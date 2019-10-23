@@ -1,0 +1,8 @@
+product1: 
+  name: mistcloak 
+  price: 1500
+  description: obscure figure while traveling through the mist 
+  stock: 10
+  wizard: wizard1
+
+
