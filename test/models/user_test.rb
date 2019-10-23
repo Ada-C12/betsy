@@ -59,7 +59,18 @@ describe User do
 
   describe "relationships" do
     it "can have many products" do
-      
+      user = users(:ada)
+      product_1 = Product.first
+      product_2 = Product.last
+
+      user.products << product_1
+      user.products << product_2
+
+      expect(user.products.count).must_be :>=, 0
+
+      user.products.each do |product|
+        expect(product).must_be_instance_of Product
+      end
     end
   end
 
