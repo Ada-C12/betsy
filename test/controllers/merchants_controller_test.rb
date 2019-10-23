@@ -1,7 +1,14 @@
 require "test_helper"
 
 describe MerchantsController do
-  # it "does a thing" do
-  #   value(1+1).must_equal 2
-  # end
+  
+  let(:merchant) { merchants(:abinbev) }
+
+  descibe "index" do
+    it "responds with success when there are many drivers" do
+      get merchants_path
+      must_respond_with :success
+    end
+  end
+  
 end

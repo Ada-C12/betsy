@@ -8,4 +8,8 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find_by(id: params[:id])
     render_404 unless @merchant
   end
+
+  def create
+  end
+  
 end
