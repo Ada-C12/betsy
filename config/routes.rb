@@ -1,3 +1,5 @@
 Rails.application.routes.draw do
-  root to: "homepages#index"
+  root "homepages#index"
+  resources :products
+
 end

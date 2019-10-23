@@ -1,27 +1,78 @@
 class ProductsController < ApplicationController
+ 
   def index
+    @products = Product.all
   end
 
   def show
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      head :not_found
+      return
+    end
   end
   
   def new
-    # Only logged in can new
+    if !session[:user_id]
+      flash[:error] = "Merchant must login to add a new product!"
+      redirect_to root_path
+    else
+      @product = Product.new
+    end
   end
 
   def create
-    # Only merchant of product can create
+    if !session[:user_id]
+      flash[:error] = "Merchant must login to add a new product!"
+      redirect_to root_path
+    else
+      @product = Product.new(product_params)
+      if @product.save
+        flash[:success] = "Product #{@product.name} has been added successfully"
+        redirect_to product_path(@product.id)
+      else
+        flash.now[:error] = "Something went wrong! Product was not added."
+        render :new
+      end
   end
 
   def edit
-    # Only merchant of product can update
+    if !session[:user_id]
+      flash[:error] = "Merchant must login to edit product!"
+      redirect_to root_path
+    else
+      @product = Product.find_by(id: params[:id])
+    end
   end
 
   def update
-    # Only merchant of product can update
+    if !session[:user_id]
+      flash[:error] = "Merchant must login to update product!"
+      redirect_to root_path
+    else
+      if @product.update(product_params)
+        flash[:success] = "Product #{@product.name} has been updated successfully"
+        redirect_to product_path(@product.id)
+      else
+        flash.now[:error] = "Something went wrong! Product can not be edited."
+        render :edit
+      end
   end
 
   def destroy
-    # Only merchant of product can detroy
+    product = Product.find_by(id: params[:id])
+    if product
+      product.destroy
+      flash[:success] = "Product #{product.name} was deleted!"
+    end
+    redirect_to products_path
+    return
   end
+
+  private
+
+  def product_params
+    return params.require(:product).permit(:name, :category_ids, :price, :quantity, :user_id)
+  end
+  
 end
