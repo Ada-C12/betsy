@@ -4,5 +4,6 @@ product1:
   description: obscure figure while traveling through the mist 
   stock: 10
   wizard: wizard1
+  categories: category1
 
 
