@@ -1,0 +1,7 @@
+<h2>Hello</h2>
+
+<ul>
+<% @products.each do |product| %>
+  <li><%= product.photo_url %> <%= product.name %></li>
+<% end %>
+</ul>
