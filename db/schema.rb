@@ -10,9 +10,8 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_23_182009) do
 
-  # These are extensions that must be enabled in order to support this database
+ActiveRecord::Schema.define(version: 2019_10_23_182009) do
   enable_extension "plpgsql"
 
   create_table "categories", force: :cascade do |t|
@@ -70,10 +69,12 @@ ActiveRecord::Schema.define(version: 2019_10_23_182009) do
 
   create_table "users", force: :cascade do |t|
     t.string "uid"
-    t.string "name"
+    t.string "merchant_name"
     t.string "email"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "provider"
+    t.string "username"
   end
 
   add_foreign_key "order_items", "products"
