@@ -11,11 +11,24 @@
  * It is generally better to create a new file per style scope.
  *
  */
-    
+
     /* Custom bootstrap variables must be set or imported *before* bootstrap. */
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+// $primary-font: font-family: 
+
+body, h1, h2, h3, h4, h5 {
+   font-family: 'Raleway', sans-serif;
+}
+
+h1, h2, h3, h4, h5 {
+   font-weight: bold;
+}
+
+
+
 
 // HEADER
 
