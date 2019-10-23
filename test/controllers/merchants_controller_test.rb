@@ -2,9 +2,9 @@ require "test_helper"
 
 describe MerchantsController do
   
-  let(:merchant) { merchants(:abinbev) }
+  let(:merchant) { merchants(:brad) }
 
-  descibe "index" do
+  describe "index" do
     it "responds with success when there are many drivers" do
       get merchants_path
       must_respond_with :success
