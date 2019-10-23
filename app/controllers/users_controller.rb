@@ -4,6 +4,7 @@ class UsersController < ApplicationController
   end
 
   def show
+    #this is a show comment
   end
   
   def new
