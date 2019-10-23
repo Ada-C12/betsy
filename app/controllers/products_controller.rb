@@ -34,6 +34,7 @@ class ProductsController < ApplicationController
         flash.now[:error] = "Something went wrong! Product was not added."
         render :new
       end
+    end
   end
 
   def edit
@@ -57,6 +58,7 @@ class ProductsController < ApplicationController
         flash.now[:error] = "Something went wrong! Product can not be edited."
         render :edit
       end
+    end
   end
 
   def destroy
