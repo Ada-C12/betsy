@@ -4,7 +4,6 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :quantity, presence: true
   validates :user_id, presence: true
-  validates :category_ids, presence: true
   validates :img_url, presence: true
   validates :description, presence: true
   
