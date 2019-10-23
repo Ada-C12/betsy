@@ -21,6 +21,13 @@ ActiveRecord::Schema.define(version: 2019_10_23_182009) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "categories_products", force: :cascade do |t|
+    t.bigint "product_id"
+    t.bigint "category_id"
+    t.index ["category_id"], name: "index_categories_products_on_category_id"
+    t.index ["product_id"], name: "index_categories_products_on_product_id"
+  end
+
   create_table "order_items", force: :cascade do |t|
     t.integer "quantity"
     t.datetime "created_at", null: false
@@ -52,9 +59,6 @@ ActiveRecord::Schema.define(version: 2019_10_23_182009) do
     t.bigint "user_id"
     t.string "img_url"
     t.index ["user_id"], name: "index_products_on_user_id"
-  end
-
-  create_table "products_category_joins", force: :cascade do |t|
   end
 
   create_table "reviews", force: :cascade do |t|

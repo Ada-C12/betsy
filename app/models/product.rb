@@ -4,6 +4,7 @@ class Product < ApplicationRecord
   validates :price, presence: true
   validates :quantity, presence: true
   validates :user_id, presence: true
+  validates :category_ids, presence: true
   
   belongs_to :user
   has_many :order_items
