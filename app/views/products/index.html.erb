@@ -1,31 +1,23 @@
 <section>
   <h1>Products#index</h1>
-  <%# <% if @products.empty? %> %>
+  <% if @products.empty? %>
+    <p><%= No products available %></p>
+  <% end %>
   <table>
     <thead>
       <tr>
         <th>Name</th>
-        <th>Description</th>
-        <th>Price</th>
         <th>Photo</th>
-        <th>Stock</th>
-        <th>Merchant</th>
       </tr>
     </thead>
     <tbody>
       <% @products.each do |product| %>
         <tr>
           <td><%= product.name %></td>
-          <td><%= product.description %></td>
-          <td><%= product.price %></td>
           <td><%= link_to product_path(product.id) do %>
             <%= image_tag "#{product.photo_url}"%>
             <% end %>
           </td>
-
-          
-          <td><%= product.stock %></td>
-          <td><%= product.merchant.username %></td>
         </tr>
       <% end %>
     </tbody>
