@@ -1,5 +1,6 @@
 <section>
   <h1>Products#index</h1>
+  <p><%= link_to "Add new product", new_product_path %></p>
   <% if @products.empty? %>
     <p><%= No products available %></p>
   <% end %>

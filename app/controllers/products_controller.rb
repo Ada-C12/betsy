@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
 
   # only merchants
   def new
+    @product = Product.new
   end
 
   # only merchants
