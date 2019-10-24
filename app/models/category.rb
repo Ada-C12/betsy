@@ -17,9 +17,14 @@ class Category < ApplicationRecord
     return more_categories
   end
 
+  def self.all_alphabetized
+    all_alphabetized = Category.all.order(name: :asc)
+    return all_alphabetized
+  end
+
 
   def self.select_options_names_ids
-    category_names_and_ids = Category.all.map do |category|
+    category_names_and_ids = Category.all_alphabetized.map do |category|
       [category.name, category.id]
     end
     return category_names_and_ids
