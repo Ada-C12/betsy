@@ -1,4 +1,6 @@
 class ProductsController < ApplicationController
+  # before_action :require_login, except [:index]
+  
   def index
     @products = Product.all
   end
@@ -26,6 +28,9 @@ class ProductsController < ApplicationController
   def destroy
   end
 
+  private
 
+  # def require_login
+  # end
 
 end
