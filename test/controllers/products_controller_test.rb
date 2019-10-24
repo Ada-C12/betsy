@@ -1,30 +1,58 @@
 require "test_helper"
 
 describe ProductsController do
-
-  let (:product) {
-    Product.create name: "ice sword", price: 1500, description: "wielded by Jack Frost", stock: 10, wizard: "zedzorander", categories: "artifact"
-  }
-  describe "index action" do
-
-    it "gives back a successful response" do
-
-      get products_path
-
-      must_respond_with :success
-    end
-
-    it "gives back a successful response if there are no products" do
+  let(:wizard1) { wizards(:wizard1) }
+  let(:wizard_no_products) { wizards(:wizard_no_products) }
+  
+  describe "Guest users" do
+    describe "index action" do
       
-      Product.destroy_all
-      # product = products(:product1)
-      # no_product = product.destroy
-
-      get products_path
-
-      must_respond_with :success
-
+      it "gives back a successful response" do
+        get products_path
+        
+        must_respond_with :success
+      end
+      
+      it "gives back a successful response if there are no products" do
+        
+        Product.destroy_all
+        # product = products(:product1)
+        # no_product = product.destroy
+        
+        get products_path
+        
+        must_respond_with :success
+        
+      end
     end
-
+    
+    describe "index of products by wizard" do
+      it "responds with success when listing products for existing wizard" do
+        get wizard_products_path(wizard1.id)
+        
+        must_respond_with :success
+      end
+      
+      it "responds with success when selected wizard has no products" do
+        get wizard_products_path(wizard_no_products.id)
+        
+        must_respond_with :success
+      end
+      
+      it "only includes projects for selected wizard" do
+        wizard1.products.each do |product|
+          expect(product.wizard).must_equal wizard1
+        end
+      end
+      
+      it "redirects if wizard does not exist" do
+        invalid_id = -20
+        
+        get wizard_products_path(invalid_id)
+        
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
   end
 end

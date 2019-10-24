@@ -1,14 +1,22 @@
-<main>
-<h2>Products</h2>
-<section class="products-container">
-  <ul>
-  <%# @products.reject do |product| %>
-    <%# if !product.category_ids.include?(6) %>
-  <% @products.each do |product| %>
-    <li><%= image_tag(product.photo_url, class:"product-photo")  %></li>
-    <li><%= product.name %></li>
-    <%# link_to product.photo_url, product_path(product.id) %>
-  <% end %>
+<section>
+  <h2>All Products
+    <% if @wizard %>
+      from <%= @wizard.username %>
+    <% end %>
+  </h2>
+  <ul class= "product-photo-container">
+    <% @products.each do |product| %>
+      <li class= "product-photo">
+      <h3><%= product.name %></h3>
+      <%= image_tag product.photo_url %>
+      <p>$<%= product.price %></p>
+      </li>
+    <% end %>
   </ul>
+
+
+  <% if @wizard && @wizard.products.empty? %>
+    <p>There are no exisiting products from this wizard.</p>
+  <% end %>
 </section>
-</main>
+

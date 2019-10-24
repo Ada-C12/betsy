@@ -2,17 +2,17 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-main {
-  margin: 2rem;
+
+.product-photo img {
+  width: 32vw;
+  height: auto;
+  float: top;
+  padding: 1em;
 }
 
-.products-container {
+.product-photo-container {
   display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-}
-
-.product-photo,  {
-  height: 15vw;
-  width: 25vh;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  align-items: center;
 }

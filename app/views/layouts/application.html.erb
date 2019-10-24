@@ -21,7 +21,7 @@
       </nav>
       <section class="categories">
         <ul>
-          <li><%#link_to 'All Items', products_path %></li>
+          <li><%=link_to 'All Items', products_path %></li>
           <% Category.all.each do |category| %>
             <li><%=category.name%></li>
           <% end %>
@@ -33,7 +33,7 @@
               </button>
               <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
                 <% Wizard.all.each do |wizard|%>
-                  <%= link_to wizard.username, wizards_products_path(wizard.id), class:"dropdown-item" %>
+                  <%= link_to wizard.username, wizard_products_path(wizard.id), class:"dropdown-item" %>
                 <% end %>
               </div>
             </div>
