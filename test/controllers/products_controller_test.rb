@@ -1,5 +1,8 @@
 require "test_helper"
 
+# ADD AUTHENTICATION
+# ADD AUTHORIZATION
+
 describe ProductsController do
   describe "index" do
     it "gives back a successful response" do
