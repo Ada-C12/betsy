@@ -10,4 +10,20 @@ class Product < ApplicationRecord
   belongs_to :user
   has_many :order_items
   has_and_belongs_to_many :categories
+
+  def quantity_available?(quantity)
+    if quantity.nil? || quantity < 1
+      return nil
+    elsif quantity > self.quantity
+      return false
+    else
+      return true
+    end
+  end
+
+  def update_quantity
+  end
+
+  def avg_rating
+  end
 end

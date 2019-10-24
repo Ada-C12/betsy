@@ -106,4 +106,8 @@ describe Product do
       expect(@product.errors.messages[:description]).must_include "can't be blank"
     end
   end
+
+  describe 'custom methods' do
+  # Write tests for product custom methods
+  end
 end
