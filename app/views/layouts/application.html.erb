@@ -10,6 +10,38 @@
   </head>
 
   <body>
+    <header>
+      <nav>
+        <ul>
+          <li><h1>Lumos</h1></li>
+          <li>Login</li>
+          <li>Sign Up</li>
+          <li>Cart</li>
+        </ul>
+      </nav>
+      <section class="categories">
+        <ul>
+          <li><%#link_to 'All Items', products_path %></li>
+          <% Category.all.each do |category| %>
+            <li><%=category.name%></li>
+          <% end %>
+          <li>
+            <%# boostrap dropdown %>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Wizards
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% Wizard.all.each do |wizard|%>
+                  <%= link_to wizard.username, wizards_products_path(wizard.id), class:"dropdown-item" %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </header>
+
     <%= yield %>
   </body>
 </html>
