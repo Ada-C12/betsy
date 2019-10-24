@@ -8,6 +8,14 @@ class OrderitemsController < ApplicationController
       order_id: session[:order_id]
     )
     
+    if @orderitem.quantity < @orderitem.product.price
+      flash[:status] = :failure
+      flash[:result_text] = "Could not add #{@orderitem.product.name} to cart"
+      flash[:messages] = "Order for #{@orderitem.product.name} exceeds inventory in stock: #{@orderitem.product.stock}"
+      redirect_back fallback_location: root_path
+      return
+    end
+    
     if @orderitem.save
       flash[:status] = :success
       flash[:result_text] = "#{@orderitem.product.name} has been added to the cart"  
