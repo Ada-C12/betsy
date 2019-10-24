@@ -2,17 +2,11 @@ ENV['RAILS_ENV'] ||= 'test'
 
 require_relative '../config/environment'
 require 'rails/test_help'
-<<<<<<< HEAD
-require "minitest/rails"
-require "minitest/skip_dsl"
-require "minitest/reporters"
-=======
 require 'minitest/rails'
 require 'minitest/autorun'
 require 'minitest/reporters'
 
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
->>>>>>> master
 
 class ActiveSupport::TestCase
 
