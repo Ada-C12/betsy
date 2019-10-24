@@ -6,3 +6,17 @@
 <% end %>
 's Shop!
 </h2>
+
+<% if @user.products.count > 0 %>
+  <% @user.products.each do |product| %>
+    <ul>
+      <li><%= image_tag product.img_url, alt: product.name + "image"%></li>
+      <li><%=product.name%></li>
+      <li><%=product.price%></li>
+      <li><%=product.quantity%></li>
+      <li><%=product.description%></li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>Merchant's fruit stand is empty.</p>
+<% end %>
