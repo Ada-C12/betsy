@@ -149,6 +149,9 @@ describe ProductsController do
 
       patch product_path(@product.id), params: wrong_product_data
       expect(Product.find_by(id: @product.id).stock).must_equal 5
+      
+      must_respond_with :bad_request
+      assert_template :edit
     end
   end 
 
