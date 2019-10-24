@@ -40,9 +40,24 @@ describe Product do
   end
 
   describe "validations" do
-    it "must have a category" do
+    it "must have a name" do
+    end
+
+    it "must have a price" do
+    end
+    
+    it "must have a que" do
     end
 
   end
 
 end
+
+
+validates :name, presence: true, uniqueness: {scope: :user_id}
+validates_length_of :name, minimum: 1, maximum: 50
+validates :price, presence: true
+validates :quantity, presence: true
+validates :user_id, presence: true
+validates :img_url, presence: true
+validates :description, presence: true
