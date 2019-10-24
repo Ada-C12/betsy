@@ -11,7 +11,7 @@
         <%= image_tag product.photo_url, alt: "Picture of #{product.name}", class: "img-thumbnail" %>
       </div>
       <div class="caption">
-        <strong><%= product.name %></strong> $<%= product.price %>
+        <strong><%= link_to product.name, product_path(product.id) %></strong> $<%= product.price %>
       </div>
     <% end %>
   </div>
