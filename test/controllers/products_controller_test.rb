@@ -14,7 +14,11 @@ describe ProductsController do
       end
       
       it "gives back a successful response if there are no products" do
-        
+        Category.destroy_all
+        Order.destroy_all
+        Review.destroy_all
+        Wizard.destroy_all
+        OrderItem.destroy_all
         Product.destroy_all
         # product = products(:product1)
         # no_product = product.destroy
