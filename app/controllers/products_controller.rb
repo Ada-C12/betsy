@@ -1,5 +1,4 @@
 class ProductsController < ApplicationController
- 
   def index
     @products = Product.all
   end
@@ -11,7 +10,7 @@ class ProductsController < ApplicationController
       return
     end
   end
-  
+
   def new
     if !session[:user_id]
       flash[:error] = "Merchant must login to add a new product!"
@@ -62,10 +61,23 @@ class ProductsController < ApplicationController
   end
 
   def destroy
-    product = Product.find_by(id: params[:id])
-    if product
-      product.destroy
-      flash[:success] = "Product #{product.name} was deleted!"
+    if !session[:user_id]
+      flash[:error] = "Merchant must login to delete a product!"
+      redirect_to root_path
+    else
+      product = Product.find_by(id: params[:id])
+      
+      if product
+        if product.user_id == session[:id]
+          product.destroy
+          flash[:success] = "Product #{product.name} was deleted!"
+        else
+          flash[:error] = "You cannot delete a product not belonging to you!"
+      
+      else
+        flash[:error] = "The product doesn't exist!"
+      end
+
     end
     redirect_to products_path
     return
@@ -74,7 +86,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :category_ids, :price, :quantity, :user_id)
+    return params.require(:product).permit(:name, :category_ids, :price, :quantity, :user_id, :img_url, :description)
   end
-  
 end
