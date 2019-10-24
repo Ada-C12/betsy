@@ -50,10 +50,8 @@ describe UsersController do
     end
 
     it "redirects back to the root path for invalid callbacks" do
-      user = User.new
-      
       expect {
-        perform_login(user)
+        perform_login(User.new)
       }.wont_change "User.count"
 
       must_redirect_to root_path
