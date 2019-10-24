@@ -3,8 +3,9 @@ class User < ApplicationRecord
 
   validates :uid, uniqueness: true, presence: true 
   validates :merchant_name, uniqueness: true 
+  validates_length_of :merchant_name, maximum: 50
   validates :username, uniqueness: true, presence: true 
-  validates :email, uniqueness: true, presence: true 
+  validates :email, uniqueness: true, presence: true, format: { with: /@/, message: "Email format must be valid." }
 
   def self.build_from_github(auth_hash)
     user = User.new
