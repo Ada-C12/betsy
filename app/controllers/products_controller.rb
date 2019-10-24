@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
   def index
     wizard_id = params[:wizard_id]
-    
+
     if wizard_id.nil?
       @products = Product.all
     else
@@ -15,5 +15,12 @@ class ProductsController < ApplicationController
       end
     end
   end
-  
+
+  def show
+    @product = Product.find_by(id: params[:id])
+    if @product.nil?
+      head :not_found
+      return
+    end
+  end
 end
