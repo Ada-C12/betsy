@@ -16,7 +16,7 @@ describe ProductsController do
     end
 
     it "responds with a not_found when id given does not exist" do
-      get product_path("500")
+      get product_path(0)
       must_respond_with :not_found
     end
   end
