@@ -38,10 +38,8 @@ describe UsersController do
         username: "merryberry2"
       )
 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
-
       expect {
-        get auth_callback_path(:github)
+        perform_login(user)
       }.must_differ "User.count", 1
 
       user = User.find_by(uid: user.uid)
@@ -54,10 +52,8 @@ describe UsersController do
     it "redirects back to the root path for invalid callbacks" do
       user = User.new
       
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
-      
       expect {
-        get auth_callback_path(:github)
+        perform_login(user)
       }.wont_change "User.count"
 
       must_redirect_to root_path
