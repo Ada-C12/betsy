@@ -98,12 +98,59 @@ describe ProductsController do
     it "will respond with a not_found when attempting to edit a nonexistent product" do
       get edit_product_path(-1)
       must_redirect_to products_path
-      
     end 
-
   end
 
-  # update
+  describe "update" do
+    before do
+      @merchant = Merchant.create(username: "jake", email: "jakw123@gmail.com", uid: 12232234, provider: "github")
+      @product = Product.create(
+        name: "Growler",
+        description: "Keeps your beer fresh!",
+        price: 30.0,
+        photo_url: "https://images-na.ssl-images-amazon.com/images/I/51NR%2BJ9lLNL._SY679_.jpg",
+        stock: 5,
+        merchant_id: @merchant.id,
+        retired: false,
+      )
+    end
+
+
+    it "can update an existing product" do
+      updated_product_data = {
+        product: {
+          name: "Coozie",
+          description: "Keeps your beer fresh!",
+          price: 50.0,
+          photo_url: "https://images-na.ssl-images-amazon.com/images/I/51NR%2BJ9lLNL._SY679_.jpg",
+          stock: 5,
+          merchant_id: @merchant.id,
+          retired: false,
+        }
+      }
+
+      patch product_path(@product.id), params: updated_product_data
+      expect(Product.find_by(id: @product.id).price).must_equal 50.0
+      expect(Product.find_by(id: @product.id).name).must_equal "Coozie"
+    end
+
+    it "can't update an existing product given the wrong params" do
+      wrong_product_data = {
+        product: {
+          name: "Growler",
+          description: "Keeps your beer fresh!",
+          price: 30.0,
+          photo_url: "https://images-na.ssl-images-amazon.com/images/I/51NR%2BJ9lLNL._SY679_.jpg",
+          stock: -1,
+          merchant_id: @merchant.id,
+          retired: false,
+        }
+      }
+
+      patch product_path(@product.id), params: wrong_product_data
+      expect(Product.find_by(id: @product.id).stock).must_equal 5
+    end
+  end 
 
   # toggle_retire
 
