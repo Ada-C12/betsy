@@ -4,15 +4,19 @@
       from <%= @wizard.username %>
     <% end %>
   </h2>
-  <ul class= "product-photo-container">
+
+  <div class="thumbnail">
     <% @products.each do |product| %>
-      <li class= "product-photo">
-      <h3><%= product.name %></h3>
-      <%= image_tag product.photo_url %>
-      <p>$<%= product.price %></p>
-      </li>
+      <div class="thumbnail-container">
+        <%= image_tag product.photo_url, alt: "Picture of #{product.name}", class: "img-thumbnail" %>
+      </div>
+      <div class="caption">
+        <strong><%= product.name %></strong> $<%= product.price %>
+      </div>
     <% end %>
-  </ul>
+  </div>
+
+
 
 
   <% if @wizard && @wizard.products.empty? %>

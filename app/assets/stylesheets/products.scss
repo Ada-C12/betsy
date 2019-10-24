@@ -2,15 +2,14 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-.product-photo img {
+.thumbnail {
   width: 32vw;
-  height: auto;
-  float: top;
+  height: 32vh;
   padding: 1em;
-}
+  margin-right: 0;
 
-.product-photo-container {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
   justify-content: space-around;
   align-items: center;

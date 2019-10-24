@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Betsy</title>
+    <title>Lumos</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -41,6 +41,43 @@
         </ul>
       </section>
     </header>
+
+    <% if flash[:error] %>
+      <div class="alert alert-warning alert-container">
+      <%= flash[:error] %>
+      <% if flash[:reason] %>
+        <ul>
+          <li><%= flash[:reason] %></li>
+        </ul>
+      <% end %>
+      <% if @user %>
+        <% if @user.errors.any? %>
+          <ul>
+            <% @user.errors.each do |column, message| %>
+              <li>
+                <%= column %>: <%= message %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+      <% if @work %>
+        <% if @work.errors.any? %>
+          <ul>
+            <% @work.errors.each do |column, message| %>
+              <li>
+                <%= column %>: <%= message %>
+              </li>
+            <% end %>
+          </ul>
+        <% end %>
+      <% end %>
+    </div>
+    <% elsif flash[:success] %>
+      <div class="alert alert-success alert-container">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>
