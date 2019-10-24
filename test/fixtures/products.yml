@@ -6,4 +6,19 @@ heineken:
   stock: 3
   merchant: brad
   retired: false
-
+sapporo:
+  name: Sapporo
+  description: Japanese standard beer.
+  price: 22.22
+  photo_url:
+  stock: 5
+  merchant: brad
+  retired: false
+corona:
+  name: Corona
+  description: Add a lime.
+  price: 33.33
+  photo_url:
+  stock: 4
+  merchant: brad
+  retired: false
