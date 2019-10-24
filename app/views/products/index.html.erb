@@ -1,0 +1,11 @@
+<section>
+<%# Header says either "All Products" or "All <Category> Products" if Category was part of path (category_id in params) (stolen from c12-library books index) %>
+  <h2>
+    All
+    <% if @category %>
+    <%= @category.name.capitalize %>
+    <% end %>
+    Products
+    <%# We can add 'if @wizard' to this to say "All Products from <Wizard>" %>
+  </h2>
+</section>
