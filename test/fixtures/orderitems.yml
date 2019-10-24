@@ -1,2 +1,4 @@
 heineken_oi:
   quantity: 2
+  order: order_1
+  product: heineken

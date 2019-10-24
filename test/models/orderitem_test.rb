@@ -95,4 +95,12 @@ describe Orderitem do
       expect(new_orderitem.order).must_equal orders(:order_1)
     end
   end
+  
+  describe "custom methods" do
+    describe "subtotal" do
+      it "can calculate the correct subtotal" do
+        expect(orderitems(:heineken_oi).subtotal).must_be_close_to 22.22
+      end
+    end
+  end
 end

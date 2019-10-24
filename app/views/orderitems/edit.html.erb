@@ -3,11 +3,13 @@
 
   <section class = "row">
     <article class = "columns small-12 large-4">
-      <%= image_tag "#{@orderitem.product.photo_url}", alt: "#{@orderitem.product.name}" %>
+      <% if @orderitem.product.photo_url != nil %>
+        <%= image_tag "#{@orderitem.product.photo_url}", alt: "#{@orderitem.product.name}" %>
+      <% end %>
     </article>
 
     <article class = "columns small-12 large-8">
-      <%= link_to "#{@orderitem.product.name}", product_path(@orderitem.product) %>
+      <%# link_to "#{@orderitem.product.name}", product_path(@orderitem.product) %>
 
       <%= form_with model: @orderitem do |f| %>
     
@@ -15,7 +17,7 @@
         <%= f.label :quantity %>
 
         <% quantity_array = [] %>
-        <% @orderitem.times do |i|%>
+        <% @orderitem.product.stock.times do |i|%>
           <% quantity_array << [i+1, i+1] %>
         <% end %>
 
@@ -23,7 +25,7 @@
         </div>
         
         <div class="form-group">
-        <%= f.submit submit_name, class:"btn btn-primary" %>
+        <%= f.submit "Save", class:"btn btn-primary" %>
         </div>
       <% end %>
     </article>

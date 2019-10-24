@@ -41,7 +41,7 @@ class OrderitemsController < ApplicationController
   end
   
   def destroy
-    @orderitem.edstroy
+    @orderitem.destroy
     flash[:status] = :success
     flash[:result_text] = "#{@orderitem.product.name} removed"
     # TIFFANY YOU NEED TO REDIRECT TO THE CART PAGE
