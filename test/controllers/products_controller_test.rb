@@ -66,7 +66,7 @@ describe ProductsController do
 
     end
 
-    it "does not create a product with invalid data, and renders edit form" do
+    it "does not create a product with invalid data, and renders new form" do
       bad_product_hash = {
         product: {
           name: nil,
@@ -89,7 +89,19 @@ describe ProductsController do
 
   end
 
-  # edit
+  describe "edit" do
+    it "can get the edit page" do
+      product = products(:heineken)
+      get edit_product_path(product.id)
+    end
+
+    it "will respond with a not_found when attempting to edit a nonexistent product" do
+      get edit_product_path(-1)
+      must_redirect_to products_path
+      
+    end 
+
+  end
 
   # update
 

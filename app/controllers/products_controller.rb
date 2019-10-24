@@ -38,14 +38,24 @@ class ProductsController < ApplicationController
 
   # only merchants
   def edit
+    @product = Product.find_by(id: params[:id])
+
+    if @product.nil?
+      flash[:status] = :failure
+      flash[:result_text] = "#{@product} doesn't exist."
+      redirect_to products_path
+    end
+
   end 
 
   # only merchants
   def update
+
   end
 
   # only merchants
   def destroy
+
   end
 
   private

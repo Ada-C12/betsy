@@ -5,4 +5,5 @@ heineken:
   photo_url:
   stock: 3
   merchant: brad
+  retired: false
 
