@@ -73,7 +73,7 @@ class ProductsController < ApplicationController
           flash[:success] = "Product #{product.name} was deleted!"
         else
           flash[:error] = "You cannot delete a product not belonging to you!"
-      
+        end 
       else
         flash[:error] = "The product doesn't exist!"
       end
