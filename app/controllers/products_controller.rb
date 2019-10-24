@@ -9,10 +9,11 @@ class ProductsController < ApplicationController
       if @wizard
         @products = @wizard.products
       else
-        head :not_found
+        flash[:status] = :success
+        flash[:result_text] = "That Wizard does not exist"
+        return redirect_to root_path
       end
     end
   end
-  
   
 end
