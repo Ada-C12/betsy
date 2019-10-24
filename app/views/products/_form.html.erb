@@ -1,0 +1,26 @@
+<%= form_with model: @product, class: product_form_class do |f| %>
+
+  <%# f.text_field :somenameofsomeattributeonbook ... in this case, :title %>
+  <%= f.label :Name %>
+  <%= f.text_field :name %>
+
+  <%= f.label :Price %>
+  <%= f.text_field :price %>
+
+  <%= f.label :Stock %>
+  <%= f.text_field :quantity %>
+
+  <%= f.label :img_url %>
+  <%= f.text_field :img_url %>
+
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <section>
+    <%= f.label :categories %>
+    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :category) %>
+  </section>
+  
+  <%= f.submit submit_button_label, class: "product-form-button" %>
+
+<% end %>
