@@ -28,6 +28,8 @@ class ProductsController < ApplicationController
       return
     else
       @product = Product.new(product_params)
+      @product.user_id = session[:user_id]
+      
       if @product.save
         flash[:success] = "Product #{@product.name} has been added successfully"
         redirect_to product_path(@product.id)
@@ -92,6 +94,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    return params.require(:product).permit(:name, :price, :quantity, :user_id, :img_url, :description, category_ids: [])
+    return params.require(:product).permit(:name, :price, :quantity, :img_url, :description, category_ids: [])
   end
 end
