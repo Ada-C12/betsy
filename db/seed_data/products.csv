@@ -1,2 +1,2 @@
-name,description,price,photo_url,stock,merchant_id
-keg,a wooden keg,200,https://images.unsplash.com/photo-1564821480050-273930a88f34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80,2,1
+name,description,price,photo_url,stock,merchant_id,retired
+keg,a wooden keg,200,https://images.unsplash.com/photo-1564821480050-273930a88f34?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1268&q=80,2,1,false
