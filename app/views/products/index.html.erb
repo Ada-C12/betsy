@@ -1,7 +1,14 @@
-<h2>Hello</h2>
-
-<ul>
-<% @products.each do |product| %>
-  <li><%= product.photo_url %> <%= product.name %></li>
-<% end %>
-</ul>
+<main>
+<h2>Products</h2>
+<section class="products-container">
+  <ul>
+  <%# @products.reject do |product| %>
+    <%# if !product.category_ids.include?(6) %>
+  <% @products.each do |product| %>
+    <li><%= product.name %></li>
+    <li><%= image_tag(product.photo_url, class:"product-photo") %></li>
+    <%# link_to product.photo_url, product_path(product.id) %>
+  <% end %>
+  </ul>
+</section>
+</main>
