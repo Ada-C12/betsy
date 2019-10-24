@@ -2,3 +2,7 @@ wizard1:
   username: zedzorander 
   email: zedzo@greatestmage.com
 
+wizard_no_products:
+  username: ihavenoproducts
+  email: ihavenoproducts@nope.com
+
