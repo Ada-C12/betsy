@@ -1,0 +1,10 @@
+<h2>Products from <%=@wizard.username%></h2>
+<% unless @wizard.products.empty? %>
+  <ul>
+    <% @wizard.products.each do |product| %>
+      <li><%= product.name %></li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>There are no exisiting products from this wizard.</p>
+<% end %>
