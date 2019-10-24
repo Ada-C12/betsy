@@ -1,5 +1,5 @@
 id,name,price,description,stock,photo_url,wizard_id,category_ids
-1,red dragon egg,5000,Not a Game of Thrones dragon,5,nil,2,5
-2,Good luck Amulet,2000,Results not guaranteed,30,nil,3,1
-3,Love potion,1500,Make your crush like you back,100,nil,4,4
+1,Red Dragon Egg,5000,Not a Game of Thrones dragon,5,nil,2,5
+2,Good Luck Amulet,2000,Results not guaranteed,30,nil,3,1
+3,Love Potion,1500,Make your crush like you back,100,nil,4,4
 4,Dorothy's Ruby Slippers,5000,There's no place like home,10,nil,3,5
