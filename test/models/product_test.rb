@@ -7,7 +7,8 @@ describe Product do
       description: "Opens bottles.",
       price: 10.10,
       stock: 2,
-      merchant: merchants(:brad)
+      merchant: merchants(:brad),
+      retired: false
     )
   }
   
@@ -20,7 +21,7 @@ describe Product do
       new_product.save
       product = Product.last
       
-      [:name, :description, :price, :stock, :merchant_id].each do |field|
+      [:name, :description, :price, :stock, :merchant_id, :retired].each do |field|
         expect(product).must_respond_to field
       end
     end
@@ -178,6 +179,14 @@ describe Product do
         expect(new_product.valid?).must_equal false
         expect(new_product.errors.messages).must_include :stock
         expect(new_product.errors.messages[:stock]).must_include "must be an integer"
+      end
+      
+      it "cannot create a Product with a retired status nil" do
+        new_product.retired = nil
+        
+        expect(new_product.valid?).must_equal false
+        expect(new_product.errors.messages).must_include :retired
+        expect(new_product.errors.messages[:retired]).must_include "retired status must be a boolean value: true or false"
       end
     end
   end

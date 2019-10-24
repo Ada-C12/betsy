@@ -5,6 +5,7 @@ heineken:
   photo_url:
   stock: 3
   merchant: brad
+  retired: false
 sapporo:
   name: Sapporo
   description: Japanese standard beer.
@@ -12,6 +13,7 @@ sapporo:
   photo_url:
   stock: 5
   merchant: brad
+  retired: false
 corona:
   name: Corona
   description: Add a lime.
@@ -19,3 +21,4 @@ corona:
   photo_url:
   stock: 4
   merchant: brad
+  retired: false
