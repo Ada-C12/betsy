@@ -6,13 +6,13 @@ main {
   margin: 2rem;
 }
 
-// .products-container {
-//   display: flex;
-//   flex-direction: row;
-//   justify-content: space-evenly;
-// }
+.products-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
 
 .product-photo,  {
-  height: 25vw;
+  height: 15vw;
   width: 25vh;
 }

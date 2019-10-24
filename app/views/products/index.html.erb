@@ -5,8 +5,8 @@
   <%# @products.reject do |product| %>
     <%# if !product.category_ids.include?(6) %>
   <% @products.each do |product| %>
+    <li><%= image_tag(product.photo_url, class:"product-photo")  %></li>
     <li><%= product.name %></li>
-    <li><%= image_tag(product.photo_url, class:"product-photo") %></li>
     <%# link_to product.photo_url, product_path(product.id) %>
   <% end %>
   </ul>
