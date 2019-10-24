@@ -1,4 +1,5 @@
 class MerchantsController < ApplicationController
+  before_action :require_login, except: [:index]
 
   def index
     @merchants = Merchant.all
@@ -31,6 +32,15 @@ class MerchantsController < ApplicationController
 
     session[:merchant_id] = merchant.id
     return redirect_to root_path
+  end
+
+  def current
+    merchant = Merchant.find_by(id: session[:merchant_id])
+
+    if merchant.nil?
+      head :not_found
+      return
+    end
   end
 
   def destroy
