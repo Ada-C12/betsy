@@ -1,0 +1,8 @@
+<h2>
+<% if @user.merchant_name %>
+  <%=@user.merchant_name%>
+<% else %>
+  <%= @user.username%>
+<% end %>
+'s Shop!
+</h2>

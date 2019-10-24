@@ -159,5 +159,43 @@ describe UsersController do
     end
   end
 
-  #any edge cases??
+  describe "logged in" do
+    before do 
+      perform_login
+    end
+    describe "show" do
+      it "responds with success when a user id exists" do
+        get user_path(users(:ada).id)
+
+        must_respond_with :success
+      end
+
+      it "responds with a not_found when a users id does not exist" do
+        get user_path(-1)
+
+        must_respond_with :not_found
+      end
+    end
+  end 
+
+  describe "logged out" do
+    before do
+      perform_login
+      session[:user_id] = nil
+    end
+
+    describe "show" do
+      it "responds with success when a user id exists" do
+        get user_path(users(:ada).id)
+
+        must_respond_with :success
+      end
+
+      it "responds with a not_found when a users id does not exist" do
+        get user_path(-1)
+        
+        must_respond_with :not_found
+      end
+    end
+  end 
 end
