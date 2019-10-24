@@ -44,35 +44,8 @@
 
     <% if flash[:error] %>
       <div class="alert alert-warning alert-container">
-      <%= flash[:error] %>
-      <% if flash[:reason] %>
-        <ul>
-          <li><%= flash[:reason] %></li>
-        </ul>
-      <% end %>
-      <% if @user %>
-        <% if @user.errors.any? %>
-          <ul>
-            <% @user.errors.each do |column, message| %>
-              <li>
-                <%= column %>: <%= message %>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
-      <% if @work %>
-        <% if @work.errors.any? %>
-          <ul>
-            <% @work.errors.each do |column, message| %>
-              <li>
-                <%= column %>: <%= message %>
-              </li>
-            <% end %>
-          </ul>
-        <% end %>
-      <% end %>
-    </div>
+        <%= flash[:error] %>
+      </div>
     <% elsif flash[:success] %>
       <div class="alert alert-success alert-container">
         <%= flash[:success] %>
