@@ -52,13 +52,11 @@ describe ProductsController do
           price: 30.0,
           photo_url: "https://images-na.ssl-images-amazon.com/images/I/51NR%2BJ9lLNL._SY679_.jpg",
           stock: 5,
-          merchant_id: merchant.id, 
+          merchant_id: merchant.id,
+          retired: false,
         }
       }
 
-      # p product_hash[:product].errors.messages
-      p merchant.inspect
-      
       expect {
         post products_path, params: product_hash
       }.must_differ 'Product.count', 1
@@ -69,6 +67,24 @@ describe ProductsController do
     end
 
     it "does not create a product with invalid data, and renders edit form" do
+      bad_product_hash = {
+        product: {
+          name: nil,
+          description: "Keeps your beer fresh!",
+          price: 30.0,
+          photo_url: "https://images-na.ssl-images-amazon.com/images/I/51NR%2BJ9lLNL._SY679_.jpg",
+          stock: 5,
+          merchant_id: nil,
+          retired: false,
+        }
+      }
+
+      expect {
+        post products_path, params: bad_product_hash
+      }.wont_change 'Product.count'
+
+      must_respond_with :bad_request
+      assert_template :new
     end
 
   end
@@ -77,7 +93,7 @@ describe ProductsController do
 
   # update
 
-  # destroy
+  # toggle_retire
 
 
 

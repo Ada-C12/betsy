@@ -23,14 +23,12 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
 
-
-    p @product.inspect
     if @product.save
+      @product.retired = false
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product} #{@product.id}"
       redirect_to product_path(@product)
     else
-      p @product.errors.messages
       flash[:status] = :failure
       flash[:result_text] = "Could not create #{@product}"
       flash[:messages] = @product.errors.messages
@@ -53,7 +51,7 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :merchant_id)
+    params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :merchant_id, :retired)
   end
 
 
