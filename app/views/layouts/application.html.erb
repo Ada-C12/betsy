@@ -20,7 +20,7 @@
 
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">
-          <li class="nav-item app-header__nav_item">Products</li>
+          <li class="nav-item app-header__nav_item"><%= link_to "Products", products_path%></li>
           <li class="nav-item app-header__nav_item"><%= link_to "Merchants", merchants_path %></li>
           <li class="nav-item app-header__nav_item">
             <% if session[:merchant_id] %>
@@ -28,6 +28,7 @@
             <% else %>
               <%= link_to "Login with Github", github_login_path %>
             <% end %></li>
+          <li class="nav-item app-header__nav_item">Shopping Cart</li>
         </ul>
       </nav>
     </header>
