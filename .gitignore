@@ -5,6 +5,7 @@
 #   git config --global core.excludesfile '~/.gitignore_global'
 
 # Ignore bundler config.
+.env
 /.bundle
 
 # Ignore all logfiles and tempfiles.
@@ -26,4 +27,4 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 
-.env
+/.env
