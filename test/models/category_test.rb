@@ -29,8 +29,23 @@ describe Category do
     end
 
     describe "all_alphabetized class method" do
+      it "returns categories in ascending alphabetical order" do
+        all_alphabetized = Category.all_alphabetized
+        current_category_name = all_alphabetized.first.name
+        all_alphabetized.each do |category|
+          expect(category.name).must_be :>=, current_category_name
+          current_category_name = category.name
+        end
+      end
     end
+
     describe "select_options_names_ids" do
+      it "returns an array of arrays for menu buttons [[category.name, category.id]]" do
+        select_options_names_ids = Category.select_options_names_ids
+        expect(select_options_names_ids.length).must_equal Category.count
+        expect(select_options_names_ids).must_be_instance_of Array
+        expect(select_options_names_ids.first).must_be_instance_of Array
+      end
     end
 
   end
