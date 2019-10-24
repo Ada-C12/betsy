@@ -44,7 +44,7 @@ describe ProductsController do
           quantity: 20,
           img_url: "new_img.com",
           user_id: users(:ada).id,
-          categories: [categories(:strawberry)],
+          category_ids: [categories(:strawberry).id],
           description: "description of a new product"
         }
       }
@@ -97,7 +97,7 @@ describe ProductsController do
           quantity: 20,
           img_url: "new_img.com",
           user_id: users(:ada).id,
-          categories: [categories(:strawberry)],
+          category_ids: [categories(:strawberry).id],
           description: "description of a new product"
         }
       }
@@ -120,7 +120,7 @@ describe ProductsController do
       expect(find_product.img_url).must_equal update_product_hash[:product][:img_url]
       expect(find_product.user.id).must_equal update_product_hash[:product][:user_id]
       expect(find_product.description).must_equal update_product_hash[:product][:description]
-      # expect(find_product.categories.first.category).must_equal update_product_hash[:product][:categories].first.category
+      expect(find_product.category_ids.first).must_equal update_product_hash[:product][:category_ids].first
 
       must_redirect_to product_path(Product.find_by(name: "lemon product"))
     end
@@ -140,7 +140,7 @@ describe ProductsController do
       expect(find_product.img_url).must_equal existing_product.img_url
       expect(find_product.user.id).must_equal existing_product.user_id
       expect(find_product.description).must_equal existing_product.description
-      # expect(find_product.categories.first.category).must_equal existing_product.categories.first.category
+      expect(find_product.category_ids.first).must_equal existing_product.categories.first.id
 
       must_redirect_to root_path
     end
