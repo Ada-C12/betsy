@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   resources :merchants, except: [:delete]
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
-  delete "/logout", to: "users#destroy", as: "logout"
+  delete "/logout", to: "merchants#destroy", as: "logout"
 
   root to: 'homepages#index'
 end

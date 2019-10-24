@@ -1,8 +1,9 @@
 require "test_helper"
+require "pry"
 
 describe MerchantsController do
   
-  let(:merchant) { merchants(:brad) }
+  #let(:merchant) { merchants(:brad) }
 
   describe "index" do
     it "responds with success when there are many merchants" do
@@ -37,14 +38,60 @@ describe MerchantsController do
     it "logs in an existing merchant and redirects to the root route" do
       start_count = Merchant.count
 
-      user = merchants(:brad)
+      merchant = merchants(:brad)
+      perform_login(merchant)
 
-      OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(mock_auth_hash(user))
-
-      get auth_callback_path(:github)
       must_redirect_to root_path
-      session[:user_id].must_equal user.id
+      session[:merchant_id].must_equal merchant.id
       Merchant.count.must_equal start_count
+      expect(flash[:success]).must_equal "Logged in as returning merchant #{merchant.username}."
+    end
+
+    it "creates an account for a new merchant and redirects to the root route" do 
+      start_count = Merchant.count
+      merchant = Merchant.new(username: "Shandy", email: "shandy@beer.com", uid: 83358335, provider: "github")
+
+      perform_login(merchant)
+
+      Merchant.count.must_equal start_count + 1
+
+      merchant = Merchant.find_by(uid: merchant.uid)
+      must_redirect_to root_path
+      session[:merchant_id].must_equal merchant.id
+      expect(flash[:success]).must_equal "Logged in as new merchant #{merchant.username}."
+
+    end
+
+    it "redirects to the login if given invalid merchant data" do 
+      start_count = Merchant.count
+
+      merchant = merchants(:brad)
+      merchant.uid = nil
+      merchant.save
+      p merchant
+      perform_login(merchant)
+
+      expect {
+        get auth_callback_path(:github)
+      }.wont_change "Merchant.count"
+
+      must_redirect_to root_path
+      expect(session[:merchant_uid]).must_be_nil
+
+      # expect(flash[:success]).must_equal "Could not create new merchant account: #{merchant.errors.messages}"
+
+      # merchant = Merchant.new
+      # OmniAuth.config.mock_auth[:github] = 
+      # OmniAuth::AuthHash.new(mock_auth_hash(merchant))
+      
+      # expect {
+      #   get auth_callback_path(:github)
+      # }.wont_change "Merchant.count"
+
+      # must_redirect_to root_path
+      # expect(session[:merchant_id]).must_be_nil
+      # expect(flash[:success]).must_equal "Could not create new merchant account: #{merchant.errors.messages}"
+
     end
   end
 end

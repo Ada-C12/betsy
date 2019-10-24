@@ -66,6 +66,7 @@ gem 'jquery-turbolinks'
 gem 'bootstrap', '~> 4.1.3'
 group :development, :test do
   gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do

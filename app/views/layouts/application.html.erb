@@ -22,7 +22,12 @@
         <ul class="nav app-header__site-nav-container">
           <li class="nav-item app-header__nav_item">Products</li>
           <li class="nav-item app-header__nav_item"><%= link_to "Merchants", merchants_path %></li>
-          <li class="nav-item app-header__nav_item"><%= link_to "Login with GitHub", github_login_path %></li>
+          <li class="nav-item app-header__nav_item">
+            <% if session[:merchant_id] %>
+              <%= link_to "Log out", logout_path, method: "delete" %>
+            <% else %>
+              <%= link_to "Login with Github", github_login_path %>
+            <% end %></li>
         </ul>
       </nav>
     </header>
