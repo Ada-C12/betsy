@@ -5,4 +5,10 @@ heineken:
   photo_url:
   stock: 3
   merchant: brad
-
+stella:
+  name: Stella Artois
+  description: People enjoy this beer.
+  price: 44.44
+  photo_url:
+  stock: 3
+  merchant: brad
