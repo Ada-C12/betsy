@@ -8,5 +8,6 @@ Rails.application.routes.draw do
   delete "/logout", to: "users#destroy", as: "logout"
 
   get "/users/current", to: "users#current", as: "current_user"
-  
+  get "/users/current/edit", to: "users#edit", as: "edit_user"
+  patch "/users/current", to: "users#update"
 end

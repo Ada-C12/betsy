@@ -26,3 +26,8 @@
 # Ignore master key for decrypting credentials and more.
 /config/master.key
 .env 
+
+# Ignore simplecov and test data in simplecov report
+/coverage.data
+/coverage  
+.DS_Store

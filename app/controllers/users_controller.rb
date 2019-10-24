@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
-  def show
+  def current
+    @user = User.find_by(id: session[:user_id])
+    if @user.nil?
+      head :not_found
+      return
+    end
   end
 
   def create
@@ -23,9 +28,27 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: session[:user_id])
+    if @user.nil?
+      flash[:error] = "You must be logged in to do that."
+      redirect_to root_path
+    end
   end
 
   def update
+    @user = User.find_by(id: session[:user_id])
+    if @user.nil?
+      flash[:error] = "You must be logged in to do that."
+      return redirect_to root_path
+    else
+      if @user.update(user_params)
+        flash[:success] = "User data updated successfully."
+        return redirect_to current_user_path
+      else
+        flash.now[:error] = "Could not update user account #{@user.errors.messages}"
+        return render :edit
+      end
+    end
   end
 
   def destroy
@@ -34,5 +57,9 @@ class UsersController < ApplicationController
     redirect_to root_path 
   end 
 
+  private
 
+  def user_params
+    return params.require(:user).permit(:uid, :merchant_name, :email, :provider, :username)
+  end
 end
