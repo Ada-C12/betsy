@@ -29,14 +29,25 @@ class UsersController < ApplicationController
 
   def edit
     @user = User.find_by(id: session[:user_id])
+    if @user.nil?
+      flash[:error] = "You must be logged in to do that."
+      redirect_to root_path
+    end
   end
 
   def update
     @user = User.find_by(id: session[:user_id])
-    if @user.update(author_params)
-      redirect_to current_user_path
+    if @user.nil?
+      flash[:error] = "You must be logged in to do that."
+      return redirect_to root_path
     else
-      render :edit
+      if @user.update(user_params)
+        flash[:success] = "User data updated successfully."
+        return redirect_to current_user_path
+      else
+        flash.now[:error] = "Could not update user account #{@user.errors.messages}"
+        return render :edit
+      end
     end
   end
 
