@@ -4,16 +4,16 @@ class Category < ApplicationRecord
   validates :name, presence: true
   validates :name, uniqueness: true
 
-  FIXED_CATEGORIES_IDS = (1..6)
+  FIXED_CATEGORIES_COUNT = 6
 
   def self.fixed_categories
-    fixed_categories = Category.where(id: FIXED_CATEGORIES_IDS)
+    fixed_categories = Category.all.order(id: :asc).limit(FIXED_CATEGORIES_COUNT)
     return fixed_categories
   end
 
 
   def self.more_categories
-    more_categories = Category.where.not(id: FIXED_CATEGORIES_IDS)
+    more_categories = Category.where.not(id: fixed_categories.ids)
     return more_categories
   end
 
