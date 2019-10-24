@@ -15,6 +15,7 @@ class ProductsController < ApplicationController
     if !session[:user_id]
       flash[:error] = "Merchant must login to add a new product!"
       redirect_to root_path
+      return
     else
       @product = Product.new
     end
@@ -24,14 +25,17 @@ class ProductsController < ApplicationController
     if !session[:user_id]
       flash[:error] = "Merchant must login to add a new product!"
       redirect_to root_path
+      return
     else
       @product = Product.new(product_params)
       if @product.save
         flash[:success] = "Product #{@product.name} has been added successfully"
         redirect_to product_path(@product.id)
+        return
       else
         flash.now[:error] = "Something went wrong! Product was not added."
         render :new
+        return
       end
     end
   end
@@ -40,6 +44,7 @@ class ProductsController < ApplicationController
     if !session[:user_id]
       flash[:error] = "Merchant must login to edit product!"
       redirect_to root_path
+      return
     else
       @product = Product.find_by(id: params[:id])
     end
@@ -49,13 +54,17 @@ class ProductsController < ApplicationController
     if !session[:user_id]
       flash[:error] = "Merchant must login to update product!"
       redirect_to root_path
+      return
     else
+      @product = Product.find_by(id: params[:id])
       if @product.update(product_params)
         flash[:success] = "Product #{@product.name} has been updated successfully"
         redirect_to product_path(@product.id)
+        return
       else
         flash.now[:error] = "Something went wrong! Product can not be edited."
         render :edit
+        return
       end
     end
   end
@@ -63,29 +72,26 @@ class ProductsController < ApplicationController
   def destroy
     if !session[:user_id]
       flash[:error] = "Merchant must login to delete a product!"
-      redirect_to root_path
     else
       product = Product.find_by(id: params[:id])
-      
       if product
-        if product.user_id == session[:id]
+        if product.user_id == session[:user_id]
           product.destroy
           flash[:success] = "Product #{product.name} was deleted!"
         else
           flash[:error] = "You cannot delete a product not belonging to you!"
-        end 
+        end
       else
         flash[:error] = "The product doesn't exist!"
       end
-
     end
-    redirect_to products_path
+    redirect_to root_path
     return
   end
 
   private
 
   def product_params
-    return params.require(:product).permit(:name, :category_ids, :price, :quantity, :user_id, :img_url, :description)
+    return params.require(:product).permit(:name, :price, :quantity, :user_id, :img_url, :description, category_ids: [])
   end
 end
