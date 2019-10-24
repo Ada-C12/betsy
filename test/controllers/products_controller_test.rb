@@ -15,7 +15,21 @@ describe ProductsController do
     end
   end 
 
-  # show
+  describe "show" do
+    it "responds with a success when given id exists" do
+      product = products(:heineken)
+
+      get product_path(product.id)
+
+      must_respond_with :success
+    end
+
+    it "redirects to root when given id doesn't exist" do
+      get product_path("-1")
+
+      must_redirect_to root_path
+    end
+  end
 
   # new
 
