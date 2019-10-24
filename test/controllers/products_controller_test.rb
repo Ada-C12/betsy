@@ -155,8 +155,31 @@ describe ProductsController do
     end
   end 
 
-  # toggle_retire
+  describe "toggle_retire" do
+    it "will set the retired value to true if false" do
+      product = products(:sapporo)
+      params = {
+        product: {
+          retired: true,
+        }
+      }
 
+      patch "/products/#{product.id}/toggle_retire", params: params
+      product.reload
+      expect(product.retired).must_equal true
+    end
 
+    it "will set the retired value to false if true" do
+      product = products(:corona)
+      params = {
+        product: {
+          retired: false,
+        }
+      }
 
+      patch "/products/#{product.id}/toggle_retire", params: params
+      product.reload
+      expect(product.retired).must_equal false
+    end
+  end
 end

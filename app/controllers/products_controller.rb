@@ -64,8 +64,16 @@ class ProductsController < ApplicationController
   end
 
   # only merchants
-  def destroy
-
+  def toggle_retire
+    @product = Product.find_by(id: params[:id])
+    if @product.retired == true
+      @product.retired = false
+      @product.save
+    elsif @product.retired == false
+      @product.retired = true
+      @product.save
+    end
+    redirect_to products_path
   end
 
   private

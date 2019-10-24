@@ -3,7 +3,6 @@ heineken:
   description: Great tasting beer.
   price: 11.11
   photo_url:
-  stock: 3
   merchant: brad
   retired: false
 sapporo:
@@ -21,4 +20,4 @@ corona:
   photo_url:
   stock: 4
   merchant: brad
-  retired: false
+  retired: true
