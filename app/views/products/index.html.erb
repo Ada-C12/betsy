@@ -1,7 +1,21 @@
-<h2>Hello</h2>
+<section>
+  <h2>All Products
+    <% if @wizard %>
+      from <%= @wizard.username %>
+    <% end %>
+  </h2>
+  <ul class= "product-photo-container">
+    <% @products.each do |product| %>
+      <li class= "product-photo">
+      <h3><%= product.name %></h3>
+      <%= image_tag product.photo_url %>
+      <p>$<%= product.price %></p>
+      </li>
+    <% end %>
+  </ul>
 
-<ul>
-<% @products.each do |product| %>
-  <li><%= product.photo_url %> <%= product.name %></li>
-<% end %>
-</ul>
+
+  <% if @wizard && @wizard.products.empty? %>
+    <p>There are no exisiting products from this wizard.</p>
+  <% end %>
+</section>
