@@ -1,10 +1,27 @@
 require "test_helper"
 
 describe Category do
+  let(:category1) {
+    categories(:category1)
+  }
   it "can be instantiated" do
+    expect(category1.valid?).must_equal true
   end
 
   describe "validations" do
+    it "must have a name" do
+      category1.name = nil
+      expect(category1.valid?).must_equal false
+      expect(category1.errors.messages).must_include :name
+      expect(category1.errors.messages[:name]).must_equal ["can't be blank"]
+    end
+    it "must have a unique name" do
+      category1_name = category1.name
+      new_invalid_category = Category.new(name: category1_name)
+      expect(new_invalid_category.valid?).must_equal false
+      expect(new_invalid_category.errors.messages).must_include :name
+      expect(new_invalid_category.errors.messages[:name]).must_equal ["has already been taken"]
+    end
   end
 
   describe "relations" do
@@ -49,7 +66,4 @@ describe Category do
     end
 
   end
-  # it "does a thing" do
-  #   value(1+1).must_equal 2
-  # end
 end
