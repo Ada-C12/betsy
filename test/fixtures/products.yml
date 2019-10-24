@@ -6,7 +6,12 @@ lemon_shirt:
   user: ada
   description: "Here is a description"
   categories: lemon
+<<<<<<< HEAD
 ​
+=======
+  
+
+>>>>>>> master
 strawberry_shoes:
   name: "Strawberry Shoes"
   price: 55
@@ -14,4 +19,8 @@ strawberry_shoes:
   img_url: "img.com"
   user: ada
   description: "Here is another description"
+<<<<<<< HEAD
   categories: strawberry
+=======
+  categories: strawberry
+>>>>>>> master

@@ -18,6 +18,8 @@ class UsersController < ApplicationController
         return redirect_to root_path 
       end 
     end
+    session[:user_id] = user.id 
+    redirect_to root_path
   end
 
   def edit
@@ -27,6 +29,10 @@ class UsersController < ApplicationController
   end
 
   def destroy
+    session[:user_id] = nil
+    flash[:success] = "Successfully logged out!"
+    redirect_to root_path 
   end 
+
 
 end
