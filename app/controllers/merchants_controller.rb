@@ -21,7 +21,7 @@ class MerchantsController < ApplicationController
       flash[:success] = "Logged in as returning merchant #{merchant.username}."
     else
       merchant = Merchant.build_from_github(auth_hash)
-
+     
       if merchant.save
         flash[:success] = "Logged in as new merchant #{merchant.username}."
       else
