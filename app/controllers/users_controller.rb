@@ -1,6 +1,11 @@
 class UsersController < ApplicationController
 
-  def show
+  def current
+    @user = User.find_by(id: session[:user_id])
+    if @user.nil?
+      head :not_found
+      return
+    end
   end
 
   def create
@@ -23,9 +28,16 @@ class UsersController < ApplicationController
   end
 
   def edit
+    @user = User.find_by(id: session[:user_id])
   end
 
   def update
+    @user = User.find_by(id: session[:user_id])
+    if @user.update(author_params)
+      redirect_to current_user_path
+    else
+      render :edit
+    end
   end
 
   def destroy
@@ -34,5 +46,9 @@ class UsersController < ApplicationController
     redirect_to root_path 
   end 
 
+  private
 
+  def user_params
+    return params.require(:user).permit(:uid, :merchant_name, :email, :provider, :username)
+  end
 end

@@ -8,5 +8,5 @@ Rails.application.routes.draw do
   delete "/logout", to: "users#destroy", as: "logout"
 
   get "/users/current", to: "users#current", as: "current_user"
-  
+  resources :users, only: [:edit, :update]
 end

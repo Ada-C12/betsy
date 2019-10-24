@@ -12,6 +12,8 @@
   <body>
     <ul>
     <%if session[:user_id]%>
+      <% user = User.find_by(id: session[:user_id])%>
+      <li><%= link_to user.username, current_user_path, class: "btn btn-primary" %>
       <li><%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary"%>
     <%else %>
       <li><%= link_to "Login with Github", github_login_path, class: "btn btn-primary "%></li>
