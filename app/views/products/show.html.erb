@@ -5,7 +5,9 @@
 	</div>
 	<div class="row">
   	<div class="col-lg-6">
+		<% if @product.photo_url %>
   		<%= image_tag @product.photo_url, alt: "a picture of #{@product.name}" %>
+		<%end%>
   	</div>
 		<div class="col-lg-6">
   
