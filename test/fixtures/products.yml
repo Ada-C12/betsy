@@ -1,0 +1,8 @@
+heineken:
+  name: Heineken
+  description: Great tasting beer.
+  price: 11.11
+  photo_url:
+  stock: 3
+  merchant: brad
+
