@@ -11,6 +11,7 @@ class ProductsController < ApplicationController
         @products = @category.products
       else
         render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found
+        return
       end
     end
   end
