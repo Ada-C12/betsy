@@ -25,7 +25,7 @@ class OrderitemsController < ApplicationController
     @orderitem = Orderitem.find_by(order_id: session[:order_id], product_id: params[:product_id])
     
     if @orderitem
-      @orderitem.quantity += params[:orderitem][:quantity]
+      @orderitem.quantity += params[:orderitem][:quantity].to_i
     else
       @orderitem = Orderitem.new(
         quantity: params[:orderitem][:quantity],

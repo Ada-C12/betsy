@@ -50,6 +50,25 @@ describe OrderitemsController do
       expect(current_order.orderitems.count).must_equal 2
       must_respond_with :redirect
     end
+    
+    it "will add to the quantity of an existing Orderitem if adding the same product to the same order" do
+      post product_orderitems_path(product_id: products(:sapporo).id), params: update_hash
+      
+      current_order = Order.find_by(id: session[:order_id])
+      
+      expect {
+        post product_orderitems_path(product_id: products(:sapporo).id), params: update_hash
+      }.wont_change "Orderitem.count"
+      
+      expect {
+        post product_orderitems_path(product_id: products(:sapporo).id), params: update_hash
+      }.wont_change "Order.count"
+      
+      orderitem = Orderitem.last 
+      
+      expect(current_order.orderitems.count).must_equal 1
+      expect(orderitem.quantity).must_equal 3
+    end
   end
   
   describe "edit" do
