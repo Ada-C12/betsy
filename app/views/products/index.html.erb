@@ -1,5 +1,9 @@
 <section>
-  <h2>All Products
+  <h2>All 
+    <% if @category %>
+    <%= @category.name.capitalize %>
+    <% end %>
+    Products
     <% if @wizard %>
       from <%= @wizard.username %>
     <% end %>
@@ -15,7 +19,6 @@
       </div>
     <% end %>
   </div>
-
 
 
 
