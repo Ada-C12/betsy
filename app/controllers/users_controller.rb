@@ -1,11 +1,15 @@
 class UsersController < ApplicationController
+  skip_before_action :require_login, :only => [:create, :show]
 
-  def current
-    @user = User.find_by(id: session[:user_id])
+  def show
+    @user = User.find_by(id: params[:id])
     if @user.nil?
       head :not_found
       return
     end
+  end
+
+  def current
   end
 
   def create
@@ -28,26 +32,16 @@ class UsersController < ApplicationController
   end
 
   def edit
-    @user = User.find_by(id: session[:user_id])
-    if @user.nil?
-      flash[:error] = "You must be logged in to do that."
-      redirect_to root_path
-    end
   end
 
   def update
-    @user = User.find_by(id: session[:user_id])
-    if @user.nil?
-      flash[:error] = "You must be logged in to do that."
-      return redirect_to root_path
+    #binding.pry
+    if @current_user.update(user_params)
+      flash[:success] = "User data updated successfully."
+      return redirect_to current_user_path
     else
-      if @user.update(user_params)
-        flash[:success] = "User data updated successfully."
-        return redirect_to current_user_path
-      else
-        flash.now[:error] = "Could not update user account #{@user.errors.messages}"
-        return render :edit
-      end
+      flash.now[:error] = "Could not update user account #{@current_user.errors.messages}"
+      return render :edit
     end
   end
 

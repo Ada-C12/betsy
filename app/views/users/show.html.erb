@@ -1,0 +1,22 @@
+<h2>
+<% if @user.merchant_name %>
+  <%=@user.merchant_name%>
+<% else %>
+  <%= @user.username%>
+<% end %>
+'s Shop!
+</h2>
+
+<% if @user.products.count > 0 %>
+  <% @user.products.each do |product| %>
+    <ul>
+      <%# <%= image_tag product.img_url, alt: product.name + "image"%>
+      <li><%=product.name%></li>
+      <li><%=product.price%></li>
+      <li><%=product.quantity%></li>
+      <li><%=product.description%></li>
+    </ul>
+  <% end %>
+<% else %>
+  <p>Merchant's fruit stand is empty.</p>
+<% end %>
