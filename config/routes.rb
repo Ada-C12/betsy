@@ -6,12 +6,12 @@ Rails.application.routes.draw do
     resources :orderitems, only: [:create]
   end
 
-  resources :merchants, except: [:delete, :new]
+  resources :merchants, except: [:delete, :new, :show]
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
-  get "merchants/current", to: "merchant#current", as: "current_merchant"
-  
+  get "merchants/current", to: "merchants#current", as: "current_merchant"
+
   resources :orderitems, only: [:edit, :destroy]
   patch '/orderitems/:id', to: 'orderitems#update'
 end

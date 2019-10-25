@@ -1,16 +1,27 @@
 class MerchantsController < ApplicationController
-  before_action :require_login, except: [:index]
+  before_action :require_login, except: [:index, :destroy]
+  skip_before_action :require_login, only: [:create]
 
   def index
     @merchants = Merchant.all
   end
 
   def show
-    @merchant = Merchant.find_by(id: params[:id])
+    @merchant = Merchant.find_by(id: session[:merchant_id])
     if @merchant.nil?
       flash[:warning] = "Merchant with id #{params[:id]} was not found."
       redirect_to root_path
+    
+    
+    # p '==================='
+    # p params[:id]
+    # p session[merchant_id]
+    # elsif params[:id] != session[:merchant_id]
+    #   redirect_to root_path
+    #   flash[:error] = "You are not authorized to view this page."
     end
+
+    
   end
 
   def create
@@ -34,11 +45,11 @@ class MerchantsController < ApplicationController
   end
 
   def current
-    merchant = Merchant.find_by(id: session[:merchant_id])
+    @current_merchant = Merchant.find_by(id: session[:merchant_id])
 
-    if merchant.nil?
-      head :not_found
-      return
+    unless @current_merchant
+      flash[:error] = "You must be a logged in authorized merchant to access this page"
+      redirect_to root_path
     end
   end
 
