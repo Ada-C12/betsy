@@ -10,7 +10,7 @@
 <% if @user.products.count > 0 %>
   <% @user.products.each do |product| %>
     <ul>
-      <li><%= image_tag product.img_url, alt: product.name + "image"%></li>
+      <%# <%= image_tag product.img_url, alt: product.name + "image"%>
       <li><%=product.name%></li>
       <li><%=product.price%></li>
       <li><%=product.quantity%></li>

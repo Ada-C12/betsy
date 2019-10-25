@@ -53,7 +53,7 @@ class UsersController < ApplicationController
         flash[:success] = "User data updated successfully."
         return redirect_to current_user_path
       else
-        flash.now[:error] = "Could not update user account #{@user.errors.messages}"
+        flash.now[:error] = "Could not update user account."
         return render :edit
       end
     end

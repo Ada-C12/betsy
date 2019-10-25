@@ -16,3 +16,11 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+ul {
+  list-style: none;
+}
+
+form {
+  margin: 3em;
+}

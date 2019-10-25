@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   get "/users/current", to: "users#current", as: "current_user"
   get "/users/current/edit", to: "users#edit", as: "edit_user"
-  patch "/users/current", to: "users#update"
+  # patch "/users/current", to: "users#update"
 
-  resources :users, only: :show
+  resources :users, only: [:show, :update]
 end
