@@ -1,0 +1,13 @@
+<h2>Edit Product Form</h2>
+
+<% if @product.errors.any? %>
+  <ul class="errors">
+    <% @product.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<%= render partial: "form", locals: { submit_button_label: "Edit product", product_form_class: "edit-product-form" } %>
