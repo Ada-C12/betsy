@@ -21,6 +21,22 @@
   margin-right: 1.1%;
 }
 
+.current-user-btn {
+  margin-right: .5%;
+}
+
+// main and footer on every page
+main {
+  min-height: 100vh;
+}
+
+footer {
+  text-align: center;
+  padding: 3%;
+  background-color: grey;
+  color: white;
+}
+
 // cards styling for products
 .cards-container {
   display: flex;

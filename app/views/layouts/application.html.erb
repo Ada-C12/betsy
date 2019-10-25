@@ -13,7 +13,7 @@
     <section class="login-loggout-container">
       <%if session[:user_id]%>
         <% user = User.find_by(id: session[:user_id])%>
-        <%= link_to user.username, current_user_path, class: "btn btn-primary" %>
+        <%= link_to user.username, current_user_path, class: "current-user-btn btn btn-primary" %>
         <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary"%>
       <%else %>
         <%= link_to "Login with Github", github_login_path, class: "btn btn-primary "%>
@@ -54,6 +54,7 @@
         </form>
       </div>
     </nav>
+    
     <%if flash%>
       <section class="alert__container">
       <ul>
@@ -63,6 +64,13 @@
       </ul>
       </section>
     <%end %>
+    
+    <main>
     <%= yield %>
+    </main>
   </body>
+  
+  <footer>
+    © 2019 The Fruit Loops
+  </footer>
 </html>
