@@ -28,3 +28,9 @@
   justify-content: space-around;
   align-items: center;
 }
+
+.carousel-inner > .carousel-item > img {
+  width:640px;
+  height:360px;
+  object-fit: contain;
+}

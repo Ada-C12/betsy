@@ -2,3 +2,4 @@ order_items1:
   quantity: 2
   product: product1
   order: order1
+  shipped: false

@@ -1,7 +1,184 @@
 require "test_helper"
 
 describe Order do
-  # it "does a thing" do
-  #   value(1+1).must_equal 2
-  # end
+  let (:order1) {
+    orders(:order1)
+  }
+  
+  it "can be instantiated" do
+    expect(order1.valid?).must_equal true
+  end
+  
+  it "will have the required fields" do
+    expect(order1.email).wont_be_nil
+    expect(order1.owling_address).wont_be_nil
+    expect(order1.name).wont_be_nil
+    expect(order1.cc_num).wont_be_nil
+    expect(order1.cc_exp_mo).wont_be_nil
+    expect(order1.cc_exp_yr).wont_be_nil
+    expect(order1.cc_cvv).wont_be_nil
+    expect(order1.zip_code).wont_be_nil
+    expect(order1.status).wont_be_nil
+    
+    [:email, :owling_address, :name, :cc_num, :cc_exp_mo, :cc_exp_yr, :cc_cvv, :zip_code, :status].each do |attribute|
+      expect(order1).must_respond_to attribute
+    end
+  end
+  
+  describe "relationships" do
+    it "can have many order_items" do
+      order_item = order_items(:order_items1)
+      
+      expect(order1.order_items.count).must_be :>=, 0
+      order1.order_items.each do |order_item|
+        expect(order_item).must_be_instance_of OrderItem
+      end
+    end
+  end
+  
+  describe "validations" do
+    it "must have an order_item" do
+      invalid_order = Order.create(email: 'bob@oz.com', owling_address: '123 Magical Lane', name: 'Bob Blah', cc_num: '1234567890123456', cc_exp_mo: 12, cc_exp_yr: 2020, cc_cvv: 123, zip_code: 12345, status: 'pending')
+      
+      expect(invalid_order.valid?).must_equal false
+      expect(invalid_order.errors.messages).must_include :order_items
+      expect(invalid_order.errors.messages[:order_items]).must_equal ["is too short (minimum is 1 character)"]
+    end
+    
+    it "does not require an email if status is pending" do
+      order1.email = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+
+    it "must have an email" do
+      order1.email = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :email
+      expect(order1.errors.messages[:email]).must_equal ["can't be blank"]
+    end
+
+    it "does not require an name if status is pending" do
+      order1.name = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+    
+    it "must have a name" do
+      order1.name = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :name
+      expect(order1.errors.messages[:name]).must_equal ["can't be blank"]
+    end
+    
+    it "does not require an owling_address if status is pending" do
+      order1.owling_address = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+
+    it "must have an owling_address" do
+      order1.owling_address = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :owling_address
+      expect(order1.errors.messages[:owling_address]).must_equal ["can't be blank"]
+    end
+
+    it "does not require a cc_num if status is pending" do
+      order1.cc_num = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+    
+    it "must have a cc_num" do
+      order1.cc_num = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :cc_num
+      expect(order1.errors.messages[:cc_num]).must_equal ["can't be blank"]
+    end
+
+    it "does not require a cc_exp_mo if status is pending" do
+      order1.cc_exp_mo = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+    
+    it "must have a cc_exp_mo" do
+      order1.cc_exp_mo = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :cc_exp_mo
+      expect(order1.errors.messages[:cc_exp_mo]).must_equal ["can't be blank"]
+    end
+
+    it "does not require a cc_exp_yr if status is pending" do
+      order1.cc_exp_yr = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+    
+    it "must have a cc_exp_yr" do
+      order1.cc_exp_yr = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :cc_exp_yr
+      expect(order1.errors.messages[:cc_exp_yr]).must_equal ["can't be blank"]
+    end
+
+    it "does not require a cc_cvv if status is pending" do
+      order1.cc_cvv = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+    
+    it "must have a cc_cvv" do
+      order1.cc_cvv = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :cc_cvv
+      expect(order1.errors.messages[:cc_cvv]).must_equal ["can't be blank"]
+    end
+
+    it "does not require a zip_code if status is pending" do
+      order1.zip_code = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+    
+    it "must have a zip_code" do
+      order1.zip_code = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :zip_code
+      expect(order1.errors.messages[:zip_code]).must_equal ["can't be blank"]
+    end
+
+    it "must have a status" do
+      order1.status = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :status
+      expect(order1.errors.messages[:status]).must_equal ["can't be blank"]
+    end
+  end
 end
