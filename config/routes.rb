@@ -4,9 +4,15 @@ Rails.application.routes.draw do
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
-
   get "merchants/current", to: "merchants#current", as: "current_merchant"
 
+
   root to: 'homepages#index'
-  resources :products
+  
+  resources :orderitems, only: [:edit, :destroy]
+  patch '/orderitems/:id', to: 'orderitems#update'
+  
+  resources :products do
+    resources :orderitems, only: [:create]
+  end
 end
