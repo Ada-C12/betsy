@@ -21,11 +21,12 @@
 			<% end %>
   	</div>
 	</div>
+  
+  <div = class="row">
+    <div class="col-lg-12"> <%=link_to "Make A Review", new_product_review_path(@product.id), class: "btn btn-dark"%></div>
+  </div>
   <div class="row">
     <div class="col-lg-12"> <h3> Reviews </h3></div>
-  </div>
-  <div = class="row">
-    <div class="col-lg-12"> <%=link_to "Make A Review", new_product_review_path(@product.id)%></div>
   </div>
  
 <table class="container table">

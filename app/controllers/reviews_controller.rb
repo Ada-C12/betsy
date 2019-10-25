@@ -19,6 +19,7 @@ class ReviewsController < ApplicationController
     @review.product = Product.find_by(id: product.id)
     
     if @review.save
+      flash[:success] = "Successfully Reviewed #{product.name}"
       redirect_to product_path(product.id)
       return 
     else
