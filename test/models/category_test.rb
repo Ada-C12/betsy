@@ -25,6 +25,13 @@ describe Category do
   end
 
   describe "relations" do
+  it "can have many products" do
+      category1 = categories(:category1)
+      expect(category1.products.count).must_be :>=, 0
+      category1.products.each do |product|
+        expect(product).must_be_instance_of Product
+      end
+    end
   end
 
   describe "custom methods" do
