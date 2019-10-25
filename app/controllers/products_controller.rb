@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :require_login, except: [:index]
+  # before_action :require_login, except: [:index]
   
   def index
     @products = Product.all
@@ -53,11 +53,11 @@ class ProductsController < ApplicationController
     @product.update_attributes(product_params)
     if @product.save
       flash[:status] = :success
-      flash[:result_text] = "Successfully updated #{@product} #{@product.id}"
+      flash[:result_text] = "Successfully updated #{@product.name}"
       redirect_to product_path(@product)
     else 
       flash.now[:status] = :failure
-      flash.now[:result_text] = "Could not update #{@product}"
+      flash.now[:result_text] = "Could not update #{@product.name}"
       flash.now[:messages] = @product.errors.messages
       render :edit, status: :bad_request
     end
@@ -73,7 +73,8 @@ class ProductsController < ApplicationController
       @product.retired = true
       @product.save
     end
-    redirect_to products_path
+    
+    # redirect_to product_path(@product)
   end
 
   private

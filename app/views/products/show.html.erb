@@ -4,6 +4,9 @@
   <p>Price: $<%= @product.price %></p>
   <p>Quantity: <%= @product.stock %></p>
   <p>Sold by: <%= @product.merchant.username%></p>
+  <% if @product.retired %>
+    <p>Not currently for sale</p>
+  <% end %>
   <p>Add to cart<%=%></p>
   <%= link_to "Edit", edit_product_path(@product.id) %>
 </section>

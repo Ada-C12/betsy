@@ -20,6 +20,11 @@
     </div>
 
     <div class="form-group">
+      <%= f.label "Retired" %>
+      <%= f.check_box :retired%>
+    </div>
+
+    <div class="form-group">
       <%= f.submit class: "btn btn-primary" %>
     </div>
   <% end %>
