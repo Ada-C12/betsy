@@ -12,8 +12,7 @@ class ProductsController < ApplicationController
       if @wizard
         @products = @wizard.products
       else
-        flash[:status] = :failure
-        flash[:result_text] = "That Wizard does not exist"
+        flash[:error] = "That Wizard does not exist"
         return redirect_to root_path
       end
 
@@ -22,8 +21,7 @@ class ProductsController < ApplicationController
       if @category
         @products = @category.products
       else
-        flash[:status] = :failure
-        flash[:result_text] = "That Category does not exist"
+        flash[:error] = "That Category does not exist"
         return redirect_to root_path
       end
     end

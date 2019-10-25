@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Betsy</title>
+    <title>Lumos</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -58,6 +58,16 @@
         </ul>
       </section>
     </header>
+
+    <% if flash[:error] %>
+      <div class="alert alert-warning alert-container">
+        <%= flash[:error] %>
+      </div>
+    <% elsif flash[:success] %>
+      <div class="alert alert-success alert-container">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
 
     <%= yield %>
   </body>
