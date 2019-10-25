@@ -18,10 +18,10 @@
       <% @current_user.products.each do |product| %>
         <tr>
           <td><%= link_to user.product.title, product_path(user.product) %></td>
-          <td><%= vote.work.creator %></td>
-          <td><%= vote.work.publication_year %></td>
-          <td><%= vote.work.category.capitalize %></td>
-          <td><%= render_date vote.created_at %></td>
+          <td><%= product.price %></td>
+          <td><%= product.quantity %></td>
+          <td><%= product.description %></td>
+          <td><%= category %></td>
         </tr>
       <% end %>
     <%end%>
@@ -43,14 +43,14 @@
       </tr>
     </thead>
     <tbody>
-    <%if @current_user.products %>
-      <% @current_user.products.each do |product| %>
+    <%if @orders %>
+      <% @orders.each do |order| %>
         <tr>
-          <td><%= link_to user.product.title, product_path(user.product) %></td>
-          <td><%= vote.work.creator %></td>
-          <td><%= vote.work.publication_year %></td>
-          <td><%= vote.work.category.capitalize %></td>
-          <td><%= render_date vote.created_at %></td>
+          <td><%= link_to order.title, root_path%></td>
+          <td><%= order.order_item %></td>
+          <td><%= render_date order.created_at %></td>
+          <td><%= order.status %></td>
+          <td><%= category %></td>
         </tr>
       <% end %>
     <%end%>
