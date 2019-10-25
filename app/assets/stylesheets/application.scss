@@ -16,3 +16,29 @@
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
+
+.login-loggout-container {
+  display: flex;
+  justify-content: flex-end;
+  background-color: white;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
+.card {
+  margin-top: 1%;
+  margin-bottom: 1%;
+}
+
+.navbar {
+  margin-top: 4%
+}
+
+.nav-brand {
+  text-align: center;
+  padding-top: 2%
+}

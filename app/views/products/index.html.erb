@@ -1,0 +1,19 @@
+
+<section class="cards-container">
+  <% Product.all.shuffle.each do |product| %>
+    <section class="card" style="width: 18rem;">
+      <%# This image should be link to product %>
+      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+      <div class="card-body">
+        <%# This should be link to product %>
+        <h5 class="card-title"> <%= product.name %> </h5>
+        <p class="card-text"> <%= product.description %> </p>
+        <p class="card-text"> $<%= product.price %> </p>
+        <p class="card-text"> Quantity: <%= product.quantity %> </p>
+        <% merchant = User.find_by(id: product.user_id)%>
+        <%# This should be link to merchant %>
+        <p class="card-text"> Merchant:<%= merchant.merchant_name %> </p>
+        
+    </section>
+  <% end %>
+</section>
