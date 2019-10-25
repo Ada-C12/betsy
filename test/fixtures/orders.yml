@@ -7,5 +7,5 @@ order1:
   cc_exp_yr: 2020
   cc_cvv: 123
   zip_code: 12345
-  status: pending 
+  status: complete 
   retired: false
