@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   has_many :order_items
-
+  
   validates :order_items, :length => { :minimum => 1 }
   validates :email, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :name, presence: true, unless: Proc.new { |o| o.status == 'pending' }
@@ -11,5 +11,4 @@ class Order < ApplicationRecord
   validates :cc_cvv, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :zip_code, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :status, presence: true
-  validates_inclusion_of :retired, in: [true, false]
 end
