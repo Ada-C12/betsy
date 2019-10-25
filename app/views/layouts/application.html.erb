@@ -14,7 +14,7 @@
     <header>
       <nav>
         <ul>
-          <li><h1>Lumos</h1></li>
+          <li><h1><%= link_to "Lumos", root_path %></h1></li>
           <li>Login</li>
           <li>Sign Up</li>
           <li>Cart</li>
@@ -22,7 +22,7 @@
       </nav>
       <section class="categories">
         <ul>
-          <li><%#link_to 'All Items', products_path %></li>
+          <li><%=link_to 'All Items', products_path %></li>
         <% Category.fixed_categories.each do |category| %>
           <li><%= link_to category.name, category_products_path(category.id) %>
           </li>
