@@ -1,65 +1,78 @@
 require "test_helper"
 
 describe UsersController do
+  describe "auth_callback" do
+    it "logs in an existing user and redirects them to the root path" do
+      user = users(:gretchen)
+    
+      expect{
+        perform_login(user)
+      }.wont_change "User.count"
+
+      must_redirect_to root_path
+      expect(session[:user_id]).must_equal user.id
+      assert_equal "Logged in as user #{user.username}", flash[:success]
+    end
+
+    it "logs in a new user and redirects them back to the root path" do
+      user = User.new(
+        uid: "465",
+        email: "queen_mary@marysberries.com",
+        provider: "github",
+        username: "merryberry2"
+      )
+
+      expect {
+        perform_login(user)
+      }.must_differ "User.count", 1
+
+      user = User.find_by(uid: user.uid)
+
+      must_redirect_to root_path
+      expect(session[:user_id]).must_equal user.id
+      assert_equal "Welcome to Fruitsy, #{user.username}!", flash[:success]
+    end
+
+    it "redirects back to the root path for invalid callbacks" do
+      
+      expect {
+        perform_login(User.new)
+      }.wont_change "User.count"
+
+      must_redirect_to root_path
+      expect(session[:user_id]).must_be_nil
+    end
+  end
 
   describe "logged in user" do 
+    before do
+      perform_login
+    end
 
     describe "current" do
       it "responds with success when a user has logged in" do
-        perform_login
-
         get current_user_path
 
         must_respond_with :success
       end
     end 
 
-    describe "auth_callback" do
-      it "logs in an existing user and redirects them to the root path" do
-        user = users(:gretchen)
-      
-        expect{
-          perform_login(user)
-        }.wont_change "User.count"
+    describe "show" do
+      it "responds with success when a user id exists" do
+        get user_path(users(:ada).id)
 
-        must_redirect_to root_path
-        expect(session[:user_id]).must_equal user.id
-        assert_equal "Logged in as user #{user.username}", flash[:success]
+        must_respond_with :success
       end
 
-      it "logs in a new user and redirects them back to the root path" do
-        user = User.new(
-          uid: "465",
-          email: "queen_mary@marysberries.com",
-          provider: "github",
-          username: "merryberry2"
-        )
+      it "responds with a not_found when a users id does not exist" do
+        get user_path(-1)
 
-        expect {
-          perform_login(user)
-        }.must_differ "User.count", 1
-
-        user = User.find_by(uid: user.uid)
-
-        must_redirect_to root_path
-        expect(session[:user_id]).must_equal user.id
-        assert_equal "Welcome to Fruitsy, #{user.username}!", flash[:success]
-      end
-
-      it "redirects back to the root path for invalid callbacks" do
-        expect {
-          perform_login(User.new)
-        }.wont_change "User.count"
-
-        must_redirect_to root_path
-        expect(session[:user_id]).must_be_nil
+        must_respond_with :not_found
       end
     end
 
     describe "edit" do
       it "can get to the edit page if the user is logged in" do
-        perform_login
-
         get edit_user_path
         
         must_respond_with :success
@@ -116,8 +129,6 @@ describe UsersController do
 
     describe "destroy" do
       it "successfully logs out a logged in user" do
-        perform_login
-
         expect {
           delete logout_path
         }.wont_change "User.count"
@@ -136,14 +147,29 @@ describe UsersController do
     end
   end 
 
-  describe "logged out / guest user" do 
+  describe "logged out / guest user" do
+
     describe "current" do
       it "responds with a redirect to the root path for the current user page" do
         get current_user_path
 
         must_redirect_to root_path
       end
-    end 
+    end
+
+    describe "show" do
+      it "responds with success when a user id exists" do
+        get user_path(users(:ada).id)
+
+        must_respond_with :success
+      end
+
+      it "responds with a not_found when a users id does not exist" do
+        get user_path(-1)
+
+        must_respond_with :not_found
+      end
+    end
 
     describe "edit" do 
       it "does not show an edit page for guest user, responds with a redirect and error message" do

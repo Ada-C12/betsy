@@ -1,7 +1,7 @@
 <h2>Edit Current User</h2>
-<% if @user.errors.any? %>
+<% if @current_user.errors.any? %>
   <ul class="errors">
-    <% @user.errors.each do |column, message| %>
+    <% @current_user.errors.each do |column, message| %>
       <li>
         <strong><%= column.capitalize %></strong> <%= message %>
       </li>
@@ -9,7 +9,7 @@
   </ul>
 <% end %>
 
-<%= form_with model: @user do |f| %>
+<%= form_with model: @current_user do |f| %>
   <div class="form-group row">
     <%= f.label :merchant_name, class: "col-sm-2 col-form-label"%>
     <div class="col-6">

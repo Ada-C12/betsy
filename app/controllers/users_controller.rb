@@ -35,6 +35,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    #binding.pry
     if @current_user.update(user_params)
       flash[:success] = "User data updated successfully."
       return redirect_to current_user_path
