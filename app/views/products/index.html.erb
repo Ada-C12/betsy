@@ -16,7 +16,7 @@
         <tr>
           <td><%= product.name %></td>
           <td><%= link_to product_path(product.id) do %>
-            <%= image_tag "#{product.photo_url}"%>
+            <span class="img"><%= image_tag "#{product.photo_url}"%></span>
             <% end %>
           </td>
         </tr>

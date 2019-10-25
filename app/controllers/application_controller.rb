@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   end
 
   def require_login
+    p session[:merchant_id]
     if @current_merchant.nil?
       flash[:error] = "You must be logged in to view this section"
       redirect_to root_path

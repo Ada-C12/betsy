@@ -27,6 +27,17 @@ h1, h2, h3, h4, h5 {
    font-weight: bold;
 }
 
+// IMAGES
+
+.img * {
+  position: relative;
+  float: left;
+  width: 100px;
+  height: 100px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
 
 
 

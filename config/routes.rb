@@ -4,7 +4,6 @@ Rails.application.routes.draw do
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
   resources :products, except: [:destroy]
   
-  
   resources :merchants, except: [:delete, :new]
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
