@@ -1,38 +1,74 @@
 require "test_helper"
 
-# ADD AUTHENTICATION
-# ADD AUTHORIZATION
-
 describe ProductsController do
-  describe "index" do
-    it "gives back a successful response" do
-      get products_path
-
+  describe "Guest users" do 
+    it "can access the homepage" do
+      get root_path
       must_respond_with :success
     end
 
-    it "gives back a sucessful response when there is no products" do
-      get products_path
-      
-      must_respond_with :success
-    end
-  end 
-
-  describe "show" do
-    it "responds with a success when given id exists" do
+    it "can access products index page" do
       product = products(:heineken)
-
       get product_path(product.id)
-
       must_respond_with :success
+    end 
+
+    it "can access the product details page" do
+      product = products(:heineken)
+      get product_path(product.id)
+      must_respond_with :success
+    end 
+
+    it "will be redirected to root when on product details if product id doesn't exist" do
+      get product_path("-1")
+      must_redirect_to root_path
+    end 
+
+    it "can't access the new product form" do
+      get new_product_path
+      must_redirect_to root_path
     end
 
-    it "redirects to root when given id doesn't exist" do
-      get product_path("-1")
-
+    it "can't access the edit product form" do
+      product = products(:heineken)
+      get edit_product_path(product.id)
       must_redirect_to root_path
     end
   end
+  
+  describe "Logged in users" do 
+    before do
+      # add login method
+    end 
+
+  end 
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+
+
+
 
   describe "new" do
     it "can get the new product page" do
