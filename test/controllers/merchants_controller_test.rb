@@ -68,7 +68,6 @@ describe MerchantsController do
       merchant = merchants(:brad)
       merchant.uid = nil
       merchant.save
-      p merchant
       perform_login(merchant)
 
       expect {
