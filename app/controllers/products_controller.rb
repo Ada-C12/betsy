@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  # before_action :require_login, except: [:index]
+  before_action :require_login, except: [:index]
   
   def index
     @products = Product.all
