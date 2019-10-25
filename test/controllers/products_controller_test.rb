@@ -43,7 +43,6 @@ describe ProductsController do
           price: 20.0,
           quantity: 20,
           img_url: "new_img.com",
-          user_id: users(:ada).id,
           category_ids: [categories(:strawberry).id],
           description: "description of a new product"
         }
@@ -96,7 +95,6 @@ describe ProductsController do
           price: 20.0,
           quantity: 20,
           img_url: "new_img.com",
-          user_id: users(:ada).id,
           category_ids: [categories(:strawberry).id],
           description: "description of a new product"
         }
@@ -118,7 +116,6 @@ describe ProductsController do
       expect(find_product.price).must_equal update_product_hash[:product][:price]
       expect(find_product.quantity).must_equal update_product_hash[:product][:quantity]
       expect(find_product.img_url).must_equal update_product_hash[:product][:img_url]
-      expect(find_product.user.id).must_equal update_product_hash[:product][:user_id]
       expect(find_product.description).must_equal update_product_hash[:product][:description]
       expect(find_product.category_ids.first).must_equal update_product_hash[:product][:category_ids].first
 
@@ -138,7 +135,6 @@ describe ProductsController do
       expect(find_product.price).must_equal existing_product.price
       expect(find_product.quantity).must_equal existing_product.quantity
       expect(find_product.img_url).must_equal existing_product.img_url
-      expect(find_product.user.id).must_equal existing_product.user_id
       expect(find_product.description).must_equal existing_product.description
       expect(find_product.category_ids.first).must_equal existing_product.categories.first.id
 
