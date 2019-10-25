@@ -19,18 +19,34 @@
 
   	</div>
 	</div>
-</div>
+  <div class="row">
+    <div class="col-lg-12"> <h3> Reviews </h3></div>
+  </div>
+  <div = class="row">
+    <div class="col-lg-12"> <%=link_to "Make A Review", new_product_review_path(@product.id)%></div>
+  </div>
+ 
+<table class="container table">
+	<thead>
+		<tr>
+			<th class="align-self-center">Rating</th>
+		</tr>
+	</thead>
 
-
-
-<h3> Reviews </h3>
-<%=link_to "Make A Review", new_product_review_path(@product.id)%>
-
-<%@product.reviews.each do |product|%>
-<%=product.rating%>
-<%end%>
-
+	<%@product.reviews.each do |review|%>
+	<tr>
+		<td class="align-self-center"><%=review.rating%></td>
+	<%end%>
+	</tr>
+</table>
 </main>
+
+
+
+
+
+
+
 
 
 

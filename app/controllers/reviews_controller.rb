@@ -11,14 +11,21 @@ class ReviewsController < ApplicationController
   def create
  
     product = Product.find_by(id: params[:product_id])
+    unless product 
+      head :not_found 
+      return 
+    end 
     @review = Review.new(review_params)
     @review.product = Product.find_by(id: product.id)
-
+    
     if @review.save
       redirect_to product_path(product.id)
+      return 
     else
       render :new
+      return 
     end
+  
 
   end
 
