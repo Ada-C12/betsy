@@ -5,4 +5,8 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :categories
 
   validates_inclusion_of :retired, in: [true, false]
+
+  def self.five_products
+    return Product.all.sample(5)
+  end
 end

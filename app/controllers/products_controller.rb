@@ -1,4 +1,8 @@
 class ProductsController < ApplicationController
+  def homepage
+    @products = Product.five_products
+  end
+  
   def index
     wizard_id = params[:wizard_id]
 
