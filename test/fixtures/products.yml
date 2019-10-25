@@ -6,6 +6,7 @@ product1:
   wizard: wizard1
   categories: category1, category2
   photo_url: https://i.imgur.com/BCK4aAc.jpg
+  retired: false
 
 product2: 
   name: mist amulet 
@@ -15,4 +16,5 @@ product2:
   wizard: wizard1
   categories: category1
   photo_url: https://i.imgur.com/BCK4aAc.jpg
+  retired: false
 
