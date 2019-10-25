@@ -75,8 +75,6 @@ class ProductsController < ApplicationController
       @product.retired = true
       @product.save
     end
-    
-    # redirect_to product_path(@product)
   end
 
   private
