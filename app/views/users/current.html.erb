@@ -1,1 +1,31 @@
-<h2>I'm the current user! My username is: <%=@user.username%></h2>
+<h2>hello, <%=@user.username%>!</h2>
+<p>You can <%=link_to "edit", edit_user_path%> your profile here.</p>
+
+<section class="user-products__container">
+  <h3 class="user-products__header">Here are your current products</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th> Title</th>
+        <th> Price</th>
+        <th> Quantity</th>
+        <th> Description</th>
+        <th> Category</th>
+      </tr>
+    </thead>
+    <tbody>
+    <%if @user.products %>
+      <% @user.products.each do |product| %>
+        <tr>
+          <td><%= link_to user.product.title, product_path(user.product) %></td>
+          <td><%= vote.work.creator %></td>
+          <td><%= vote.work.publication_year %></td>
+          <td><%= vote.work.category.capitalize %></td>
+          <td><%= render_date vote.created_at %></td>
+        </tr>
+      <% end %>
+    <%end%>
+    </tbody>
+  </table>
+</section>
+<%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
