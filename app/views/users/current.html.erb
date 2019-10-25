@@ -17,11 +17,13 @@
       <%if @current_user.products %>
         <% @current_user.products.each do |product| %>
           <tr>
-            <td><%= link_to user.product.title, product_path(user.product) %></td>
+            <td><%= link_to product.name, product_path(product) %></td>
             <td><%= product.price %></td>
             <td><%= product.quantity %></td>
             <td><%= product.description %></td>
-            <td><%= category %></td>
+            <%product.categories.each do |category|%>
+              <td><%= category.category %></td>
+            <%end%>
           </tr>
         <% end %>
       <% end %>
