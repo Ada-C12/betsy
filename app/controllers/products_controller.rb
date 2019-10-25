@@ -22,11 +22,10 @@ class ProductsController < ApplicationController
   # only merchants
   def create
     @product = Product.new(product_params)
-
+    @merchant = Merchant.find_by(id: session[:merchant_id])
+    @product.merchant_id = @merchant.id 
     if @product.save
       @product.retired = false
-      # assign logged in merchant to the product
-      @product.merchant_id = session[:merchant_id]
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name} #{@product.id}"
       redirect_to product_path(@product)
