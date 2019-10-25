@@ -11,8 +11,25 @@ describe OrderitemsController do
   
   let(:existing_orderitem) { orderitems(:heineken_oi) }
   
+  let(:update_hash){
+    {
+      orderitem: {
+        quantity: 1,
+      },
+    }
+  }
+  
+  
   describe "create" do
-    # TIFFANY FILL THIS IN AFTER YOU GET A ROUTE SET UP
+    it "can create an orderitem with valid data" do
+      # TIFFANY I THINK YOU NEED TO SOMEHOW SIMULATE SETTING AN ORDER_ID IN SESSION
+      
+      # session_hash = { order_id: Orderitem.last.id }
+      
+      # expect {
+      #   post product_orderitems_path(product_id: Product.first.id), params: update_hash
+      # }.must_change "Orderitem.count", 1
+    end
   end
   
   describe "edit" do
@@ -32,34 +49,38 @@ describe OrderitemsController do
   
   describe "update" do
     it "succeeds for valid data and an existing orderitem ID, and redirects" do
+      expect {
+        patch orderitem_path(existing_orderitem.id), params: update_hash
+      }.wont_change "Orderitem.count"
+      
+      updated_orderitem = Orderitem.find_by(id: existing_orderitem.id)
+      
+      expect(updated_orderitem.quantity).must_equal 1
+      
       # TIFFANY YOU NEED TO FILL THIS IN ONCE YOU FIX REDIRECT
+      # must_redirect_to
     end
     
     it "renders bad_request for invalid data, and redirects" do
       invalid_hash = {
         orderitem: {
-          quantity: nil
+          quantity: nil,
         },
       }
       
       expect {
-        patch orderitem_path(orderitems(:heineken_oi)), params: invalid_hash
+        patch orderitem_path(existing_orderitem.id), params: invalid_hash
       }.wont_change "Orderitem.count"
       
-      must_respond_with :bad_request
-      
+      updated_orderitem = Orderitem.find_by(id: existing_orderitem.id)
       expect(orderitems(:heineken_oi).quantity).must_equal 2
+      
+      must_respond_with :bad_request
     end
     
     it "renders 404 not_found for an invalid orderitem ID" do
-      valid_hash = {
-        orderitem: {
-          quantity: 1
-        },
-      }
-      
       expect {
-        patch orderitem_path(-1), params: valid_hash
+        patch orderitem_path(-1), params: update_hash
       }.wont_change "Orderitem.count"
       
       must_respond_with :not_found

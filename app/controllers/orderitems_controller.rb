@@ -2,10 +2,24 @@ class OrderitemsController < ApplicationController
   before_action :find_orderitem, only: [:edit, :update, :destroy]
   
   def create
+    if session[:order_id] && Order.find_by(id: session[:order_id])
+      @order = Order.find_by(id: session[:order_id])
+    else
+      @order = Order.new(status: "pending")
+      
+      unless @order.save
+        flash[:status] = :failure
+        flash[:result_text] = "Something went wrong. Please refresh and try again."
+        flash[:messages] = @order.errors.messages
+      end
+      
+      session[:order_id] = @order.id
+    end
+    
     @orderitem = Orderitem.new(
       quantity: params[:orderitem][:quantity],
       product_id: params[:id],
-      order_id: session[:order_id]
+      order_id: @order.id
     )
     
     if @orderitem.save

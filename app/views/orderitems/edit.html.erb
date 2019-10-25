@@ -1,7 +1,7 @@
 <section class="forms">
   <h1>Update Quantity</h1>
 
-  <section class = "row">
+  <section>
     <article class = "columns small-12 large-4">
       <% if @orderitem.product.photo_url != nil %>
         <%= image_tag "#{@orderitem.product.photo_url}", alt: "#{@orderitem.product.name}" %>
@@ -9,7 +9,7 @@
     </article>
 
     <article class = "columns small-12 large-8">
-      <%# link_to "#{@orderitem.product.name}", product_path(@orderitem.product) %>
+      <%= link_to "#{@orderitem.product.name}", product_path(@orderitem.product) %>
 
       <%= form_with model: @orderitem do |f| %>
     
