@@ -40,8 +40,8 @@ describe ProductsController do
           expect(product.wizard).must_equal wizard1
         end
       end
-
-      it "redirects if wizard does not exist" do
+      
+      it "redirects to root if wizard does not exist" do
         invalid_id = -20
 
         get wizard_products_path(invalid_id)
@@ -50,6 +50,26 @@ describe ProductsController do
         must_redirect_to root_path
       end
     end
+
+    describe "index action given category_id" do
+        
+      it "gives back a success response if given a valid category id" do
+        valid_category = Category.first
+        assert_not_nil(valid_category)
+        get category_products_path(valid_category.id)
+        must_respond_with :success
+      end
+
+      it "redirects to root if given an invalid category id" do
+        invalid_category_id = -1
+        invalid_category = Category.find_by(id: invalid_category_id)
+        assert_nil(invalid_category)
+        get category_products_path(invalid_category_id)
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
+
     describe "show" do
       let(:product) { products(:product1) }
       it "responds with success when showing an existing valid product" do

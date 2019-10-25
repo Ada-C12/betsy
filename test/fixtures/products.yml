@@ -4,6 +4,15 @@ product1:
   description: obscure figure while traveling through the mist 
   stock: 10
   wizard: wizard1
+  categories: category1, category2
+  photo_url: https://i.imgur.com/BCK4aAc.jpg
+
+product2: 
+  name: mist amulet 
+  price: 1500
+  description: obscure amulet traveling through the mist 
+  stock: 10
+  wizard: wizard1
   categories: category1
   photo_url: https://i.imgur.com/BCK4aAc.jpg
 
