@@ -1,8 +1,9 @@
 class OrdersController < ApplicationController
+  skip_before_action :require_login
+  
   def show
     # find current order in session
     @order = Order.find_by(id: session[:cart_id])
-    
   end
 
   def new
