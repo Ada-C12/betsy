@@ -10,30 +10,30 @@
   </head>
 
   <body>
-    <ul>
-    <%if session[:user_id]%>
-      <% user = User.find_by(id: session[:user_id])%>
-      <li><%= link_to user.username, current_user_path, class: "btn btn-primary" %>
-      <li><%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary"%>
-    <%else %>
-      <li><%= link_to "Login with Github", github_login_path, class: "btn btn-primary "%></li>
-    <%end %>
-    </ul>
+    <section class="login-loggout-container">
+      <%if session[:user_id]%>
+        <% user = User.find_by(id: session[:user_id])%>
+        <%= link_to user.username, current_user_path, class: "current-user-btn btn btn-primary" %>
+        <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary"%>
+      <%else %>
+        <%= link_to "Login with Github", github_login_path, class: "btn btn-primary "%>
+      <%end %>
+    </section>
+    <h1 class="nav-brand">
+      <%= link_to "Fruitsy", root_path %>
+    </h1>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">fruitsy</a>
+    <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
+      <%= link_to "Fruitsy", root_path, class:"navbar-brand" %>
+
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <%= link_to "Home", root_path, class: "nav-link"%>
-          </li>
           <li class="nav-item">
-            <%= link_to "Shop", products_path, class: "nav-link"%>
-          </li>
+            <%= link_to "All Fruits", products_path, class:"nav-link" %>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categories
@@ -60,6 +60,7 @@
         </form>
       </div>
     </nav>
+
     <%if flash%>
       <section class="alert__container">
       <ul>
@@ -69,6 +70,13 @@
       </ul>
       </section>
     <%end %>
+    
+    <main>
     <%= yield %>
+    </main>
   </body>
+  
+  <footer>
+    © 2019 The Fruit Loops
+  </footer>
 </html>
