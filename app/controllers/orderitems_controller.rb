@@ -2,6 +2,9 @@ class OrderitemsController < ApplicationController
   before_action :find_orderitem, only: [:edit, :update, :destroy]
   
   def create
+    # When adding items to an Order, does an order_id exist in sessions?
+    # If yes, add to existing Order
+    # Else, create a new Order
     if session[:order_id] && Order.find_by(id: session[:order_id])
       @order = Order.find_by(id: session[:order_id])
     else
@@ -16,12 +19,22 @@ class OrderitemsController < ApplicationController
       session[:order_id] = @order.id
     end
     
-    @orderitem = Orderitem.new(
-      quantity: params[:orderitem][:quantity],
-      product_id: params[:id],
-      order_id: @order.id
-    )
+    # Does an existing already contain your product?
+    # If yes, increase the quantity of that specific product
+    # Else, create a new product
+    @orderitem = Orderitem.find_by(order_id: session[:order_id], product_id: params[:product_id])
     
+    if @orderitem
+      @orderitem.quantity += params[:orderitem][:quantity]
+    else
+      @orderitem = Orderitem.new(
+        quantity: params[:orderitem][:quantity],
+        product_id: params[:product_id],
+        order_id: @order.id
+      )
+    end
+    
+    # Now save and see if validation fights you
     if @orderitem.save
       flash[:status] = :success
       flash[:result_text] = "#{@orderitem.product.name} has been added to the cart"  

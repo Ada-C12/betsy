@@ -1,13 +1,13 @@
 require "test_helper"
 
 describe OrderitemsController do
-  let(:new_orderitem) {
-    Orderitem.new(
-      quantity: 1,
-      product: products(:stella),
-      order: orders(:order_1)
-    )
-  }
+  # let(:new_orderitem) {
+  #   Orderitem.new(
+  #     quantity: 1,
+  #     product: products(:stella),
+  #     order: orders(:order_1)
+  #   )
+  # }
   
   let(:existing_orderitem) { orderitems(:heineken_oi) }
   
@@ -21,14 +21,34 @@ describe OrderitemsController do
   
   
   describe "create" do
-    it "can create an orderitem with valid data" do
-      # TIFFANY I THINK YOU NEED TO SOMEHOW SIMULATE SETTING AN ORDER_ID IN SESSION
+    it "can create a new Order and an Orderitem with valid data" do
+      expect {
+        post product_orderitems_path(product_id: products(:stella).id), params: update_hash
+      }.must_change "Orderitem.count", 1
       
-      # session_hash = { order_id: Orderitem.last.id }
+      expect(session[:order_id]).wont_be_nil
       
-      # expect {
-      #   post product_orderitems_path(product_id: Product.first.id), params: update_hash
-      # }.must_change "Orderitem.count", 1
+      new_orderitem = Orderitem.last
+      
+      expect(new_orderitem.product.name).must_equal "Stella Artois"
+      expect(new_orderitem.order.orderitems.count).must_equal 1
+      must_respond_with :redirect
+    end
+    
+    it "will add to existing Order while creating new Orderitems" do
+      expect {
+        post product_orderitems_path(product_id: products(:stella).id), params: update_hash
+      }.must_change "Orderitem.count", 1
+      
+      current_order = Order.find_by(id: session[:order_id])
+      expect(current_order.orderitems.count).must_equal 1
+      
+      expect {
+        post product_orderitems_path(product_id: products(:sapporo).id), params: update_hash
+      }.wont_change "Order.count"
+      
+      expect(current_order.orderitems.count).must_equal 2
+      must_respond_with :redirect
     end
   end
   
