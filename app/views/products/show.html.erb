@@ -1,6 +1,6 @@
 <section>
   <h1 class="card-title"> <%= @product.name %></h1>
-  <%= image_tag (@product.img_url), class:"card-img-top", alt:"#{@product.name}product image" %> 
+  <%= image_tag (@product.img_url), class:"show-product-img", alt:"#{@product.name}product image" %> 
     <h2> $<%= @product.price %> </h2>
     <h4> <%= @product.description %> </h4>
     <h5> Quantity: <%= @product.quantity %> </h5>

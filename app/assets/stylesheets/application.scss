@@ -28,6 +28,7 @@
 // main and footer on every page
 main {
   min-height: 100vh;
+  margin: 1%
 }
 
 footer {
@@ -47,4 +48,9 @@ footer {
 .card {
   margin-top: 1%;
   margin-bottom: 1%;
+}
+
+// show product page
+.show-product-img {
+  max-width: 30vw;
 }
