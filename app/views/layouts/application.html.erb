@@ -19,7 +19,9 @@
         <%= link_to "Login with Github", github_login_path, class: "btn btn-primary "%>
       <%end %>
     </section>
-    <h1 class="nav-brand">Fruitsy</h1>
+    <h1 class="nav-brand">
+      <%= link_to "Fruitsy", root_path %>
+    </h1>
 
     <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
       <%= link_to "Fruitsy", root_path, class:"navbar-brand" %>
@@ -54,7 +56,7 @@
         </form>
       </div>
     </nav>
-    
+
     <%if flash%>
       <section class="alert__container">
       <ul>
