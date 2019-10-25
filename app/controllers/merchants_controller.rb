@@ -1,5 +1,6 @@
 class MerchantsController < ApplicationController
-  before_action :require_login, except: [:index, :create, :destroy]
+  before_action :require_login, except: [:index, :destroy]
+  skip_before_action :require_login, only: [:create]
 
   def index
     @merchants = Merchant.all
@@ -35,11 +36,11 @@ class MerchantsController < ApplicationController
   end
 
   def current
-    merchant = Merchant.find_by(id: session[:merchant_id])
+    @current_merchant = Merchant.find_by(id: session[:merchant_id])
 
-    if merchant.nil?
-      head :not_found
-      return
+    unless @current_merchant
+      flash[:error] = "You must be logged in to see this page"
+      redirect_to root_path
     end
   end
 
