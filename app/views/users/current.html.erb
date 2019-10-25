@@ -1,1 +1,63 @@
-<h2>I'm the current user! My username is: <%=@user.username%></h2>
+<h2>hello, <%=@current_user.username%>!</h2>
+<p>You can <%=link_to "edit", edit_user_path %> your profile here.</p>
+
+<section class="user-products__container">
+  <h3 class="user-products__header">Manage your products</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th> Title</th>
+        <th> Price</th>
+        <th> Quantity</th>
+        <th> Description</th>
+        <th> Category</th>
+      </tr>
+    </thead>
+    <tbody>
+      <%if @current_user.products %>
+        <% @current_user.products.each do |product| %>
+          <tr>
+            <td><%= link_to user.product.title, product_path(user.product) %></td>
+            <td><%= product.price %></td>
+            <td><%= product.quantity %></td>
+            <td><%= product.description %></td>
+            <td><%= category %></td>
+          </tr>
+        <% end %>
+      <% end %>
+  </tbody>
+  </table>
+</section>
+
+<section class="user-orders__container">
+  <h3 class="user-products__header">Manage your orders</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th> Order id</th>
+        <%# #Will require a link to view individual order %>
+        <th> Product</th> 
+        <%# #Will require a link to the product %>
+        <th> Order date</th>
+        <th> Status</th>
+        <th> Category</th>
+      </tr>
+    </thead>
+    <tbody>
+    <% if @products %>
+    <% @products.each do |product| %>
+      <% product.order_items.each do |order_item| %>
+        <tr>
+          <td><%= link_to order_item.order.id, root_path%></td>
+          <td><%= order.order_item %></td>
+          <td><%= render_date order.created_at %></td>
+          <td><%= order.status %></td>
+          <td><%= category %></td>
+        </tr>
+      <% end %>
+    <%end%>
+    <%end%>
+    </tbody>
+  </table>
+</section>
+<%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
