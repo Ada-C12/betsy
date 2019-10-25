@@ -15,8 +15,10 @@
 			<p>Price: <%=@product.price%></p>
 			<p>Description: <%=@product.description%></p>
 			<p>Stock: <%=@product.stock%></p>
-			<%=link_to "Add to Cart" %>
-
+			<%= form_with model: OrderItem, url: product_order_items_path(@product.id) do |f| %>
+				<%= number_field(:order_item, :quantity, min: 1) %>
+				<%= f.submit "Add to Cart", class: "btn btn-dark" %>
+			<% end %>
   	</div>
 	</div>
   <div class="row">
@@ -40,17 +42,4 @@
 	</tr>
 </table>
 </main>
-
-
-
-
-
-
-
-
-
-
-
-
-
 

@@ -1,5 +1,8 @@
 class ProductsController < ApplicationController
-  # Can now be accessed via /, /books, or /authors/:author_id/books
+  def homepage
+    @products = Product.five_products
+  end
+  
   def index
     wizard_id = params[:wizard_id]
     category_id = params[:category_id]
