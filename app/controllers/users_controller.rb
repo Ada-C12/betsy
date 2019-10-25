@@ -1,6 +1,14 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, :only => [:create, :show]
 
+  def show
+    @user = User.find_by(id: params[:id])
+    if @user.nil?
+      head :not_found
+      return
+    end
+  end
+
   def current
   end
 
@@ -27,6 +35,7 @@ class UsersController < ApplicationController
   end
 
   def update
+    #binding.pry
     if @current_user.update(user_params)
       flash[:success] = "User data updated successfully."
       return redirect_to current_user_path
