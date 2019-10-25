@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+  # before_action :require_login, except: [:index, :show]
   
   def index
     @products = Product.all
@@ -25,6 +25,8 @@ class ProductsController < ApplicationController
 
     if @product.save
       @product.retired = false
+      # assign logged in merchant to the product
+      @product.merchant = session[:merchant_id]
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name} #{@product.id}"
       redirect_to product_path(@product)

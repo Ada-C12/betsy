@@ -49,7 +49,7 @@ describe ProductsController do
     # MODIFY TEST SO THAT IT ADDS THE CURRENT SESSION USER_ID
     # AS THE MERCHANT_ID FOR THE NEW PRODUCT
     it "creates a product sucessfully with valid data, and redirects the user to the product page" do
-      merchant = Merchant.create(username: "jake", email: "jakw123@gmail.com", uid: 12232234, provider: "github")
+      # merchant = Merchant.create(username: "jake", email: "jakw123@gmail.com", uid: 12232234, provider: "github")
 
       product_hash = {
         product: {
@@ -58,7 +58,7 @@ describe ProductsController do
           price: 30.0,
           photo_url: "https://images-na.ssl-images-amazon.com/images/I/51NR%2BJ9lLNL._SY679_.jpg",
           stock: 5,
-          merchant_id: merchant.id,
+          merchant_id: session[:merchant_id],
           retired: false,
         }
       }
@@ -69,7 +69,7 @@ describe ProductsController do
 
       new_product = Product.find_by(name: product_hash[:product][:name])
       expect(new_product.name).must_equal product_hash[:product][:name]
-
+      expect(new_product.merchant_id).must_equal session[:merchant_id]
     end
 
     it "does not create a product with invalid data, and renders new form" do
@@ -116,7 +116,6 @@ describe ProductsController do
           retired: false,
         )
       end
-  
   
       it "can update an existing product" do
         updated_product_data = {
@@ -184,10 +183,6 @@ describe ProductsController do
         expect(product.retired).must_equal false
       end
     end
-
-
-
-
   end 
   
   
