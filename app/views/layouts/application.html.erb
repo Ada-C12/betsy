@@ -24,10 +24,10 @@
           <li class="nav-item app-header__nav_item"><%= link_to "Merchants", merchants_path %></li>
           <li class="nav-item app-header__nav_item">
             <% if session[:merchant_id] %>
-            Logged in as <%= Merchant.find_by(id: session[:merchant_id]).username %>
-              <%= link_to "Log out", logout_path, method: "delete" %>
+              <%= link_to "Logged in as #{Merchant.find_by(id: session[:merchant_id]).username}", merchant_path(Merchant.find_by(id: session[:merchant_id]).id), class: "btn btn-primary"  %>
+              <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary" %>
             <% else %>
-              <%= link_to "Login with Github", github_login_path %>
+              <%= link_to "Login with Github", github_login_path, class: "btn btn-primary" %>
             <% end %></li>
           <li class="nav-item app-header__nav_item">Shopping Cart</li>
         </ul>

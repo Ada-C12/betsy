@@ -1,5 +1,5 @@
 class MerchantsController < ApplicationController
-  before_action :require_login, except: [:index]
+  before_action :require_login, except: [:index, :create, :destroy]
 
   def index
     @merchants = Merchant.all
