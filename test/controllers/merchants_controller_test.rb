@@ -10,9 +10,9 @@ describe MerchantsController do
     end
 
     describe "show" do
-      it "responds with success when id given exists" do
+      it "responds with success when given current merchants id" do
         get merchant_path(:brad)
-        must_respond_with :found
+        must_respond_with :success
       end
   
       it "responds with a not found flash and redirects to root path when id given does not exist" do
