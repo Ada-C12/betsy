@@ -1,6 +1,7 @@
 require "test_helper"
 
 describe UsersController do
+
   describe "auth_callback" do
     it "logs in an existing user and redirects them to the root path" do
       user = users(:gretchen)
@@ -34,7 +35,6 @@ describe UsersController do
     end
 
     it "redirects back to the root path for invalid callbacks" do
-      
       expect {
         perform_login(User.new)
       }.wont_change "User.count"
