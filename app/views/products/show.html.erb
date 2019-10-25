@@ -24,7 +24,7 @@
 
 
 <h3> Reviews </h3>
-<%=link_to "Make A Review"%>
+<%=link_to "Make A Review", new_product_review_path(@product.id)%>
 
 <%@product.reviews.each do |product|%>
 <%=product.rating%>

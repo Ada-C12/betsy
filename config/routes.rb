@@ -10,4 +10,11 @@ Rails.application.routes.draw do
   resources :wizards do
     resources :products, only: [:index]
   end
+
+  resources :products do 
+    resources :reviews, only: [:new,:create]
+  end 
+
+
+
 end
