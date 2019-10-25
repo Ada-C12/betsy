@@ -37,10 +37,10 @@ class OrderitemsController < ApplicationController
     # Now save and see if validation fights you
     if @orderitem.save
       flash[:status] = :success
-      flash[:result_text] = "#{@orderitem.product.name} has been added to the cart"  
+      flash[:result_text] = "#{@orderitem.product.name} has been added to the cart."  
     else 
       flash[:status] = :failure
-      flash[:result_text] = "Could not add #{@orderitem.product.name} to cart"
+      flash[:result_text] = "Could not add the item to the cart."
       flash[:messages] = @orderitem.errors.messages
     end
     
@@ -53,14 +53,14 @@ class OrderitemsController < ApplicationController
   def update
     if @orderitem.update(quantity: params[:orderitem][:quantity])
       flash[:status] = :success
-      flash[:result_text] = "Quantity has been updated"
+      flash[:result_text] = "Quantity has been updated."
       # TIFFANY YOU NEED TO REDIRECT TO THE CART PAGE
       # IS CURRENTLY NOT CREATED
       redirect_to root_path 
       return
     else
       flash.now[:status] = :failure
-      flash.now[:result_text] = "Could not update #{@orderitem.product.name}"
+      flash.now[:result_text] = "Could not update item."
       flash.now[:messages] = @orderitem.errors.messages
       render :edit, status: :bad_request
       return

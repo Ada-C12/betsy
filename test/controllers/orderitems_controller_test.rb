@@ -35,7 +35,7 @@ describe OrderitemsController do
       must_respond_with :redirect
     end
     
-    it "will add to existing Order while creating new Orderitems" do
+    it "will add to existing Order while creating new Orderitems as separate orderitems" do
       expect {
         post product_orderitems_path(product_id: products(:stella).id), params: update_hash
       }.must_change "Orderitem.count", 1
@@ -68,6 +68,43 @@ describe OrderitemsController do
       
       expect(current_order.orderitems.count).must_equal 1
       expect(orderitem.quantity).must_equal 3
+      must_respond_with :redirect
+    end
+    
+    it "will not create a new Orderitem if given an invalid product_id" do
+      expect {
+        post product_orderitems_path(product_id: -1), params: update_hash
+      }.wont_change "Orderitem.count"
+      
+      must_respond_with :redirect
+    end
+    
+    it "will not create a new Orderitem if given an invalid quantity" do
+      invalid_hash = {
+        orderitem: {
+          quantity: nil,
+        },
+      }
+      
+      expect {
+        post product_orderitems_path(product_id: products(:sapporo).id), params: invalid_hash
+      }.wont_change "Orderitem.count"
+      
+      must_respond_with :redirect
+    end
+    
+    it "will not create a new Orderitem if given an quantity greater than Product stock" do
+      overstock_hash = {
+        orderitem: {
+          quantity: 20,
+        },
+      }
+      
+      expect {
+        post product_orderitems_path(product_id: products(:sapporo).id), params: overstock_hash
+      }.wont_change "Orderitem.count"
+      
+      must_respond_with :redirect
     end
   end
   
