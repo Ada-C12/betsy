@@ -8,14 +8,6 @@ class OrderitemsController < ApplicationController
       order_id: session[:order_id]
     )
     
-    if @orderitem.quantity < @orderitem.product.price
-      flash[:status] = :failure
-      flash[:result_text] = "Could not add #{@orderitem.product.name} to cart"
-      flash[:messages] = "Order for #{@orderitem.product.name} exceeds inventory in stock: #{@orderitem.product.stock}"
-      redirect_back fallback_location: root_path
-      return
-    end
-    
     if @orderitem.save
       flash[:status] = :success
       flash[:result_text] = "#{@orderitem.product.name} has been added to the cart"  
@@ -43,7 +35,7 @@ class OrderitemsController < ApplicationController
       flash.now[:status] = :failure
       flash.now[:result_text] = "Could not update #{@orderitem.product.name}"
       flash.now[:messages] = @orderitem.errors.messages
-      render :edit
+      render :edit, status: :bad_request
       return
     end
   end
@@ -51,7 +43,7 @@ class OrderitemsController < ApplicationController
   def destroy
     @orderitem.destroy
     flash[:status] = :success
-    flash[:result_text] = "#{@orderitem.product.name} removed"
+    flash[:result_text] = "#{@orderitem.product.name} removed from cart"
     # TIFFANY YOU NEED TO REDIRECT TO THE CART PAGE
     # IS CURRENTLY NOT CREATED
     redirect_to root_path
@@ -61,6 +53,6 @@ class OrderitemsController < ApplicationController
   
   def find_orderitem
     @orderitem = Orderitem.find_by(id: params[:id])
-    render_404 unless @orderitem
+    head :not_found unless @orderitem
   end
 end

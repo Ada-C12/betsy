@@ -78,6 +78,14 @@ describe Orderitem do
       expect(new_orderitem.errors.messages).must_include :order
       expect(new_orderitem.errors.messages[:order]).must_include "must exist"
     end
+    
+    it "cannot create an orderitem with quantity greater than stock available" do
+      new_orderitem.quantity = 10
+      
+      expect(new_orderitem.valid?).must_equal false
+      expect(new_orderitem.errors.messages).must_include :quantity
+      expect(new_orderitem.errors.messages[:quantity]).must_include "order exceeds inventory in stock"
+    end
   end
   
   describe "relationships" do
