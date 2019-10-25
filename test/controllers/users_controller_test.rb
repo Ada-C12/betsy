@@ -138,10 +138,10 @@ describe UsersController do
 
   describe "logged out / guest user" do 
     describe "current" do
-      it "responds with not_found for the current user page" do
+      it "responds with a redirect to the root path for the current user page" do
         get current_user_path
 
-        must_respond_with :not_found
+        must_redirect_to root_path
       end
     end 
 
