@@ -6,6 +6,14 @@ heineken:
   stock: 3
   merchant: brad
   retired: false
+stella:
+  name: Stella Artois
+  description: People enjoy this beer.
+  price: 44.44
+  photo_url:
+  stock: 3
+  merchant: brad
+  retired: false
 sapporo:
   name: Sapporo
   description: Japanese standard beer.
