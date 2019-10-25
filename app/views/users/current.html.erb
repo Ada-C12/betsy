@@ -1,5 +1,5 @@
 <h2>hello, <%=@current_user.username%>!</h2>
-<p>You can <%=link_to "edit", edit_user_path%> your profile here.</p>
+<p>You can <%=link_to "edit", edit_user_path %> your profile here.</p>
 
 <section class="user-products__container">
   <h3 class="user-products__header">Manage your products</h3>
@@ -14,17 +14,18 @@
       </tr>
     </thead>
     <tbody>
-    <%if @current_user.products %>
-      <% @current_user.products.each do |product| %>
-        <tr>
-          <td><%= link_to user.product.title, product_path(user.product) %></td>
-          <td><%= product.price %></td>
-          <td><%= product.quantity %></td>
-          <td><%= product.description %></td>
-          <td><%= category %></td>
-        </tr>
+      <%if @current_user.products %>
+        <% @current_user.products.each do |product| %>
+          <tr>
+            <td><%= link_to user.product.title, product_path(user.product) %></td>
+            <td><%= product.price %></td>
+            <td><%= product.quantity %></td>
+            <td><%= product.description %></td>
+            <td><%= category %></td>
+          </tr>
+        <% end %>
       <% end %>
-    <%end%>
+  </tbody>
   </table>
 </section>
 
@@ -43,10 +44,11 @@
       </tr>
     </thead>
     <tbody>
-    <%if @orders %>
-      <% @orders.each do |order| %>
+    <% if @products %>
+    <% @products.each do |product| %>
+      <% product.order_items.each do |order_item| %>
         <tr>
-          <td><%= link_to order.title, root_path%></td>
+          <td><%= link_to order_item.order.id, root_path%></td>
           <td><%= order.order_item %></td>
           <td><%= render_date order.created_at %></td>
           <td><%= order.status %></td>
@@ -54,6 +56,8 @@
         </tr>
       <% end %>
     <%end%>
+    <%end%>
+    </tbody>
   </table>
 </section>
 <%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
