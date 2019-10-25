@@ -1,28 +1,27 @@
-/*
- * This is a manifest file that'll be compiled into application.css, which will include all the files
- * listed below.
- *
- * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
- * vendor/assets/stylesheets directory can be referenced here using a relative path.
- *
- * You're free to add application-wide styles to this file and they'll appear at the bottom of the
- * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
- * files in this directory. Styles in this file should be added after the last require_* statement.
- * It is generally better to create a new file per style scope.
- *
- */
-
 /* Custom bootstrap variables must be set or imported *before* bootstrap. */
 @import "bootstrap";
 /* Import scss content */
 @import "**/*";
 
+// navbar header on every page
+.navbar {
+  margin-top: 4%
+}
+
+.nav-brand {
+  text-align: center;
+  padding-top: 2%
+}
+
 .login-loggout-container {
   display: flex;
   justify-content: flex-end;
   background-color: white;
+  margin-top: 1.1%;
+  margin-right: 1.1%;
 }
 
+// cards styling for products
 .cards-container {
   display: flex;
   flex-wrap: wrap;
@@ -32,13 +31,4 @@
 .card {
   margin-top: 1%;
   margin-bottom: 1%;
-}
-
-.navbar {
-  margin-top: 4%
-}
-
-.nav-brand {
-  text-align: center;
-  padding-top: 2%
 }
