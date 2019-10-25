@@ -1,96 +1,83 @@
 class OrdersController < ApplicationController
+  before_action :find_order, only: [:edit, :update, :destroy]
   
-  def index
-    @orders = Orders.all
-  end
-  
-  def new
-    @order = Order.new(order_params)
-  end
-  
-  #need to add merchant login
-  #for views of:
-  #merchant logged in
-  #guest user 
-  #super not sure about thiiiis :|
   def show
-    if @merchant_logged_in 
-      @order = Order.find_by(id: params[:id])
-    elsif
-      if @order = nil 
-        redirect_to login_path
-      else
-        flash[:error] = "You must be logged in to see this page" #if merchant isnt logged in
-        redirect_to root_path #to login
-      end
-    end
-  end
-  
-  def create
-    @order = Order.new(order_params)
-    if @order.save
-      redirect_to confirmation_path
-      return 
-    else 
-      render :new
-    end
-  end
-  
-  #order items get added to cart
-  def current_order
+    # If you don't have an order_id, you haven't added anthing to cart.
     if session[:order_id]
-      Order.find(session[:order_id])
+      @order = Order.find_by(id: session[:order_id])
+      
+      # This is the nice redirect not found carts.
+      if @order.nil?
+        flash[:status] = :failure
+        flash[:result_text] = "Unable to load cart at this time. Please refresh and try again."
+        redirect_back fallback_location: root_path
+        return
+      end
     else
-      Order.new
-    end
-  end 
-  
-  def cart
-    @current_order = order_items
-  end
-  
-  def update
-    @order = Order.find_by(id: params[:id])
-    if @order.nil?
-      head :not_foiund
+      # This is the nice redirect for average users with empty carts.
+      # Theoretically would render a dummy cart page 
+      flash[:status] = :failure
+      flash[:result_text] = "No items currently in cart."
+      redirect_back fallback_location: root_path
       return
     end
+  end
+  
+  def edit ; end
+  
+  def update
+    # Smart but needs to be tested. 
+    # Will your status update along with your order params.
+    @order.status = "paid"
+    
     if @order.update(order_params)
+      flash[:status] = :success
+      flash[:result_text] = "Order confirmed. We are working on your order!"  
+      
       redirect_to order_path(@order.id)
       return 
     else 
-      render order_path
+      flash.now[:status] = :failure
+      flash.now[:result_text] = "Please check the following information and submit again."
+      flash.now[:messages] = @order.errors.messages
+      
+      render :edit, status: :bad_request  
+      return
     end
   end
   
-  #order when officially purchased
-  def confirmation
-    @order = Order.find_by(id: params[:id])
-  end
-  
-  #to toggle between shipped and not shipped
-  def order_shipped
-    order_id = params[:id]
-    @order = Order.find_by(id: params[:id])
-    if @order.shipped == true
-      @order.shipped = false
-      @order.save 
+  def cancel
+    @order.status = "cancelled"
+    
+    if @order.save
+      flash[:status] = :success
+      flash[:result_text] = "Your order has been cancelled."
+      
+      redirect_to root_path
+      return
     else
-      @order.shipped == false
-      @order.shipped = true
-      @order.save 
+      flash[:status] = :failure
+      flash[:result_text] = "Something went wrong. Could not cancel order."
+      flash[:messages] = @order.errors.messages
+      
+      redirect_back fallback_location: root_path
+      return
     end
-    redirect_to orders_path
   end
   
   private 
   
   def order_params
-    params.require(:order).permit(:email, :address, :cc_name, :cc_num, :ccv, :cc_exp, :zip, :status)
+    params.require(:order).permit(:email, :address, :cc_name, :cc_num, :ccv, :cc_exp, :zip)
   end
   
-  # def find_order
-  #   @order = Order.find_by(id: params: [id])
-  # end
+  def find_order
+    @order = Order.find_by(id: session[:order_id])
+    
+    if @order.nil?
+      head :not_found
+      return
+    end
+  end
   
 end
