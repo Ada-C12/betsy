@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update]
   skip_before_action :require_login, :only => [:index, :show]
-  
+  skip_before_action :find_order
+
   def index
     category_id = params[:category_id]
     user_id = params[:user_id]
@@ -35,13 +36,7 @@ class ProductsController < ApplicationController
   end
   
   def new
-    if !session[:user_id]
-      flash[:error] = "Merchant must login to add a new product!"
-      redirect_to root_path
-      return
-    else
-      @product = Product.new
-    end
+    @product = Product.new
   end
   
   def create
@@ -60,6 +55,10 @@ class ProductsController < ApplicationController
   end
   
   def edit
+    if @product.nil?
+      redirect_to root_path
+      return
+    end
   end
   
   def update
