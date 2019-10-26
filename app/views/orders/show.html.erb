@@ -1,0 +1,17 @@
+<h2>Order details: this page is for registered user to check the order details!</h2>
+
+Order ID: <%= @order.id %>
+
+Order Status: <%= @order.status %>
+
+Shipping info:
+Name: <%= @order.name %>
+Email: <%= @order.email %>
+Address: <%= @order.address %>
+
+Payment info:
+Name: <%= @order.cc_name %>
+Card num: <%= @order.cc_last4 %>
+Exp: <%= @order.cc_exp %>
+CVV: <%= @order.cc_cvv %>
+Billing Zip: <%= @order.billing_zip %>

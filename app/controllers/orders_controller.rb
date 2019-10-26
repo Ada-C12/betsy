@@ -1,5 +1,5 @@
 class OrdersController < ApplicationController
-  skip_before_action :require_login
+  skip_before_action :require_login, only: [:cart, :checkout, :update]
   skip_before_action :find_order, only: [:cart, :update]
 
   def show
@@ -49,9 +49,6 @@ class OrdersController < ApplicationController
       flash[:error] = "Order doesn't exist!"
       redirect_to root_path
     end
-  end
-  
-  def destroy
   end
   
   private
