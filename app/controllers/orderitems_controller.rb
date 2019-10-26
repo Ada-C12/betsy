@@ -19,7 +19,7 @@ class OrderitemsController < ApplicationController
       session[:order_id] = @order.id
     end
     
-    # Does an existing already contain your product?
+    # Does an existing order already contain your product?
     # If yes, increase the quantity of that specific product
     # Else, create a new product
     @orderitem = Orderitem.find_by(order_id: session[:order_id], product_id: params[:product_id])

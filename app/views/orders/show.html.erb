@@ -1,0 +1,54 @@
+<% if @order.status == "paid" %>
+  <section>
+    <h2>THANK YOU FOR SHOPPING WITH KEGSY</h2>
+    <h2>Order confirmed.</h2>
+    <p>We are working on your order!</p>
+  </section>
+
+  <section>
+    <h2>Order Details</h2>
+
+    <div class = "columns small-6">
+      <ul>
+        <li>Order: #<%= @order.id %></li>
+        <li>Purchased On: <%= @order.created_at.to_date %></li>
+        <li>Order Status: <%= @order.status %></li>
+      </ul>
+    </div>
+
+    <div class = "columns small-6">
+      <ul>
+        <li>Name: <%= @order.cc_name %></li>
+        <li>Shipping Address: <%= @order.address %></li>
+        <li>Email: <%= @order.email %></li>
+      </ul>
+    </div>
+  </section>
+<% end %>
+
+<section>
+  <h2>Products</h2>
+
+  <% @order.orderitems.each do |orderitem| %>
+  <section class="row checkout">
+    <section class = "columns small-12 medium-3">
+      <%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}" %>
+    </section>
+
+    <section class = "columns small-12 medium-9 align-right">
+      <p><%= link_to orderitem.product.name, product_path(orderitem.product) %></p>
+      <p>price: <%= orderitem.product.price %></p>
+      <p>quantity: <%= orderitem.quantity %></p>
+    </section>
+  </section>
+  <% end %>
+
+  <section class = "row total align-right">
+    <p>Purchase Total: $<%= order.total %></p>
+    <% if @order.status == "paid" %>
+      <p><%= link_to 'Cancel Order', cancel_order_path(id: @order.id), method: patch, class:"btn btn-alert" %></p>
+    <% elsif @order.status == "pending" %>
+      <p><p><%= link_to 'Checkout', edit_order_path(id: @order.id), class:"btn btn-primary" %></p></p>
+    <% end %>
+  </section>
+</section>

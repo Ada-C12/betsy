@@ -18,4 +18,5 @@ Rails.application.routes.draw do
   
   resources :orders, only: [:show, :edit]
   patch '/orders/:id', to: 'orders#update'
+  patch '/orders/:id/cancel', to: 'orders#cancel', as: "cancel_order"
 end

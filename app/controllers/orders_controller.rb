@@ -6,11 +6,8 @@ class OrdersController < ApplicationController
     if session[:order_id]
       @order = Order.find_by(id: session[:order_id])
       
-      # This is the nice redirect not found carts.
       if @order.nil?
-        flash[:status] = :failure
-        flash[:result_text] = "Unable to load cart at this time. Please refresh and try again."
-        redirect_back fallback_location: root_path
+        head :not_found
         return
       end
     else
@@ -26,13 +23,15 @@ class OrdersController < ApplicationController
   def edit ; end
   
   def update
-    # Smart but needs to be tested. 
-    # Will your status update along with your order params.
+    # Stage the status to be "paid"
     @order.status = "paid"
     
     if @order.update(order_params)
-      flash[:status] = :success
-      flash[:result_text] = "Order confirmed. We are working on your order!"  
+      # Reduce the inventory or all ordered products
+      @order.reduce_stock
+      
+      # Clears the current cart
+      session[:order_id] = nil
       
       redirect_to order_path(@order.id)
       return 
@@ -52,6 +51,9 @@ class OrdersController < ApplicationController
     if @order.save
       flash[:status] = :success
       flash[:result_text] = "Your order has been cancelled."
+      
+      # Returns all previously purchased inventory to product stock
+      @order.return_stock
       
       redirect_to root_path
       return
