@@ -15,13 +15,7 @@ class ProductsController < ApplicationController
   end
   
   def new
-    if !session[:user_id]
-      flash[:error] = "Merchant must login to add a new product!"
-      redirect_to root_path
-      return
-    else
-      @product = Product.new
-    end
+    @product = Product.new
   end
   
   def create
@@ -40,6 +34,10 @@ class ProductsController < ApplicationController
   end
   
   def edit
+    if @product.nil?
+      redirect_to root_path
+      return
+    end
   end
   
   def update
