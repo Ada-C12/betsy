@@ -1,0 +1,21 @@
+<section>
+  <% if @order %>
+    <h1>Your Cart</h1>
+    <h5>Total: $<%= @order.total %></h5>
+
+    <% @order.order_items.each do |order_item|%>
+      <div class="row">
+        <%= image_tag order_item.product.photo_url, alt: "Picture of #{order_item.product.name}", class: "col-5" %>
+        <div class="col-5">
+          <h3><%= order_item.product.name %></h3>
+          <h5>Quantity in cart: <%= order_item.quantity %></h5>
+          <h5>Subtotal: $<%= order_item.subtotal %></h5>
+        </div>
+      </div>
+    <% end %>
+
+  <% else %>
+    <h1>Your cart is empty!</h1>
+    <%= image_tag "https://i.imgur.com/WRxbxDC.jpg[/img]", alt: "Harry Potter and Ron Weasley staring at divination ball, lost", class: "not-found"%>
+  <% end %>
+</section>

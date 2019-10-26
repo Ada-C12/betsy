@@ -11,4 +11,8 @@ class Order < ApplicationRecord
   validates :cc_cvv, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :zip_code, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :status, presence: true
+  
+  def total
+    return self.order_items.reduce(0) { |sum, item| sum + item.subtotal }
+  end
 end

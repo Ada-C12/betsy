@@ -6,16 +6,15 @@ Rails.application.routes.draw do
   
   resources :products, only: [:index, :show] do
     resources :order_items, only: [:create]
+    resources :reviews, only: [:new,:create]
   end
+
+  resources :orders, only: [:edit, :update]
+  get "/cart", to: "orders#cart", as: "cart"
   
   resources :wizards do
     resources :products, only: [:index]
   end
-
-  resources :products do 
-    resources :reviews, only: [:new,:create]
-  end 
-
   
   resources :categories do
     resources :products, only: [:index]
