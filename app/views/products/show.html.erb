@@ -5,7 +5,7 @@
     <h4> <%= @product.description %> </h4>
     <h5> Quantity: <%= @product.quantity %> </h5>
     <% merchant = User.find_by(id: @product.user_id)%>
-    <h5 class="card-text"> Merchant:<%= merchant.merchant_name %>MAKE LINK!! </h5>
+    <h5 class="card-text"> Merchant:<%= link_to @product.user.username, user_path(@product.user.id)  %></h5> 
     <h5>
       <% categories = @product.categories.map do |category| %>
         <%= link_to category.name, category_products_path(category.id) %>

@@ -15,4 +15,9 @@ class User < ApplicationRecord
     user.email = auth_hash["info"]["email"]
     return user 
   end 
+
+  #This method will call 
+  def total_earned
+
+  end 
 end
