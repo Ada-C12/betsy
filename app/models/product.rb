@@ -5,15 +5,12 @@ class Product < ApplicationRecord
   has_and_belongs_to_many :categories, dependent: :nullify
 
   validates :name, presence: true
+  validates_uniqueness_of :name
   validates :price, presence: true
-  validates :price, numericality: { only_integer: true }
+  validates :price, numericality: { only_integer: true, greater_than: 0 }
   validates :stock, presence: true
   validates :stock, numericality: { only_integer: true }
   validates :wizard, presence: true
-
-
-
-
   validates_inclusion_of :retired, in: [true, false]
 
   def self.five_products
