@@ -34,26 +34,21 @@
           <li class="nav-item">
             <%= link_to "All Fruits", products_path, class:"nav-link" %>
           </li>
-          <li>
-            <%= link_to "Add New Product", new_product_path, class:"nav-link" %>
-          </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categories
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <a class="dropdown-item" href="#">Apple</a>
-              <a class="dropdown-item" href="#">Blueberry</a>
-              <a class="dropdown-item" href="#">Peach</a>
-              <a class="dropdown-item" href="#">Strawberry</a>
-
-              <div class="dropdown-divider"></div>
-              <a class="dropdown-item" href="#">Something else here</a>
-            </div>
+              <% Category.all.each do |category| %>
+                <%= link_to category.category.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
+              <% end%>
           </li>
           <%if session[:user_id]%>
           <li class="nav-item">
             <%= link_to "View my store", current_user_path, class: "nav-link"%>
+          </li>
+          <li>
+            <%= link_to "Add New Product", new_product_path, class:"nav-link" %>
           </li>
           <%end%>
         </ul>
