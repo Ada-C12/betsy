@@ -8,6 +8,30 @@
 }
 
 .row {
-  margin: 0 auto 2em auto;
-  // align-items: center;
+  margin: 1em auto 1em auto;
+  padding: 1em 0 2em 0;
+  border-top: 1px gray solid;
+}
+
+.row img {
+  border: 1px solid #ddd;
+  border-radius: 3px;
+  padding: 5px;
+  width: 160px;
+}
+
+h1 {
+  border-top: 1px gray solid;
+}
+
+.cart-products > h3, h5 {
+  padding: 1em;
+}
+
+.cart-products > h5 {
+  margin-top: 1em;
+}
+
+.cart-quantity-button {
+  margin-top: 2em;
 }

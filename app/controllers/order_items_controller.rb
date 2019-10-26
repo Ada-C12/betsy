@@ -33,15 +33,43 @@ class OrderItemsController < ApplicationController
     if @order_item.save
       flash[:success] = "Item added to cart!"
       order.order_items << @order_item
-      redirect_back(fallback_location: :back)
-      return
+      return redirect_back(fallback_location: :back)
     else
       flash[:error] = "A problem occurred: Could not add item to cart"
-      redirect_back(fallback_location: :back)
-      return
+      return redirect_back(fallback_location: :back)
     end
   end
-  
+
+  def update
+    order = Order.find_by(id: session[:order_id])
+    order_item = OrderItem.find_by(id: params[:id])
+
+    if order_item.nil?
+      return head :not_found
+    elsif order_item.update(order_items_params)
+      flash[:success] = "Successfully updated #{order_item.product.name} quantity to #{order_item.quantity}"
+      return redirect_to cart_path
+    else
+      flash.now[:error] = "A problem occurred: Could not update #{order_item.product.name} quantity"
+      return render :edit
+    end
+  end
+
+  def destroy
+    order = Order.find_by(id: session[:order_id])
+    order_item = OrderItem.find_by(id: params[:id])
+
+    if order_item.nil?
+      return head :not_found
+    else
+      order_item.destroy
+      flash[:success] = "Removed #{order_item.product.name} from cart"
+      return redirect_to cart_path
+    end
+  end
+
+  private
+
   def order_items_params
     params.require(:order_item).permit(:quantity)
   end

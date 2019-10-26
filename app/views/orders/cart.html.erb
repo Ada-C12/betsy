@@ -1,15 +1,24 @@
 <section>
-  <% if @order %>
+  <% if @order && !@order.order_items.empty? %>
     <h1>Your Cart</h1>
     <h5>Total: $<%= @order.total %></h5>
 
     <% @order.order_items.each do |order_item|%>
       <div class="row">
         <%= image_tag order_item.product.photo_url, alt: "Picture of #{order_item.product.name}", class: "col-5" %>
-        <div class="col-5">
+        <div class="col-4 cart-products">
           <h3><%= order_item.product.name %></h3>
-          <h5>Quantity in cart: <%= order_item.quantity %></h5>
+
+          <%= form_with model: OrderItem, method: :patch, url: order_item_path(order_item.id) do |f| %>
+            <%= f.label :quantity %>
+            <%= number_field(:order_item, :quantity, min: 1, value: order_item.quantity) %>
+            <%= f.submit "Update Quantity", class: "btn btn-dark" %>
+          <% end %>
+
           <h5>Subtotal: $<%= order_item.subtotal %></h5>
+        </div>
+        <div class="col-1">
+          <%= link_to "Remove", order_item_path(order_item.id), method: :delete, data: { confirm: "Are you sure you want to remove #{order_item.product.name} from cart?" }, class: "btn btn-outline-danger" %>
         </div>
       </div>
     <% end %>

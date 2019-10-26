@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   end
 
   resources :orders, only: [:edit, :update]
+  resources :order_items, only: [:update, :destroy]
   get "/cart", to: "orders#cart", as: "cart"
   
   resources :wizards do
