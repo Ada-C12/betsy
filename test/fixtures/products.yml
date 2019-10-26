@@ -6,8 +6,6 @@ lemon_shirt:
   user: ada
   description: "Here is a description"
   categories: lemon
-  
-
 strawberry_shoes:
   name: "Strawberry Shoes"
   price: 55
@@ -16,3 +14,11 @@ strawberry_shoes:
   user: ada
   description: "Here is another description"
   categories: strawberry
+banana_sweatshirt:
+  name: "Banana Sweatshirt"
+  price: 25
+  quantity: 6
+  img_url: http://fakeurl.com
+  user: ada
+  description: "Here is another description"
+  categories: banana

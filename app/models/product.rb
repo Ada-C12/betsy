@@ -8,7 +8,7 @@ class Product < ApplicationRecord
   validates :description, presence: true
   
   belongs_to :user
-  has_many :order_items
+  has_many :order_items, dependent: :nullify
   has_and_belongs_to_many :categories
 
   def quantity_available?(quantity)
