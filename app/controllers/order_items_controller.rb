@@ -1,6 +1,8 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
-  
+  # skip find_order for some actions
+  skip_before_action :find_order, only: []
+
   def index
   end
 
