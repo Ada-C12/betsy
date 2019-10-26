@@ -58,7 +58,7 @@ describe Order do
       
       expect(order1.valid?).must_equal false
       expect(order1.errors.messages).must_include :email
-      expect(order1.errors.messages[:email]).must_equal ["can't be blank"]
+      expect(order1.errors.messages[:email]).must_include "can't be blank"
     end
 
     it "must have a valid email" do
@@ -67,7 +67,7 @@ describe Order do
         order1.email = invalid_email
         expect(order1.valid?).must_equal false
         expect(order1.errors.messages).must_include :email
-        expect(order1.errors.messages[:email]).must_equal ["is not an email"]
+        expect(order1.errors.messages[:email]).must_include "is invalid"
       end
     end
 
