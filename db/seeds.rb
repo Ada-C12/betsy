@@ -28,7 +28,6 @@ puts "Loading raw product data from #{PRODUCTS_FILE}"
 
 product_failures = []
 CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
-
   product = Product.new
   product.img_url = row['img_url']
   product.name = row['name']
