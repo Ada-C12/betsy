@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :require_login 
+  before_action :find_order
 
   def current_user 
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -12,7 +13,8 @@ class ApplicationController < ActionController::Base
     end 
   end
 
-  def current_order
-    @current_order ||= Order.find(session[:cart_id]) if session[:order_id]
+  def find_order
+    @current_order = Order.find_by(id: session[:cart_id])
   end
+  
 end 

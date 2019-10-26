@@ -1,14 +1,13 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
-  before_action :current_order
-  
+  skip_before_action :find_order
+
   def create
     if @current_order
       order = @current_order
     else
       order = Order.create
     end
-
     product = Product.find_by(id: params[:id])
 
     order_item = OrderItem.create(
