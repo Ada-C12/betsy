@@ -38,7 +38,6 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   user = User.find_by(uid: row['merchant'] )
   product.user_id = user.id
   
-  
   if (row['fruit'])
     fruits = (row['fruit']).split(",")
     fruits.each do |fruit|
@@ -46,8 +45,13 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
       if cat
         product.categories << cat
       else
-        cat = Category.create(name: fruit, category_type: "fruit")
-        product.categories << cat
+        cat = Category.new(name: fruit, category_type: "fruit")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
       end    
     end
   end
@@ -59,8 +63,13 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
       if cat
         product.categories << cat
       else
-        cat = Category.create(name: theme, category_type: "theme")
-        product.categories << cat
+        cat = Category.new(name: theme, category_type: "theme")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
       end    
     end
   end
@@ -72,8 +81,13 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
       if cat
         product.categories << cat
       else
-        cat = Category.create(name: category, category_type: "category")
-        product.categories << cat
+        cat = Category.new(name: category, category_type: "category")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
       end    
     end
   end
@@ -85,8 +99,13 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
       if cat
         product.categories << cat
       else
-        cat = Category.create(name: color, category_type: "color")
-        product.categories << cat
+        cat = Category.new(name: color, category_type: "color")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
       end    
     end
   end
