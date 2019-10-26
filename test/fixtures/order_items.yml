@@ -1,0 +1,20 @@
+order_item_1:
+  quantity: 3
+  product: lemon_shirt
+  order: order_1
+order_item_2:
+  quantity: 1
+  product: :strawberry_shoes
+  order: order_1
+order_item_3:
+  quantity: 7
+  product: banana_sweatshirt
+  order: order_1
+order_item_4:
+  quantity: 4
+  product: banana_sweatshirt
+  order: order_2
+order_item_5:
+  quantity: 1
+  product: lemon_shirt
+  order: order_2

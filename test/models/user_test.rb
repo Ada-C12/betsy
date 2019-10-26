@@ -3,7 +3,7 @@ require "test_helper"
 describe User do
   describe "validations" do 
     it "can be valid" do
-      user = User.all
+      users = User.all
 
       users.each do |user|
         assert(user.valid?)
