@@ -2,11 +2,21 @@ require "test_helper"
 
 describe User do
   describe "validations" do 
-    it "can be valid" do
-      users = User.all
+    before do
+      @users = User.all
+    end
 
-      users.each do |user|
+    it "can be valid" do
+      @users.each do |user|
         assert(user.valid?)
+      end
+    end
+
+    it "will have the required fields" do
+      @users.each do |user|
+        [:uid, :merchant_name, :email, :provider, :username].each do |field|
+          expect(user).must_respond_to field
+        end
       end
     end
 
