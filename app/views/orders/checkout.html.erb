@@ -1,6 +1,6 @@
 <section>
 <h2>Checkout</h2>
-<%= form_with model: @order, class: order_form_class do |f| %>
+<%= form_with model: @order do |f| %>
 
   <%= f.label :Name %>
   <%= f.text_field :name %>
@@ -21,7 +21,7 @@
   <%= f.label "Billing Zip Code" %>
   <%= f.text_field :billing_zip %>
   
-  <%= f.submit submit_button_label, class: "checkout-form-button" %>
+  <%= f.submit "Submit Order" %>
 
 <% end %>
 </section>

@@ -14,7 +14,7 @@ class ApplicationController < ActionController::Base
   end
 
   def find_order
-    @order = Order.find_by(id: params[:id])
+    @current_order = Order.find_by(id: session[:cart_id])
   end
   
 end 
