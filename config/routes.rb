@@ -16,5 +16,6 @@ Rails.application.routes.draw do
   resources :order, only: [:show, :update]
   get "/orders/cart", to: "orders#cart", as: "cart"
   get "/orders/confirmation", to: "orders#confirmation", as: "confirmation"
+  get "/orders/checkout", to: "orders#checkout", as: "checkout"
   
 end
