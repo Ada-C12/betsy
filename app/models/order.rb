@@ -1,7 +1,7 @@
 class Order < ApplicationRecord
   has_many :order_items
   
-  validates :order_items, :length => { :minimum => 1 }
+  validates :order_items, :length => { :minimum => 1 }, unless: Proc.new { |o| o.status == 'pending' }
   validates :email, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :name, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :owling_address, presence: true, unless: Proc.new { |o| o.status == 'pending' }
