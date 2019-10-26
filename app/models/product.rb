@@ -26,4 +26,5 @@ class Product < ApplicationRecord
 
   def avg_rating
   end
+  
 end

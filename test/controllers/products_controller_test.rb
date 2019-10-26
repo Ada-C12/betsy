@@ -2,10 +2,33 @@ require "test_helper"
 
 describe ProductsController do
   describe "index action" do
-    it "gives back a successful response" do
+    it "gives back a successful response when provided no params" do
       get products_path
       must_respond_with :success
     end
+    
+    it "gives back a successful response when provided user_id" do
+      user = users(:ada)
+      get user_products_path(user)
+      must_respond_with :success
+    end
+
+    it "returns 404 response when no user found" do
+      get user_products_path(-1)
+      must_respond_with :not_found
+    end
+    
+    it "gives back a successful response when provided category_id" do
+      category = categories(:lemon)
+      get category_products_path(category)
+      must_respond_with :success
+    end
+
+    it "returns 404 response when no category found" do
+      get category_products_path(-1)
+      must_respond_with :not_found
+    end
+
   end
 
   describe "show action" do
