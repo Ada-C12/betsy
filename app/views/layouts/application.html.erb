@@ -40,7 +40,7 @@
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% Category.all.each do |category| %>
-                <%= link_to category.category.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
+                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
               <% end%>
           </li>
           <%if session[:user_id]%>
