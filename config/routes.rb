@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "homepages#index"
   
+
+  
   resources :products
 
   get "/auth/github", as: "github_login"
@@ -12,4 +14,14 @@ Rails.application.routes.draw do
   # patch "/users/current", to: "users#update"
 
   resources :users, only: [:show, :update]
+
+
+  resources :categories do
+    resources :products, only: [:index]
+  end
+  
+  resources :users do
+    resources :products, only: [:index]
+  end
+
 end
