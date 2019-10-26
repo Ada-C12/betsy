@@ -36,12 +36,50 @@
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Fruits
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.where(category_type: "fruit").each do |category| %>
+                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
+              <% end%>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Themes
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.where(category_type: "theme").each do |category| %>
+                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
+              <% end%>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               Categories
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Category.all.each do |category| %>
+              <% Category.where(category_type: "category").each do |category| %>
                 <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
               <% end%>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Colors
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.where(category_type: "color").each do |category| %>
+                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
+              <% end%>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Merchants
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% User.all.each do |user| %>
+                <% if user.merchant_name %>
+                  <%= link_to user.merchant_name, user_products_path(user.id) , class:"dropdown-item" %>
+                <% end %>    
+              <% end %>
           </li>
           <%if session[:user_id]%>
           <li class="nav-item">

@@ -9,7 +9,6 @@
 
 <section class="cards-container">
   <% @products.shuffle.each do |product| %>
-    
     <section class="card" style="width: 18rem;">
       <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
       <div class="card-body">
