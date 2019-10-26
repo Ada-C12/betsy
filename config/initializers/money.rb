@@ -6,6 +6,9 @@ MoneyRails.configure do |config|
   #
   config.default_currency = :usd
 
+  # Show cents if whole
+  config.no_cents_if_whole = false
+
   # Set default bank object
   #
   # Example:
@@ -77,11 +80,11 @@ MoneyRails.configure do |config|
   # Default value is nil meaning "ignore this option".
   # Example:
   #
-  # config.default_format = {
-  #   no_cents_if_whole: nil,
-  #   symbol: nil,
-  #   sign_before_symbol: nil
-  # }
+  config.default_format = {
+    no_cents_if_whole: false,
+    symbol: nil,
+    sign_before_symbol: nil
+  }
 
   # If you would like to use I18n localization (formatting depends on the
   # locale):
