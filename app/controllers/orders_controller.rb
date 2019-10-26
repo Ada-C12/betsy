@@ -21,6 +21,13 @@ class OrdersController < ApplicationController
       end
     end
   end
+
+  def checkout
+    if @order.nil?
+      flash[:error] = "Order doesn't exist!"
+      redirect_to root_path
+    end
+  end
   
   def update
     @order = Order.update(order_params)
