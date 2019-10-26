@@ -1,0 +1,27 @@
+<section>
+<h2>Checkout</h2>
+<%= form_with model: @order, class: order_form_class do |f| %>
+
+  <%= f.label :Name %>
+  <%= f.text_field :name %>
+  <%= f.label :Email %>
+  <%= f.text_field :email %>
+  <%= f.label :Address %>
+  <%= f.text_field :address %>
+
+  <h2>Billing info</h2>
+  <%= f.label "Credit Card Name" %>
+  <%= f.text_field :cc_name %>
+  <%= f.label "Credit Card Last 4 Digits" %>
+  <%= f.text_field :cc_last_4 %>
+  <%= f.label "Exp Date" %>
+  <%= f.text_field :cc_exp %>
+  <%= f.label "CVV" %>
+  <%= f.text_field :cc_cvv %>
+  <%= f.label "Billing Zip Code" %>
+  <%= f.text_field :billing_zip %>
+  
+  <%= f.submit submit_button_label, class: "checkout-form-button" %>
+
+<% end %>
+</section>

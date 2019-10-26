@@ -1,0 +1,10 @@
+<section>
+<h2>Cart: this page is for customer to check the cart details!</h2>
+
+<% @order.orderitems.each do |orderitem| %>
+  <%= image_tag (orderitem.product.img_url), class:"show-product-img", alt:"#{orderitem.product.name}product image" %> 
+    <h2> $<%= orderitem.product.price %> </h2>
+    <h5> Quantity: <%= orderitem.quantity %> </h5>
+    <h5 class="card-text"> Merchant:<%= orderitem.product.user.merchant_name %>MAKE LINK!! </h5> 
+  <% end %>
+</section>
