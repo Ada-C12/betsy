@@ -3,7 +3,5 @@ class OrderItem < ApplicationRecord
   belongs_to :order
 
   validates_numericality_of :quantity, greater_than: 0
-
-
-  #For each order item it calls 
+  # validates :quantity, numericality: {less_than_or_equal_to: :product_id.quantity, message: "desired quantity exceeds current quantity in stock"}
 end

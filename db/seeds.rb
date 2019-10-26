@@ -28,26 +28,86 @@ puts "Loading raw product data from #{PRODUCTS_FILE}"
 
 product_failures = []
 CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
-
   product = Product.new
   product.img_url = row['img_url']
   product.name = row['name']
-  product.description = row['description']
+  product.description = "Here is a fun description about this fruit themed product!"
   product.price = rand(1..100)
   product.quantity = rand(1..100)
   
   user = User.find_by(uid: row['merchant'] )
   product.user_id = user.id
   
-  categories = (row['categories']).split(",")
-  categories.each do |category|
-    cat = Category.find_by(category: category)
-    if cat
-      product.categories << cat
-    else
-      cat = Category.create(category: category)
-      product.categories << cat
-    end    
+  if (row['fruit'])
+    fruits = (row['fruit']).split(",")
+    fruits.each do |fruit|
+      cat = Category.find_by(name: fruit)
+      if cat
+        product.categories << cat
+      else
+        cat = Category.new(name: fruit, category_type: "fruit")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
+      end    
+    end
+  end
+  
+  if (row['fruit_theme'])
+    fruit_themes = (row['fruit_theme']).split(",")
+    fruit_themes.each do |theme|
+      cat = Category.find_by(name: theme)
+      if cat
+        product.categories << cat
+      else
+        cat = Category.new(name: theme, category_type: "theme")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
+      end    
+    end
+  end
+  
+  if (row['category'])
+    categories = (row['category']).split(",")
+    categories.each do |category|
+      cat = Category.find_by(name: category)
+      if cat
+        product.categories << cat
+      else
+        cat = Category.new(name: category, category_type: "category")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
+      end    
+    end
+  end
+
+  if (row['color']) 
+    colors = (row['color']).split(",")
+    colors.each do |color|
+      cat = Category.find_by(name: color)
+      if cat
+        product.categories << cat
+      else
+        cat = Category.new(name: color, category_type: "color")
+        if cat.save
+          puts "Created category: #{cat.inspect}"
+          product.categories << cat
+        else
+          puts "Failed to save category: #{cat.inspect}"
+        end
+      end    
+    end
   end
   
   successful = product.save
