@@ -1,11 +1,11 @@
 <section>
   <% if @order && !@order.order_items.empty? %>
-    <h1>Your Cart</h1>
+    <h1 class="heading">Your Cart</h1>
     <h5>Total: $<%= @order.total %></h5>
 
     <% @order.order_items.each do |order_item|%>
       <div class="row">
-        <%= image_tag order_item.product.photo_url, alt: "Picture of #{order_item.product.name}", class: "col-5" %>
+        <%= link_to image_tag(order_item.product.photo_url, alt: "Picture of #{order_item.product.name}"), product_path(order_item.product.id, class: "col-5") %>
         <div class="col-4 cart-products">
           <h3><%= order_item.product.name %></h3>
 
