@@ -58,7 +58,17 @@ describe Order do
       
       expect(order1.valid?).must_equal false
       expect(order1.errors.messages).must_include :email
-      expect(order1.errors.messages[:email]).must_equal ["can't be blank"]
+      expect(order1.errors.messages[:email]).must_include "can't be blank"
+    end
+
+    it "must have a valid email" do
+      invalid_emails = ["peppermints.com", "muggle@domain", "applesauce"]
+      invalid_emails.each do |invalid_email|
+        order1.email = invalid_email
+        expect(order1.valid?).must_equal false
+        expect(order1.errors.messages).must_include :email
+        expect(order1.errors.messages[:email]).must_include "is invalid"
+      end
     end
 
     it "does not require an name if status is pending" do
