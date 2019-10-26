@@ -1,7 +1,7 @@
 <% if @user %>
   <h1> Shop All <%= @user.merchant_name %>'s Products </h1>
 <% elsif @category %>
-  <h1> Shop All <%= @category.category.capitalize %> Products </h1>
+  <h1> Shop All <%= @category.name.capitalize %> Products </h1>
 <% else %>
   <h1> Shop All Fruit Products </h1>
 <% end %>
@@ -9,7 +9,6 @@
 
 <section class="cards-container">
   <% @products.shuffle.each do |product| %>
-    
     <section class="card" style="width: 18rem;">
       <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
       <div class="card-body">
@@ -20,7 +19,7 @@
         <p class="card-text"><strong><%= merchant.merchant_name %>'s</strong> fruit stand ----> MAKE LINK!! </p> 
         <p>
           <% product.categories.each do |category| %>
-            <%= link_to category.category, category_products_path(category.id) %>
+            <%= link_to category.name, category_products_path(category.id) %>
           <% end %>
         </p>
       </div>    
