@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   before_action :require_login 
+  before_action :find_order
 
   def current_user 
     @current_user ||= User.find(session[:user_id]) if session[:user_id]
@@ -11,4 +12,9 @@ class ApplicationController < ActionController::Base
       redirect_to root_path
     end 
   end
+
+  def find_order
+    @order = Order.find_by(id: params[:id]])
+  end
+  
 end 

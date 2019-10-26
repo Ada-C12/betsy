@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login
-  
+  skip_before_action :find_order, only: [:cart, :update]
+
   def show
-    @order = Order.find_by(id: params[:id]])
     if @order.nil?
       flash[:error] = "Order doesn't exist!"
       redirect_to root_path
@@ -22,17 +22,25 @@ class OrdersController < ApplicationController
     end
   end
   
-  def create
+  def update
     @order = Order.update(order_params)
     @order.status = "paid"
     @order.customer_id = session[:user_id]
     if @order.save
-      session[:cart_id] = nil
-      flash[:success] = "Order #{@order.id} has been successfully created!"
-      redirect_to order_path(@order.id)
+      redirect_to confirmation_path
     else
       flash[:error] = "Something went wrong! Order was not paid."
       render cart_path
+    end
+  end
+
+  def confirmation
+    if @order
+      session[:cart_id] = nil
+      flash[:success] = "Order #{@order.id} has been successfully created!"
+    else
+      flash[:error] = "Order doesn't exist!"
+      redirect_to root_path
     end
   end
   

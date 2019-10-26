@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
   skip_before_action :require_login, :only => [:create, :show]
-
+  skip_before_action :find_order
+  
   def show
     @user = User.find_by(id: params[:id])
     if @user.nil?

@@ -1,7 +1,8 @@
 class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update]
   skip_before_action :require_login, :only => [:index, :show]
-  
+  skip_before_action :find_order
+
   def index
     @products = Product.all
   end
