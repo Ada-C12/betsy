@@ -16,8 +16,13 @@ class User < ApplicationRecord
     return user 
   end 
 
-  #This method will call 
   def total_earned
-
+    #Find the order items that belong to a particular user 
+    earnings = 0
+    self.products.order_items.each do |order_item|
+      earnings += order_item.total 
+    end 
+    return earnings 
   end 
+
 end

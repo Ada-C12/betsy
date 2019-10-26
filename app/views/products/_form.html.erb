@@ -18,7 +18,7 @@
 
   <section>
     <%= f.label :categories %>
-    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :category) %>
+    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
   </section>
   
   <%= f.submit submit_button_label, class: "product-form-button" %>
