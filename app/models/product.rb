@@ -6,6 +6,8 @@ class Product < ApplicationRecord
 
   validates_inclusion_of :retired, in: [true, false]
 
+  monetize :price_cents
+
   def self.five_products
     return Product.all.sample(5)
   end
