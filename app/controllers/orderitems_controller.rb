@@ -27,7 +27,11 @@ class OrderitemsController < ApplicationController
     if @orderitem
       @orderitem.quantity += params[:orderitem][:quantity].to_i
     else
-      @orderitem = Orderitem.new(orderitem_params)
+      @orderitem = Orderitem.new(
+        quantity: params[:orderitem][:quantity],
+        product_id: params[:product_id],
+        order_id: @order.id
+      )
     end
     
     # Now save and see if validation fights you
@@ -73,10 +77,7 @@ class OrderitemsController < ApplicationController
   end
   
   private
-
-  def orderitem_params
-    params.require(:orderitem).permit(:quantity, :product_id, :order_id)
-  end
+  
   
   def find_orderitem
     @orderitem = Orderitem.find_by(id: params[:id])
