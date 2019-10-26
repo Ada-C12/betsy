@@ -17,10 +17,19 @@ describe Product do
 
   describe "relationships" do
     it "can have many order items" do   
-      order_item1 = OrderItem.create(quantity: 1, product_id: @product.id)
-      order_item2 = OrderItem.create(quantity: 1, product_id: @product.id)
-  
-      expect(@product.order_items.count).must_equal 2
+      product = Product.create(
+        name: "Orange Soap Dispenser",
+        price: 20.00,
+        quantity: 15,
+        img_url: "http:\\fakeurl.com",
+        user: users(:betsy),
+        description: "A soap dispenser shaped like an orange."
+      )
+
+      product.order_items << OrderItem.create(quantity: 2, product: product, order: Order.first)
+      product.order_items << OrderItem.create(quantity: 3, product: product, order: Order.last)
+
+      expect(product.order_items.count).must_equal 2
     end
     
     it "can have many categories" do

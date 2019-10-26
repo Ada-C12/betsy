@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root "homepages#index"
   
+
+  
   resources :products
 
   get "/auth/github", as: "github_login"
@@ -9,7 +11,6 @@ Rails.application.routes.draw do
 
   get "/users/current", to: "users#current", as: "current_user"
   get "/users/current/edit", to: "users#edit", as: "edit_user"
-  # patch "/users/current", to: "users#update"
 
   resources :users, only: [:show, :update]
 
@@ -18,4 +19,12 @@ Rails.application.routes.draw do
   get "/orders/checkout", to: "orders#checkout", as: "checkout"
   get "/orders/confirmation", to: "orders#confirmation", as: "confirmation"
   
+  resources :categories do
+    resources :products, only: [:index]
+  end
+  
+  resources :users do
+    resources :products, only: [:index]
+  end
+
 end
