@@ -1,5 +1,7 @@
 lemon:
-  category: "Lemon"
+  name: "Lemon"
+  category_type: "fruit"
   
 strawberry:
-  category: "Strawberry"
+  name: "Strawberry"
+  category_type: "fruit"
