@@ -21,7 +21,7 @@ describe OrderitemsController do
   
   
   describe "create" do
-    it "can create a new Order and an Orderitem with valid data" do
+    it "can create a new Orderitem with valid data" do
       expect {
         post product_orderitems_path(product_id: products(:stella).id), params: update_hash
       }.must_change "Orderitem.count", 1
@@ -33,6 +33,25 @@ describe OrderitemsController do
       expect(new_orderitem.product.name).must_equal "Stella Artois"
       expect(new_orderitem.order.orderitems.count).must_equal 1
       must_respond_with :redirect
+    end
+    
+    it "will instantiate a new order with ONLY orderitem and status" do
+      expect {
+        post product_orderitems_path(product_id: products(:stella).id), params: update_hash
+      }.must_change "Order.count", 1
+      
+      new_order = Order.last
+      
+      expect(new_order).must_be_instance_of Order
+      expect(new_order.orderitems.count).must_equal 1
+      expect(new_order.status).must_equal "pending"
+      expect(new_order.email).must_be_nil
+      expect(new_order.address).must_be_nil
+      expect(new_order.cc_name).must_be_nil
+      expect(new_order.cc_num).must_be_nil
+      expect(new_order.cvv).must_be_nil
+      expect(new_order.cc_exp).must_be_nil
+      expect(new_order.zip).must_be_nil
     end
     
     it "will add to existing Order while creating new Orderitems as separate orderitems" do

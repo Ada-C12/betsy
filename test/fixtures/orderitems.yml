@@ -1,4 +1,16 @@
 heineken_oi:
   quantity: 2
-  order: order_1
+  order: order1
   product: heineken
+heineken_o2:
+  quantity: 1
+  order: order2
+  product: heineken
+corona_o2:
+  quantity: 1
+  order: order2
+  product: corona
+sapporo_o2:
+  quantity: 2
+  order: order2
+  product: sapporo

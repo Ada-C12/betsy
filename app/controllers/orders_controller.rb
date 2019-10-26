@@ -23,6 +23,13 @@ class OrdersController < ApplicationController
   def edit ; end
   
   def update
+    @order.check_orderitems
+    
+    if flash[:status] == :failure
+      render :edit, status: :bad_request  
+      return
+    end
+    
     # Stage the status to be "paid"
     @order.status = "paid"
     
