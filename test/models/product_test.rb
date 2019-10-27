@@ -97,13 +97,14 @@ describe Product do
       expect(is_invalid.errors.messages[:retired]).must_equal ["is not included in the list"]
     end
   end
-  
+
   describe "monetize price_cents" do
     it "stores a money object in .price with amount equal to price_cents in USD" do
       expect(product1.price).must_be_instance_of Money
       expect(product1.price.amount).must_equal product1.price_cents * 10**-2
       expect(product1.price.currency.id).must_equal :usd
     end
+  end
   
   describe "relationships" do
     it "can set wizard through 'wizard'" do
