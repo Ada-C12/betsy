@@ -11,17 +11,7 @@ class MerchantsController < ApplicationController
     if @merchant.nil?
       flash[:warning] = "Merchant with id #{params[:id]} was not found."
       redirect_to root_path
-    
-    
-    # p '==================='
-    # p params[:id]
-    # p session[merchant_id]
-    # elsif params[:id] != session[:merchant_id]
-    #   redirect_to root_path
-    #   flash[:error] = "You are not authorized to view this page."
     end
-
-    
   end
 
   def create
@@ -32,7 +22,6 @@ class MerchantsController < ApplicationController
       flash[:success] = "Logged in as returning merchant #{merchant.username}."
     else
       merchant = Merchant.build_from_github(auth_hash)
-     
       if merchant.save
         flash[:success] = "Logged in as new merchant #{merchant.username}."
       else
@@ -60,5 +49,4 @@ class MerchantsController < ApplicationController
 
     redirect_to root_path
   end
-  
 end

@@ -78,6 +78,7 @@ class OrderitemsController < ApplicationController
   
   private
   
+  
   def find_orderitem
     @orderitem = Orderitem.find_by(id: params[:id])
     head :not_found unless @orderitem
