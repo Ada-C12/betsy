@@ -12,7 +12,7 @@
           <%= form_with model: OrderItem, method: :patch, url: order_item_path(order_item.id) do |f| %>
             <%= f.label :quantity %>
             <%= number_field(:order_item, :quantity, min: 1, value: order_item.quantity) %>
-            <%= f.submit "Update Quantity", class: "btn btn-dark" %>
+            <%= f.submit "Update", class: "btn btn-dark" %>
           <% end %>
 
           <h5>Subtotal: $<%= order_item.subtotal %></h5>

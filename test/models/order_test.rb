@@ -4,6 +4,10 @@ describe Order do
   let (:order1) {
     orders(:order1)
   }
+
+  let (:pending_order) {
+    orders(:pending_order)
+  }
   
   it "can be instantiated" do
     expect(order1.valid?).must_equal true
@@ -37,8 +41,8 @@ describe Order do
   end
   
   describe "validations" do
-    it "must have an order_item" do
-      invalid_order = Order.create(email: 'bob@oz.com', owling_address: '123 Magical Lane', name: 'Bob Blah', cc_num: '1234567890123456', cc_exp_mo: 12, cc_exp_yr: 2020, cc_cvv: 123, zip_code: 12345, status: 'pending')
+    it "must have an order_item if not pending" do
+      invalid_order = Order.create(email: 'bob@oz.com', owling_address: '123 Magical Lane', name: 'Bob Blah', cc_num: '1234567890123456', cc_exp_mo: 12, cc_exp_yr: 2020, cc_cvv: 123, zip_code: 12345, status: 'complete')
       
       expect(invalid_order.valid?).must_equal false
       expect(invalid_order.errors.messages).must_include :order_items
@@ -179,6 +183,42 @@ describe Order do
       expect(order1.valid?).must_equal false
       expect(order1.errors.messages).must_include :status
       expect(order1.errors.messages[:status]).must_equal ["can't be blank"]
+    end
+  end
+
+  describe "Custom methods" do
+    describe "total" do
+      it "accurately calculates the total" do
+        expect(order1.order_items).wont_be_empty
+
+        expect(order1.total).must_equal 3000
+      end
+
+      it "the total is 0 if there are no items" do
+        OrderItem.delete_all
+        expect(order1.order_items).must_be_empty
+
+        expect(order1.total).must_equal 0
+      end
+    end
+
+    describe "cancel_abandoned_orders" do
+      it "can change an order to cancelled" do
+        # expect(pending_order.status).must_equal 'pending'
+
+        # pending_order.created_at = DateTime.now - 5
+        # Order.cancel_abandoned_orders
+
+        # expect(pending_order.status).must_equal 'cancelled'
+      end
+
+      it "only changes orders that are a day old" do
+
+      end
+
+      it "only changes pending orders" do
+
+      end
     end
   end
 end

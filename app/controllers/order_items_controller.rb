@@ -9,6 +9,8 @@ class OrderItemsController < ApplicationController
     @order_item = OrderItem.new(order_items_params)
     
     if session[:order_id].nil?
+      # cancels pending orders that are no longer in session and over a day old
+      # Order.cancel_abandoned_orders
       order = Order.new(status: 'pending')
       if order.save
         session[:order_id] = order.id
@@ -33,10 +35,10 @@ class OrderItemsController < ApplicationController
     if @order_item.save
       flash[:success] = "Item added to cart!"
       order.order_items << @order_item
-      return redirect_back(fallback_location: :back)
+      return redirect_to product_path(@order_item.product.id)
     else
       flash[:error] = "A problem occurred: Could not add item to cart"
-      return redirect_back(fallback_location: :back)
+      return redirect_to product_path(@order_item.product.id)
     end
   end
 
@@ -50,8 +52,8 @@ class OrderItemsController < ApplicationController
       flash[:success] = "Successfully updated #{order_item.product.name} quantity to #{order_item.quantity}"
       return redirect_to cart_path
     else
-      flash.now[:error] = "A problem occurred: Could not update #{order_item.product.name} quantity"
-      return render :edit
+      flash[:error] = "A problem occurred: Could not update #{order_item.product.name} quantity"
+      return redirect_to cart_path
     end
   end
 

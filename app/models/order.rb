@@ -15,4 +15,16 @@ class Order < ApplicationRecord
   def total
     return self.order_items.reduce(0) { |sum, item| sum + item.subtotal }
   end
+
+  def self.cancel_abandoned_orders
+    # pending_orders = Order.where(status: 'pending')
+    # pending_orders.each do |order|
+    #   p order
+    #   order.update_attribute(:status, 'cancelled')
+    #   p order
+    #   order.save
+    #   #  if (DateTime.now - order.created_at) <= 1
+    # end
+    # return pending_orders
+  end
 end

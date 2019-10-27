@@ -65,4 +65,18 @@ describe OrderItem do
       expect(invalid_quantity.errors.messages[:quantity]).must_equal ["is not a number"]
     end
   end
+
+  describe "Custom methods" do
+    describe "subtotal" do
+      it "accurately calculates the total" do
+        expect(order_items1.subtotal).must_equal 3000
+      end
+
+      it "the total is 0 if there are no items" do
+        order_items1.quantity = 0
+
+        expect(order_items1.subtotal).must_equal 0
+      end
+    end
+  end
 end
