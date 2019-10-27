@@ -64,5 +64,25 @@ describe OrderItem do
       expect(invalid_quantity.errors.messages).must_include :quantity
       expect(invalid_quantity.errors.messages[:quantity]).must_equal ["is not a number"]
     end
+
+    it "is invalid if quantity is not present" do
+      is_invalid = order_items(:order_items1)
+      is_invalid.quantity = nil
+
+      refute(is_invalid.valid?)
+      expect(is_invalid.errors.messages).must_include :quantity
+      expect(is_invalid.errors.messages[:quantity]).must_equal ["can't be blank", "is not a number"]
+    end
+
+
+    it "is invalid if quantity is not greater than zero" do
+      is_invalid = order_items(:order_items1)
+      is_invalid.quantity = 0
+
+      refute(is_invalid.valid?)
+      expect(is_invalid.errors.messages).must_include :quantity
+      expect(is_invalid.errors.messages[:quantity]).must_equal ["must be greater than 0"]
+
+    end
   end
 end
