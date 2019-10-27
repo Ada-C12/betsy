@@ -6,7 +6,7 @@ describe OrdersController do
   let(:order1) { orders(:order1) }
 
   describe "cart" do
-    it "finds the order in session" do
+    it "finds the order in session and responds with success" do
       new_item = { 
         order_item: { 
           quantity: 1, 
@@ -21,6 +21,11 @@ describe OrdersController do
 
       expect(session[:order_id]).must_equal order.id
 
+      get cart_path
+      must_respond_with :success
+    end
+
+    it "finds responds with success when no order is in session" do
       get cart_path
       must_respond_with :success
     end
