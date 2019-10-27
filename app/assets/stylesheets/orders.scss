@@ -1,3 +1,37 @@
 // Place all the styles related to the Orders controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.not-found {
+  width: 70vw;
+  height: auto;
+}
+
+.row {
+  margin: 1em auto 1em auto;
+  padding: 1em 0 2em 0;
+  border-top: 1px gray solid;
+}
+
+.row a img {
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+  padding: 1em;
+  width: 20em;
+}
+
+.heading {
+  border-top: 1px gray solid;
+}
+
+.cart-products > h3, h5 {
+  padding: 1em;
+}
+
+.cart-products > h5 {
+  margin-top: 1em;
+}
+
+.cart-quantity-button {
+  margin-top: 2em;
+}
