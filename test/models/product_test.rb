@@ -1,4 +1,5 @@
 require "test_helper"
+require 'pry'
 
 describe Product do
   describe "validations" do
@@ -16,10 +17,10 @@ describe Product do
       expect(is_invalid.errors.messages).must_include :name
       expect(is_invalid.errors.messages[:name]).must_equal ["can't be blank"]
     end
-
+    
     it "is invalid if there is more than one of the same name in the same category" do
       is_invalid = Product.create(name: "mistcloak", categories: [categories(:category2)])
-
+      
       refute(is_invalid.valid?)
       expect(is_invalid.errors.messages).must_include :name
       expect(is_invalid.errors.messages[:name]).must_equal ["has already been taken"]
@@ -94,5 +95,42 @@ describe Product do
       expect(is_invalid.errors.messages).must_include :retired
       expect(is_invalid.errors.messages[:retired]).must_equal ["is not included in the list"]
     end
+  end
+  
+  describe "relationships" do
+    it "can set wizard through 'wizard'" do
+      wizard = wizards(:wizard1)
+      products(:product1).wizard = wizard
+      
+      expect(products(:product1).wizard).must_equal wizard
+      
+    end
+    
+    it "can have many reviews" do
+      valid_product = products(:product1)
+      
+      expect(valid_product.reviews.count).must_equal 1
+      valid_product.reviews.each do |review|
+        review.must_be_kind_of Review
+      end
+    end
+    
+    it "can have many order_items" do
+      valid_product = products(:product1)
+      
+      expect(valid_product.order_items.count).must_equal 1
+      valid_product.order_items.each do |order_item|
+        order_item.must_be_kind_of OrderItem
+      end
+    end
+    
+    it "can have many categories" do
+      valid_product = products(:product1)
+      expect(valid_product.categories.count).must_equal 2
+      valid_product.categories.each do |category|
+        category.must_be_kind_of Category
+      end
+    end
+    
   end
 end

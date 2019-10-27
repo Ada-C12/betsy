@@ -1,7 +1,7 @@
 # category1 - category6 represent the FIXED_CATEGORIES_IDS
 category1: 
   name: Amulets and Wards 
-  products: product1, product2
+  products: 
 
 
 category2: 
