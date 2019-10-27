@@ -12,7 +12,7 @@
     <section class="card" style="width: 18rem;">
       <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
       <div class="card-body">
-        <h5> <%= link_to product.name, product_path(product.id) %> </h5>
+      <h5> <%= link_to product.name, product_path(product.id) %> </h5>
         <p class="card-text"> $<%= product.price %> </p>
         <% merchant = User.find_by(id: product.user_id)%>
         <p class="card-text"><strong><%=link_to product.user.username, user_path(product.user.id) %>'s</strong> fruit stand </p> 
