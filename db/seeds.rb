@@ -59,7 +59,7 @@ CSV.foreach(PRODUCT_FILE, headers: true) do |row|
   product = Product.new
   product.id = row['id']
   product.name = row['name']
-  product.price = row['price']
+  product.price_cents = row['price_cents']
   product.description = row['description']
   product.stock = row['stock']
   product.photo_url = row['photo_url']
