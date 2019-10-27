@@ -1,4 +1,4 @@
-<h2>Write A Review</h2>
+<h2>Write a review</h2>
 <% if @review.errors.any? %>
   <ul class="errors">
     <% @review.errors.each do |column, message| %>
@@ -9,12 +9,24 @@
   </ul>
 <% end %>
 
-<%= form_with model: @review, url: product_reviews_path do |f| %>
+<div class="container">
+  <%= form_with model: @review, url: product_reviews_path do |f| %>
+  <div class="row justify-content-md-center">
+    <%= f.label :rating %>: 
+  </div>
+  <div class="row justify-content-md-center">
+    <%= f.select :rating, [ 1,2,3,4,5] %>
+  </div>
+  <div class="row justify-content-md-center ">
+    <%= f.label :review_comment %>
+  </div>
+  <div class="row justify-content-md-center">
+  <%= f.text_area :review_comment,:cols => "50", :rows => "6"%>
+  </div>
+  <div class="row justify-content-md-center"">
+    <%= f.submit "Create Review", class: "btn btn-dark review-button"%>
+  </div>
 
-  <%= f.label :rating %>
-  <%= f.select :rating, [ 1,2,3,4,5] %>
+  <% end %>
 
-
-  <%= f.submit "Create Review"%>
-
-<% end %>
+</div>

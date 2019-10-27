@@ -11,6 +11,15 @@ describe ProductsController do
 
         must_respond_with :success
       end
+      
+      it "gives back a successful response if there are no products" do
+        Product.destroy_all
+        
+        get products_path
+        
+        must_respond_with :success
+        
+      end
     end
 
     describe "index of products by wizard" do

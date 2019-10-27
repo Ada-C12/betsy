@@ -1,16 +1,15 @@
 <main>
 <div class="container">
-	<div class="row">
+  <div class="row">
 		<div class="col-lg-12"><h2><%= @product.name.upcase%></h2></div>
 	</div>
 	<div class="row">
-  	<div class="col-lg-6 product-photo">
-		<% if @product.photo_url %>
-  		<%= image_tag @product.photo_url, alt: "a picture of #{@product.name}" %>
+    <div class="col-lg-6 product-photo">
+      <% if @product.photo_url %>
+      <%= image_tag @product.photo_url, alt: "a picture of a #{@product.name}" %>
 		<%end%>
-  	</div>
+    </div>
 		<div class="col-lg-6 align-self-center">
-  
 			<p>Seller: <%=@product.wizard.username%></p>
 			<p>Price: <%= humanized_money_with_symbol(@product.price) %></p>
 			<p>Description: <%=@product.description%></p>
@@ -19,28 +18,29 @@
 				<%= number_field(:order_item, :quantity, min: 1) %>
 				<%= f.submit "Add to Cart", class: "btn btn-dark" %>
 			<% end %>
-  	</div>
-	</div>
-  
-  <div = class="row">
-    <div class="col-lg-12"> <%=link_to "Make A Review", new_product_review_path(@product.id), class: "btn btn-dark"%></div>
   </div>
-  <div class="row">
-    <div class="col-lg-12"> <h3> Reviews </h3></div>
-  </div>
- 
-<table class="container table">
+</div>
+<table class="container reviews">
 	<thead>
 		<tr>
-			<th class="align-self-center">Rating</th>
+			<th class="align-self-center">Reviews</th>
 		</tr>
 	</thead>
 
-	<%@product.reviews.each do |review|%>
-	<tr>
-		<td class="align-self-center"><%=review.rating%></td>
-	<%end%>
-	</tr>
-</table>
-</main>
 
+	<%@product.reviews.each do |review|%>
+  <tr>
+  <%review.rating.times do%>
+  <td> <%= image_tag 'https://i.imgur.com/Q3BnKML.png', class: "review-photo"%> </td>
+  <%end%>
+  </tr>
+  <tr class="review-tr">
+    <td><%= review.review_comment%></td>
+  </tr>
+	<%end%>
+
+</table>
+<div class="review-button">
+    <%=link_to "Make a review", new_product_review_path(@product.id), class: "btn btn-dark"%>
+</div>
+</main>
