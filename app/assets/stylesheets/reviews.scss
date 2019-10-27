@@ -1,3 +1,22 @@
 // Place all the styles related to the Reviews controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.review-photo {
+    width: 3vw;
+    height: auto;
+  }
+  .reviews td {
+    display: inline;
+    padding-bottom: 6px;
+    float:left;
+  }
+  
+  .review-tr,th {
+      border-bottom: gray solid 1px;
+  }
+
+  .review-button {
+      margin-top: 1em;
+  }
+
