@@ -71,11 +71,23 @@ describe Product do
     end
     
     it "can have many orderitems" do
-      # WAIT FOR YAML FILES TO POPULATE
+      multi_order_prod = products(:heineken)
+      
+      expect(multi_order_prod.orderitems.count).must_be :>, 1
+      
+      multi_order_prod.orderitems.each do |orderitem|
+        expect(orderitem).must_be_instance_of Orderitem
+      end
     end
     
     it "can have many orders through orderitems" do
-      # WAIT FOR YAML FILES TO POPULATE
+      multi_order_prod = products(:heineken)
+      
+      expect(multi_order_prod.orders.count).must_be :>, 1
+      
+      multi_order_prod.orders.each do |order|
+        expect(order).must_be_instance_of Order
+      end
     end
     
     it "has and belongs to types" do

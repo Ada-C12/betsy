@@ -16,19 +16,9 @@ class Order < ApplicationRecord
   validates :cc_exp, presence: true, on: :update
   validates :zip, presence: true, numericality: { only_integer: true }, on: :update
   
-  def check_orderitems
-    self.orderitems each do |orderitem|
-      if !orderitem.valid?
-        flash[:status] = :failure
-        flash[:result_text] = "Sorry. Some of the items in your cart are no longer available."
-        flash[:messages] << @orderitem.errors.messages
-      end
-    end
-  end
-  
   def reduce_stock
     self.orderitems.each do |orderitem|
-      orderitem.product.quantity -= orderitem.quantity
+      orderitem.product.stock -= orderitem.quantity
       orderitem.product.save
     end
   end
@@ -36,7 +26,7 @@ class Order < ApplicationRecord
   def return_stock
     self.orderitems.each do |orderitem|
       if !orderitem.product.retired
-        orderitem.product.quantity += orderitem.quantity
+        orderitem.product.stock += orderitem.quantity
         orderitem.product.save
       end
     end

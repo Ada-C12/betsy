@@ -216,7 +216,7 @@ describe Order do
   
   describe "relationships" do
     it "has many orderitems" do
-      expect(paid_order.orderitems.count).must_be :>, 0
+      expect(paid_order.orderitems.count).must_be :>, 1
       
       paid_order.orderitems.each do |orderitem|
         expect(orderitem).must_be_instance_of Orderitem
@@ -224,7 +224,7 @@ describe Order do
     end
     
     it "has many products" do
-      expect(paid_order.products.count).must_be :>, 0
+      expect(paid_order.products.count).must_be :>, 1
       
       paid_order.products.each do |product|
         expect(product).must_be_instance_of Product
@@ -233,13 +233,40 @@ describe Order do
   end
   
   describe "custom methods" do
-    describe "check_orderitems" do
-    end
-    
     describe "reduce_stock" do
+      it "will reduce the number of product stock by orderitem quantity" do
+        expect(products(:heineken).stock).must_equal 3
+        expect(products(:corona).stock).must_equal 4
+        expect(products(:sapporo).stock).must_equal 5
+        
+        paid_order.reduce_stock
+        
+        updated_heineken = Product.find_by(id: products(:heineken).id)
+        updated_corona = Product.find_by(id: products(:corona).id)
+        updated_sapporo = Product.find_by(id: products(:sapporo).id)
+        
+        expect(updated_heineken.stock).must_equal 2
+        expect(updated_corona.stock).must_equal 3
+        expect(updated_sapporo.stock).must_equal 3
+      end
     end
     
     describe "return_stock" do
+      it "will add back the number of product stock by orderitem quantity" do
+        expect(products(:heineken).stock).must_equal 3
+        expect(products(:corona).stock).must_equal 4
+        expect(products(:sapporo).stock).must_equal 5
+        
+        paid_order.return_stock
+        
+        updated_heineken = Product.find_by(id: products(:heineken).id)
+        updated_corona = Product.find_by(id: products(:corona).id)
+        updated_sapporo = Product.find_by(id: products(:sapporo).id)
+        
+        expect(updated_heineken.stock).must_equal 4
+        expect(updated_corona.stock).must_equal 5
+        expect(updated_sapporo.stock).must_equal 7
+      end
     end
     
     describe "total" do

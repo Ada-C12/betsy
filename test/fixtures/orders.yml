@@ -15,7 +15,7 @@ order2:
   cvv: 789
   cc_exp: 11/22
   zip: 98109
-  status: shipped
+  status: pending
 order3:
   email: mrmouse@dland.com
   address: 4444 ball rd.
@@ -24,6 +24,6 @@ order3:
   cvv: 1456
   cc_exp: 09/23
   zip: 98124
-  status: shipped
+  status: pending
 pending_order:
   status: pending
