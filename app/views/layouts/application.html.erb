@@ -10,6 +10,22 @@
   </head>
 
   <body>
+    <section class="fruit-shape-links fixed-top">
+      <%= fruit_image("48966256972_b25342b8df", "strawberry") %>
+      <%= fruit_image("48966257187_4808931340", "apple") %>
+      <%= fruit_image("48965531768_24fce80958", "orange") %>
+      <%= fruit_image("48966077751_5e88d3a52a", "mango") %>
+      <%= fruit_image("48965531738_c70c61c848", "pineapple") %>
+      <%= fruit_image("48966077756_d140d28fbe", "lemon") %>
+      <%= fruit_image("48965531848_7477ccc902", "banana") %>
+      <%= fruit_image("48966256962_f7655d0227", "watermelon") %>
+      <%= fruit_image("48966077851_25c938e75c", "avocado") %>
+      <%= fruit_image("48965531803_a181744b80", "kiwi") %>
+      <%= fruit_image("48965531838_40b12131ee", "berry") %>
+      <%= fruit_image("48966077781_02aa2abeed", "grapes") %>
+      <%= fruit_image("48965531818_7678560b94", "dragonfruit") %>
+      <%= fruit_image("48966257017_39d2f25373", "peach") %>
+  </section>
     <section class="login-loggout-container">
       <%if session[:user_id]%>
         <% user = User.find_by(id: session[:user_id])%>
