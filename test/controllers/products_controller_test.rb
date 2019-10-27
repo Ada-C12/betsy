@@ -46,10 +46,7 @@ describe ProductsController do
       must_respond_with :success
     end 
 
-    # MODIFY TEST SO THAT IT ADDS THE CURRENT SESSION USER_ID
-    # AS THE MERCHANT_ID FOR THE NEW PRODUCT
     it "creates a product sucessfully with valid data, and redirects the user to the product page" do
-      # merchant = Merchant.create(username: "jake", email: "jakw123@gmail.com", uid: 12232234, provider: "github")
 
       product_hash = {
         product: {

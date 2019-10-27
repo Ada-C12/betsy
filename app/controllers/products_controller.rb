@@ -24,8 +24,8 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @merchant = Merchant.find_by(id: session[:merchant_id])
     @product.merchant_id = @merchant.id 
+    @product.retired = false
     if @product.save
-      @product.retired = false
       flash[:status] = :success
       flash[:result_text] = "Successfully created #{@product.name} #{@product.id}"
       redirect_to product_path(@product)
@@ -79,6 +79,6 @@ class ProductsController < ApplicationController
   private
 
   def product_params
-    params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :merchant_id, :retired)
+    params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :retired)
   end
 end
