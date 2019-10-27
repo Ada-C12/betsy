@@ -42,10 +42,10 @@ class Order < ApplicationRecord
     return total_cost
   end
   
-  # def mark_as_complete?
-  #   if !self.orderitems.find_by(shipped: false)
-  #     self.status = "complete"
-  #     self.save
-  #   end
-  # end
+  def mark_as_complete?
+    if self.status == "pending" && !self.orderitems.find_by(shipped: false)
+      self.status = "complete"
+      self.save
+    end
+  end
 end

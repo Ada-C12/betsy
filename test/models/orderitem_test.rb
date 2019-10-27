@@ -5,7 +5,8 @@ describe Orderitem do
     Orderitem.new(
       quantity: 1,
       product: products(:stella),
-      order: orders(:order1)
+      order: orders(:order1),
+      shipped: false
     )
   }
   

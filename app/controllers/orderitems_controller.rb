@@ -1,5 +1,5 @@
 class OrderitemsController < ApplicationController
-  before_action :find_orderitem, only: [:edit, :update, :destroy]
+  before_action :find_orderitem, only: [:edit, :update, :destroy, :mark_shipped]
   
   def create
     # When adding items to an Order, does an order_id exist in sessions?
@@ -30,7 +30,8 @@ class OrderitemsController < ApplicationController
       @orderitem = Orderitem.new(
         quantity: params[:orderitem][:quantity],
         product_id: params[:product_id],
-        order_id: @order.id
+        order_id: @order.id,
+        shipped: false
       )
     end
     
@@ -76,14 +77,29 @@ class OrderitemsController < ApplicationController
   def destroy
     if @orderitem.order.status == "pending"
       @orderitem.destroy
+      
       flash[:status] = :success
-      flash[:result_text] = "#{@orderitem.product.name} removed from cart"
+      flash[:result_text] = "#{@orderitem.product.name} removed from cart."
       
       redirect_to order_path(@orderitem.order)
     else
       flash[:status] = :failure
       flash[:result_text] = "Cannot delete items that are part of a #{@orderitem.order.status} order."
       redirect_to root_path
+    end
+  end
+  
+  def mark_shipped
+    if @orderitem.order.status == "paid"
+      @orderitem.shipped = true
+      @orderitem.save
+      
+      flash[:status] = :success
+      flash[:result_text] = "#{@orderitem.product.name} has been marked as shipped."
+      
+      @orderitem.order.mark_as_complete?
+      
+      redirect_back fallback_location: root_path
     end
   end
   
