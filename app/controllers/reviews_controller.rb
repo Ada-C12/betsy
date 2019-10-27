@@ -9,7 +9,7 @@ class ReviewsController < ApplicationController
   end
 
   def create
- 
+  
     product = Product.find_by(id: params[:product_id])
     unless product 
       head :not_found 
@@ -33,6 +33,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    return params.require(:review).permit(:rating)
+    return params.require(:review).permit(:rating,:review_comment)
   end
 end
