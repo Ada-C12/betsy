@@ -1,0 +1,10 @@
+bad_review:
+  rating: 1
+  description: "This product sucks!!"
+  user: ada
+  product: lemon_shirt
+good_review:
+  rating: 1
+  description: "This product is the best!!"
+  user: gretchen
+  product: lemon_shirt
