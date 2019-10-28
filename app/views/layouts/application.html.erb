@@ -73,13 +73,13 @@
     <% if @order %>
       <section id="cart-validations">
         <% if @order.errors.any? %>
-          <ul>
+          <div>
             <% @order.errors.each do |column, message| %>
-              <li>
+              <div class="validations">
                 <%= column %> <%= message %>
-              </li>
+              </div>
             <% end %>
-          </ul>
+          </div>
         <% end %>
       </section>
     <% end %>
