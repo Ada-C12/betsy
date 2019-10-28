@@ -13,7 +13,7 @@ class OrdersController < ApplicationController
       end
     else
       # This is the nice redirect for average users with empty carts.
-      # Theoretically would render a dummy cart page 
+      # Theoretically sdj render a dummy cart page 
       flash[:status] = :failure
       flash[:result_text] = "No items currently in cart."
       redirect_back fallback_location: root_path
