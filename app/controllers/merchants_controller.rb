@@ -6,15 +6,6 @@ class MerchantsController < ApplicationController
     @merchants = Merchant.all
   end
 
-  # def show
-  #   @merchant = Merchant.find_by(id: session[:merchant_id])
-  #   if @merchant.nil?
-  #     flash[:status] = :failure
-  #     flash[:result_text] = "Merchant with id #{params[:id]} was not found."
-  #     redirect_to root_path
-  #   end
-  # end
-
   def create
     auth_hash = request.env["omniauth.auth"]
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")

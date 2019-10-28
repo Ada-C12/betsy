@@ -21,6 +21,6 @@ Rails.application.routes.draw do
   patch '/orders/:id', to: 'orders#update'
   patch '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
   
-  resources :types, only: [:show, :new, :create] do 
-  end
+  resources :types, only: [:show, :new, :create] 
+
 end
