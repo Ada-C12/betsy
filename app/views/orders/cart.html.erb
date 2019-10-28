@@ -7,8 +7,12 @@
     <h2> $<%= orderitem.product.price %> </h2>
     <h5> Quantity: <%= orderitem.quantity %> </h5>
     <h5 class="card-text"> Merchant:<%= orderitem.product.user.merchant_name %>MAKE LINK!! </h5> 
+  
+  <%= link_to "Order", order_path(order: {status: "paid"}), method: :patch %>
   <% end %>
 <% else %>
   <h2>Your Basket is Empty! :(</h2>
 <% end %>
 </section>
+
+
