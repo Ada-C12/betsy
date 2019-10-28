@@ -208,7 +208,7 @@ describe OrdersController do
         expect(Product.find_by(id: products(:cat_toy).id).stock).must_equal 1
         
         expect(flash.now[:status]).must_equal :failure
-        must_respond_with :bad_request
+        must_redirect_to cart_path
       end
       
       it "cannot purchase retired items" do
@@ -234,7 +234,7 @@ describe OrdersController do
         expect(Product.find_by(id: products(:cat_toy).id).stock).must_equal 10
         
         expect(flash.now[:status]).must_equal :failure
-        must_respond_with :bad_request
+        must_redirect_to cart_path
       end
       
       it "cannot purchase an order with missing fields" do
