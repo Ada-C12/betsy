@@ -56,6 +56,9 @@ describe OrdersController do
       
       it "responds with success for valid orders with completed status" do
         orders(:fruit_order).update!(status: "complete")
+        updated_order = Order.find_by(id: orders(:fruit_order).id)
+        
+        expect(updated_order.status).must_equal "complete"
         
         get order_path(id: orders(:fruit_order))
         
@@ -64,6 +67,9 @@ describe OrdersController do
       
       it "responds with success for valid orders with cancelled status" do
         orders(:fruit_order).update!(status: "cancel")
+        updated_order = Order.find_by(id: orders(:fruit_order).id)
+        
+        expect(updated_order.status).must_equal "cancel"
         
         get order_path(id: orders(:fruit_order))
         
@@ -77,44 +83,73 @@ describe OrdersController do
         must_respond_with :not_found
       end
       
-      it "" do
+      it "redirects to root path with flash messages for orders with pending status" do
+        patch cancel_order_path(id: orders(:order1))
+        
+        must_redirect_to root_path
+        expect(flash[:status]).must_equal :failure
       end
-    end
-    
-    
-    it "returns not found the cancel action (invalid id)" do
-      # expect { patch cancel_order_path(id: orders(:order1)) }.wont_change "Order.count"
-      # must_respond_with :not_found
+      
+      it "redirects to root path with flash messages for orders with complete status" do
+        orders(:order1).update!(status: "complete")
+        updated_order = Order.find_by(id: orders(:order1).id)
+        
+        expect(updated_order.status).must_equal "complete"
+        
+        patch cancel_order_path(id: orders(:order1))
+        
+        must_redirect_to root_path
+        expect(flash[:status]).must_equal :failure
+      end
+      
+      it "redirects to root path with flash messages for orders with cancel status" do
+        orders(:order1).update!(status: "cancel")
+        updated_order = Order.find_by(id: orders(:order1).id)
+        
+        expect(updated_order.status).must_equal "cancel"
+        
+        patch cancel_order_path(id: orders(:order1))
+        
+        must_redirect_to root_path
+        expect(flash[:status]).must_equal :failure
+      end
+      
+      it "changes status to cancel, returns product stock, and redirects to order path for valid orders with paid status" do
+        expect(orders(:fruit_order).status).must_equal "paid"
+        
+        patch cancel_order_path(id: orders(:fruit_order))
+        
+        updated_order = Order.find_by(id: orders(:fruit_order).id)
+        updated_carrot = Product.find_by(id: products(:carrot).id)
+        updated_banana = Product.find_by(id: products(:banana).id)
+        updated_peach = Product.find_by(id: products(:peach).id)
+        
+        expect(updated_order.status).must_equal "cancel"
+        expect(updated_carrot.stock).must_equal 12
+        expect(updated_banana.stock).must_equal 12
+        expect(updated_peach.stock).must_equal 12
+        
+        must_redirect_to order_path(id: updated_order.id)
+      end
     end
   end
   
   describe "initialized carts/orders" do
-    
     before do
       post product_orderitems_path(product_id: products(:stella).id), params: { orderitem: { quantity: 1, }, }
     end
     
     describe "cart" do
-      it "returns success for an existing order id" do
+      it "returns success for an existing session order id" do
         get cart_path
         must_respond_with :success
-      end
-      
-      it "" do
-      end
-      
-      it "" do
-      end
-      
-      it "" do
       end
     end
     
     describe "edit" do
-      it "returns success for an existing order id" do
-      end
-      
-      it "" do
+      it "returns success for an existing session order id" do
+        get edit_order_path(id: -1)
+        must_respond_with :success
       end
     end
     

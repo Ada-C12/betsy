@@ -74,7 +74,7 @@ class OrdersController < ApplicationController
       flash[:result_text] = "Cannot cancel #{@order.status} orders."
       flash[:messages] = @order.errors.messages
       
-      redirect_back fallback_location: root_path
+      redirect_to root_path
       return
     end
     
@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
       # Returns all previously purchased inventory to product stock
       @order.return_stock
       
-      redirect_to root_path
+      redirect_to order_path(@order.id)
       return
     else
       flash[:status] = :failure
