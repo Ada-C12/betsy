@@ -20,5 +20,8 @@ Rails.application.routes.draw do
   resources :categories do
     resources :products, only: [:index]
   end
-  
+
+  get "/auth/github", as: "github_login"
+  get "/auth/:provider/callback", to: "wizards#create"
+  delete "/logout", to: "wizards#destroy", as: "logout"
 end
