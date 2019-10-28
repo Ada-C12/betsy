@@ -1,6 +1,6 @@
 product1: 
   name: mistcloak 
-  price: 1500
+  price_cents: 1500
   description: obscure figure while traveling through the mist 
   stock: 10
   wizard: wizard1
@@ -10,7 +10,7 @@ product1:
 
 product2: 
   name: mist amulet 
-  price: 1500
+  price_cents: 1500
   description: obscure amulet traveling through the mist 
   stock: 10
   wizard: wizard1

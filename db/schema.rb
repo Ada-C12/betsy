@@ -55,7 +55,6 @@ ActiveRecord::Schema.define(version: 2019_10_27_233933) do
 
   create_table "products", force: :cascade do |t|
     t.string "name"
-    t.integer "price"
     t.string "description"
     t.integer "stock"
     t.string "photo_url"
@@ -63,6 +62,7 @@ ActiveRecord::Schema.define(version: 2019_10_27_233933) do
     t.datetime "updated_at", null: false
     t.bigint "wizard_id"
     t.boolean "retired", default: false
+    t.integer "price_cents"
     t.index ["wizard_id"], name: "index_products_on_wizard_id"
   end
 
