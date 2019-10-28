@@ -1,6 +1,38 @@
 require "test_helper"
 
 describe Category do
+  before do
+    @category = categories(:strawberry)
+  end
+
+    it "can be instantiated" do
+      assert(@category.valid?)
+    end
+
+  it "will have the required fields" do
+    [:name, :category_type ].each do |field|
+      expect(@category).must_respond_to field
+    end
+  end
+
+  describe "relationships" do
+    it "can have many products" do   
+      
+    end
+  end
+
+  describe "validations" do
+    describe 'name' do 
+      it "must have a name" do
+        @category.name = nil
+        
+        refute(@category.valid?)
+        expect(@category.errors.messages).must_include :name
+        expect(@category.errors.messages[:name]).must_include "can't be blank"
+      end
+    end
+  end
+
   describe 'custom methods' do
     describe 'products_by_category' do
       it 'returns products for a give cateogry given the string name' do
@@ -30,3 +62,4 @@ describe Category do
     end
   end
 end
+
