@@ -2,7 +2,32 @@ class ProductsController < ApplicationController
   def homepage
     @products = Product.five_products
   end
-  
+
+  def new
+    if params[:wizard_id]
+      @product = Product.new(wizard_id: params[:wizard_id])
+    end
+  end
+
+  def create
+    wizard = Wizard.find_by(id: params[:wizard_id])
+    unless wizard 
+      head :not_found 
+      return 
+    end 
+    @product = Product.new(product_params)
+    @product.wizard = Wizard.find_by(id: wizard.id)
+    
+    if @product.save
+      flash[:success] = "Successfully Added #{@product.name}"
+      redirect_to wizard_path(wizard.id)
+      return 
+    else
+      render :new
+      return 
+    end
+  end
+
   def index
     wizard_id = params[:wizard_id]
     category_id = params[:category_id]
@@ -37,4 +62,10 @@ class ProductsController < ApplicationController
       return
     end
   end
+end
+
+private
+
+def product_params
+  return params.require(:product).permit(:name, :description, :stock, :photo_url, :price)
 end
