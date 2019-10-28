@@ -9,12 +9,12 @@ describe ProductsController do
     
     it "gives back a successful response when provided user_id" do
       user = users(:ada)
-      get user_products_path(user)
+      get user_path(user)
       must_respond_with :success
     end
 
     it "returns 404 response when no user found" do
-      get user_products_path(-1)
+      get user_path(-1)
       must_respond_with :not_found
     end
     

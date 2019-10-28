@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root "homepages#index"
   
-
-  
   resources :products
 
   get "/auth/github", as: "github_login"
