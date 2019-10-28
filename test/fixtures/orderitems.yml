@@ -18,3 +18,18 @@ sapporo_o2:
   order: order2
   product: sapporo
   shipped: false
+carrot_op:
+  quantity: 2
+  order: fruit_order
+  product: carrot
+  shipped: true
+banana_op:
+  quantity: 2
+  order: fruit_order
+  product: banana
+  shipped: true
+peach_op:
+  quantity: 2
+  order: fruit_order
+  product: peach
+  shipped: false

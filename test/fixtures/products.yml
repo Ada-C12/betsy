@@ -30,3 +30,27 @@ corona:
   stock: 4
   merchant: brad
   retired: true
+carrot:
+  name: Carrot
+  description: Orange vegetable.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+banana:
+  name: Banana
+  description: Yello fruit.
+  price: 2.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+peach:
+  name: Peach
+  description: Peach colored fruit.
+  price: 3.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false

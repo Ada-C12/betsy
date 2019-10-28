@@ -103,6 +103,15 @@ describe Orderitem do
       
       expect(new_orderitem.valid?).must_equal true
     end
+    
+    it "cannot create an orderitem with shipped status nil" do
+      new_orderitem.shipped = nil
+      new_orderitem.save
+      
+      expect(new_orderitem.valid?).must_equal false
+      expect(new_orderitem.errors.messages).must_include :shipped
+      expect(new_orderitem.errors.messages[:shipped]).must_include "shipped status must be a boolean value: true or false"
+    end
   end
   
   describe "relationships" do

@@ -282,5 +282,41 @@ describe Order do
         expect(pending_order.total).must_equal 0
       end
     end
+    
+    describe "mark_as_complete?" do
+      it "will not mark an order as complete if there are remaining not-shipped orderitems" do
+        expect(orders(:fruit_order).orderitems.count).must_equal 3
+        expect(orders(:fruit_order).status).must_equal "paid"
+        
+        expect(orderitems(:carrot_op).order.id).must_equal orders(:fruit_order).id
+        expect(orderitems(:banana_op).order.id).must_equal orders(:fruit_order).id
+        expect(orderitems(:peach_op).order.id).must_equal orders(:fruit_order).id
+        
+        expect(orderitems(:carrot_op).shipped).must_equal true
+        expect(orderitems(:banana_op).shipped).must_equal true
+        expect(orderitems(:peach_op).shipped).must_equal false
+        
+        orders(:fruit_order).mark_as_complete?
+        updated_order = Order.find_by(id: orders(:fruit_order).id)
+        
+        expect(updated_order.status).must_equal "paid"
+      end
+      
+      it "will mark an order as complete when the last remaining not-shipped orderitem is shipped" do
+        fruit_order = Order.find_by(id: orders(:fruit_order).id)
+        
+        orderitems(:peach_op).update(shipped: true)
+        peach = Orderitem.find_by(id: orderitems(:peach_op).id)
+        
+        expect(peach.shipped).must_equal true
+        
+        fruit_order = Order.find_by(id: orders(:fruit_order).id)
+        
+        fruit_order.mark_as_complete?
+        updated_order = Order.find_by(id: orders(:fruit_order).id)
+        
+        expect(updated_order.status).must_equal "complete"
+      end
+    end
   end
 end

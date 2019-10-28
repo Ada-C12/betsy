@@ -1,7 +1,8 @@
 class OrdersController < ApplicationController
-  before_action :find_order, only: [:edit, :update, :destroy]
+  before_action :find_order_from_session, only: [:edit, :update]
+  before_action :find_order_from_params, only: [:show, :cancel]
   
-  def show
+  def cart
     # If you don't have an order_id, you haven't added anthing to cart.
     if session[:order_id]
       @order = Order.find_by(id: session[:order_id])
@@ -56,8 +57,28 @@ class OrdersController < ApplicationController
     end
   end
   
+  def show 
+    if @order.status == "pending"
+      flash[:status] = :failure
+      flash[:result_text] = "Cannot cancel #{@order.status} orders."
+      flash[:messages] = @order.errors.messages
+      
+      redirect_to root_path
+      return
+    end
+  end
+  
   def cancel
-    @order.status = "cancelled"
+    unless @order.status == "paid"
+      flash[:status] = :failure
+      flash[:result_text] = "Cannot cancel #{@order.status} orders."
+      flash[:messages] = @order.errors.messages
+      
+      redirect_back fallback_location: root_path
+      return
+    end
+    
+    @order.status = "cancel"
     
     if @order.save
       flash[:status] = :success
@@ -81,10 +102,10 @@ class OrdersController < ApplicationController
   private 
   
   def order_params
-    params.require(:order).permit(:email, :address, :cc_name, :cc_num, :ccv, :cc_exp, :zip)
+    params.require(:order).permit(:email, :address, :cc_name, :cc_num, :cvv, :cc_exp, :zip)
   end
   
-  def find_order
+  def find_order_from_session
     @order = Order.find_by(id: session[:order_id])
     
     if @order.nil?
@@ -93,4 +114,12 @@ class OrdersController < ApplicationController
     end
   end
   
+  def find_order_from_params
+    @order = Order.find_by(id: params[:id])
+    
+    if @order.nil?
+      head :not_found
+      return
+    end
+  end
 end
