@@ -252,10 +252,14 @@ describe Order do
     end
     
     describe "return_stock" do
-      it "will add back the number of product stock by orderitem quantity" do
+      it "will add back the number of product stock by orderitem quantity if the product is not retired" do
         expect(products(:heineken).stock).must_equal 3
         expect(products(:corona).stock).must_equal 4
         expect(products(:sapporo).stock).must_equal 5
+        
+        expect(products(:heineken).retired).must_equal false
+        expect(products(:corona).retired).must_equal true
+        expect(products(:sapporo).retired).must_equal false
         
         paid_order.return_stock
         
@@ -264,7 +268,7 @@ describe Order do
         updated_sapporo = Product.find_by(id: products(:sapporo).id)
         
         expect(updated_heineken.stock).must_equal 4
-        expect(updated_corona.stock).must_equal 5
+        expect(updated_corona.stock).must_equal 4
         expect(updated_sapporo.stock).must_equal 7
       end
     end
