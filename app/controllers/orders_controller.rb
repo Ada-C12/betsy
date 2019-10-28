@@ -1,6 +1,5 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login, only: [:cart, :checkout, :update, :confirmation]
-  skip_before_action :find_order, only: [:show, :cart]
   
   def show
     @order = Order.find_by(id: params[:id])
@@ -16,16 +15,6 @@ class OrdersController < ApplicationController
   end
   
   def cart
-    if session[:cart_id].nil?
-      @order = Order.create(status: "pending")
-      session[:cart_id] = @order.id
-    else
-      @order = Order.find_by(id: session[:cart_id])
-      if @order.nil?
-        flash[:error] = "Order doesn't exist!"
-        return redirect_to root_path
-      end
-    end
   end
   
   def checkout
