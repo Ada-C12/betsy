@@ -9,4 +9,7 @@ class OrderItem < ApplicationRecord
     return self.quantity * self.product.price_cents
   end
 
+  def updated_stock
+    return self.product.stock - self.quantity
+  end
 end

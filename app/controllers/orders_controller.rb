@@ -20,9 +20,9 @@ class OrdersController < ApplicationController
     
     if @order.update(order_params)
       @order.order_items.each do |order_item|
-        updated_stock = order_item.product.stock - order_item.quantity
+        updated_stock = order_item.updated_stock
         if updated_stock < 0
-          flash[:error] = "There are not enough #{order_item.product.name} in stock"
+          flash[:error] = "There are not enough #{order_item.product.name}s in stock"
           return redirect_to cart_path
         end
         order_item.product.update_attributes(stock: updated_stock)
