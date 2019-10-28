@@ -1,7 +1,7 @@
 <section>
 <h2>Cart: this page is for customer to check the cart details!</h2>
 
-<% if @current_order && @current_order.order_items %>
+<% if @current_order && @current_order.order_items.count > 0 %>
   <% @current_order.order_items.each do |order_item| %>
     <%= image_tag (order_item.product.img_url), class:"show-product-img", alt:"#{order_item.product.name}product image" %> 
     <h2> $<%= order_item.product.price %> </h2>

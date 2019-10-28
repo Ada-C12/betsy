@@ -31,9 +31,13 @@
 <nav class="all-nav-parts-container">
   <%# Login/Login & Basket Nav %>
   <nav class="login-basket-nav">
-  <p>Add logic to show empty when empty and not empty when not empty!!!</p>
-    <div class="cart-link"> <%= cart_empty_img_link %> </div>
-    <div class="cart-link"> <%= cart_full_img_link %> </div>
+  <% cart_order = Order.find_by(id:session[:cart_id]) %>
+    <% if cart_order &&  cart_order.order_items.count > 0 %>
+      <div class="cart-link"> <%= cart_full_img_link %> </div>
+    <% else %>
+      <div class="cart-link"> <%= cart_empty_img_link %> </div>
+    <% end %>
+    
     <section class="login-loggout-container">
       <%if session[:user_id]%>
         <% user = User.find_by(id: session[:user_id])%>
