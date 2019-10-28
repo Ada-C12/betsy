@@ -14,7 +14,7 @@ Rails.application.routes.draw do
 
   resources :users, only: [:show, :update]
 
-  resources :order, only: [:show, :update]
+  resources :orders, only: [:show, :update]
   get "/orders/cart", to: "orders#cart", as: "cart"
   get "/orders/checkout", to: "orders#checkout", as: "checkout"
   get "/orders/confirmation", to: "orders#confirmation", as: "confirmation"

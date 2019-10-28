@@ -15,7 +15,7 @@ class Order < ApplicationRecord
     status != 'pending'
   end
 
-  def contains_orderitems?
+  def contain_orderitems?
     self.order_items.each do |order_item|
       return true if order_item.product.user_id == session[:user_id]
     end

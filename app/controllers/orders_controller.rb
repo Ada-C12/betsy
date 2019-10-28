@@ -4,28 +4,15 @@ class OrdersController < ApplicationController
   
   def show
     @order = Order.find_by(id: params[:id])
-    if @order.contain_orderitems?
-      if @order.nil?
-        flash[:error] = "Order doesn't exist!"
-        return redirect_to root_path 
-      end
-    else
+    if !@order
+      head :not_found 
+    elsif !@order.contain_orderitems?
       flash[:error] = "You cannot check this order details!"
       return redirect_to root_path 
     end
   end
   
   def cart
-    if session[:cart_id].nil?
-      @order = Order.create(status: "pending")
-      session[:cart_id] = @order.id
-    else
-      @order = Order.find_by(id: session[:cart_id])
-      if @order.nil?
-        flash[:error] = "Order doesn't exist!"
-        return redirect_to root_path
-      end
-    end
   end
   
   def checkout
