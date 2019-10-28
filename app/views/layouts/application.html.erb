@@ -99,32 +99,28 @@
                 <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
               <% end%>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Merchants
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% User.all.each do |user| %>
-                <% if user.merchant_name %>
-                  <%= link_to user.merchant_name, user_path(user.id) , class:"dropdown-item" %>
-                <% end %>    
-              <% end %>
-          </li>
-          <%if session[:user_id]%>
-            <li class="nav-item">
-              <%= link_to "View my store", user_path(user.id), class: "nav-link"%>
-            </li>
-            <li>
-              <%= link_to "Add New Product", new_product_path, class:"nav-link" %>
-            </li>
-          <%end%>
-        </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-        </form>
-      </div>
-    </nav>
+        <% end %>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Merchants
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% User.all.each do |user| %>
+              <% if user.merchant_name %>
+                <%= link_to user.merchant_name, user_path(user.id) , class:"dropdown-item" %>
+              <% end %>    
+            <% end %>
+        </li>
+      </ul>
+      
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
+      </form>
+    </div>
+  </nav>
+</nav>
 
   <%# Flash Messages on each page %>
     <%if flash%>
