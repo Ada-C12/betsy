@@ -7,7 +7,7 @@ class MerchantsController < ApplicationController
   end
 
   def show
-    @merchant = Merchant.find_by(id: session[:merchant_id])
+    @merchant = Merchant.find_by(id: params[:id])
     if @merchant.nil?
       flash[:warning] = "Merchant with id #{params[:id]} was not found."
       redirect_to root_path

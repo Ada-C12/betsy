@@ -3,6 +3,10 @@ class ProductsController < ApplicationController
   
   def index
     @products = Product.all
+    @merchants = Merchant.all
+    # if params[:merchant_id].present?
+    #   @merchant = @merchant.merchant_id(params[:merchant_id])
+    # end
   end
 
   def show
@@ -75,6 +79,11 @@ class ProductsController < ApplicationController
       @product.save
     end
   end
+
+  # def merchant_products
+  #   @merchant = Merchant.find_by(id: params[:id])
+  #   @products = Product.where("merchant_id = #{@merchant.id}")
+  # end
 
   private
 

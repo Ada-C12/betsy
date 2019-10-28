@@ -12,4 +12,6 @@ class Product < ApplicationRecord
     in: [true, false],
     message: "retired status must be a boolean value: true or false" 
   }
+
+  scope :merchant_id, lambda { |merchant_id| where(:merchant_id => merchant_id)}
 end

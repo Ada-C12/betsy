@@ -6,7 +6,18 @@
   <% if @products.empty? %>
     <p> No products available </p>
   <% end %>
-  
+
+  <h3>Shop by Merchant</h3>
+  <% @merchants.each do |merchant| %>
+    <%= link_to filtered_products_path(merchant.id) do %>
+      <%= merchant.username %>
+    <% end %>
+
+
+<% end %>
+
+
+
   <div class="container">
     <div class="row">
       <% @products.each do |product| %>
@@ -20,7 +31,6 @@
         <% end %>
       <% end %>
     </div>
-    
   </div>
 
 
