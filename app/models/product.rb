@@ -6,12 +6,14 @@ class Product < ApplicationRecord
 
   validates :name, presence: true
   validates_uniqueness_of :name
-  validates :price, presence: true
-  validates :price, numericality: { only_integer: true, greater_than: 0 }
+  validates :price_cents, presence: true
+  validates :price_cents, numericality: { only_integer: true, greater_than: 0 }
   validates :stock, presence: true
   validates :stock, numericality: { only_integer: true }
   validates :wizard, presence: true
   validates_inclusion_of :retired, in: [true, false]
+
+  monetize :price_cents
 
   def self.five_products
     return Product.all.sample(5)

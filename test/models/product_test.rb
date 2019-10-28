@@ -2,6 +2,7 @@ require "test_helper"
 require 'pry'
 
 describe Product do
+  let(:product1) { products(:product1) }
   describe "validations" do
     
     it "must have a name, price, stock, wizard, categories and retired information" do
@@ -26,33 +27,33 @@ describe Product do
       expect(is_invalid.errors.messages[:name]).must_equal ["has already been taken"]
     end
     
-    it "is invalid if there is no price" do
+    it "is invalid if there is no price_cents" do
       is_invalid = products(:product1)
-      is_invalid.price = nil
+      is_invalid.price_cents = nil
       
       refute(is_invalid.valid?)
-      expect(is_invalid.errors.messages).must_include :price
-      expect(is_invalid.errors.messages[:price]).must_equal ["can't be blank", "is not a number"]
+      expect(is_invalid.errors.messages).must_include :price_cents
+      expect(is_invalid.errors.messages[:price_cents]).must_equal ["can't be blank", "is not a number"]
       
     end
     
-    it "is invalid if price is not an integer" do
+    it "is invalid if price_cents is not an integer" do
       is_invalid = products(:product1)
-      is_invalid.price = "a"
+      is_invalid.price_cents = "a"
       
       refute(is_invalid.valid?)
-      expect(is_invalid.errors.messages).must_include :price
-      expect(is_invalid.errors.messages[:price]).must_equal ["is not a number"]
+      expect(is_invalid.errors.messages).must_include :price_cents
+      expect(is_invalid.errors.messages[:price_cents]).must_equal ["is not a number"]
       
     end
     
-    it "is invalid if price is not greater than 0" do
+    it "is invalid if price_cents is not greater than 0" do
       is_invalid = products(:product1)
-      is_invalid.price = 0
+      is_invalid.price_cents = 0
       
       refute(is_invalid.valid?)
-      expect(is_invalid.errors.messages).must_include :price
-      expect(is_invalid.errors.messages[:price]).must_equal ["must be greater than 0"]
+      expect(is_invalid.errors.messages).must_include :price_cents
+      expect(is_invalid.errors.messages[:price_cents]).must_equal ["must be greater than 0"]
     end
     
     
@@ -88,12 +89,20 @@ describe Product do
     
     
     it "must have a retired" do
-      is_invalid = products(:product1)
+      is_invalid = product1
       is_invalid.retired = nil
       
       expect(is_invalid.valid?).must_equal false
       expect(is_invalid.errors.messages).must_include :retired
       expect(is_invalid.errors.messages[:retired]).must_equal ["is not included in the list"]
+    end
+  end
+
+  describe "monetize price_cents" do
+    it "stores a money object in .price with amount equal to price_cents in USD" do
+      expect(product1.price).must_be_instance_of Money
+      expect(product1.price.amount).must_equal product1.price_cents * 10**-2
+      expect(product1.price.currency.id).must_equal :usd
     end
   end
   
