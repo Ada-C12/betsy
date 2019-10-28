@@ -10,7 +10,7 @@ class MerchantsController < ApplicationController
     @merchant = Merchant.find_by(id: session[:merchant_id])
     if @merchant.nil?
       flash[:warning] = "Merchant with id #{params[:id]} was not found."
-      redirect_to root_path
+      return redirect_to root_path
     end
   end
 
@@ -38,8 +38,8 @@ class MerchantsController < ApplicationController
     @current_merchant = Merchant.find_by(id: session[:merchant_id])
 
     unless @current_merchant
-      flash[:error] = "You must be a logged in authorized merchant to access this page"
-      redirect_to root_path
+      flash[:error] = "You must be logged in as an authorized merchant to access this page."
+      return redirect_to root_path
     end
   end
 
@@ -47,6 +47,6 @@ class MerchantsController < ApplicationController
     session[:merchant_id] = nil
     flash[:success] = "Successfully logged out!"
 
-    redirect_to root_path
+    return redirect_to root_path
   end
 end
