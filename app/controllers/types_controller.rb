@@ -1,7 +1,8 @@
 class TypesController < ApplicationController
-
+  
   before_action :require_login, except: [:show]
-
+  
+  
   def show
     @type = Type.find_by(id: params[:id])
     if @type.nil?
@@ -11,14 +12,14 @@ class TypesController < ApplicationController
       return
     end
   end
-
+  
   def new
     @type = Type.new
   end
-
+  
   def create
     @type = Type.new(name: params[:type][:name])
-
+    
     if @type.save
       flash[:status] = :success
       flash[:result_text] = "#{@type.name} has been created."  
