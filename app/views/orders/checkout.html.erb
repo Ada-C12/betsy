@@ -1,12 +1,12 @@
 <section>
 <h2>Checkout</h2>
-<%= form_with model: @order do |f| %>
+<%= form_with model: @current_order, url: order_path(id: @current_order.id, status: "paid") do |f| %>
 
-  <%= f.label :Name %>
+  <%= f.label :name %>
   <%= f.text_field :name %>
-  <%= f.label :Email %>
+  <%= f.label :email %>
   <%= f.text_field :email %>
-  <%= f.label :Address %>
+  <%= f.label :address %>
   <%= f.text_field :address %>
 
   <h2>Billing info</h2>

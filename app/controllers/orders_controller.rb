@@ -14,21 +14,17 @@ class OrdersController < ApplicationController
     end
   end
   
-  def cart
-  end
-  
   def checkout
     if @current_order.nil?
       flash[:error] = "Order doesn't exist!"
       return redirect_to root_path
+    else
     end
   end
   
   def update
-    @current_order = Order.update(order_params)
-    @current_order.status = "paid"
-    @current_order.customer_id = session[:user_id]
-    if @current_order.save
+    if @current_order.update(order_params)
+      flash[:success] = "Order #{@current_order.id} has been purchased successfully!"
       return redirect_to confirmation_path
     else
       flash[:error] = "Something went wrong! Order was not paid."
