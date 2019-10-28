@@ -1,1 +1,73 @@
-  <h2>WELCOME TO FRUiTSY!!!!</h2>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1>Welcome to <strong> FRUiTSY! </strong> </h1>
+    <p class="lead">The Sweetest Platform For All Things Fruit</p>
+  </div>
+</div>
+
+<h2> Discover Products </h2>
+<section class="card-group">
+  <% random_products = Product.random_products(3) %>
+  <% random_products.each do |product| %>
+    <section class="card" style="width: 18rem;">
+      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+      <div class="card-body">
+          <h5> 
+            <%= link_to product.name, product_path(product.id) %>
+            <small> $<%= product.price %> </small> 
+          </h5>
+      </div>  
+    </section>
+  <% end %>
+</section>
+
+  <h2> Deals Under $10 </h2>
+  <% deals = Product.deals_under(10).first(7) %>
+  <section class="card-group">
+    <% deals.each do |product| %>
+      <section class="card" style="width: 18rem;">
+        <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+        <div class="card-body">
+          <h5> 
+            <%= link_to product.name, product_path(product.id) %>
+            <small> $<%= product.price %> </small> 
+          </h5>
+      </section>
+    <% end %>
+  </section>
+
+<% ["citrus", "berry", "tropical"].each do |theme| %>
+  <h2> <%= theme.capitalize %> </h2>
+  <% products = Category.products_by_category(theme).shuffle.first(4) %>
+  <section class="card-group">
+    <% products.each do |product| %>
+      <section class="card" style="width: 18rem;">
+        <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+        <div class="card-body">
+          <h5> 
+            <%= link_to product.name, product_path(product.id) %>
+            <small> $<%= product.price %> </small> 
+          </h5>
+      </section>
+    <% end %>
+  </section>
+<% end %>
+
+<section class="card-group">
+  <% ["earrings", "animals", "furniture"].each do |cat| %>
+    <% category = Category.find_by(name: cat) %>
+    <% product = Category.products_by_category(cat).shuffle.first %>
+    <section class="card" style="width: 18rem;">
+      <h2> <%= cat.capitalize %> </h2>
+      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+      <div class="card-body">
+        <h5> 
+          <%= link_to product.name, product_path(product.id) %>
+          <small> $<%= product.price %> </small> 
+        </h5>
+      <%= link_to "Shop All #{category.name.capitalize}", category_products_path(category.id), class:"btn btn-primary" %>  
+    </section>
+  <% end %>
+</section>
+
+
