@@ -43,7 +43,6 @@ h1, h2, h3, h4, h5 {
   position: relative;
 }
 
-
 // HEADER
 
 .app-header__nav {
@@ -152,3 +151,11 @@ margin-left: 2rem;
    }
  }
 
+//  PRODUCT ADD TO CART
+
+
+form input[type="text"], textarea, select, form input[type="submit"], form input[type="number"] {
+  border-radius: 5px;
+  border-width: 0;
+  display: block;
+}

@@ -1,20 +1,30 @@
-<section>
-  <div class="img"><%= image_tag "#{@product.photo_url}"%></div>
-  <h3>Name: <%= @product.name %><h3>
-  <p>Description: <%= @product.description %></p>
-  <p>Price: $<%= '%.2f' % @product.price %></p>
-  <p>Sold by: <%= @product.merchant.username%></p>
-  <% if @product.retired %>
-    <p>Not currently for sale</p>
-  <% end %>
+<section class="container">
+  
+  <article class="col-sm"><div class="img"><%= image_tag "#{@product.photo_url}"%></div>
+  <article class="col-sm">
+    <h3><%= @product.name %><h3></article>
+    <p><%= @product.description %></p>
+    <p>$<%= '%.2f' % @product.price %></p>
+    <p>Sold by: <%= @product.merchant.username%></p>
+    <% if @product.retired %>
+      <p>Not currently for sale</p>
+    <% end %>
 
-  <%= form_with model: @orderitem, url: "/products/#{@product.id}/orderitems" do |f| %>
-    <%= f.label :quantity %>
-    <%= f.select :quantity, (1..@product.stock) %>
-    <%= f.submit "Add to Cart", class: "btn btn-primary"%>
-  <% end %>
+    <form class="new_order_product" id="new_order_product">
+      <%= form_with model: @orderitem, url: "/products/#{@product.id}/orderitems" do |f| %>
+        <%= f.label :quantity %>
+        <%= f.select :quantity, (1..@product.stock) %>
+        <%= f.submit "Add to Cart", class: "btn btn-primary"%>
+      <% end %>
+    </form>
+
+  </article>
+</section>
+
 
   <%= link_to "Edit", edit_product_path(@product.id), class: "btn btn-primary" %>
   <%= link_to "Back", products_path, class: "btn btn-primary" %>
-</section>
+
+
+
 
