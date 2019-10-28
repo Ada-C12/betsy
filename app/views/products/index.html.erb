@@ -15,7 +15,7 @@
         <%= link_to image_tag(product.photo_url, alt: "Picture of #{product.name}", class: "img-thumbnail"), product_path(product.id) %>
       </div>
       <div class="caption">
-        <strong><%= link_to product.name, product_path(product.id) %></strong> $<%= product.price %>
+        <strong><%= link_to product.name, product_path(product.id) %></strong> $<%= humanized_money_with_symbol(product.price) %>
       </div>
     <% end %>
   </div>

@@ -11,12 +11,12 @@
     </div>
 		<div class="col-lg-6 align-self-center">
 			<p>Seller: <%=@product.wizard.username%></p>
-			<p>Price: <%=@product.price%></p>
+			<p>Price: <%= humanized_money_with_symbol(@product.price) %></p>
 			<p>Description: <%=@product.description%></p>
 			<p>Stock: <%=@product.stock%></p>
 			<%= form_with model: OrderItem, url: product_order_items_path(@product.id) do |f| %>
-				<%= number_field(:order_item, :quantity, min: 1) %>
-				<%= f.submit "Add to Cart", class: "btn btn-dark" %>
+				<%= number_field(:order_item, :quantity, min: 1, value: 1) %>
+				<%= f.submit "Add to Cart", class: "btn btn-dark cart-quantity-button" %>
 			<% end %>
   </div>
 </div>

@@ -3,6 +3,7 @@ require "test_helper"
 describe ProductsController do
   let(:wizard1) { wizards(:wizard1) }
   let(:wizard_no_products) { wizards(:wizard_no_products) }
+  let(:product) { products(:product1) }
 
   describe "Guest users" do
     describe "index action" do
@@ -71,7 +72,6 @@ describe ProductsController do
     end
 
     describe "show" do
-      let(:product) { products(:product1) }
       it "responds with success when showing an existing valid product" do
         get product_path(product.id)
 
