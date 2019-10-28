@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_26_211443) do
+ActiveRecord::Schema.define(version: 2019_10_27_233933) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -44,8 +44,8 @@ ActiveRecord::Schema.define(version: 2019_10_26_211443) do
     t.string "owling_address"
     t.string "name"
     t.string "cc_num"
-    t.integer "cc_exp_mo"
-    t.integer "cc_exp_yr"
+    t.string "cc_exp_mo"
+    t.string "cc_exp_yr"
     t.integer "cc_cvv"
     t.integer "zip_code"
     t.string "status"
