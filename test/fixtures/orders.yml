@@ -2,20 +2,13 @@ order1:
   email: bob@oz.com
   owling_address: 123 Magical Lane 
   name: Bob Blah 
+  name_on_cc: Bob Blah
   cc_num: '1234567890123456'
-  cc_exp_mo: 12
-  cc_exp_yr: 2020
+  cc_exp_mo: '12'
+  cc_exp_yr: '2020'
   cc_cvv: 123
   zip_code: 12345
   status: complete 
 
 pending_order: 
-  email: bob@oz.com
-  owling_address: 123 Magical Lane 
-  name: Bob Blah 
-  cc_num: '1234567890123456'
-  cc_exp_mo: 12
-  cc_exp_yr: 2020
-  cc_cvv: 123
-  zip_code: 12345
   status: pending 

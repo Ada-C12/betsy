@@ -1,5 +1,5 @@
 <section>
-  <h2>All 
+  <h2 class="product-heading" id="index-heading">All 
     <% if @category %>
     <%= @category.name.capitalize %>
     <% end %>
@@ -9,18 +9,17 @@
     <% end %>
   </h2>
 
-  <div class="thumbnail">
+  <div class="card-container">
     <% @products.each do |product| %>
-      <div class="thumbnail-container">
-        <%= link_to image_tag(product.photo_url, alt: "Picture of #{product.name}", class: "img-thumbnail"), product_path(product.id) %>
-      </div>
-      <div class="caption">
-        <strong><%= link_to product.name, product_path(product.id) %></strong> $<%= humanized_money_with_symbol(product.price) %>
+      <div class="card" style="width: 18rem;">
+        <%= link_to image_tag(product.photo_url || "https://i.imgur.com/yciRdrY.jpg?2", alt: "Picture of #{product.name}", class: "img-thumbnail"), product_path(product.id) %>
+        <div class="card-body">
+          <h5 class="card-title"><%= link_to product.name, product_path(product.id) %></h5>
+          <p class="card-text"><%= humanized_money_with_symbol(product.price) %></p>
+        </div>
       </div>
     <% end %>
   </div>
-
-
 
   <% if @wizard && @wizard.products.empty? %>
     <p>There are no exisiting products from this wizard.</p>
