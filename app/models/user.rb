@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :products
+  has_many :reviews, dependent: :nullify
 
   validates :uid, uniqueness: true, presence: true 
   validates :merchant_name, uniqueness: true, :allow_nil => true
@@ -16,8 +17,13 @@ class User < ApplicationRecord
     return user 
   end 
 
-  #This method will call 
-  def total_earned
-
+  def total_earned(status = nil )
+    #Find the order items that belong to a particular user 
+    earnings = 0
+    self.products.order_items.each do |order_item|
+      earnings += order_item.total 
+    end 
+    return earnings 
   end 
+
 end

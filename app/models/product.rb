@@ -9,7 +9,17 @@ class Product < ApplicationRecord
   
   belongs_to :user
   has_many :order_items, dependent: :nullify
+  has_many :reviews, dependent: :nullify
   has_and_belongs_to_many :categories
+
+    
+  def self.random_products(num)
+    return Product.all.shuffle.first(num)
+  end
+  
+  def self.deals_under(price)  
+    return Product.where("price < ?", price).shuffle
+  end
 
   def quantity_available?(quantity)
     if quantity.nil? || quantity < 1
@@ -26,5 +36,5 @@ class Product < ApplicationRecord
 
   def avg_rating
   end
-  
+
 end

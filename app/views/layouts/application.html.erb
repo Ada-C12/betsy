@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>🍉 fruitsy 🍊</title>
+    <title>🍉FRUiTSY 🍊</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -10,94 +10,119 @@
   </head>
 
   <body>
+  <%# Fruit Image Links Fixed Nav %>
+    <section class="fruit-shape-links fixed-top">
+      <%= fruit_image("48966256972_b25342b8df", "strawberry") %>
+      <%= fruit_image("48966257187_4808931340", "apple") %>
+      <%= fruit_image("48965531768_24fce80958", "orange") %>
+      <%= fruit_image("48966077751_5e88d3a52a", "mango") %>
+      <%= fruit_image("48965531738_c70c61c848", "pineapple") %>
+      <%= fruit_image("48966077756_d140d28fbe", "lemon") %>
+      <%= fruit_image("48965531848_7477ccc902", "banana") %>
+      <%= fruit_image("48966256962_f7655d0227", "watermelon") %>
+      <%= fruit_image("48966077851_25c938e75c", "avocado") %>
+      <%= fruit_image("48965531803_a181744b80", "kiwi") %>
+      <%= fruit_image("48965531838_40b12131ee", "berry") %>
+      <%= fruit_image("48966077781_02aa2abeed", "grapes") %>
+      <%= fruit_image("48965531818_7678560b94", "dragonfruit") %>
+      <%= fruit_image("48966257017_39d2f25373", "peach") %>
+  </section>
+
+<nav class="all-nav-parts-container">
+  <%# Login/Login & Basket Nav %>
+  <nav class="login-basket-nav">
+  <p>Add logic to show empty when empty and not empty when not empty!!!</p>
+    <div class="cart-link"> <%= cart_empty_img_link %> </div>
+    <div class="cart-link"> <%= cart_full_img_link %> </div>
     <section class="login-loggout-container">
       <%if session[:user_id]%>
         <% user = User.find_by(id: session[:user_id])%>
-        <%= link_to user.username, current_user_path, class: "current-user-btn btn btn-primary" %>
-        <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary"%>
+        <%= link_to "Logged in as #{user.username}", current_user_path, class: "current-user-btn btn btn-dark" %>
+        <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-dark logout-btn"%>
       <%else %>
-        <%= link_to "Login with Github", github_login_path, class: "btn btn-primary "%>
+        <%= link_to "Login with Github", github_login_path, class: "btn btn-dark "%>
       <%end %>
     </section>
-    <h1 class="nav-brand">
-      <%= link_to "🍉 fruitsy 🍉", root_path %>
-    </h1>
+  </nav>
+    
+  <%# Main Brand Name %>
+  <h1 class="top-brand-name">
+    <%= link_to "FRUiTSY", root_path %>
+  </h1>
 
-    <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
-      <%= link_to "fruitsy", root_path, class:"navbar-brand" %>
-
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
+  <%# Merchant Nav Bar %>
+  <%if session[:user_id]%>
+    <% current_user = User.find_by(id: session[:user_id]) %>
+    <nav class="navbar navbar-expand-lg navbar-dark">
+      <%= link_to current_user.username, current_user_path, class: "navbar-brand" %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
       </button>
-
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <%= link_to "All Fruits", products_path, class:"nav-link" %>
-          </li>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+        <ul class="navbar-nav">
           <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Fruits
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Manage Fruit Stand
             </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Category.where(category_type: "fruit").each do |category| %>
-                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
-              <% end%>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <%= link_to "View My Store", user_path(current_user.id), class: "dropdown-item" %>
+              <%= link_to "Manage My Store", current_user_path, class: "dropdown-item" %>
+              <%= link_to "Add New Product", new_product_path, class: "dropdown-item" %>
+            </div>
           </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Themes
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Category.where(category_type: "theme").each do |category| %>
-                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
-              <% end%>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Categories
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Category.where(category_type: "category").each do |category| %>
-                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
-              <% end%>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Colors
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Category.where(category_type: "color").each do |category| %>
-                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
-              <% end%>
-          </li>
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-              Merchants
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% User.all.each do |user| %>
-                <% if user.merchant_name %>
-                  <%= link_to user.merchant_name, user_products_path(user.id) , class:"dropdown-item" %>
-                <% end %>    
-              <% end %>
-          </li>
-          <%if session[:user_id]%>
-          <li class="nav-item">
-            <%= link_to "View my store", current_user_path, class: "nav-link"%>
-          </li>
-          <li>
-            <%= link_to "Add New Product", new_product_path, class:"nav-link" %>
-          </li>
-          <%end%>
         </ul>
-        <form class="form-inline my-2 my-lg-0">
-          <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-        </form>
       </div>
     </nav>
+  <%end%>  
 
+  <%# Main Nav Bar with Category/Merchant Links %>
+  <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
+    <%= link_to "🍉FRUiTSY", root_path, class:"navbar-brand" %>
+
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to "All Fruits", products_path, class:"nav-link" %>
+        </li>
+        
+        <% ["fruit", "theme", "category", "color"].each do |type| %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= type.capitalize %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.where(category_type: type).each do |category| %>
+                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
+              <% end%>
+          </li>
+        <% end %>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Merchants
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% User.all.each do |user| %>
+              <% if user.merchant_name %>
+                <%= link_to user.merchant_name, user_path(user.id) , class:"dropdown-item" %>
+              <% end %>    
+            <% end %>
+        </li>
+      </ul>
+      
+      <form class="form-inline my-2 my-lg-0">
+        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
+      </form>
+    </div>
+  </nav>
+</nav>
+
+  <%# Flash Messages on each page %>
     <%if flash%>
       <section class="alert__container">
       <ul>
@@ -108,11 +133,14 @@
       </section>
     <%end %>
     
+  <%# Main content on each page %>
     <main>
     <%= yield %>
     </main>
+  
   </body>
   
+  <%# Footer on each page %>
   <footer>
     © 2019 The Fruit Loops
   </footer>
