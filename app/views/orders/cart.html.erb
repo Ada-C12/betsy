@@ -2,11 +2,16 @@
 <h2>Cart: this page is for customer to check the cart details!</h2>
 
 <% if @current_order && @current_order.order_items %>
-  <% @current_order.order_items.each do |orderitem| %>
-    <%= image_tag (orderitem.product.img_url), class:"show-product-img", alt:"#{orderitem.product.name}product image" %> 
-    <h2> $<%= orderitem.product.price %> </h2>
-    <h5> Quantity: <%= orderitem.quantity %> </h5>
-    <h5 class="card-text"> Merchant:<%= orderitem.product.user.merchant_name %>MAKE LINK!! </h5> 
+  <% @current_order.order_items.each do |order_item| %>
+    <%= image_tag (order_item.product.img_url), class:"show-product-img", alt:"#{order_item.product.name}product image" %> 
+    <h2> $<%= order_item.product.price %> </h2>
+    <%= form_with model: order_item, url: order_item_path(order_item.id) do |f| %>
+      <%= f.label :quantity, class: "col-sm-2 col-form-label"%>
+      <%= f.text_field :quantity, class: "form-control" %>
+      <%= f.submit "Update", class: "btn btn-primary" %>
+    <% end %>
+    <%= link_to "Delete", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
+    <h5 class="card-text"> Merchant:<%= order_item.product.user.merchant_name %>MAKE LINK!! </h5> 
   <% end %>
 <% else %>
   <h2>Your Basket is Empty! :(</h2>
