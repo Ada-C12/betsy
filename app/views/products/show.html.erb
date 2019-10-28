@@ -13,7 +13,7 @@
     <%= f.select :quantity, (1..@product.stock) %>
     <%= f.submit "Add to Cart", class: "btn btn-primary"%>
   <% end %>
-  
+
   <%= link_to "Edit", edit_product_path(@product.id), class: "btn btn-primary" %>
   <%= link_to "Back", products_path, class: "btn btn-primary" %>
 </section>

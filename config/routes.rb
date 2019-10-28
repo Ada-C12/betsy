@@ -6,9 +6,8 @@ Rails.application.routes.draw do
     resources :orderitems, only: [:create]
   end
 
-  resources :merchants, except: [:delete, :new, :show] do
-    resources :products, only: [:index]
-  end 
+  resources :merchants, except: [:delete, :new, :show]
+  get '/merchants/:id/products', to: 'products#merchant_products', as: 'merchant_products'
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
@@ -16,7 +15,6 @@ Rails.application.routes.draw do
   
   resources :orderitems, only: [:edit, :destroy]
   patch '/orderitems/:id', to: 'orderitems#update'
-  get 'merchant_products' => 'products#index', as: :filtered_products
   patch '/orderitems/:id/mark_shipped', to: 'orderitems#mark_shipped', as: 'mark_shipped'
   
   resources :orders, only: [:show, :edit]

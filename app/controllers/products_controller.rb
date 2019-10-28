@@ -1,12 +1,9 @@
 class ProductsController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: [:index, :show, :merchant_products]
   
   def index
     @products = Product.all
     @merchants = Merchant.all
-    # if params[:merchant_id].present?
-    #   @merchant = @merchant.merchant_id(params[:merchant_id])
-    # end
   end
 
   def show
@@ -81,10 +78,10 @@ class ProductsController < ApplicationController
     end
   end
 
-  # def merchant_products
-  #   @merchant = Merchant.find_by(id: params[:id])
-  #   @products = Product.where("merchant_id = #{@merchant.id}")
-  # end
+  def merchant_products
+    @merchant = Merchant.find_by(id: params[:id])
+    @products = Product.where("merchant_id = #{@merchant.id}")
+  end
 
   private
 
