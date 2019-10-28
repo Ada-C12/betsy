@@ -1,0 +1,15 @@
+<h2> Products/<%= @type.name %> </h2>
+
+<div class="container">
+    <div class="row">
+      <% @type.products.each do |product| %>
+        <% if product.retired == false%>
+          <div class="col-sm">
+          <span class="img-description"><%= product.name %></span>
+          <%= link_to product_path(product.id) do %>
+            <span class="img"><%= image_tag "#{product.photo_url}"%></span>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>

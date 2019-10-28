@@ -38,7 +38,7 @@ class MerchantsController < ApplicationController
     @current_merchant = Merchant.find_by(id: session[:merchant_id])
 
     unless @current_merchant
-      flash[:error] = "You must be a logged in authorized merchant to access this page"
+      flash[:error] = "You must be logged in as an authorized merchant to access this page."
       return redirect_to root_path
     end
   end

@@ -20,7 +20,19 @@
 
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">
-          <li class="nav-item app-header__nav_item"><%= link_to "Products", products_path%></li>
+
+          <div class="dropdown">
+          <li class="nav-item app-header__nav_item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= link_to "Products", products_path %></li>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% Type.all.each do |type|%>
+                <li> <%= link_to "#{type.name.capitalize}", type_path(type), class: "dropdown-item"  %> </li>
+              <% end %>
+            </div>
+          </div>
+      
+        
+          
           <li class="nav-item app-header__nav_item"><%= link_to "Merchants", merchants_path %></li>
           <li class="nav-item app-header__nav_item">
             <% if session[:merchant_id] %>

@@ -1,10 +1,14 @@
 class TypesController < ApplicationController
 
+  before_action :require_login, except: [:show]
+
   def show
     @type = Type.find_by(id: params[:id])
     if @type.nil?
       flash[:status] = :failure
       flash[:result_text] = "This category does not exist."
+      redirect_to root_path
+      return
     end
   end
 
@@ -18,14 +22,14 @@ class TypesController < ApplicationController
     if @type.save
       flash[:status] = :success
       flash[:result_text] = "#{@type.name} has been created."  
+      redirect_to root_path
+      return
     else 
       flash[:status] = :failure
       flash[:result_text] = "Could not create #{@type.name}."
       flash[:messages] = @type.errors.messages
+      render :new, status: :bad_request
     end
-    
-    redirect_back fallback_location: root_path
-    return
   end
   
 end
