@@ -23,6 +23,7 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
   
+  resources :order_items, only: [:update, :destroy]
   
   
 
