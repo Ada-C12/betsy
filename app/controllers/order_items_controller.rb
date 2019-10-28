@@ -7,6 +7,7 @@ class OrderItemsController < ApplicationController
       order = @current_order
     else
       order = Order.create(status: "pending")
+      session[:cart_id] = order.id
     end
 
     @product = Product.find_by(id: params[:product_id])
