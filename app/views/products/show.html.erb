@@ -8,15 +8,17 @@
     <p>Not currently for sale</p>
   <% end %>
   <%= @product.stock %>
-  <%= form_with model: @product do |f| %>
-    <%= f.label :stock %>
-    <%= f.select :stock, (1..@product.stock) %>
+
+  <%= form_with model: @orderitem, url: "/products/#{@product.id}/orderitems" do |f| %>
+    <%= f.label :quantity %>
+    <%= f.select :quantity, (1..@product.stock) %>
+    <%= f.submit "add to cart"%>
   <% end %>
 
 
 
-  <%#= button_to "Add to Cart", product_orderitems_path(product_id: @product.id), method: :post, class: "btn btn-primary" %>
+  <%= button_to "Add to Cart", product_orderitems_path(product_id: @product.id), method: :post, class: "btn btn-primary" %>
   <%= link_to "Edit", edit_product_path(@product.id), class: "btn btn-primary" %>
-  <%#= link_to "Back", products_path, class: "btn btn-primary" %>
+  <%= link_to "Back", products_path, class: "btn btn-primary" %>
 </section>
 

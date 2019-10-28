@@ -16,6 +16,7 @@ class ProductsController < ApplicationController
       redirect_to root_path
       return
     end
+    @orderitem = Orderitem.new
   end 
 
   # only merchants
