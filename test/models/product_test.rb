@@ -117,6 +117,49 @@ describe Product do
   end
 
   describe 'custom methods' do
-  # Write tests for product custom methods
+    describe 'random_products' do
+      it 'returns random given number of products' do
+        product = products(:lemon_shirt)
+        expect(Product.random_products(1).count).must_equal 1
+        product2 = products(:strawberry_shoes)
+        product3 = products(:banana_sweatshirt)
+        
+        random_products = Product.random_products(2)
+        expect(random_products.count).must_equal 2
+        
+        random_products.each do |product|
+          expect(product).must_be_instance_of Product
+        end
+      end
+
+      it 'returns [] if no products' do
+        Product.destroy_all
+        expect(Product.random_products(1)).must_equal []
+      end
+    end
+    
+    describe 'deals_under' do
+      it 'returns products under given price' do
+        product = products(:lemon_shirt)
+        product2 = products(:strawberry_shoes)
+        product3 = products(:banana_sweatshirt)
+
+        expect(Product.deals_under(10).count).must_equal 0
+        expect(Product.deals_under(30).count).must_equal 2
+        expect(Product.deals_under(100).count).must_equal 3
+
+        Product.deals_under(100).each do |product|
+          expect(product).must_be_instance_of Product
+        end
+      end
+
+      it 'returns [] if no products' do
+        Product.destroy_all
+        expect(Product.deals_under(100)).must_equal []
+      end
+    end
+    
+    describe 'quantity_available?' do
+    end
   end
 end

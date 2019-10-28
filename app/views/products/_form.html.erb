@@ -16,10 +16,29 @@
   <%= f.label :description %>
   <%= f.text_field :description %>
 
+
+<h1> MAKE THESE DROP DOWN BOXES? below!!!</h1>
   <section>
-    <%= f.label :categories %>
-    <%= collection_check_boxes(:product, :category_ids, Category.all, :id, :name) %>
+    <%= f.label "Fruits: " %>
+    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "fruit"), :id, :name) %>
   </section>
+  
+  <section>
+    <%= f.label "Themes: " %>
+    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "theme"), :id, :name) %>
+  </section>
+
+  <section>
+    <%= f.label "Categories: " %>
+    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "category"), :id, :name) %>
+  </section>
+
+  <section>
+    <%= f.label "Colors: " %>
+    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "color"), :id, :name) %>
+  </section>
+
+  
   
   <%= f.submit submit_button_label, class: "product-form-button" %>
 
