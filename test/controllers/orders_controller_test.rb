@@ -178,35 +178,112 @@ describe OrdersController do
         
         expect(session[:order_id]).must_be_nil
         
-        expect(Product.find_by(id: products(:cat_food).id).stock).must_equal
+        expect(Product.find_by(id: products(:cat_food).id).stock).must_equal 8
+        expect(Product.find_by(id: products(:kitty_litter).id).stock).must_equal 9
+        expect(Product.find_by(id: products(:cat_toy).id).stock).must_equal 7
+        
+        must_redirect_to order_path(updated_order)
       end
       
       it "cannot purchase out of stock items" do
-        
         products(:cat_toy).update!(stock: 1)
-        # updated_cat_toy = Product.find_by(id: products(:cat_toy).id)
+        expect(Product.find_by(id: products(:cat_toy).id).stock).must_equal 1
+        current_order = Order.last
+        
+        expect{ patch order_path(current_order), params: valid_params }.wont_change "Order.count"
+        
+        updated_order = Order.find_by(id: current_order.id)
+        
+        expect(updated_order.status).must_equal "pending"
+        expect(updated_order.email).must_be_nil
+        expect(updated_order.address).must_be_nil
+        expect(updated_order.cc_name).must_be_nil
+        expect(updated_order.cc_num).must_be_nil
+        expect(updated_order.cvv).must_be_nil
+        expect(updated_order.cc_exp).must_be_nil
+        expect(updated_order.zip).must_be_nil
+        
+        expect(Product.find_by(id: products(:cat_food).id).stock).must_equal 10
+        expect(Product.find_by(id: products(:kitty_litter).id).stock).must_equal 10
         expect(Product.find_by(id: products(:cat_toy).id).stock).must_equal 1
         
-        # expect{ patch order_path(id: current_order.id), params: valid_params }.wont_change
-        
+        expect(flash.now[:status]).must_equal :failure
+        must_respond_with :bad_request
       end
       
       it "cannot purchase retired items" do
+        products(:cat_toy).update!(retired: true)
+        expect(Product.find_by(id: products(:cat_toy).id).retired).must_equal true
+        current_order = Order.last
+        
+        expect{ patch order_path(current_order), params: valid_params }.wont_change "Order.count"
+        
+        updated_order = Order.find_by(id: current_order.id)
+        
+        expect(updated_order.status).must_equal "pending"
+        expect(updated_order.email).must_be_nil
+        expect(updated_order.address).must_be_nil
+        expect(updated_order.cc_name).must_be_nil
+        expect(updated_order.cc_num).must_be_nil
+        expect(updated_order.cvv).must_be_nil
+        expect(updated_order.cc_exp).must_be_nil
+        expect(updated_order.zip).must_be_nil
+        
+        expect(Product.find_by(id: products(:cat_food).id).stock).must_equal 10
+        expect(Product.find_by(id: products(:kitty_litter).id).stock).must_equal 10
+        expect(Product.find_by(id: products(:cat_toy).id).stock).must_equal 10
+        
+        expect(flash.now[:status]).must_equal :failure
+        must_respond_with :bad_request
       end
       
       it "cannot purchase an order with missing fields" do
+        invalid_param = {
+          order: {
+            email: nil,
+          },
+        }
+        
+        current_order = Order.last
+        expect{ patch order_path(current_order), params: invalid_param }.wont_change "Order.count"
+        
+        updated_order = Order.find_by(id: current_order.id)
+        
+        expect(updated_order.valid?).must_equal false
+        expect(updated_order.errors.messages).must_include :email
+        expect(updated_order.errors.messages).must_include :address
+        expect(updated_order.errors.messages).must_include :cc_name
+        expect(updated_order.errors.messages).must_include :cc_num
+        expect(updated_order.errors.messages).must_include :cvv
+        expect(updated_order.errors.messages).must_include :cc_exp
+        expect(updated_order.errors.messages).must_include :zip
+        
+        expect(updated_order.errors.messages[:email]).must_include "can't be blank"
+        expect(updated_order.errors.messages[:address]).must_include "can't be blank"
+        expect(updated_order.errors.messages[:cc_name]).must_include "can't be blank"
+        expect(updated_order.errors.messages[:cc_num]).must_include "can't be blank"
+        expect(updated_order.errors.messages[:cvv]).must_include "can't be blank"
+        expect(updated_order.errors.messages[:cc_exp]).must_include "can't be blank"
+        expect(updated_order.errors.messages[:zip]).must_include "can't be blank"
       end
       
       it "cannot purchase an order with no orderitems" do
-      end
-      
-      it "cannot purchase an order with non-numerical cc_num" do
-      end
-      
-      it "cannot purchase an order with non-numerical cvv" do
-      end
-      
-      it "cannot purchase an order with non-numerical zip" do
+        current_order = Order.last
+        
+        current_order.orderitems.each do |orderitem|
+          orderitem.destroy
+        end
+        
+        expect{ patch order_path(current_order), params: valid_params }.wont_change "Order.count"
+        
+        updated_order = Order.find_by(id: current_order.id)
+        
+        expect(session[:order_id]).must_equal updated_order.id
+        expect(updated_order.orderitems.count).must_equal 0
+        
+        expect(updated_order.valid?).must_equal false
+        expect(updated_order.errors.messages).must_include :orderitems
+        expect(updated_order.errors.messages[:orderitems]).must_include "There are no items in your cart!"
       end
     end
     

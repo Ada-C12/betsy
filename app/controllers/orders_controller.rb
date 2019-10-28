@@ -28,14 +28,15 @@ class OrdersController < ApplicationController
       if !orderitem.valid?
         flash.now[:status] = :failure
         flash.now[:result_text] = "Sorry. Some of the items in your cart are no longer available."
-        flash.now[:messages] << @orderitem.errors.messages
+        flash.now[:messages] = orderitem.errors.messages
+        
+        # NOT SURE HOW TO CHAIN ERROR MESSAGES TOGETHER, WILL NEED TO GO THROUGH THEM ONE BY ONE
       end
       
       if flash.now[:status] == :failure
         return render :edit, status: :bad_request 
       end
     end
-    
     
     # Stage the status to be "paid"
     @order.status = "paid"
