@@ -1,14 +1,6 @@
 require "test_helper"
 
 describe OrderitemsController do
-  # let(:new_orderitem) {
-  #   Orderitem.new(
-  #     quantity: 1,
-  #     product: products(:stella),
-  #     order: orders(:order_1)
-  #   )
-  # }
-  
   let(:existing_orderitem) { orderitems(:heineken_oi) }
   
   let(:update_hash){
@@ -21,7 +13,7 @@ describe OrderitemsController do
   
   
   describe "create" do
-    it "can create a new Order and an Orderitem with valid data" do
+    it "can create a new Orderitem with valid data" do
       expect {
         post product_orderitems_path(product_id: products(:stella).id), params: update_hash
       }.must_change "Orderitem.count", 1
@@ -33,6 +25,25 @@ describe OrderitemsController do
       expect(new_orderitem.product.name).must_equal "Stella Artois"
       expect(new_orderitem.order.orderitems.count).must_equal 1
       must_respond_with :redirect
+    end
+    
+    it "will instantiate a new order with ONLY orderitem and status" do
+      expect {
+        post product_orderitems_path(product_id: products(:stella).id), params: update_hash
+      }.must_change "Order.count", 1
+      
+      new_order = Order.last
+      
+      expect(new_order).must_be_instance_of Order
+      expect(new_order.orderitems.count).must_equal 1
+      expect(new_order.status).must_equal "pending"
+      expect(new_order.email).must_be_nil
+      expect(new_order.address).must_be_nil
+      expect(new_order.cc_name).must_be_nil
+      expect(new_order.cc_num).must_be_nil
+      expect(new_order.cvv).must_be_nil
+      expect(new_order.cc_exp).must_be_nil
+      expect(new_order.zip).must_be_nil
     end
     
     it "will add to existing Order while creating new Orderitems as separate orderitems" do
@@ -133,11 +144,10 @@ describe OrderitemsController do
       
       expect(updated_orderitem.quantity).must_equal 1
       
-      # TIFFANY YOU NEED TO FILL THIS IN ONCE YOU FIX REDIRECT
-      # must_redirect_to
+      must_redirect_to order_path(updated_orderitem.order)
     end
     
-    it "renders bad_request for invalid data, and redirects" do
+    it "renders bad_request for invalid params data, and redirects" do
       invalid_hash = {
         orderitem: {
           quantity: nil,
@@ -161,29 +171,60 @@ describe OrderitemsController do
       
       must_respond_with :not_found
     end
+    
+    it "redirects to root with no updates for orders with status other than pending" do
+      existing_orderitem.order.status = "paid"
+      existing_orderitem.order.save!
+      
+      updated_order = Order.find_by(id: existing_orderitem.order.id)
+      
+      expect(updated_order.status).must_equal "paid"
+      
+      expect {
+        patch orderitem_path(existing_orderitem.id), params: update_hash
+      }.wont_change "Orderitem.count"
+      
+      updated_orderitem = Orderitem.find_by(id: existing_orderitem.id)
+      
+      expect(updated_orderitem.quantity).must_equal 2
+      
+      must_redirect_to root_path
+      
+      expect(flash[:status]).must_equal :failure
+    end
   end
   
   describe "destroy" do
-    it "succeeds for a valid, existing orderitem ID, and redirects" do
-      
-      # TIFFANY YOU NEED TO FILL THIS IN ONCE YOU FIX REDIRECT
+    it "succeeds for a valid, existing orderitem ID, and redirects for a pending Order" do
+      current_order = existing_orderitem.order
       
       expect {
         delete orderitem_path(existing_orderitem)
       }.must_change 'Orderitem.count', 1
       
       must_respond_with :redirect
-      # must_redirect_to
+      must_redirect_to order_path(current_order)
     end
     
     it "renders 404 not_found and does not update the DB for an invalid work ID" do
-      # TIFFANY YOU NEED TO FILL THIS IN ONCE YOU FIX REDIRECT
-      
       expect {
         delete orderitem_path(id: -1)
       }.wont_change 'Orderitem.count'
       
       must_respond_with :not_found
+    end
+    
+    it "cannot deleted an Orderitem in an Order that is not pending" do
+      existing_orderitem.order.status = "paid"
+      existing_orderitem.order.save!
+      
+      expect {
+        delete orderitem_path(existing_orderitem.id)
+      }.wont_change "Orderitem.count"
+      
+      must_redirect_to root_path
+      
+      expect(flash[:status]).must_equal :failure
     end
   end
 end

@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'homepages#index'
+  
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
   resources :products, except: [:destroy] do
     resources :orderitems, only: [:create]
@@ -13,8 +13,13 @@ Rails.application.routes.draw do
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
   get "merchants/current", to: "merchants#current", as: "current_merchant"
-
+  
   resources :orderitems, only: [:edit, :destroy]
   patch '/orderitems/:id', to: 'orderitems#update'
   get 'merchant_products' => 'products#index', as: :filtered_products
+  patch '/orderitems/:id/mark_shipped', to: 'orderitems#mark_shipped', as: 'mark_shipped'
+  
+  resources :orders, only: [:show, :edit]
+  patch '/orders/:id', to: 'orders#update'
+  patch '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
 end

@@ -1,0 +1,12 @@
+type1: 
+  name: lager
+type2: 
+  name: cider
+type3: 
+  name: pilsner
+type4: 
+  name: stout
+type5: 
+  name: ipa
+type6: 
+  name: porter

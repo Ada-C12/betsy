@@ -5,7 +5,8 @@ describe Orderitem do
     Orderitem.new(
       quantity: 1,
       product: products(:stella),
-      order: orders(:order_1)
+      order: orders(:order1),
+      shipped: false
     )
   }
   
@@ -86,6 +87,22 @@ describe Orderitem do
       expect(new_orderitem.errors.messages).must_include :quantity
       expect(new_orderitem.errors.messages[:quantity]).must_include "order exceeds inventory in stock"
     end
+    
+    it "cannot create an orderitem from a retired product" do
+      products(:stella).update(retired: true)
+      expect(products(:stella).retired).must_equal true
+      
+      expect(new_orderitem.valid?).must_equal false
+      expect(new_orderitem.errors.messages).must_include :product_id
+      expect(new_orderitem.errors.messages[:product_id]).must_include "Stella Artois is no longer available"
+    end
+    
+    it "can create an orderitem with shipped status false" do
+      new_orderitem.shipped = false
+      new_orderitem.save
+      
+      expect(new_orderitem.valid?).must_equal true
+    end
   end
   
   describe "relationships" do
@@ -99,8 +116,8 @@ describe Orderitem do
     it "belongs to an order" do
       new_orderitem.save!
       
-      expect(new_orderitem.order_id).must_equal orders(:order_1).id
-      expect(new_orderitem.order).must_equal orders(:order_1)
+      expect(new_orderitem.order_id).must_equal orders(:order1).id
+      expect(new_orderitem.order).must_equal orders(:order1)
     end
   end
   
