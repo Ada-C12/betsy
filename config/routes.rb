@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'reviews/new'
+  get 'reviews/create'
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   root to: 'homepages#index'
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
