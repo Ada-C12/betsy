@@ -1,18 +1,16 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 
-  resources :merchants, except: [:delete, :new, :show] do
-    resources :orderitems, only: [:index]
-  end
-
-
   root to: 'homepages#index'
+
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
   resources :products, except: [:destroy] do
     resources :orderitems, only: [:create]
   end
 
-
+  resources :merchants, except: [:delete, :new, :show] do
+    resources :orderitems, only: [:index]
+  end
 
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"

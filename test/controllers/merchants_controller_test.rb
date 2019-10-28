@@ -1,16 +1,13 @@
 require "test_helper"
 
 describe MerchantsController do
-  
-  #let(:merchant) { merchants(:brad) }
 
   describe "Logged in Merchants" do 
-    before do 
-      perform_login(merchants(:brad))
-    end
+   
 
     describe "current" do
       it "responds with success when given current merchants id" do
+        perform_login(merchants(:brad))
         get current_merchant_path
         must_respond_with :success
       end
@@ -87,8 +84,7 @@ describe MerchantsController do
        
         get current_merchant_path
 
-        # expect(flash[:status]).must_equal :failure
-        # expect(flash[:result_text]).must_equal "You must be a logged in authorized merchant to access this page"
+        expect(flash[:error]).must_equal "You must be logged in as an authorized merchant to access this page."
   
         
         must_respond_with :redirect
