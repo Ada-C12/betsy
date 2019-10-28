@@ -21,18 +21,23 @@ class OrdersController < ApplicationController
     end
   end
   
+  # This is the payment information form.
   def edit ; end
   
+  # This is the confirm button to proceed with your order after payment information.
   def update
     @order.orderitems.each do |orderitem|
       if !orderitem.valid?
         flash.now[:status] = :failure
         flash.now[:result_text] = "Sorry. Some of the items in your cart are no longer available."
-        flash.now[:messages] << @orderitem.errors.messages
+        flash.now[:messages] = orderitem.errors.messages
+        
+        # NOT SURE HOW TO CHAIN ERROR MESSAGES TOGETHER, WILL NEED TO GO THROUGH THEM ONE BY ONE
       end
       
-      render :edit, status: :bad_request 
-      return
+      if flash.now[:status] == :failure
+        return redirect_to cart_path
+      end
     end
     
     # Stage the status to be "paid"
@@ -57,10 +62,11 @@ class OrdersController < ApplicationController
     end
   end
   
+  # This is the order confirmation page. 
   def show 
     if @order.status == "pending"
       flash[:status] = :failure
-      flash[:result_text] = "Cannot cancel #{@order.status} orders."
+      flash[:result_text] = "Pending orders do not have access to this page."
       flash[:messages] = @order.errors.messages
       
       redirect_to root_path

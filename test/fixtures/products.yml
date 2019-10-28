@@ -54,3 +54,27 @@ peach:
   stock: 10
   merchant: brad
   retired: false
+cat_food:
+  name: Hill Science Diet Cat Food
+  description: Food.
+  price: 10.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+kitty_litter:
+  name: Fresh Step Kitty Litter
+  description: Unscented. Oder absorbent.
+  price: 15.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+cat_toy:
+  name: Cat Toy
+  description: Feathers and catnip.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
