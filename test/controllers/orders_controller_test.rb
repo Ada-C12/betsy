@@ -37,41 +37,28 @@ describe OrdersController do
     end
   end
 
-  # describe "checkout action" do
-  #   let(:product_hash) {
-  #     {
-  #       product: {
-  #         name: "new product",
-  #         price: 20.0,
-  #         quantity: 20,
-  #         img_url: "new_img.com",
-  #         category_ids: [categories(:strawberry).id],
-  #         description: "description of a new product"
-  #       }
-  #     }
-  #   }
+  describe "checkout action" do
+    # it "gives back a successful response" do
+    #   user = users(:ada)
+    #   perform_login(user)
 
-  #   it "creates a new product successfully with valid data by a logged in merchant, and redirects the user to the product page" do
-  #     user = users(:ada)
-  #     perform_login(user)
+    #   expect {
+    #     post products_path, params: product_hash
+    #   }.must_differ "Product.count", 1
 
-  #     expect {
-  #       post products_path, params: product_hash
-  #     }.must_differ "Product.count", 1
+    #   must_redirect_to product_path(Product.find_by(name: "new product"))
+    # end
 
-  #     must_redirect_to product_path(Product.find_by(name: "new product"))
-  #   end
+    # it "cannot creates a new product if no merchant logged in, and redirects the user to root path" do
+    #   user = users(:ada)
 
-  #   it "cannot creates a new product if no merchant logged in, and redirects the user to root path" do
-  #     user = users(:ada)
+    #   expect {
+    #     post products_path, params: product_hash
+    #   }.must_differ "Product.count", 0
 
-  #     expect {
-  #       post products_path, params: product_hash
-  #     }.must_differ "Product.count", 0
-
-  #     must_redirect_to root_path
-  #   end
-  # end
+    #   must_redirect_to root_path
+    # end
+  end
 
   # describe "update action" do
   #   let(:update_product_hash) {
