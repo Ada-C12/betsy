@@ -14,6 +14,7 @@ class OrderItemsController < ApplicationController
       flash[:error] = "Product no longer exists."
       return head :not_found
     end
+    #add logic so cannot create order item if quantity exceeds stock
 
     order_item = OrderItem.new(
       product: @product,
@@ -31,13 +32,29 @@ class OrderItemsController < ApplicationController
     end
   end
 
-  def edit
-  end
-
   def update
+    order_item = OrderItem.find_by(id: params[:id])
+
+    if order_item.update(order_item_params)
+      flash[:success] = "Item successfully updated."
+    else
+      flash[:error] = "Could not update item quantity."
+    end
+    return redirect_to cart_path
   end
 
   def destroy
+    order_item = OrderItem.find_by(id: params[:id])
+    if order_item.nil?
+      return redirect_to cart_path
+    else
+      if order_item.destroy
+        flash[:success] = "Item successfully removed from your basket."
+      else
+        flash.now[:error] = "A problem occurred."
+      end
+    return redirect_to cart_path
+    end
   end
   
   def order_item_params
