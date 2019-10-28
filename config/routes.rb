@@ -14,4 +14,6 @@ Rails.application.routes.draw do
 
   resources :orderitems, only: [:edit, :destroy]
   patch '/orderitems/:id', to: 'orderitems#update'
+
+  resources :types, only: [:show, :new, :create]
 end
