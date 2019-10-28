@@ -1,6 +1,9 @@
 <h2>hello, <%=@current_user.username%>!</h2>
 <p>You can <%=link_to "edit", edit_user_path %> your profile here.</p>
-Total revenue as of <%= Date.today %>: 
+Total revenue as of <%= Date.today %>:
+<%# <%= @current_user.total_earned%> 
+<%# <%= User.total_earned() %>
+<%# ADD total revenue of all status that qualify HERE %>
 <section class="user-products__container">
   <h3 class="user-products__header">Manage your products</h3>
   <table class="table">
@@ -55,6 +58,8 @@ Total revenue as of <%= Date.today %>:
           <td><%= render_date order.created_at %></td>
           <td><%= order.status %></td>
           <td><%= category %></td>
+          <td><%= subtotal %></td>
+          <%# in this subtotal section, calculate the subtotal for that order item by calling the 'total' class method in Order_Item %>
         </tr>
       <% end %>
     <%end%>

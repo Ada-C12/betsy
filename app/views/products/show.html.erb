@@ -11,9 +11,6 @@
     <% end %>
 
 
-    
-
-
     <% merchant = User.find_by(id: @product.user_id)%>
     <h5 class="card-text"> Merchant:<%= link_to @product.user.username, user_path(@product.user.id)  %></h5> 
     <h5>
