@@ -76,7 +76,7 @@
           <ul>
             <% @order.errors.each do |column, message| %>
               <li>
-                <%= column %>: <%= message %>
+                <%= column %> <%= message %>
               </li>
             <% end %>
           </ul>
