@@ -4,25 +4,47 @@
 @import "**/*";
 
 // navbar header on every page
-.navbar {
-  margin-top: 4%
-}
-
-.nav-brand {
+.top-brand-name {
   text-align: center;
-  padding-top: 2%
+  font-size: 5rem;
+  padding-bottom: 2%;
+  margin-top: 2%;
+}
+.top-brand-name a {
+  color: white
 }
 
+.all-nav-parts-container {
+  background-color: pink
+}
+
+// login/logout and baskets
 .login-loggout-container {
+  margin-right: 2%;
+}
+
+.login-basket-nav {
   display: flex;
   justify-content: flex-end;
-  background-color: white;
-  margin-top: 6.5%;
-  margin-right: 1.1%;
+  padding-top: 7.5%;
 }
 
-.current-user-btn {
-  margin-right: .5%;
+.basket-img {
+  max-width: 5vw;
+}
+
+.cart-link {
+  margin-right: 1%;
+  background-color: pink;
+}
+
+// merchant nav bar
+.merchant-nav {
+  display: flex;
+}
+
+.merchant-nav a{
+  color:white
 }
 
 // main and footer on every page
@@ -55,15 +77,7 @@ footer {
   max-width: 30vw;
 } 
 
-ul {
-  list-style: none;
-}
-
-form {
-  margin: 3em;
-}
-
-
+// Fruit Links Header
 .fruit-img {
   max-width: 7vw;
 }
@@ -96,6 +110,25 @@ form {
   100% { transform: translate(1px, -2px) rotate(-1deg); }
 }
 
+// Homepage
 .category-card-container {
   display: flex;
+}
+
+// General
+ul {
+  list-style: none;
+}
+
+form {
+  margin: 3em;
+}
+
+a {
+  color: black
+}
+
+a:hover {
+  text-decoration: none;
+  color: green
 }

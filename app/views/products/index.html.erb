@@ -1,6 +1,4 @@
-<% if @user %>
-  <h1> Shop All <%= @user.merchant_name %>'s Products </h1>
-<% elsif @category %>
+<% if @category %>
   <h1> Shop All <%= @category.name.capitalize %> Products </h1>
 <% else %>
   <h1> Shop All Fruit Products </h1>
