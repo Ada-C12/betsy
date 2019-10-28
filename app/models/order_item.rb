@@ -8,7 +8,8 @@ class OrderItem < ApplicationRecord
 
   #Make a method to validate the current quantity of the product that is being ordered is the same as the amount that exists 
   #Make a class method to find out the total amount of profit 
-  def self.total 
+  
+  def total
     (self.quantity * self.product.price)
   end
 

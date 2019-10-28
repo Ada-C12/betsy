@@ -1,7 +1,7 @@
 <h2>hello, <%=@current_user.username%>!</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
 Total revenue as of <%= Date.today %>:
-<%# <%= @current_user.total_earned%> 
+  <%= @current_user.total_earned%>
 <%# <%= User.total_earned() %>
 <%# ADD total revenue of all status that qualify HERE %>
 <section class="user-products__container">
