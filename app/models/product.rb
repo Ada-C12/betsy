@@ -24,7 +24,7 @@ class Product < ApplicationRecord
     if Product.all.nil?
       return nil
     else
-      return Product.where("price < ?", price)
+      return Product.where("price < ?", price).shuffle
     end
   end
 

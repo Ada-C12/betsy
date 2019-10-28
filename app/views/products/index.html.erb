@@ -8,7 +8,7 @@
 <section class="cards-container">
   <% @products.shuffle.each do |product| %>
     <section class="card" style="width: 18rem;">
-      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %>  
       <div class="card-body">
       <h5> <%= link_to product.name, product_path(product.id) %> </h5>
         <p class="card-text"> $<%= product.price %> </p>

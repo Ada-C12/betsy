@@ -1,6 +1,6 @@
 <div class="jumbotron jumbotron-fluid">
   <div class="container">
-    <h1 class="display-4">Welcome to <strong> FRUiTSY! </strong> </h1>
+    <h1>Welcome to <strong> FRUiTSY! </strong> </h1>
     <p class="lead">The Sweetest Platform For All Things Fruit</p>
   </div>
 </div>
@@ -22,7 +22,7 @@
 </section>
 
   <h2> Deals Under $10 </h2>
-  <% deals = Product.deals_under(10) %>
+  <% deals = Product.deals_under(10).first(7) %>
   <section class="card-group">
     <% deals.each do |product| %>
       <section class="card" style="width: 18rem;">
@@ -38,7 +38,7 @@
 
 <% ["citrus", "berry", "tropical"].each do |theme| %>
   <h2> <%= theme.capitalize %> </h2>
-  <% products = Category.products_by_category(theme) %>
+  <% products = Category.products_by_category(theme).shuffle.first(4) %>
   <section class="card-group">
     <% products.each do |product| %>
       <section class="card" style="width: 18rem;">
@@ -69,8 +69,5 @@
     </section>
   <% end %>
 </section>
-
-
-
 
 

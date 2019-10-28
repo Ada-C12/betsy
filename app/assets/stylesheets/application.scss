@@ -15,7 +15,7 @@
 }
 
 .all-nav-parts-container {
-  background-color: #FAC098;
+  background-color: grey;
 }
 
 // login/logout and baskets
@@ -41,16 +41,7 @@
 
 .cart-link {
   margin-right: 1%;
-  background-color: #FAC098;
-}
-
-// merchant nav bar
-.merchant-nav {
-  display: flex;
-}
-
-.merchant-nav a{
-  color:white
+  background-color: grey;
 }
 
 // main and footer on every page
@@ -138,3 +129,11 @@ a:hover {
   text-decoration: none;
   color: green
 }
+
+img { 
+  max-width: 500px;
+  max-height: 500px;
+}
+
+
+
