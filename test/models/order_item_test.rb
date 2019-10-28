@@ -45,7 +45,7 @@ describe OrderItem do
       refute(invalid_order_item.valid?)
     end
 
-    #the quantity must not exceed the quantity of the product.quantity
+    #the quantity must not exceed the quantity of the product.stocko
   end
 
   describe "relationships" do

@@ -33,7 +33,7 @@ CSV.foreach(PRODUCTS_FILE, :headers => true) do |row|
   product.name = row['name']
   product.description = "Here is a fun description about this fruit themed product!"
   product.price = rand(1..100)
-  product.quantity = rand(1..100)
+  product.stock = rand(1..100)
   
   user = User.find_by(uid: row['merchant'] )
   product.user_id = user.id

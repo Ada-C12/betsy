@@ -23,7 +23,7 @@ Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
             <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
             <td><%= link_to product.name, product_path(product) %></td>
             <td><%= f.text_field :price%></td>
-            <td><%= product.quantity %></td>
+            <td><%= product.stock%></td>
             <td><%= product.description %></td>
             <td><%= product.categories.first.name %></td>
             <td><%= f.submit submit_button_label: "Edit Product"%></td>
