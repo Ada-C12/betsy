@@ -12,7 +12,7 @@
   </div>
   <div class="row justify-content-md-center">
     <%= currency_symbol() %>
-    <%= f.number_field :price %>
+    <%= f.number_field :price, step: 0.01 %>
   </div>
 
   <div class="row justify-content-md-center ">
