@@ -16,12 +16,19 @@ class OrderItemsController < ApplicationController
       return head :not_found
     end
     #add logic so cannot create order item if quantity exceeds stock
-
-    order_item = OrderItem.new(
-      product: @product,
-      order: order,
-      quantity: order_item_params[:quantity]
-    )
+    if order.order_items.where(product: @product)
+      order_item = order.order_items.where(product: @product).first
+      quantity = order_item_params[:quantity].to_i + order_item.quantity
+      order_item.update(quantity: quantity)
+      flash[:success] = "Item successfully added to your basket."
+      return redirect_back(fallback_location: :back)
+    else
+      order_item = OrderItem.new(
+        product: @product,
+        order: order,
+        quantity: order_item_params[:quantity]
+      )
+    end
 
     if order_item.save
       flash[:success] = "Item successfully added to your basket."
