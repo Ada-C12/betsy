@@ -43,7 +43,7 @@ class Order < ApplicationRecord
   end
   
   def mark_as_complete?
-    if self.status == "pending" && self.orderitems.find_by(shipped: false) != nil
+    if self.status == "paid" && self.orderitems.find_by(shipped: false).nil?
       self.status = "complete"
       self.save
     end

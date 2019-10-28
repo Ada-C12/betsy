@@ -20,6 +20,7 @@ Rails.application.routes.draw do
   patch '/orderitems/:id/mark_shipped', to: 'orderitems#mark_shipped', as: 'mark_shipped'
   
   resources :orders, only: [:show, :edit]
+  get '/cart', to: 'orders#cart', as: 'cart'
   patch '/orders/:id', to: 'orders#update'
   patch '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
 end
