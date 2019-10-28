@@ -27,6 +27,12 @@ describe OrderItem do
       refute(order_item.valid?)
     end
 
+    it "must have a quantity that is an integer" do
+      order_item = OrderItem.new(product: Product.first, order: Order.first, quantity: "a lot")
+
+      refute(order_item.valid?)
+    end
+
     it "must have a valid product" do
       invalid_order_item = OrderItem.new(quantity: 4, product_id: -1, order: Order.first)
 

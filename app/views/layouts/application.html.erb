@@ -78,7 +78,7 @@
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
               <% User.all.each do |user| %>
                 <% if user.merchant_name %>
-                  <%= link_to user.merchant_name, user_products_path(user.id) , class:"dropdown-item" %>
+                  <%= link_to user.merchant_name, user_path(user.id) , class:"dropdown-item" %>
                 <% end %>    
               <% end %>
           </li>

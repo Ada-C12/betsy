@@ -1,8 +1,6 @@
 Rails.application.routes.draw do
   root "homepages#index"
   
-
-  
   resources :products
 
   get "/auth/github", as: "github_login"
@@ -22,9 +20,7 @@ Rails.application.routes.draw do
   resources :categories do
     resources :products, only: [:index]
   end
-  
-  resources :users do
-    resources :products, only: [:index]
-  end
+
+  resources :orderitems
 
 end

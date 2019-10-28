@@ -1,6 +1,6 @@
 class OrderItemsController < ApplicationController
   skip_before_action :require_login
-  skip_before_action :find_order
+  before_action :find_order
 
   def create
     if @current_order
@@ -25,5 +25,9 @@ class OrderItemsController < ApplicationController
   end
 
   def destroy
-  end 
+  end
+  
+  def order_item_params
+    return params.require(:order_item).permit(:product, :order, :quantity)
+  end
 end
