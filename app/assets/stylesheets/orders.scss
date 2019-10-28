@@ -37,3 +37,13 @@
 #cart-heading {
   margin: 0 7em 0 7em;
 }
+
+.checkout-form {
+  display: flex;
+  justify-content: center;
+  margin: 4em;
+}
+
+label { 
+  float: left;
+}

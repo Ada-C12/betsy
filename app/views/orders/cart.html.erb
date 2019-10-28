@@ -3,6 +3,7 @@
     <div class="product-heading" id="cart-heading">
       <h2>Your Cart</h2>
       <h5 class="total">Total: $<%= @order.total %></h5>
+      <%= link_to "Checkout", checkout_path(@order.id), class: "btn btn btn-dark" %>
     </div>
 
     <% @order.order_items.each do |order_item|%>

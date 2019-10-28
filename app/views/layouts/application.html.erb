@@ -70,6 +70,20 @@
       </div>
     <% end %>
 
+    <% if @order %>
+      <section id="cart-validations">
+        <% if @order.errors.any? %>
+          <div>
+            <% @order.errors.each do |column, message| %>
+              <div class="validations">
+                <%= column %> <%= message %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </section>
+    <% end %>
+
     <%= yield %>
   </body>
 </html>
