@@ -7,14 +7,14 @@
     <p> No products available </p>
   <% end %>
 
-  <h3>Shop by Merchant</h3>
-  <% @merchants.each do |merchant| %>
-    <%= link_to filtered_products_path(merchant.id) do %>
-      <%= merchant.username %>
+  <aside>
+    <h3>Shop by Merchant</h3>
+    <% @merchants.each do |merchant| %>
+      <%= link_to filtered_products_path(merchant.id) do %>
+        <%= merchant.username %>
+      <% end %>
     <% end %>
-
-
-<% end %>
+  </aside>
 
 
 
