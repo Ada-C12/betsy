@@ -1,12 +1,12 @@
-type1: 
+lager: 
   name: lager
-type2: 
+cider: 
   name: cider
-type3: 
+pilsner: 
   name: pilsner
-type4: 
+stout: 
   name: stout
-type5: 
+ipa: 
   name: ipa
-type6: 
+porter: 
   name: porter
