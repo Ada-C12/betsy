@@ -45,13 +45,15 @@ class MerchantsController < ApplicationController
     unless @current_merchant
       flash[:status] = :failure
       flash[:result_text] = "You must be a logged in authorized merchant to access this page"
+      flash[:messages] = @current_merchant.errors.messages
       redirect_to root_path
     end
   end
 
   def destroy
     session[:merchant_id] = nil
-    flash[:success] = "Successfully logged out!"
+    flash[:status] = :success
+    flash[:result_text] = "Successfully logged out!"
 
     redirect_to root_path
   end
