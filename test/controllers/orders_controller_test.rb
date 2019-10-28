@@ -109,7 +109,25 @@ describe OrdersController do
     end
     
     it "updates product stock when order successfully updates" do
+      new_item = { 
+        order_item: { 
+          quantity: 2, 
+          product: product1,
+          order: order1,
+          shipped: false
+        }
+      }
       
+      post product_order_items_path(product1.id), params: new_item
+      pending_order = Order.last
+      
+      expect(product1.stock).must_equal 10
+      
+      put order_path(pending_order.id), params: @updates
+
+      product1.reload
+      
+      expect(product1.stock).must_equal 8
     end
     
     it "status stays pending for bad data" do
