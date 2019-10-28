@@ -1,0 +1,20 @@
+review1: 
+  rating: 4
+  text_review: "This was just I needed for my kegger"
+  product_id: 1
+review2: 
+  rating: 5
+  text_review: "got this as a gift, it was awesome"
+  product_id: 2
+review3: 
+  rating: 2
+  text_review: "Shipping took to long"
+  product_id: 3
+review4: 
+  rating: 5
+  text_review: "I got this as a joke gift but I ended up keeping it because I wanted it"
+  product_id: 4
+review5: 
+  rating: 4
+  text_review: "LOOKS BETTER THAN PICTURED!"
+  product_id: 5
