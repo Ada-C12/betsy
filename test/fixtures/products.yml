@@ -3,6 +3,7 @@ heineken:
   description: Great tasting beer.
   price: 11.11
   photo_url:
+  stock: 3
   merchant: brad
   retired: false
 stella:
@@ -29,3 +30,51 @@ corona:
   stock: 4
   merchant: brad
   retired: true
+carrot:
+  name: Carrot
+  description: Orange vegetable.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+banana:
+  name: Banana
+  description: Yello fruit.
+  price: 2.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+peach:
+  name: Peach
+  description: Peach colored fruit.
+  price: 3.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+cat_food:
+  name: Hill Science Diet Cat Food
+  description: Food.
+  price: 10.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+kitty_litter:
+  name: Fresh Step Kitty Litter
+  description: Unscented. Oder absorbent.
+  price: 15.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+cat_toy:
+  name: Cat Toy
+  description: Feathers and catnip.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false

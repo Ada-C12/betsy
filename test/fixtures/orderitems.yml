@@ -1,4 +1,50 @@
 heineken_oi:
   quantity: 2
-  order: order_1
+  order: order1
   product: heineken
+  shipped: false
+heineken_o2:
+  quantity: 1
+  order: order2
+  product: heineken
+  shipped: false
+corona_o2:
+  quantity: 1
+  order: order2
+  product: corona
+  shipped: false
+sapporo_o2:
+  quantity: 2
+  order: order2
+  product: sapporo
+  shipped: false
+carrot_op:
+  quantity: 2
+  order: fruit_order
+  product: carrot
+  shipped: true
+banana_op:
+  quantity: 2
+  order: fruit_order
+  product: banana
+  shipped: true
+peach_op:
+  quantity: 2
+  order: fruit_order
+  product: peach
+  shipped: false
+cat_food_ok:
+  quantity: 2
+  order: cat_order
+  product: cat_food
+  shipped: false
+kitty_litter_ok:
+  quantity: 1
+  order: cat_order
+  product: kitty_litter
+  shipped: false
+cat_toy_ok:
+  quantity: 3
+  order: cat_order
+  product: cat_toy
+  shipped: false
