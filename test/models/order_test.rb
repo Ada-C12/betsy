@@ -107,6 +107,22 @@ describe Order do
       expect(order1.errors.messages[:owling_address]).must_equal ["can't be blank"]
     end
 
+    it "does not require a name_on_cc if status is pending" do
+      order1.name_on_cc = nil
+      order1.status = 'pending'
+      
+      expect(order1.valid?).must_equal true
+      expect(order1.errors.messages).must_be_empty
+    end
+
+    it "must have an name_on_cc" do
+      order1.name_on_cc = nil
+      
+      expect(order1.valid?).must_equal false
+      expect(order1.errors.messages).must_include :name_on_cc
+      expect(order1.errors.messages[:name_on_cc]).must_equal ["can't be blank"]
+    end
+
     it "does not require a cc_num if status is pending" do
       order1.cc_num = nil
       order1.status = 'pending'

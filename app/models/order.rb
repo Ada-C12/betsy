@@ -7,6 +7,7 @@ class Order < ApplicationRecord
   validates :email, format: { with: /\A([^@\s]+)@((?:[-a-z0-9]+\.)+[a-z]{2,})\z/i }, unless: Proc.new { |o| o.status == 'pending' }
   validates :name, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :owling_address, presence: true, unless: Proc.new { |o| o.status == 'pending' }
+  validates :name_on_cc, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :cc_num, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :cc_exp_mo, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :cc_exp_yr, presence: true, unless: Proc.new { |o| o.status == 'pending' }

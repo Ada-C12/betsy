@@ -32,6 +32,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.require(:order).permit(:email, :owling_address, :name, :cc_num, :cc_exp_mo, :cc_exp_yr, :cc_cvv, :zip_code)
+    params.require(:order).permit(:email, :owling_address, :name_on_cc, :name, :cc_num, :cc_exp_mo, :cc_exp_yr, :cc_cvv, :zip_code)
   end
 end
