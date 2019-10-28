@@ -1,11 +1,5 @@
 <div class="container">
   <%= form_with model: @product, url: wizard_products_path do |f| %>
-  <div class="row justify-content-md-center">
-    <%= f.label :categories %>: 
-  </div>
-  <div class="row justify-content-md-center">
-    <%= f.collection_check_boxes :category_ids, Category.all_alphabetized, :id, :name, {}, {:multiple => true} %>
-  </div>
 
   <div class="row justify-content-md-center">
     <%= f.label :name %>: 
@@ -20,6 +14,13 @@
   <div class="row justify-content-md-center">
     <%= currency_symbol() %>
     <%= f.number_field :price, step: 0.01 %>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <%= f.label :categories %>: 
+  </div>
+  <div class="row justify-content-md-center">
+    <%= f.collection_check_boxes :category_ids, Category.all_alphabetized, :id, :name, {}, {:multiple => true} %>
   </div>
 
   <div class="row justify-content-md-center ">
