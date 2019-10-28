@@ -21,6 +21,6 @@ Rails.application.routes.draw do
     resources :products, only: [:index]
   end
 
-  resources :orderitems
+  resources :order_items
 
 end
