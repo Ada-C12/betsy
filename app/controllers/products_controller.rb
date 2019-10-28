@@ -3,7 +3,6 @@ class ProductsController < ApplicationController
   
   def index
     @products = Product.all
-    @merchants = Merchant.all
   end
 
   def show
@@ -80,7 +79,6 @@ class ProductsController < ApplicationController
 
   def merchant_products
     @merchant = Merchant.find_by(id: params[:id])
-    @products = Product.where("merchant_id = #{@merchant.id}")
   end
 
   private

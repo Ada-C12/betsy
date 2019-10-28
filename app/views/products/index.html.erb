@@ -7,15 +7,6 @@
     <p> No products available </p>
   <% end %>
 
-  <%# <aside> %>
-    <%# <h3>Shop by Merchant</h3> %>
-    <%# @merchants.each do |merchant| %>
-      <%#= link_to filtered_products_path(merchant.id) do %>
-        <%#= merchant.username %>
-      <%# end %>
-    <%# end %>
-  <%# </aside> %>
-
   <div class="container">
     <div class="row">
       <% @products.each do |product| %>
@@ -30,7 +21,5 @@
       <% end %>
     </div>
   </div>
-
-
 </section>
 
