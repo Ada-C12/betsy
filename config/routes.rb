@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   end
 
   get "/checkout/:id", to: "orders#checkout", as: "checkout"
-  resources :orders, only: [:edit, :update]
+  resources :orders, only: [:update]
   
   resources :order_items, only: [:update, :destroy]
   get "/cart", to: "orders#cart", as: "cart"
