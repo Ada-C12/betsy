@@ -22,7 +22,7 @@
         <ul class="nav app-header__site-nav-container">
 
           <div class="dropdown">
-          <li class="nav-item app-header__nav_item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= link_to "Products", products_path %></li>
+          <li class="nav-item app-header__nav_item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= link_to "Products", products_path, method: :get %></li>
           
             <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
               <% Type.all.each do |type|%>

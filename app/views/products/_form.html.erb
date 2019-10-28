@@ -20,7 +20,7 @@
       <%= f.text_field :stock%>
     </div>
 
-     <%= f.label :genres %>
+     <%= f.label :types %>
       <%= collection_check_boxes(:product, :type_ids, Type.all, :id, :name) %>
 
     <div class="form-group">

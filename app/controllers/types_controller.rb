@@ -17,7 +17,7 @@ class TypesController < ApplicationController
   end
 
   def create
-    @type = Type.create(name: params[:type][:name])
+    @type = Type.new(name: params[:type][:name])
 
     if @type.save
       flash[:status] = :success
