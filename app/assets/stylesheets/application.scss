@@ -21,12 +21,18 @@
 // login/logout and baskets
 .login-loggout-container {
   margin-right: 2%;
+  display: flex;
+  flex-direction: column;
 }
 
 .login-basket-nav {
   display: flex;
   justify-content: flex-end;
   padding-top: 7.5%;
+}
+
+.logout-btn {
+  margin-top: 2%
 }
 
 .basket-img {
@@ -88,7 +94,7 @@ footer {
   background-color: rgba(255, 255, 255, 0.8);
 }
 
-.fruit-img:hover {
+.fruit-img:hover, .basket-img:hover {
   /* Start the shake animation and make the animation last for 0.5 seconds */
   animation: shake 0.5s; 
 
