@@ -7,16 +7,16 @@
   <% if @product.retired %>
     <p>Not currently for sale</p>
   <% end %>
-
-  <%# add a drop for quantity which is basically the limit of the stock %>
-  <%# when add to cart is clicked, orderitem.quantity is set %>
-  <%= form_with model: @orderitem do |f| %>
-    <%= f.select :quantity, (0..@product.stock) %>
-    <%= f.submit "Add to Cart", class: "btn btn-primary" %>
+  <%= @product.stock %>
+  <%= form_with model: @product do |f| %>
+    <%= f.label :stock %>
+    <%= f.select :stock, (1..@product.stock) %>
   <% end %>
+
 
 
   <%#= button_to "Add to Cart", product_orderitems_path(product_id: @product.id), method: :post, class: "btn btn-primary" %>
   <%= link_to "Edit", edit_product_path(@product.id), class: "btn btn-primary" %>
-  <%= link_to "Back", products_path, class: "btn btn-primary" %>
+  <%#= link_to "Back", products_path, class: "btn btn-primary" %>
 </section>
+
