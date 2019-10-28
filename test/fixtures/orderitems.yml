@@ -1,4 +1,20 @@
 heineken_oi:
   quantity: 2
-  order: order_1
+  order: order1
   product: heineken
+  shipped: false
+heineken_o2:
+  quantity: 1
+  order: order2
+  product: heineken
+  shipped: false
+corona_o2:
+  quantity: 1
+  order: order2
+  product: corona
+  shipped: false
+sapporo_o2:
+  quantity: 2
+  order: order2
+  product: sapporo
+  shipped: false

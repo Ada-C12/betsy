@@ -1,5 +1,5 @@
 class OrderitemsController < ApplicationController
-  before_action :find_orderitem, only: [:edit, :update, :destroy]
+  before_action :find_orderitem, only: [:edit, :update, :destroy, :mark_shipped]
   
   def create
     # When adding items to an Order, does an order_id exist in sessions?
@@ -30,7 +30,8 @@ class OrderitemsController < ApplicationController
       @orderitem = Orderitem.new(
         quantity: params[:orderitem][:quantity],
         product_id: params[:product_id],
-        order_id: @order.id
+        order_id: @order.id,
+        shipped: false
       )
     end
     
@@ -51,32 +52,59 @@ class OrderitemsController < ApplicationController
   def edit ; end
   
   def update
-    if @orderitem.update(quantity: params[:orderitem][:quantity])
-      flash[:status] = :success
-      flash[:result_text] = "Quantity has been updated."
-      # TIFFANY YOU NEED TO REDIRECT TO THE CART PAGE
-      # IS CURRENTLY NOT CREATED
-      redirect_to root_path 
-      return
+    if @orderitem.order.status == "pending"
+      if @orderitem.update(quantity: params[:orderitem][:quantity])
+        flash[:status] = :success
+        flash[:result_text] = "Quantity has been updated."
+        
+        redirect_to order_path(@orderitem.order)
+        return
+      else
+        flash.now[:status] = :failure
+        flash.now[:result_text] = "Could not update item."
+        flash.now[:messages] = @orderitem.errors.messages
+        
+        render :edit, status: :bad_request
+        return
+      end
     else
-      flash.now[:status] = :failure
-      flash.now[:result_text] = "Could not update item."
-      flash.now[:messages] = @orderitem.errors.messages
-      render :edit, status: :bad_request
-      return
+      flash[:status] = :failure
+      flash[:result_text] = "Cannot update items that are part of a #{@orderitem.order.status} order."
+      redirect_to root_path
     end
   end
   
   def destroy
-    @orderitem.destroy
-    flash[:status] = :success
-    flash[:result_text] = "#{@orderitem.product.name} removed from cart"
-    # TIFFANY YOU NEED TO REDIRECT TO THE CART PAGE
-    # IS CURRENTLY NOT CREATED
-    redirect_to root_path
+    if @orderitem.order.status == "pending"
+      @orderitem.destroy
+      
+      flash[:status] = :success
+      flash[:result_text] = "#{@orderitem.product.name} removed from cart."
+      
+      redirect_to order_path(@orderitem.order)
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Cannot delete items that are part of a #{@orderitem.order.status} order."
+      redirect_to root_path
+    end
+  end
+  
+  def mark_shipped
+    if @orderitem.order.status == "paid"
+      @orderitem.shipped = true
+      @orderitem.save
+      
+      flash[:status] = :success
+      flash[:result_text] = "#{@orderitem.product.name} has been marked as shipped."
+      
+      @orderitem.order.mark_as_complete?
+      
+      redirect_back fallback_location: root_path
+    end
   end
   
   private
+  
   
   def find_orderitem
     @orderitem = Orderitem.find_by(id: params[:id])
