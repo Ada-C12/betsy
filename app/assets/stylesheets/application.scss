@@ -95,6 +95,20 @@ margin-left: 2rem;
    }
  }
 
+ .dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+.dropdown-item {
+  text-decoration: none;
+}
+
+
 // FOOTER
 
 .app-footer__nav {
@@ -141,3 +155,4 @@ margin-left: 2rem;
      margin-bottom: 5px;
    }
  }
+
