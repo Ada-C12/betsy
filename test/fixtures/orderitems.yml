@@ -33,3 +33,18 @@ peach_op:
   order: fruit_order
   product: peach
   shipped: false
+cat_food_ok:
+  quantity: 2
+  order: cat_order
+  product: cat_food
+  shipped: false
+kitty_litter_ok:
+  quantity: 1
+  order: cat_order
+  product: kitty_litter
+  shipped: false
+cat_toy_ok:
+  quantity: 3
+  order: cat_order
+  product: cat_toy
+  shipped: false

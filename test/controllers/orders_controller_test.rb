@@ -9,7 +9,7 @@ describe OrdersController do
         cc_name: "Mochi Cat",
         cc_num: 12345,
         cvv: 123,
-        cc_exp: 12/2019,
+        cc_exp: "12/2019",
         zip: 11111,
       },
     }
@@ -136,7 +136,9 @@ describe OrdersController do
   
   describe "initialized carts/orders" do
     before do
-      post product_orderitems_path(product_id: products(:stella).id), params: { orderitem: { quantity: 1, }, }
+      post product_orderitems_path(product_id: products(:cat_food).id), params: { orderitem: { quantity: 2, }, }
+      post product_orderitems_path(product_id: products(:kitty_litter).id), params: { orderitem: { quantity: 1, }, }
+      post product_orderitems_path(product_id: products(:cat_toy).id), params: { orderitem: { quantity: 3, }, }
     end
     
     describe "cart" do
@@ -154,79 +156,57 @@ describe OrdersController do
     end
     
     describe "update" do
-      it "returns success for an existing order id" do
+      it "can purchase an order with valid payment information" do
+        expect(session[:order_id]).wont_be_nil
+        current_order = Order.last
+        expect(current_order.orderitems.count).must_equal 3
+        expect(current_order.status).must_equal "pending"
+        expect(current_order.products.find_by(name: "Cat Toy")).wont_be_nil
+        
+        expect{ patch order_path(current_order), params: valid_params }.wont_change "Order.count"
+        
+        updated_order = Order.find_by(id: current_order.id)
+        
+        expect(updated_order.status).must_equal "paid"
+        expect(updated_order.email).must_equal "anything@gmail.com"
+        expect(updated_order.address).must_equal "123 abcstreet"
+        expect(updated_order.cc_name).must_equal "Mochi Cat"
+        expect(updated_order.cc_num).must_equal "12345"
+        expect(updated_order.cvv).must_equal "123"
+        expect(updated_order.cc_exp).must_equal "12/2019"
+        expect(updated_order.zip).must_equal "11111"
+        
+        expect(session[:order_id]).must_be_nil
       end
       
-      it "" do
+      it "cannot purchase out of stock items" do
+        
+        products(:cat_toy).update!(stock: 1)
+        # updated_cat_toy = Product.find_by(id: products(:cat_toy).id)
+        expect(Product.find_by(id: products(:cat_toy).id).stock).must_equal 1
+        
+        # expect{ patch order_path(id: current_order.id), params: valid_params }.wont_change
+        
       end
       
-      it "" do
+      it "cannot purchase retired items" do
       end
       
-      it "" do
+      it "cannot purchase an order with missing fields" do
       end
       
-      it "" do
+      it "cannot purchase an order with no orderitems" do
       end
       
-      it "" do
+      it "cannot purchase an order with non-numerical cc_num" do
+      end
+      
+      it "cannot purchase an order with non-numerical cvv" do
+      end
+      
+      it "cannot purchase an order with non-numerical zip" do
       end
     end
     
   end
 end
-
-#   before do 
-#     @order1 = Order.create email: "spinelli@recess.com", address: "1234 strawberrylane dr", cc_name: "ashley spinelli", cc_num: "23423434", cvv: "123", cc_exp: "12/20", zip: "98117", status: "pending"
-#   end
-
-#   describe "show" do
-#     it "responds with success when a given id exist" do
-#       valid_order = @order1
-
-#       get order_path(valid_order.id)
-#       must_respond_with :found      
-#     end
-
-#     it "will redirect w a flash error If the order id is not found" do
-#       invalid_order = -1
-
-#       get order_path(invalid_order)
-#       must_redirect_to root_path
-
-#       expect(flash[:failure]).must_equal "No items currently in cart."
-#     end
-
-#     it "redirect guest Users with empty carts" do
-#       order = Order.create
-#       get order_path(order.id)
-
-#       must_redirect_to root_path
-#     end
-#   end #show/do
-
-
-#   describe "edit" do
-#     it "succeeds For an existing order ID" do
-#       get edit_order_path(order.id)
-
-#       must_respond_with :success
-#     end
-#   end #edit/do
-
-#   describe "update" do
-#     # i know update is all the way done, leaving it like this For now.
-#     order = Order.create(status: "pending")
-#     patch order_path(order), params: order_params
-#     expect(flash[:message]).wont_be_nil
-#     must_redirect_to order_path(order)
-#     expect(session[:order_id]).must_be_nil #mustnotbenil?
-#   end #update/do
-
-#   describe "cancel" do
-#     it "will update order status as cancelled" do
-
-#     end
-#   end #cancel/do
-
-# end #end of orders controller desc
