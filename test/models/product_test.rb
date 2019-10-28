@@ -10,7 +10,7 @@ describe Product do
   end
 
   it "will have the required fields" do
-    [:name, :price, :quantity, :img_url, :user_id, :categories, :description ].each do |field|
+    [:name, :price, :stock, :img_url, :user_id, :categories, :description ].each do |field|
       expect(@product).must_respond_to field
     end
   end
@@ -20,7 +20,7 @@ describe Product do
       product = Product.create(
         name: "Orange Soap Dispenser",
         price: 20.00,
-        quantity: 15,
+        stock: 15,
         img_url: "http:\\fakeurl.com",
         user: users(:betsy),
         description: "A soap dispenser shaped like an orange."
@@ -58,7 +58,7 @@ describe Product do
       end
 
       it "must be unique in the scope of user_id" do
-        invalid_product = Product.create(name: "Lemon Shirt", price: 55, quantity: 2, img_url: "img.com", user_id: users(:ada).id, description: "Here is another description", category_ids: [categories(:strawberry).id])
+        invalid_product = Product.create(name: "Lemon Shirt", price: 55, stock: 2, img_url: "img.com", user_id: users(:ada).id, description: "Here is another description", category_ids: [categories(:strawberry).id])
 
         refute(invalid_product.valid?)
         expect(invalid_product.errors.messages).must_include :name
@@ -84,11 +84,11 @@ describe Product do
     end
     
     it "must have a quantity" do
-      @product.quantity = nil
+      @product.stock = nil
 
       refute(@product.valid?)
-      expect(@product.errors.messages).must_include :quantity
-      expect(@product.errors.messages[:quantity]).must_include "can't be blank"
+      expect(@product.errors.messages).must_include :stock
+      expect(@product.errors.messages[:stock]).must_include "can't be blank"
     end
 
     it "must have a user_id" do
