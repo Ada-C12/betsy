@@ -62,7 +62,7 @@
       <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
       <div class="card-body">
         <h5> 
-          <%= link_to product.name, product_path(product.id) %>
+        <%= link_to product.name, product_path(product.id) %>
           <small> $<%= product.price %> </small> 
         </h5>
       <%= link_to "Shop All #{category.name.capitalize}", category_products_path(category.id), class:"btn btn-primary" %>  
