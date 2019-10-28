@@ -64,11 +64,11 @@ class ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       flash[:success] = "Product #{@product.name} has been updated successfully"
-      redirect_to product_path(@product.id)
+      render "/users/current" 
       return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
-      render :edit
+      render "/users/current" 
       return
     end
   end
