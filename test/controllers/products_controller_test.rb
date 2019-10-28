@@ -5,7 +5,7 @@ describe ProductsController do
   let(:wizard_no_products) { wizards(:wizard_no_products) }
   let(:product) { products(:product1) }
 
-  describe "Guest users" do
+  describe "Guest and Logged In Users" do
     describe "index action" do
       it "gives back a successful response" do
         get products_path
@@ -82,6 +82,43 @@ describe ProductsController do
         get product_path(-1)
 
         must_respond_with :not_found
+      end
+    end
+  end
+
+  describe "Logged In Users Only" do
+    describe "new action" do
+      it "succeeds if user is the Wizard given in params" do
+      end
+      it "responds with redirect if the user is not the Wizard given in params" do
+      end
+    end
+    describe "create action" do
+      it "creates a product given valid product data and correct wizard is logged in" do
+        # Need to test that they're logged in still
+
+        category1 = categories(:category1)
+        category5 = categories(:category5)
+        
+        new_product_params = {
+          product: {
+            name: "Ancient Amulet",
+            description: "Amulet that also qualifies as an artifact",
+            stock: 1,
+            # photo_url,
+            price: 23.00,
+            category_ids: [category1.id, category5.id]        
+          }
+        }
+
+        expect {
+          post wizard_products_path(wizard1.id), params: new_product_params
+        }.must_change "Product.count", 1
+
+        must_respond_with :redirect
+
+      end
+      it "renders bad_request and does not update the DB for bogus data" do
       end
     end
   end
