@@ -63,7 +63,7 @@ describe Product do
       new_product.reviews << review_2
       new_product.reviews << review_3
       
-      expect(new_product.reviews.count).must_be :>, 0
+      expect(new_product.reviews.count).must_be :>, 1
       
       new_product.reviews.each do |review|
         expect(review).must_be_instance_of Review
@@ -199,6 +199,18 @@ describe Product do
         expect(new_product.valid?).must_equal false
         expect(new_product.errors.messages).must_include :retired
         expect(new_product.errors.messages[:retired]).must_include "retired status must be a boolean value: true or false"
+      end
+      
+      it "will set the column value to true if non-valid entry is entered" do
+        new_product.retired = 123
+        
+        expect(new_product.valid?).must_equal true
+        
+        new_product.save!
+        updated_product = Product.find_by(id: new_product)
+        
+        expect(updated_product.retired).must_equal true
+        expect(updated_product.retired).wont_equal 123
       end
     end
   end

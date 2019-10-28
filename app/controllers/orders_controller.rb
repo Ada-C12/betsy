@@ -25,9 +25,9 @@ class OrdersController < ApplicationController
   def update
     @order.orderitems.each do |orderitem|
       if !orderitem.valid?
-        flash[:status] = :failure
-        flash[:result_text] = "Sorry. Some of the items in your cart are no longer available."
-        flash[:messages] << @orderitem.errors.messages
+        flash.now[:status] = :failure
+        flash.now[:result_text] = "Sorry. Some of the items in your cart are no longer available."
+        flash.now[:messages] << @orderitem.errors.messages
       end
       
       render :edit, status: :bad_request 

@@ -96,6 +96,20 @@ describe Orderitem do
       expect(new_orderitem.errors.messages).must_include :product_id
       expect(new_orderitem.errors.messages[:product_id]).must_include "Stella Artois is no longer available"
     end
+    
+    it "cannot create an orderitem with a non-boolean shipped status" do
+      new_orderitem.shipped = 123
+      new_orderitem.save
+      puts "READ HERE"
+      puts Orderitem.find_by(id: new_orderitem.id).shipped
+      
+      expect(new_orderitem.valid?).must_equal false
+      expect(new_orderitem.errors.messages).must_include :shipped
+      expect(new_orderitem.errors.messages[:shipped]).must_include "order exceeds inventory in stock"
+    end
+    
+    it "can create an orderitem with shipped status false" do
+    end
   end
   
   describe "relationships" do
