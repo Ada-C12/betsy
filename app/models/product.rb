@@ -30,14 +30,6 @@ class Product < ApplicationRecord
     end
   end
 
-  def find_order_items
-    all_products = @current_user.find_products
-    all_order_items = []
-    all_products.each do |product| 
-      all_order_items << OrderItem.find_by(product_id: product.id)
-    end 
-    all_order_items = self.where(product_id: self)
-  end 
 
 
   def update_quantity
