@@ -70,7 +70,7 @@ class OrdersController < ApplicationController
   private 
   
   def order_params
-    params.require(:order).permit(:email, :address, :cc_name, :cc_num, :ccv, :cc_exp, :zip)
+    params.require(:order).permit(:email, :address, :cc_name, :cc_num, :cvv, :cc_exp, :zip)
   end
   
   def find_order

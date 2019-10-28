@@ -3,7 +3,7 @@ order1:
   address: 1234 strawberrylane dr.
   cc_name: ashley spinelli
   cc_num: 23423434
-  ccv: 123
+  cvv: 123
   cc_exp: 12/20
   zip: 98117
   status: pending
@@ -12,7 +12,7 @@ order2:
   address: 222  dr.
   cc_name: tommy pickles
   cc_num: 23423434
-  ccv: 789
+  cvv: 789
   cc_exp: 11/22
   zip: 98109
   status: shipped
@@ -21,7 +21,7 @@ order3:
   address: 4444 ball rd.
   cc_name: mickey mouse
   cc_num: 44253234
-  ccv: 1456
+  cvv: 1456
   cc_exp: 09/23
   zip: 98124
   status: shipped
