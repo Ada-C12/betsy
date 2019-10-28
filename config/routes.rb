@@ -23,4 +23,7 @@ Rails.application.routes.draw do
   
   resources :types, only: [:show, :new, :create] do 
   end
+  
+  resources :reviews, only: [:new, :create] do 
+  end
 end
