@@ -17,7 +17,8 @@ Rails.application.routes.draw do
   get "/orders/cart", to: "orders#cart", as: "cart"
   get "/orders/checkout", to: "orders#checkout", as: "checkout"
   get "/orders/confirmation", to: "orders#confirmation", as: "confirmation"
-  resources :orders, only: [:show, :update]
+  resources :orders, only: [:show]
+  patch "/orders/:id", to: "orders#update_paid"
   
   resources :categories do
     resources :products, only: [:index]
@@ -25,6 +26,5 @@ Rails.application.routes.draw do
   
   resources :order_items, only: [:update, :destroy]
   
-  
-
+ 
 end
