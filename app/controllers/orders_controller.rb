@@ -31,9 +31,11 @@ class OrdersController < ApplicationController
         flash.now[:messages] << @orderitem.errors.messages
       end
       
-      render :edit, status: :bad_request 
-      return
+      if flash.now[:status] == :failure
+        return render :edit, status: :bad_request 
+      end
     end
+    
     
     # Stage the status to be "paid"
     @order.status = "paid"
