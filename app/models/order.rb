@@ -22,4 +22,12 @@ class Order < ApplicationRecord
     return false
   end
 
+  def total
+    total = 0 
+    self.order_items.each do |orderitem|
+      total += orderitem.total 
+    end 
+    return total 
+  end
+
 end
