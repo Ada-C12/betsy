@@ -6,16 +6,29 @@ class OrderItemsController < ApplicationController
     if @current_order
       order = @current_order
     else
-      order = Order.create
+      order = Order.create(status: "pending")
     end
-    product = Product.find_by(id: params[:id])
 
-    order_item = OrderItem.create(
-      product: product,
+    @product = Product.find_by(id: params[:product_id])
+    if @product.nil?
+      flash[:error] = "Product no longer exists."
+      return head :not_found
+    end
+
+    order_item = OrderItem.new(
+      product: @product,
       order: order,
-      quantity: order_item_params
+      quantity: order_item_params[:quantity]
     )
-    order.order_items << order_item
+
+    if order_item.save
+      flash[:success] = "Item successfully added to your basket."
+      return redirect_back(fallback_location: :back)
+    else
+      raise
+      flash[:error] = "Item could not be added to your basket."
+      return redirect_back(fallback_location: :back)
+    end
   end
 
   def edit
