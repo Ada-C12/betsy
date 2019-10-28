@@ -40,7 +40,12 @@ class Product < ApplicationRecord
   end 
 
 
-  def update_quantity
+  def quantity_available?(input_quantity)
+    if input_quantity > self.quantity
+      return false
+    else
+      return true
+    end
   end
 
   def avg_rating

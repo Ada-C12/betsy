@@ -15,8 +15,13 @@ class OrderItemsController < ApplicationController
       flash[:error] = "Product no longer exists."
       return head :not_found
     end
-    #add logic so cannot create order item if quantity exceeds stock
-    if order.order_items.where(product: @product)
+
+
+    
+    if !@product.quantity_available?(order_item_params[:quantity].to_i)
+      flash[:error] = "Quantity entered is greater than available stock for #{@product.name}."
+      return redirect_back(fallback_location: :back)
+    elsif !order.order_items.where(product: @product).empty?
       order_item = order.order_items.where(product: @product).first
       quantity = order_item_params[:quantity].to_i + order_item.quantity
       order_item.update(quantity: quantity)
@@ -34,7 +39,6 @@ class OrderItemsController < ApplicationController
       flash[:success] = "Item successfully added to your basket."
       return redirect_back(fallback_location: :back)
     else
-      raise
       flash[:error] = "Item could not be added to your basket."
       return redirect_back(fallback_location: :back)
     end
@@ -42,6 +46,12 @@ class OrderItemsController < ApplicationController
 
   def update
     order_item = OrderItem.find_by(id: params[:id])
+    product = order_item.product
+
+    if !product.quantity_available?(order_item_params[:quantity].to_i)
+      flash[:error] = "Quantity entered is greater than available stock for #{product.name}."
+      return redirect_back(fallback_location: :back)
+    end
 
     if order_item.update(order_item_params)
       flash[:success] = "Item successfully updated."
