@@ -1,0 +1,12 @@
+lager: 
+  name: lager
+cider: 
+  name: cider
+pilsner: 
+  name: pilsner
+stout: 
+  name: stout
+ipa: 
+  name: ipa
+porter: 
+  name: porter
