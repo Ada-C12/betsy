@@ -14,7 +14,7 @@ Rails.application.routes.draw do
   get "/cart", to: "orders#cart", as: "cart"
   
   resources :wizards do
-    resources :products, only: [:index]
+    resources :products, only: [:index, :new, :create]
   end
   
   resources :categories do
