@@ -21,7 +21,7 @@ Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
           <tr>
             <td><%= link_to product.name, product_path(product) %></td>
             <td><%= product.price %></td>
-            <td><%= product.quantity %></td>
+            <td><%= product.stock %></td>
             <td><%= product.description %></td>
             <td><%= product.categories.first.name %></td>
           </tr>
