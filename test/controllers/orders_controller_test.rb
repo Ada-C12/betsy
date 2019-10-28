@@ -1,44 +1,41 @@
 require "test_helper"
 
 describe OrdersController do
-  # describe "show action" do
-  #   it "responds with a success when an order id given exists and the logged in user has products in this order" do
-  #     order = orders(:order_1)
-  #     user = users(:ada)
-  #     perform_login(user)
+  describe "show action" do
+    it "responds with a success when an order id given exists and the logged in user has products in this order" do
+      order = orders(:order_1)
+      user = users(:ada)
+      perform_login(user)
+     
+      get order_path(order.id)
+      must_respond_with :success
+    end
+
+    it "responds with a redirect when an order id given exists and the logged in user didn't sell products in this order" do
+      order = orders(:order_1)
+      user = users(:betsy)
+      perform_login(user)
       
-  #     get order_path(order.id)
-  #     must_respond_with :success
-  #   end
+      get order_path(order.id)
+      must_redirect_to root_path
+    end
 
-  #   it "responds with a redirect when an order id given exists and the logged in user didn't sell products in this order" do
-  #     order = orders(:order_1)
-  #     user = users(:betsy)
-  #     perform_login(user)
-      
-  #     get order_path(order.id)
-  #     must_redirect_to root_path
-  #   end
+    it "responds with a not_found when id given does not exist" do
+      user = users(:betsy)
+      perform_login(user)
+      order_id = -10000
 
-  #   it "responds with a not_found when id given does not exist" do
-  #     get order_path(-1)
-  #     must_respond_with :not_found
-  #   end
-  # end
+      get order_path(order_id)
+      must_respond_with :not_found
+    end
+  end
 
-  # describe "cart action" do
-    # it "gives back a successful response and the session[:cart_id] will be assigned if it's nil" do
-    #   expect(session[:id]).must_be_nil
-    #   get cart_path
-    #   expect(session[:id]).wont_be_nil
-    #   must_respond_with :success
-    # end
-
-    # it "redirects user to root path if no merchant logged in" do
-    #   get new_product_path
-    #   must_redirect_to root_path
-    # end
-  # end
+  describe "cart action" do
+    it "gives back a successful response" do
+      get cart_path
+      must_respond_with :success
+    end
+  end
 
   # describe "checkout action" do
   #   let(:product_hash) {

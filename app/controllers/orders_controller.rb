@@ -5,12 +5,13 @@ class OrdersController < ApplicationController
     @order = Order.find_by(id: params[:id])
     if !@order
       head :not_found 
-    elsif !@order.contain_orderitems?
+      return 
+    elsif !@order.contain_orderitems?(@current_user)
       flash[:error] = "You cannot check this order details!"
       return redirect_to root_path 
     end
   end
-
+  
   def cart
   end
   
@@ -18,23 +19,22 @@ class OrdersController < ApplicationController
     if @current_order.nil?
       flash[:error] = "Order doesn't exist!"
       return redirect_to root_path
-    else
     end
   end
   
   def update_paid
     @current_order.update(order_params)
-      @current_order.status = "paid"
-      @current_order.customer_id = session[:user_id]
-      
-      if @current_order.save
-        flash[:success] = "Order #{@current_order.id} has been purchased successfully!"
-        return redirect_to confirmation_path
-      else
-        flash.now[:error] = "Something went wrong! Order was not paid.#{@current_order.errors.messages}"
-        render cart_path
-        return
-      end
+    @current_order.status = "paid"
+    @current_order.customer_id = session[:user_id]
+    
+    if @current_order.save
+      flash[:success] = "Order #{@current_order.id} has been purchased successfully!"
+      return redirect_to confirmation_path
+    else
+      flash.now[:error] = "Something went wrong! Order was not paid.#{@current_order.errors.messages}"
+      render cart_path
+      return
+    end
   end
   
   def confirmation
