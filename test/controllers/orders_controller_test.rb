@@ -177,6 +177,8 @@ describe OrdersController do
         expect(updated_order.zip).must_equal "11111"
         
         expect(session[:order_id]).must_be_nil
+        
+        expect(Product.find_by(id: products(:cat_food).id).stock).must_equal
       end
       
       it "cannot purchase out of stock items" do
