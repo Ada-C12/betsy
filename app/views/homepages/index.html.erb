@@ -8,36 +8,17 @@
 <h2> Discover Products </h2>
 <section class="card-group">
   <% random_products = Product.random_products(3) %>
-  <% product1 = random_products[0] %>
-  <% product2 = random_products[1] %>
-  <% product3 = random_products[2] %>
-  <section class="card" style="width: 18rem;">
-    <%= image_tag (product1.img_url), class:"card-img-top", alt:"#{product1.name} product image" %> 
-    <div class="card-body">
-        <h5> 
-          <%= link_to product1.name, product_path(product1.id) %>
-          <small> $<%= product1.price %> </small> 
-        </h5>
-    </div>  
-  </section>
-  <section class="card" style="width: 18rem;">
-    <%= image_tag (product2.img_url), class:"card-img-top", alt:"#{product2.name} product image" %> 
-    <div class="card-body">
-        <h5> 
-          <%= link_to product2.name, product_path(product2.id) %>
-          <small> $<%= product2.price %> </small> 
-        </h5>
-    </div>  
-  </section>
-  <section class="card" style="width: 18rem;">
-    <%= image_tag (product3.img_url), class:"card-img-top", alt:"#{product3.name} product image" %> 
-    <div class="card-body">
-        <h5> 
-          <%= link_to product3.name, product_path(product3.id) %>
-          <small> $<%= product3.price %> </small> 
-        </h5>
-    </div>  
-  </section>
+  <% random_products.each do |product| %>
+    <section class="card" style="width: 18rem;">
+      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+      <div class="card-body">
+          <h5> 
+            <%= link_to product.name, product_path(product.id) %>
+            <small> $<%= product.price %> </small> 
+          </h5>
+      </div>  
+    </section>
+  <% end %>
 </section>
 
   <h2> Deals Under $10 </h2>
@@ -55,91 +36,38 @@
     <% end %>
   </section>
 
-<h2> Citrus </h2>
-<% citrus_products = Category.products_by_category("citrus") %>
+<% ["citrus", "berry", "tropical"].each do |theme| %>
+  <h2> <%= theme.capitalize %> </h2>
+  <% products = Category.products_by_category(theme) %>
+  <section class="card-group">
+    <% products.each do |product| %>
+      <section class="card" style="width: 18rem;">
+        <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
+        <div class="card-body">
+          <h5> 
+            <%= link_to product.name, product_path(product.id) %>
+            <small> $<%= product.price %> </small> 
+          </h5>
+      </section>
+    <% end %>
+  </section>
+<% end %>
+
 <section class="card-group">
-  <% citrus_products.each do |product| %>
+  <% ["earrings", "animals", "furniture"].each do |cat| %>
+    <% category = Category.find_by(name: cat) %>
+    <% product = Category.products_by_category(cat).shuffle.first %>
     <section class="card" style="width: 18rem;">
+      <h2> <%= category.name.capitalize %> </h2>
       <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
       <div class="card-body">
         <h5> 
           <%= link_to product.name, product_path(product.id) %>
           <small> $<%= product.price %> </small> 
         </h5>
+      <%= link_to "Shop All #{category.name.capitalize}", category_products_path(category.id), class:"btn btn-primary" %>  
     </section>
   <% end %>
-</section>
-
-<h2> Berry </h2>
-<% berry_products = Category.products_by_category("berry") %>
-<section class="card-group">
-  <% berry_products.each do |product| %>
-    <section class="card" style="width: 18rem;">
-      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
-      <div class="card-body">
-        <h5> 
-          <%= link_to product.name, product_path(product.id) %>
-          <small> $<%= product.price %> </small> 
-        </h5>
-    </section>
-  <% end %>
-</section>
-
-<h2> Tropical </h2>
-<% category = Category.find_by(name: "tropical") %>
-<% tropical_products = Category.products_by_category("tropical") %>
-<section class="card-group">
-  <% tropical_products.each do |product| %>
-    <section class="card" style="width: 18rem;">
-      <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
-      <div class="card-body">
-        <h5> 
-          <%= link_to product.name, category_products_path(category.id) %>
-          <small> $<%= product.price %> </small> 
-        </h5>  
-    </section>
-  <% end %>
-</section>
-
-<section class="card-group">
-  <% category = Category.find_by(name: "earrings") %>
-  <% product = Category.products_by_category("earrings").shuffle.first %>
-  <section class="card" style="width: 18rem;">
-    <h2> Funky Earrings </h2>
-    <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
-    <div class="card-body">
-      <h5> 
-        <%= link_to product.name, product_path(product.id) %>
-        <small> $<%= product.price %> </small> 
-      </h5>
-    <%= link_to "Shop All Earrings", category_products_path(category.id), class:"btn btn-primary" %>  
-  </section>
-
-  <% category = Category.find_by(name: "animals") %>
-  <% product = Category.products_by_category("animals").shuffle.first %>
-  <section class="card" style="width: 18rem;">
-    <h2> Fruit Your Pet </h2>
-    <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
-    <div class="card-body">
-      <h5> 
-        <%= link_to product.name, product_path(product.id) %>
-        <small> $<%= product.price %> </small> 
-      </h5>
-    <%= link_to "Shop All Animals", category_products_path(category.id), class:"btn btn-primary" %>  
-  </section>
-
-  <% category = Category.find_by(name: "furniture") %>
-  <% product = Category.products_by_category("furniture").shuffle.first %>
-  <section class="card" style="width: 18rem;">
-    <h2> Fun Furniture </h2>
-    <%= image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
-    <div class="card-body">
-      <h5> 
-        <%= link_to product.name, product_path(product.id) %>
-        <small> $<%= product.price %> </small> 
-      </h5>
-    <%= link_to "Shop All Furniture", category_products_path(category.id), class:"btn btn-primary" %>  
-  </section>
 </section>
 
 
