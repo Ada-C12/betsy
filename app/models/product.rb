@@ -13,19 +13,11 @@ class Product < ApplicationRecord
 
     
   def self.random_products(num)
-    if Product.all.nil?
-      return nil
-    else
-      return Product.all.shuffle.first(num)
-    end
+    return Product.all.shuffle.first(num)
   end
   
-  def self.deals_under(price)
-    if Product.all.nil?
-      return nil
-    else
-      return Product.where("price < ?", price).shuffle
-    end
+  def self.deals_under(price)  
+    return Product.where("price < ?", price).shuffle
   end
 
   def quantity_available?(quantity)
