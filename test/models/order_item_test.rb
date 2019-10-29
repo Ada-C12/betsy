@@ -92,7 +92,7 @@ describe OrderItem do
       it "returns the total for each orderitem" do 
         orderitem = order_items(:order_item_1)
 
-        expect(orderitem.total).must_equal 75
+        expect(orderitem.total).must_equal 100
       end 
 
       it "returns 0 for an order item with a quantity of 0" do 

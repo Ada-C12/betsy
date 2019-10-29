@@ -130,7 +130,7 @@ describe Order do
       it "returns the total for all orderitems inside of a paid order" do
         order = orders(:order_1)
         
-        expect(order.total).must_equal 305
+        expect(order.total).must_equal 330
       end 
       it "returns the total for all orderitems inside of a pending order" do 
         order = orders(:order_2)

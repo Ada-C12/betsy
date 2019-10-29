@@ -40,7 +40,7 @@ Total revenue as of <%= Date.today %>:
             <%if !product.categories.empty? %>
               <td><%= product.categories.first.name %></td>
             <%else%>
-              <td><p> N/A!</p></td>
+              <td><p> N/A</p></td>
             <%end %>
             <td> <%= f.check_box :active%></td>
             <td> <%= product.active %>
@@ -95,6 +95,8 @@ Total revenue as of <%= Date.today %>:
           <td><%= order_item.total %>
           <% if !product.categories.empty?%>
             <td><%= product.categories.first.name %></td>
+          <% elsif %>
+            <td> <p> N/A </p>
           <% end %>
         </tr>
       <% end %>

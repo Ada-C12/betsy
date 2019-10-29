@@ -7,19 +7,12 @@ class ProductsController < ApplicationController
     category_id = params[:category_id]
     user_id = params[:user_id]
 
-    if category_id.nil? && user_id.nil?
-      @products = Product.all
+    if category_id.nil?
+      @products = Product.active
     elsif category_id
       @category = Category.find_by(id: category_id)
       if @category
-        @products = @category.products
-      else
-        head :not_found
-      end
-    elsif user_id
-      @user = User.find_by(id: user_id)
-      if @user
-        @products = @user.products
+        @products = @category.products.active
       else
         head :not_found
       end

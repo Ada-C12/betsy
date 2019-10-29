@@ -101,7 +101,7 @@ describe User do
       it "returns the total revenue a user has earned on the site" do
         user = users(:ada)
         expect(user.total_earned).must_be_instance_of Float
-        expect(user.total_earned).must_equal 430
+        expect(user.total_earned).must_equal 330
       end 
 
       it "returns 0 if the user has not sold any products" do 
