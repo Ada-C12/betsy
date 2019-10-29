@@ -1,0 +1,28 @@
+
+<p><%= @wizard.username%> </p>
+<p><%= @wizard.email%>  </p>
+
+
+
+<h2> Products </h2>
+<div class="container">
+<div class="row ">
+		 
+	<%@wizard.products.each do |product|%>
+    
+    
+		<%= image_tag product.photo_url, alt: "a picture of a #{product.name}", class: "col-lg-2 "%>
+		<div class="col-lg-7">
+         <p><%= product.name%>  </p>
+				<p><%= product.description%></p>
+         
+	   </div> 
+	<p class="col-lg-3"> Edit</p>
+		 <%#link_to "Edit", edit_product_path(product.id),class: "btn btn-dark" %>
+   
+	<%end%>
+
+
+</div>
+
+
