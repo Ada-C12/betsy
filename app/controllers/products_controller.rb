@@ -44,9 +44,15 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
     
     if @product.save
-      flash[:success] = "Product #{@product.name} has been added successfully"
-      redirect_to product_path(@product.id)
-      return
+      if @current_user.merchant_name.nil?
+        flash[:success] = "Product #{@product.name} has been added successfully"
+        flash[:message] = "You merchant name is currently empty. Please add a merchant name to add your fruit stand to the Merchants List."
+        return redirect_to edit_user_path
+      else
+        flash[:success] = "Product #{@product.name} has been added successfully"
+        redirect_to product_path(@product.id)
+        return
+      end
     else
       flash.now[:error] = "Something went wrong! Product was not added."
       render :new
