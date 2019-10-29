@@ -1,7 +1,7 @@
-name,description,price,photo_url,stock,merchant_id,retired
-Keg,Perfect to store all your home-brewed beer,200,https://cdn.pixabay.com/photo/2015/09/24/20/36/beer-barrel-956322_1280.jpg,2,1,false
-Beer Opener,Opens your beer right!,10,https://cdn.pixabay.com/photo/2017/08/10/04/54/beer-2618337_1280.jpg,10,1,false
-Funny Bar Sign,No home is complete without this darling sign,25,https://cdn.pixabay.com/photo/2017/09/03/23/35/beer-advertising-2712521_1280.jpg,6,1,false
-Pretzels,Need a way to get even thirstier so you can drink more beer? Buy some pretzels!,5,https://cdn.pixabay.com/photo/2017/02/08/14/37/st-paddys-day-2049043_1280.jpg,15,1,false
-Beer Mug,Impress your friends with your fancy beer mug,23,https://cdn.pixabay.com/photo/2016/09/14/11/52/beer-1669298_1280.png,18,1,false
-Wall Mounted Beer Opener,You don't need this but buy it anyway,14,https://images-na.ssl-images-amazon.com/images/I/717peNEJfIL._SX425_.jpg,6,1,false
+name,description,price,photo_url,stock,merchant_id,retired,type
+Keg,Perfect to store all your home-brewed beer,200,https://cdn.pixabay.com/photo/2015/09/24/20/36/beer-barrel-956322_1280.jpg,2,1,false,drinkware
+Beer Opener,Opens your beer right!,10,https://cdn.pixabay.com/photo/2017/08/10/04/54/beer-2618337_1280.jpg,10,1,false,gifts
+Funny Bar Sign,No home is complete without this darling sign,25,https://cdn.pixabay.com/photo/2017/09/03/23/35/beer-advertising-2712521_1280.jpg,6,2,false,accessories
+Pretzels,Need a way to get even thirstier so you can drink more beer? Buy some pretzels!,5,https://cdn.pixabay.com/photo/2017/02/08/14/37/st-paddys-day-2049043_1280.jpg,15,3,false,gifts
+Beer Mug,Impress your friends with your fancy beer mug,23,https://cdn.pixabay.com/photo/2016/09/14/11/52/beer-1669298_1280.png,18,3,false,drinkware
+Wall Mounted Beer Opener,You don't need this but buy it anyway,14,https://images-na.ssl-images-amazon.com/images/I/717peNEJfIL._SX425_.jpg,6,4,false,decor
