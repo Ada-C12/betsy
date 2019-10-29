@@ -38,7 +38,7 @@ class OrderitemsController < ApplicationController
     # Now save and see if validation fights you
     if @orderitem.save
       flash[:status] = :success
-      flash[:result_text] = "#{@orderitem.product.name} has been added to the cart."  
+      flash[:result_text] = "#{@orderitem.product.name} has been added to your cart!"  
     else 
       flash[:status] = :failure
       flash[:result_text] = "Could not add the item to the cart."
@@ -57,7 +57,7 @@ class OrderitemsController < ApplicationController
         flash[:status] = :success
         flash[:result_text] = "Quantity has been updated."
         
-        redirect_to order_path(@orderitem.order)
+        redirect_to cart_path
         return
       else
         flash.now[:status] = :failure
@@ -81,7 +81,7 @@ class OrderitemsController < ApplicationController
       flash[:status] = :success
       flash[:result_text] = "#{@orderitem.product.name} removed from cart."
       
-      redirect_to order_path(@orderitem.order)
+      redirect_to cart_path
     else
       flash[:status] = :failure
       flash[:result_text] = "Cannot delete items that are part of a #{@orderitem.order.status} order."
@@ -90,7 +90,7 @@ class OrderitemsController < ApplicationController
   end
   
   def mark_shipped
-    if @orderitem.order.status == "paid"
+    if @orderitem.order.status == "paid" && @orderitem.shipped == false
       @orderitem.shipped = true
       @orderitem.save
       
@@ -100,6 +100,16 @@ class OrderitemsController < ApplicationController
       @orderitem.order.mark_as_complete?
       
       redirect_back fallback_location: root_path
+    elsif @orderitem.order.status == "paid" && @orderitem.shipped == true
+      flash[:status] = :failure
+      flash[:result_text] = "#{@orderitem.shipped} has already been marked as shipped."
+      
+      redirect_back fallback_location: root_path
+    else
+      flash[:status] = :failure
+      flash[:result_text] = "Cannot perform this action for a #{@orderitem.order.status} order."
+      
+      redirect_to root_path
     end
   end
   

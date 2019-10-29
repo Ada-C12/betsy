@@ -6,11 +6,6 @@ class OrdersController < ApplicationController
     # If you don't have an order_id, you haven't added anthing to cart.
     if session[:order_id]
       @order = Order.find_by(id: session[:order_id])
-      
-      if @order.nil?
-        head :not_found
-        return
-      end
     else
       # This is the nice redirect for average users with empty carts.
       # Theoretically sdj render a dummy cart page 

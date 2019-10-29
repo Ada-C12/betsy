@@ -8,7 +8,7 @@ class ApplicationController < ActionController::Base
   def require_login
     if current_merchant.nil?
       flash[:error] = "You must be logged in as an authorized merchant to access this page."
-      redirect_to root_path
+      return redirect_to root_path
     end
   end
 end
