@@ -45,37 +45,4 @@ class User < ApplicationRecord
     return all_products
   end 
 
-
-
-
-    # current_user_id = self.id
-  #   #Find all the products for that user 
-  #   #Find all the order items that belong to the user 
-    
-  #   order_items = OrderItem.where
-
-  #   #Find all the orders that belong to the current user
-    
-  #   all_order_items = []
-
-  #   order_items.each do |item|
-  #     all_order_items << OrderItem.where(order_id: item.id )
-  #   end 
-
-  #   return all_orders 
-  # end 
-
-
-  #This will take all of a merchant's orders
-  #It will look at each order's order items by calling 'orders.total'
-  #By calling 'orders.total' we look at each order's order items
-  #We call 'total' on each OrderItem in a given individual order
-
-  #Find the orders that contain a particular status 
-  # earnings = 0
-  # self.products.order_items.each do |order_item|
-  #   earnings += OrderItem.total(status) 
-  # end 
-  # return earnings 
-
 end

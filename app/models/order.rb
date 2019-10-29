@@ -1,6 +1,6 @@
 class Order < ApplicationRecord
   has_many :order_items
-
+  
   validates :status, presence: true
   validates :name, presence: true, if: :not_pending?
   validates :email, presence: true, format: { with: /@/, message: "Email format must be valid." } , if: :not_pending?
@@ -14,10 +14,10 @@ class Order < ApplicationRecord
   def not_pending?
     status != 'pending'
   end
-
-  def contains_orderitems?
+  
+  def contain_orderitems?(user)
     self.order_items.each do |order_item|
-      return true if order_item.product.user_id == session[:user_id]
+      return true if order_item.product.user_id == user.id
     end
     return false
   end

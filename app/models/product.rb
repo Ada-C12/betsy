@@ -31,7 +31,6 @@ class Product < ApplicationRecord
     end
   end
 
-
   def update_quantity
   end
 
