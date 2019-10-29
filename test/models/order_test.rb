@@ -249,8 +249,7 @@ describe Order do
     describe "total" do
       it "accurately calculates the total" do
         expect(order1.order_items).wont_be_empty
-
-        expect(order1.total).must_equal 3000
+        expect(order1.total.amount).must_equal 3000 * 10**-2
       end
 
       it "the total is 0 if there are no items" do

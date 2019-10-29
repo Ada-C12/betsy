@@ -16,7 +16,8 @@ class Order < ApplicationRecord
   validates :status, presence: true
 
   def total
-    return self.order_items.reduce(0) { |sum, item| sum + item.subtotal }
+    total_cents = self.order_items.reduce(0) { |sum, item| sum + item.subtotal }
+    return Money.new(total_cents)
   end
 
   def self.cancel_abandoned_orders
