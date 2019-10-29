@@ -5,26 +5,22 @@ class ProductsController < ApplicationController
 
   def index
     category_id = params[:category_id]
-    user_id = params[:user_id]
 
-    if category_id.nil? && user_id.nil?
+    if category_id.nil?
       @products = Product.all
+      return
     elsif category_id
       @category = Category.find_by(id: category_id)
       if @category
         @products = @category.products
+        return
       else
         head :not_found
-      end
-    elsif user_id
-      @user = User.find_by(id: user_id)
-      if @user
-        @products = @user.products
-      else
-        head :not_found
+        return
       end
     else
       head :not_found
+      return
     end
   end
   
@@ -64,11 +60,11 @@ class ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       flash[:success] = "Product #{@product.name} has been updated successfully"
-      redirect_to current_user_path
+      redirect_to product_path(@product.id)
       return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
-      render "/users/current" 
+      render current_user_path
       return
     end
   end
@@ -79,15 +75,18 @@ class ProductsController < ApplicationController
       if product.user_id == session[:user_id]
         product.destroy
         flash[:success] = "Product #{product.name} was deleted!"
+        redirect_to root_path
+        return
       else
         flash[:error] = "You cannot delete a product not belonging to you!"
+        redirect_to root_path
+        return
       end
     else
       flash[:error] = "The product doesn't exist!"
+      redirect_to root_path
+      return
     end
-    
-    redirect_to root_path
-    return
   end
   
   private
