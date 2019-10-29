@@ -116,25 +116,36 @@ describe Merchant do
        merchant = Merchant.build_from_github(auth_hash)
        merchant.save!
 
-       expect(Merchant.count).must_equal 2
+       expect(Merchant.count).must_equal 3
 
        expect(merchant.provider).must_equal auth_hash[:provider]
        expect(merchant.uid).must_equal auth_hash[:uid]
        expect(merchant.username).must_equal auth_hash["info"]["nickname"]
        expect(merchant.email).must_equal auth_hash["info"]["email"]
-
-       
       end
     end
 
+    describe "find_merchants_orderitems" do
+      it "returns an array of a merchant's orderitems" do
+        current_merchant = merchants(:brad)
+        result = Merchant.find_merchants_orderitems(current_merchant)
+        expect(result.first.product.merchant.id).must_equal current_merchant.id
+      end 
+    end
+    
     describe "calculate_total_revenue" do
       it "returns the total revenue for a merchant's orderitems" do
+        current_merchant = merchants(:brad)
+        result = Merchant.calculate_total_revenue(current_merchant)
+        expect(result).must_equal 181.1
+      end
 
+      it "returns zero for the total revenue if merchant has no orderitems" do
+        current_merchant = merchants(:leo)
+        result = Merchant.calculate_total_revenue(current_merchant)
+        expect(result).must_equal 0
       end
       
-      it "returns the total revenue for a merchant's orderitems by status" do
-      end 
-
     end 
 
 

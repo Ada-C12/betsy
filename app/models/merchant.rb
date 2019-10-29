@@ -20,21 +20,17 @@ class Merchant < ApplicationRecord
 
   def self.calculate_total_revenue(current_merchant)
     orderitems = Merchant.find_merchants_orderitems(current_merchant)
-    prices = []
-    orderitems.each do |orderitem|
-      prices << orderitem.product.price * orderitem.quantity
-    end
-    return prices.sum
-
-  end
-
-  def revenue_for_shipped
-    revenue = 0
-    @merchant_orderitems.each do |orderitem|
-      if orderitem.shipped 
-        revenue += orderitem.product.price 
+    
+    if orderitems.length == 0 
+      return 0
+    else 
+      prices = []
+      orderitems.each do |orderitem|
+        prices << orderitem.product.price * orderitem.quantity
       end
+      return prices.sum
     end
 
   end
+
 end
