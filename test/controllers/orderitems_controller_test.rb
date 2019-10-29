@@ -219,12 +219,58 @@ describe OrderitemsController do
       existing_orderitem.order.save!
       
       expect {
-        delete orderitem_path(existing_orderitem.id)
+        delete orderitem_path(id: existing_orderitem.id)
       }.wont_change "Orderitem.count"
       
       must_redirect_to root_path
       
       expect(flash[:status]).must_equal :failure
+    end
+  end
+  
+  describe "mark_shipped" do
+    it "will mark an orderitem as shipped if order status is paid and redirect" do
+      expect(orderitems(:peach_op).shipped).must_equal false
+      patch mark_shipped_path(id: orderitems(:peach_op).id)
+      
+      updated_peaches = Orderitem.find_by(id: orderitems(:peach_op).id)
+      expect(updated_peaches.shipped).must_equal true
+      
+      expect(flash[:status]).must_equal :success
+      must_respond_with :redirect
+    end
+    
+    it "will change an order status to complete if it is marking the last not-shipped order item as shipped" do
+      expect(orders(:fruit_order).status).must_equal "paid"
+      
+      patch mark_shipped_path(id: orderitems(:peach_op).id)
+      
+      updated_order = Order.find_by(id: orders(:fruit_order).id)
+      expect(updated_order.status).must_equal "complete"
+    end
+    
+    it "will respond with a failure flash message, redirect for an orderitem already marked as ship" do
+      expect(orderitems(:banana_op).shipped).must_equal true
+      patch mark_shipped_path(id: orderitems(:banana_op).id)
+      
+      updated_bananas = Orderitem.find_by(id: orderitems(:banana_op).id)
+      expect(updated_bananas.shipped).must_equal true
+      
+      expect(flash[:status]).must_equal :failure
+      must_respond_with :redirect
+    end
+    
+    it "will respond with a failure flash message, redirect to root path for a non-paid order" do
+      expect(orders(:cat_order).status).must_equal "pending"
+      
+      expect(orderitems(:cat_food_ok).shipped).must_equal false
+      patch mark_shipped_path(id: orderitems(:cat_food_ok).id)
+      
+      updated_cat_food = Orderitem.find_by(id: orderitems(:cat_food_ok).id)
+      expect(updated_cat_food.shipped).must_equal false
+      
+      expect(flash[:status]).must_equal :failure
+      must_respond_with :redirect
     end
   end
 end
