@@ -14,17 +14,28 @@ class Merchant < ApplicationRecord
     return merchant
   end
 
-  # def self.orderitems
-  # @products = Product.where(merchant_id: session[:merchant_id])
+  def self.find_merchants_orderitems(current_merchant)
+    Orderitem.joins(product: :merchant).where(merchants: {id: current_merchant.id})
+  end
 
-  #   merchant_orderitems = []
-  #   @products.each do |product|
-  #     product.orderitems.each do |orderitem|
-  #       if orderitem.shipped == false && orderitem.order.status == 'paid'
-  #         merchant_orderitems << orderitem
-  #       end
-  #     end
-  #   end
-  #   return merchant_orderitems
-  # end
+  def self.calculate_total_revenue(current_merchant)
+    orderitems = Merchant.find_merchants_orderitems(current_merchant)
+    prices = []
+    orderitems.each do |orderitem|
+      prices << orderitem.product.price * orderitem.quantity
+    end
+    return prices.sum
+
+  end
+
+  
+  def revenue_for_shipped
+    revenue = 0
+    @merchant_orderitems.each do |orderitem|
+      if orderitem.shipped 
+        revenue += orderitem.product.price 
+      end
+    end
+
+  end
 end

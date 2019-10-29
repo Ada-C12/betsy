@@ -43,7 +43,7 @@ class MerchantsController < ApplicationController
   end
 
   def merchant_orderitems
-    @merchant_orderitems = Orderitem.joins(product: :merchant).where(merchants: {id: session[:merchant_id]})
+    @current_merchant = Merchant.find_by(id: session[:merchant_id])
   end
 
 end
