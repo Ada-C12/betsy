@@ -18,7 +18,7 @@ describe TypesController do
     it "will return a 404 if type does not exist" do 
       get type_path("apple")
       must_respond_with :redirect
-
+      
     end
     
   end

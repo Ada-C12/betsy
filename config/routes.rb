@@ -2,9 +2,6 @@ Rails.application.routes.draw do
   root to: 'homepages#index'
   
   resources :types, only: [:show, :new, :create]
-  # get 'types/new', to: 'types#new', as: 'new_type'
-  get 'types/:types_id', to: 'types#show_type', as: 'show_type'
-  # get 'type/browse', to: 'type#browse_type', as: 'browse_type'
   
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
   resources :products, except: [:destroy] do
