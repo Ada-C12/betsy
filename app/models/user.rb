@@ -16,7 +16,7 @@ class User < ApplicationRecord
     user.email = auth_hash["info"]["email"]
     return user 
   end 
-
+  
   def total_earned
     all_order_items = self.find_order_items
     total = 0 
@@ -28,8 +28,6 @@ class User < ApplicationRecord
     return total 
   end 
 
-  #In this method we will find all the orders that belong to a user
-  #We can pass those orders into the total_earned method
   def find_order_items
     all_products = self.find_products
     all_order_items = []
