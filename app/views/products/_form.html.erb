@@ -19,8 +19,12 @@
   <div class="row justify-content-md-center">
     <%= f.label :categories %>: 
   </div>
-  <div class="row justify-content-md-center">
-    <%= f.collection_check_boxes :category_ids, Category.all_alphabetized, :id, :name, {}, {:multiple => true} %>
+  <div class="row justify-content-md-between">
+    <%= f.collection_check_boxes :category_ids, Category.all_alphabetized, :id, :name, {}, {:multiple => true} do |b| %>
+      <%= b.label class:"label-checkbox" do %>
+        <%= b.check_box + b.text %>
+      <% end %>
+    <% end %>
   </div>
 
   <div class="row justify-content-md-center ">
