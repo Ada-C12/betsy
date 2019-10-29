@@ -1,8 +1,7 @@
 require "test_helper"
 
 describe ReviewsController do
-  describe "create action" do
-    let(:lemon_shirt) {
+  let(:lemon_shirt) {
       products(:lemon_shirt)
     }
     let(:betsy) {
@@ -31,6 +30,7 @@ describe ReviewsController do
       }
     }
 
+  describe "create action" do
     it "creates a new review successfully with valid data, and redirects the user to the product page" do
       expect {
         post reviews_path, params: review_hash
@@ -48,6 +48,50 @@ describe ReviewsController do
     end
   end
 
-  
+  describe 'destroy action' do
+    it 'destroys a review successfully if belongs to current user, and redirects to reviews product page' do
+      user = users(:betsy)
+      perform_login(user)
+      post reviews_path, params: review_hash
+      review = user.reviews.first
+      product = review.product
+
+      expect {
+        delete review_path(review.id) 
+      }.must_differ "Review.count", -1
+
+      must_redirect_to product_path(product.id)
+    end
+    it 'will not destroy a review if product does not belong to current user, and redirects to reviews product page' do
+      user = users(:betsy)
+      post reviews_path, params: review_hash
+      review = user.reviews.first
+      product = review.product
+      
+      other_user = users(:ada)
+      perform_login(other_user)
+
+      expect {
+        delete review_path(review.id) 
+      }.must_differ "Review.count", 0
+
+      must_redirect_to product_path(product.id)
+    end
+
+    it 'will not destroy a review if review doesnt exist, and redirects to root path' do
+      user = users(:betsy)
+      perform_login(user)
+      post reviews_path, params: review_hash
+      review = user.reviews.first
+      product = review.product
+
+      expect {
+        delete review_path(-1) 
+      }.must_differ "Review.count", 0
+
+      must_redirect_to root_path
+    end
+  end
+
 
 end

@@ -17,26 +17,6 @@ class ReviewsController < ApplicationController
     end
   end
 
-  def edit
-    if @review.nil?
-      redirect to root_path
-      return
-    end
-  end
-
-  def update
-    if @review.update(review_params)
-      flash[:success] = "Review has been updated successfully"
-      product = @review.product
-      redirect_to product_path(product.id)
-      return
-    else
-      flash.now[:error] = "Something went wrong! Product can not be edited."
-      render :edit
-      return
-    end
-  end
-
   def destroy
     review = Review.find_by(id: params[:id])
     if review
