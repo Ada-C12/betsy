@@ -1,9 +1,9 @@
 require 'simplecov'
 SimpleCov.start 'rails' do
-  add_filter '/test/' # Tests should not be counted toward coverage.
   add_filter '/bin/'
   add_filter '/db/'
-  add_filter '/spec/'
+  add_filter '/spec/' # for rspec
+  add_filter '/test/' # for minitest
 end
 
 ENV['RAILS_ENV'] ||= 'test'
@@ -13,6 +13,9 @@ require 'minitest/rails'
 require 'minitest/autorun'
 require 'minitest/reporters'
 Minitest::Reporters.use! Minitest::Reporters::SpecReporter.new
+
+
+
 
 class ActiveSupport::TestCase
   # Setup all fixtures in test/fixtures/*.yml for all tests in alphabetical order.

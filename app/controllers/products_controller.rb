@@ -24,6 +24,7 @@ class ProductsController < ApplicationController
   def create
     @product = Product.new(product_params)
     @merchant = Merchant.find_by(id: session[:merchant_id])
+    @product.photo_url = "https://www.netclipart.com/pp/m/10-101242_beer-mug-clip-art-beer-beer-clipart-png.png"
     @product.merchant_id = @merchant.id 
     @product.retired = false
     if @product.save
