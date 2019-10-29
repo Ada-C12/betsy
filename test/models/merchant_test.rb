@@ -126,6 +126,18 @@ describe Merchant do
        
       end
     end
+
+    describe "calculate_total_revenue" do
+      it "returns the total revenue for a merchant's orderitems" do
+
+      end
+      
+      it "returns the total revenue for a merchant's orderitems by status" do
+      end 
+
+    end 
+
+
   end
 
 end

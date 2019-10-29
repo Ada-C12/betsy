@@ -1,6 +1,9 @@
 <h2>Merchant's Order Items</h2>
 
 <section>
+
+
+@current_merchant.
   <% @merchant_orderitems.each do |orderitem| %>
     <section class="row checkout">
     <section class = "columns small-12 medium-3">
@@ -16,6 +19,8 @@
       <%= orderitem.order.status %>
       <%= orderitem.shipped %>
     </section>
+
+    <%= @current_merchant.calculate_total_revenue %>
 
 </section>
 <% end %>

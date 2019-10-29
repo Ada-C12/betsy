@@ -1,7 +1,5 @@
 class ApplicationController < ActionController::Base
-
- 
-
+  
   def current_merchant
     if session[:merchant_id]
       @current_merchant ||= Merchant.find_by(id: session[:merchant_id])

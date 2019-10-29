@@ -14,17 +14,15 @@ class Merchant < ApplicationRecord
     return merchant
   end
 
-  # def self.orderitems
-  # @products = Product.where(merchant_id: session[:merchant_id])
+  def calculate_total_revenue
+    # if status isn't passed in, find all the merchants orderitems and 
+    # return total revenue
+    costs = []
+    order_items = merchant_orderitems
+    order_items.each do |orderitem|
+      p orderitem.product.cost
+    end
 
-  #   merchant_orderitems = []
-  #   @products.each do |product|
-  #     product.orderitems.each do |orderitem|
-  #       if orderitem.shipped == false && orderitem.order.status == 'paid'
-  #         merchant_orderitems << orderitem
-  #       end
-  #     end
-  #   end
-  #   return merchant_orderitems
-  # end
+  end 
+
 end

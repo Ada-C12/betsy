@@ -43,23 +43,6 @@ class MerchantsController < ApplicationController
   end
 
   def merchant_orderitems
-     @merchant_orderitems = Orderitem.joins(product: :merchant).where(merchants: {id: session[:merchant_id]})
-
-     #.where("product.merchant_id==@current_merchant")
-
-    # @orderitems = Orderitem.where(product_id: )
-
-    #each product has a merchant so we care about the orderitem product_id
-    # @orderitems.each do |orderitem|
-    # product = Product.where(id: orderitem.product_id)
-    # end
-
-    # @current_merchant = Merchant.find_by(id: session[:merchant_id])
-
-    # @current_merechant.products.each do |product|
-    # if product.orderitems.shipped == false && orderitems.order.status == 'paid'
-  
-
-
+    @current_merchant = Merchant.find_by(id: session[:merchant_id])
   end
 end
