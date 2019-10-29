@@ -14,7 +14,7 @@
   <ul>
     <% @current_merchant.products.each do |product|%>
       <%= image_tag "#{product.photo_url}"%>
-      <%= product.name %>
+      <%= link_to product.name, product_path(product.id) %>
       <%= link_to "Edit", edit_product_path(product), class: "btn btn-primary" %>
     <% end %>
   </ul>
