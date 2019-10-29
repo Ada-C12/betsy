@@ -4,11 +4,12 @@ class ReviewsController < ApplicationController
   end
   
   def create
-    @review = Review.new(media_params)
+    @review = Review.new(review_params)
+    @review.product_id = params[:product_id]
     if @review.save
       flash[:status] = :success
       flash[:result_text] = "Thank you! Your review has been saved."
-      redirect_back fallback_location: root_path
+      redirect_to product_path(params[:product_id])
     else
       flash.now[:status] = :failure
       flash.now[:result_text] = "Could not save your review. Please check below and submit again."
@@ -19,8 +20,8 @@ class ReviewsController < ApplicationController
   
   private
   
-  def media_params
-    params.require(:work).permit(:title, :category, :creator, :description, :publication_year)
+  def review_params
+    params.require(:review).permit(:rating, :text_review)
   end
 end
 

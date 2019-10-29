@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
   resources :products, except: [:destroy] do
     resources :orderitems, only: [:create]
+    resources :reviews, only: [:new, :create]
   end
   
   resources :merchants, except: [:delete, :new, :show]
@@ -21,9 +22,6 @@ Rails.application.routes.draw do
   get '/cart', to: 'orders#cart', as: 'cart'
   patch '/orders/:id', to: 'orders#update'
   patch '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
-  
-  resources :reviews, only: [:new, :create] do 
-  end
   
   resources :types, only: [:show, :new, :create]
 end

@@ -38,7 +38,7 @@ class OrderitemsController < ApplicationController
     # Now save and see if validation fights you
     if @orderitem.save
       flash[:status] = :success
-      flash[:result_text] = "#{@orderitem.product.name} has been added to the cart."  
+      flash[:result_text] = "#{@orderitem.product.name} has been added to your cart!"  
     else 
       flash[:status] = :failure
       flash[:result_text] = "Could not add the item to the cart."
