@@ -56,4 +56,16 @@ describe Wizard do
       end
     end
   end
+
+  describe "custom methods" do
+    describe "build from github" do
+      it "" do
+        
+
+      end
+    end
+
+
+  end
+
 end

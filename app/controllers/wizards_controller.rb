@@ -2,10 +2,12 @@ class WizardsController < ApplicationController
   def create
     auth_hash = request.env["omniauth.auth"]
     wizard = Wizard.find_by(uid: auth_hash[:uid], provider: "github")
+    # binding.pry
     if wizard
       flash[:success] = "Logged in as returning wizard #{wizard.username}"
     else
       wizard = Wizard.build_from_github(auth_hash)
+      # binding.pry
 
       if wizard.save
         flash[:success] = "Logged in as new wizard #{wizard.username}"

@@ -1,5 +1,5 @@
 class Wizard < ApplicationRecord
-  has_many :products
+  has_many :products, dependent: :nullify
   
   validates :username, presence: true
   validates :username, uniqueness: true
