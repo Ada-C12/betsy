@@ -16,7 +16,7 @@ class OrderItemsController < ApplicationController
     
     if !@product.quantity_available?(order_item_params[:quantity].to_i)
       flash[:error] = "Quantity entered is greater than available stock for #{@product.name}."
-      return redirect_back(fallback_location: :back)
+      return redirect_back(fallback_location: cart_path)
     elsif !@current_order.order_items.where(product: @product).empty?
       order_item = @current_order.order_items.where(product: @product).first
       order_item.increase_quantity(order_item_params[:quantity].to_i)

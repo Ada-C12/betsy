@@ -36,7 +36,39 @@ describe OrderItemsController do
       assert_equal "Item could not be added to your basket.", flash[:error]
     end
 
-   #Do/can we test for session[:cart_id]???
+    it "does not create a new order item if the product does not exit and responds with a 404" do
+      product_id = -1
+      order_items_hash = {
+        order_item: {
+          quantity: 0
+        }
+      }
+
+      expect {
+        post product_order_items_path(product_id), params: order_items_hash
+      }.wont_differ 'OrderItem.count'
+
+      must_respond_with :not_found
+      assert_equal "Product no longer exists.", flash[:error]
+    end
+
+    it "does not create a new order item if the quanity entered is greater than the product stock" do
+      product = products(:strawberry_shoes)
+      expect(product.stock).must_equal 2
+
+      order_item_hash = {
+        order_item: {
+          quantity: 7
+        }
+      }
+
+      expect {
+        post product_order_items_path(product.id), params: order_item_hash
+      }.wont_differ 'OrderItem.count'
+
+      must_respond_with :redirect
+      assert_equal "Quantity entered is greater than available stock for #{product.name}.", flash[:error]
+    end
   end
 
   describe "update" do
