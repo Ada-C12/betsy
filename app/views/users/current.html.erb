@@ -63,14 +63,14 @@ Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
           <td>
             <% if order.status == "paid" %>
               <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                paid
+                Paid
               </a>
               <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
                 <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, class: "dropdown-item" %>
                 <%= link_to "Completed", complete_order_path(order.id), method: :patch, class: "dropdown-item" %>
               </div>
             <% else %>
-              <%= order.status %>
+              <%= order.status.capitalize %>
             <% end %>
           </td>
           <td><%= order_item.total %>
