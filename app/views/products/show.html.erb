@@ -11,18 +11,19 @@
       <small class="description"><%= @product.description %><small>
       <small><p>Sold by: <%= link_to @product.merchant.username, merchant_products_path(@product.merchant.id)%></p></small>
       <p>$<%= '%.2f' % @product.price %></p>
+      
       <% if @product.retired %>
         <p>Not currently for sale</p>
       <% end %>
-      <form class="new_order_product" id="new_order_product">
+      
+      <div class="new_order_product" id="new_order_product">
         <%= form_with model: @orderitem, url: "/products/#{@product.id}/orderitems" do |f| %>
           <%= f.label :quantity %>
           <%= f.select :quantity, (1..@product.stock) %>
-          <div><%= f.submit "Add to Cart", class: "btn btn-primary"%></div>
-          <%#= link_to "Edit", edit_product_path(@product.id), class: "btn btn-primary" %>
-          <%#= link_to "Back", products_path, class: "btn btn-primary" %>
+          <div><%= f.submit "Add to Cart", method: :post, class: "btn btn-primary"%></div>
         <% end %>
-      </form>
+      </div>
+
       <% if !@product.types.empty? %>
         <p class="types"><% @product.types.each do |type| %>
           <%= link_to type.name, type_path(type) %>

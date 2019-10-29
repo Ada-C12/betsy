@@ -22,7 +22,7 @@
       <% Merchant.find_merchants_orderitems(@current_merchant, "false").each do |orderitem| %>
         <% if orderitem.order.status != "cancel" %>
         <tr>
-          <td><%= link_to "Order ##{orderitem.order_id}", order_path(orderitem.order_id) %></td>
+          <td><%= link_to "Order ##{orderitem.order_id}", merchant_order_path(orderitem.order_id) %></td>
           <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
           <td><%= orderitem.order.created_at %></td>
           <td>$<%= orderitem.product.price %> x <%= orderitem.quantity %></td>
@@ -52,7 +52,7 @@
       <th>Status</th>
       <% Merchant.find_merchants_orderitems(@current_merchant, "true").each do |orderitem| %>
       <tr>
-        <td><%= link_to "Order ##{orderitem.order_id}", order_path(orderitem.order_id) %></td>
+        <td><%= link_to "Order ##{orderitem.order_id}", merchant_order_path(orderitem.order_id) %></td>
         <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
         <td><%= orderitem.order.created_at %></td>
         <td>$<%= orderitem.product.price %> x <%= orderitem.quantity %></td>
