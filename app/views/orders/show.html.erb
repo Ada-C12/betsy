@@ -54,7 +54,9 @@
       <p>$<%= @order.total %></p>
     </section>
 
-    <p><%= link_to 'Cancel Order', cancel_order_path(id: @order.id), method: :patch, class:"btn btn-alert" %></p>
+    <% if @order.status != 'cancel' %>
+      <p><%= link_to 'Cancel Order', cancel_order_path(id: @order.id), method: :patch, class:"btn btn-alert" %></p>
+    <% end %>
   </section>
   
 </section>
