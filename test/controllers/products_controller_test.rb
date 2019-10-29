@@ -52,7 +52,14 @@ describe ProductsController do
 
     describe "edit action" do
       it "responds with redirect since user is guest and not logged in" do
-        get edit_wizard_products_path(wizard1.id)
+        get edit_product_path(product.id)
+        must_respond_with :redirect
+      end
+    end
+
+    describe "update action" do
+      it "responds with redirect since user is guest and not logged in" do
+        patch product_path(product.id)
         must_respond_with :redirect
       end
     end
