@@ -148,6 +148,23 @@ describe Merchant do
       
     end 
 
+    describe "calc_rev_by_status" do
+      it "returns the total revenue for a merchant's orderitems" do
+        current_merchant = merchants(:brad)
+        result1 = Merchant.calc_rev_by_status(current_merchant, "true")
+        result2 = Merchant.calc_rev_by_status(current_merchant, "false")
+
+        expect(result1).must_equal 14.0
+        expect(result2).must_equal 167.1
+      end
+
+      it "returns zero for the total revenue if merchant has no orderitems" do
+        current_merchant = merchants(:leo)
+        result = Merchant.calc_rev_by_status(current_merchant, "true")
+        expect(result).must_equal 0
+      end
+    end
+
 
   end
 
