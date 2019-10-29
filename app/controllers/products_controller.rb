@@ -7,16 +7,13 @@ class ProductsController < ApplicationController
     category_id = params[:category_id]
 
     if category_id.nil?
-      @products = Product.all
-      return
+      @products = Product.active
     elsif category_id
       @category = Category.find_by(id: category_id)
       if @category
-        @products = @category.products
-        return
+        @products = @category.products.active
       else
         head :not_found
-        return
       end
     else
       head :not_found
@@ -102,6 +99,6 @@ class ProductsController < ApplicationController
   end
 
   def product_params
-    return params.require(:product).permit(:name, :price, :stock, :img_url, :description, active: true, category_ids: [])
+    return params.require(:product).permit(:name, :price, :stock, :img_url, :description, :active, category_ids: [])
   end
 end
