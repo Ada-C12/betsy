@@ -1,19 +1,18 @@
 class OrdersController < ApplicationController
-  skip_before_action :require_login, only: [:cart, :checkout, :update, :confirmation]
-  
+  skip_before_action :require_login, only: [:cart, :checkout, :update_paid, :confirmation]
+  skip_before_action :find_order, only: [:show, :update_paid]
+  before_action :find_order_params, only: [:show, :update_paid]
+
   def show
-    @order = Order.find_by(id: params[:id])
-    if @order.contains_orderitems?
-      if @order.nil?
-        flash[:error] = "Order doesn't exist!"
-        return redirect_to root_path 
-      end
-    else
+    if !@order
+      head :not_found 
+      return 
+    elsif !@order.contain_orderitems?(@current_user)
       flash[:error] = "You cannot check this order details!"
       return redirect_to root_path 
     end
   end
-
+  
   def cart
   end
   
@@ -21,23 +20,27 @@ class OrdersController < ApplicationController
     if @current_order.nil?
       flash[:error] = "Order doesn't exist!"
       return redirect_to root_path
-    else
+    elsif @current_order.order_items.empty?
+      flash[:error] = "No item in the cart! Please add some items then checkout!"
+      return redirect_to root_path
     end
   end
   
   def update_paid
-    @current_order.update(order_params)
-      @current_order.status = "paid"
-      @current_order.customer_id = session[:user_id]
-      
-      if @current_order.save
-        flash[:success] = "Order #{@current_order.id} has been purchased successfully!"
-        return redirect_to confirmation_path
-      else
-        flash.now[:error] = "Something went wrong! Order was not paid.#{@current_order.errors.messages}"
-        render cart_path
-        return
-      end
+    @order.update(order_params)
+    @order.customer_id = session[:user_id]
+    @order.status = "paid"
+
+    if @order.save
+      flash[:success] = "Order #{@order.id} has been purchased successfully!"
+      return redirect_to confirmation_path
+    
+    else
+      @order.update(status: "pending")
+      flash[:error] = "Something went wrong! Order was not paid.#{@order.errors.messages}"
+      redirect_to cart_path
+      return
+    end
   end
   
   def confirmation
@@ -53,8 +56,12 @@ class OrdersController < ApplicationController
   private
   
   def order_params
-    return params.require(:order).permit(:name, :email, :address, :cc_name, :cc_last4, :cc_exp, :cc_cvv, :billing_zip)
+    return params.require(:order).permit(:name, :email, :address, :cc_name, :cc_last4, :cc_exp, :cc_cvv, :billing_zip, status: "paid")
   end
   
+  def find_order_params
+    @order = Order.find_by(id: params[:id])
+  end
+
 end
 
