@@ -1,8 +1,8 @@
 <h2>hello, <%=@current_user.username%>!</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
-Total revenue as of <%= Date.today %>:
-  <%=  @current_user.total_earned%>
-<%# ADD total revenue of all status that qualify HERE %>
+Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
+
+<%# ADD total revenue of all status that qualify(all status except for pending) HERE %>
 <section class="user-products__container">
   <h3 class="user-products__header">Manage your products</h3>
   <table class="table">
@@ -21,11 +21,9 @@ Total revenue as of <%= Date.today %>:
           <tr>
             <td><%= link_to product.name, product_path(product) %></td>
             <td><%= product.price %></td>
-            <td><%= product.quantity %></td>
+            <td><%= product.stock %></td>
             <td><%= product.description %></td>
-            <%product.categories.each do |category|%>
-              <td><%= category.name %></td>
-            <%end%>
+            <td><%= product.categories.first.name %></td>
           </tr>
         <% end %>
       <% end %>
@@ -44,20 +42,23 @@ Total revenue as of <%= Date.today %>:
         <%# #Will require a link to the product %>
         <th> Order date</th>
         <th> Status</th>
+        <th> Total </th>
         <th> Category</th>
       </tr>
     </thead>
     <tbody>
-    <% if @products %>
-    <% @products.each do |product| %>
+    <% if @current_user.products %>
+    <% total_revenue = 0 %>
+    <% @current_user.products.each do |product| %>
       <% product.order_items.each do |order_item| %>
         <tr>
-          <td><%= link_to order_item.order.id, root_path%></td>
-          <td><%= order.order_item %></td>
-          <td><%= render_date order.created_at %></td>
+          <%order = order_item.order %>
+          <td><%= link_to order.id, order_path(order.id)%></td>
+          <td><%= product.id %></td>
+          <td><%= readable_date(order.created_at) %></td>
           <td><%= order.status %></td>
-          <td><%= category %></td>
-          <td><%= subtotal %></td>
+          <td><%= order_item.total %>
+          <td><%= product.categories.first.name %></td>
           <%# in this subtotal section, calculate the subtotal for that order item by calling the 'total' class method in Order_Item %>
         </tr>
       <% end %>

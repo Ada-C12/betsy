@@ -1,7 +1,7 @@
 lemon_shirt:
   name: "Lemon Shirt"
   price: 25
-  quantity: 5
+  stock: 5
   img_url: "https://img.com"
   user: ada
   description: "Here is a description"
@@ -9,7 +9,7 @@ lemon_shirt:
 strawberry_shoes:
   name: "Strawberry Shoes"
   price: 55
-  quantity: 2
+  stock: 2
   img_url: "https://img.com"
   user: ada
   description: "Here is another description"
@@ -17,7 +17,7 @@ strawberry_shoes:
 banana_sweatshirt:
   name: "Banana Sweatshirt"
   price: 25
-  quantity: 6
+  stock: 6
   img_url: http://fakeurl.com
   user: ada
   description: "Here is another description"

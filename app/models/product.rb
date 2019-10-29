@@ -2,13 +2,14 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: {scope: :user_id}
   validates_length_of :name, minimum: 1, maximum: 50
   validates :price, presence: true
-  validates :quantity, presence: true
+  validates :stock, presence: true
   validates :user_id, presence: true
   validates :img_url, presence: true
   validates :description, presence: true
   
   belongs_to :user
   has_many :order_items, dependent: :nullify
+  has_many :reviews, dependent: :nullify
   has_and_belongs_to_many :categories
 
     
@@ -30,14 +31,6 @@ class Product < ApplicationRecord
     end
   end
 
-  def find_order_items
-    all_products = @current_user.find_products
-    all_order_items = []
-    all_products.each do |product| 
-      all_order_items << OrderItem.find_by(product_id: product.id)
-    end 
-    all_order_items = self.where(product_id: self)
-  end 
 
 
   def update_quantity
