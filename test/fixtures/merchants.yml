@@ -3,3 +3,8 @@ brad:
   email: radbrad@frat.com
   uid: 13371337
   provider: github
+leo:
+  username: leod
+  email: leod@frat.com
+  uid: 13373345
+  provider: github
