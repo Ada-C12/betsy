@@ -97,12 +97,14 @@ describe ProductsController do
         get wizard_products_path(wizard1.id)
         must_respond_with :success
       end
+
       it "responds with redirect if the logged in user is not the Wizard given in params" do
         different_wizard = wizard_no_products
         get wizard_products_path(different_wizard.id)
         must_respond_with :redirect
       end
     end
+
     describe "create action" do
       let(:new_product_params) {
         {
@@ -118,17 +120,17 @@ describe ProductsController do
       }
       it "redirects if correct wizard is not logged in" do
         post wizard_products_path(different_logged_in_wizard.id), params: new_product_params
-
         must_respond_with :redirect
       end
+
       it "creates a product given valid product data" do
         expect {
           post wizard_products_path(wizard1.id), params: new_product_params
         }.must_change "Product.count", 1
 
         must_respond_with :redirect
-
       end
+
       it "renders bad_request and does not update the DB for bogus data" do
         bad_new_product_params = {
           product: {
@@ -147,9 +149,13 @@ describe ProductsController do
 
         must_respond_with :bad_request
       end
-      it "responds with :not_found if Wizard is not found from params[:wizard_id]" do
 
+      it "responds with :not_found if Wizard is not found from params[:wizard_id]" do
+        bogus_wizard_id = -1
+        post wizard_products_path(bogus_wizard_id), params: new_product_params
+        must_respond_with :not_found
       end
+      
     end
   end
 end
