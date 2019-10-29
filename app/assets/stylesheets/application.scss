@@ -69,6 +69,7 @@ margin-left: 2rem;
    background-color: white;
    margin-bottom: 0.5rem;
    padding: 2rem 1rem 0.5rem 1rem;
+  //  text-transform: uppercase;
    h1 {
      text-align: center;
      margin: 25px auto 40px auto;
@@ -87,7 +88,11 @@ margin-left: 2rem;
    }
  }
 
- .dropdown:hover>.dropdown-menu {
+.float-right {
+  float: right !important;
+}
+
+.dropdown:hover>.dropdown-menu {
   display: block;
 }
 
