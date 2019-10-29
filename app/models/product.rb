@@ -35,4 +35,8 @@ class Product < ApplicationRecord
   def avg_rating
   end
 
+  def self.active
+    return self.where(active:true)
+  end 
+
 end

@@ -21,7 +21,7 @@ Rails.application.routes.draw do
   patch "/orders/:id", to: "orders#update_paid"
   patch "/orders/:id/cancel", to: "orders#cancel_order", as: "cancel_order"
   patch "/orders/:id/complete", to: "orders#complete_order", as: "complete_order"
-  
+
   resources :categories do
     resources :products, only: [:index]
   end

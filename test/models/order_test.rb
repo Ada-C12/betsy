@@ -92,5 +92,51 @@ describe Order do
 
   describe "custom methods" do 
 
+    describe "not pending" do 
+      it "returns true for an order that is not pending" do
+      
+        order = orders(:order_1)
+        assert(order.not_pending?) 
+
+        order.status = "cancelled"
+        assert(order.not_pending?)
+
+        order.status = "completed"
+        assert(order.not_pending?)
+      end 
+
+      it "returns false for an order that is pending" do 
+        order = orders(:order_2)
+        refute(order.not_pending?)
+      end 
+    end 
+
+    describe "contain_orderitems?" do 
+      it "returns true if the current user has a product in an order" do 
+        order = orders(:order_1)
+        user = users(:ada)
+        
+        assert(order.contain_orderitems?(user))
+      end 
+
+      it "returns false if the current user does not contain products in an order" do
+        user = users(:gretchen)
+        order = orders(:order_1) 
+        refute(order.contain_orderitems?(user))
+      end 
+    end 
+
+    describe "total" do 
+      it "returns the total for all orderitems inside of a paid order" do
+        order = orders(:order_1)
+        
+        expect(order.total).must_equal 330
+      end 
+      it "returns the total for all orderitems inside of a pending order" do 
+        order = orders(:order_2)
+
+        expect(order.total).must_equal 125
+      end 
+    end 
   end
 end

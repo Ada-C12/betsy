@@ -93,5 +93,48 @@ describe User do
         expect(review).must_be_instance_of Review
       end
     end
+  end 
+
+  describe "custom methods" do 
+
+    describe "total earned" do 
+      it "returns the total revenue a user has earned on the site" do
+        user = users(:ada)
+        expect(user.total_earned).must_be_instance_of Float
+        expect(user.total_earned).must_equal 330
+      end 
+
+      it "returns 0 if the user has not sold any products" do 
+        user = User.create(username: "aaaawooo", email: "werewolf@mail.com", uid: 23542)
+        expect(user.total_earned).must_equal 0 
+      end 
+    end 
+
+    describe "find order items" do
+      it "returns an array of all order items belonging to a user" do
+        user = users(:ada)
+        expect(user.find_order_items).must_be_instance_of Array
+        expect(user.find_order_items.first).must_be_kind_of OrderItem
+      end 
+
+      it "contains accurate orderitems for a user" do 
+        user = users(:ada)
+        orderitem = order_items(:order_item_1)
+        expect(user.find_order_items.first).must_equal orderitem
+        expect(user.find_order_items.first.product.name).must_equal "Lemon Shirt"
+      end 
+    end 
+
+    describe "find products" do 
+      it "finds all products belonging to a user" do 
+        user = users(:ada)
+        expect(user.find_products.first).must_be_kind_of Product
+      end 
+
+      it "won't return any products if a user has none" do 
+      user = users(:gretchen)
+      expect(user.find_products.first).must_equal nil 
+      end 
+    end 
   end
 end

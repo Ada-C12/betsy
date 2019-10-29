@@ -87,19 +87,31 @@ describe OrderItem do
     end
   end
 
-  describe "increase_quantity" do
-    it "accurately increases the quantity of an existing order item" do
-      order_item = OrderItem.first
-      expect(order_item.quantity).must_be :<, 5
-      new_quantity = 5
+  describe "custom methods" do 
+    describe "total" do 
+      it "returns the total for each orderitem" do 
+        orderitem = order_items(:order_item_1)
 
-      order_item.increase_quantity(new_quantity)
+        expect(orderitem.total).must_equal 100
+      end 
 
-      expect(order_item.quantity).must_be :>, 5
-    end
+      it "returns 0 for an order item with a quantity of 0" do 
+        order_items(:order_item_1).quantity = 0
+        orderitem = order_items(:order_item_1)
+        expect(orderitem.total).must_equal 0
+      end 
+    end 
 
-    #edge case?
+    describe "increase_quantity" do
+      it "accurately increases the quantity of an existing order item" do
+        order_item = OrderItem.first
+        expect(order_item.quantity).must_be :<, 5
+        new_quantity = 5
 
+        order_item.increase_quantity(new_quantity)
 
+        expect(order_item.quantity).must_be :>, 5
+      end
+    end 
   end
 end
