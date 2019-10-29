@@ -12,5 +12,12 @@ class OrderItem < ApplicationRecord
   def total
     (self.quantity * self.product.price)
   end
+
+  def increase_quantity(quantity)
+    existing_quantity = self.quantity
+    new_quantity = existing_quantity + quantity
+
+    self.update(quantity: new_quantity)
+  end
   
 end

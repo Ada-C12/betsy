@@ -16,12 +16,12 @@ class OrderItemsController < ApplicationController
       return head :not_found
     end
     #add logic so cannot create order item if quantity exceeds stock
-    if order.order_items.where(product: @product)
+
+    if order.order_items.where(product: @product).length > 0
       order_item = order.order_items.where(product: @product).first
-      quantity = order_item_params[:quantity].to_i + order_item.quantity
-      order_item.update(quantity: quantity)
+      order_item.increase_quantity(order_item_params[:quantity].to_i)
       flash[:success] = "Item successfully added to your basket."
-      return redirect_back(fallback_location: :back)
+      return redirect_back(fallback_location: cart_path)
     else
       order_item = OrderItem.new(
         product: @product,
@@ -32,11 +32,10 @@ class OrderItemsController < ApplicationController
 
     if order_item.save
       flash[:success] = "Item successfully added to your basket."
-      return redirect_back(fallback_location: :back)
+      return redirect_back(fallback_location: cart_path)
     else
-      raise
       flash[:error] = "Item could not be added to your basket."
-      return redirect_back(fallback_location: :back)
+      return redirect_back(fallback_location: :root)
     end
   end
 
@@ -53,6 +52,7 @@ class OrderItemsController < ApplicationController
 
   def destroy
     order_item = OrderItem.find_by(id: params[:id])
+
     if order_item.nil?
       return redirect_to cart_path
     else
@@ -64,6 +64,8 @@ class OrderItemsController < ApplicationController
     return redirect_to cart_path
     end
   end
+
+  private
   
   def order_item_params
     return params.require(:order_item).permit(:product, :order, :quantity)
