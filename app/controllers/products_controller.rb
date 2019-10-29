@@ -5,7 +5,6 @@ class ProductsController < ApplicationController
 
   def index
     category_id = params[:category_id]
-    user_id = params[:user_id]
 
     if category_id.nil?
       @products = Product.active
@@ -18,6 +17,7 @@ class ProductsController < ApplicationController
       end
     else
       head :not_found
+      return
     end
   end
   
@@ -37,9 +37,15 @@ class ProductsController < ApplicationController
     @product.user_id = session[:user_id]
     
     if @product.save
-      flash[:success] = "Product #{@product.name} has been added successfully"
-      redirect_to product_path(@product.id)
-      return
+      if @current_user.merchant_name.nil?
+        flash[:success] = "Product #{@product.name} has been added successfully"
+        flash[:message] = "You merchant name is currently empty. Please add a merchant name to add your fruit stand to the Merchants List."
+        return redirect_to edit_user_path
+      else
+        flash[:success] = "Product #{@product.name} has been added successfully"
+        redirect_to product_path(@product.id)
+        return
+      end
     else
       flash.now[:error] = "Something went wrong! Product was not added."
       render :new
@@ -57,11 +63,11 @@ class ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       flash[:success] = "Product #{@product.name} has been updated successfully"
-      redirect_to current_user_path
+      redirect_to product_path(@product.id)
       return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
-      render "/users/current" 
+      render current_user_path
       return
     end
   end
@@ -72,15 +78,18 @@ class ProductsController < ApplicationController
       if product.user_id == session[:user_id]
         product.destroy
         flash[:success] = "Product #{product.name} was deleted!"
+        redirect_to root_path
+        return
       else
         flash[:error] = "You cannot delete a product not belonging to you!"
+        redirect_to root_path
+        return
       end
     else
       flash[:error] = "The product doesn't exist!"
+      redirect_to root_path
+      return
     end
-    
-    redirect_to root_path
-    return
   end
   
   private

@@ -1,13 +1,11 @@
 <h2>hello, <%=@current_user.username%>!</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
-Total revenue as of <%= Date.today %>:  
+Total revenue as of <%= readable_date(Date.today) %>: <%=currency_format(@current_user.total_earned)%>
 <%if @current_user.total_earned > 0 %> 
   <%= @current_user.total_earned %>
 <%else %>
   <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
-<%end%>
-
-<%# ADD total revenue of all status that qualify(all status except for pending) HERE %>
+<%end%> 
 <section class="user-products__container">
   <h3 class="user-products__header">Manage your products</h3>
   <table class="table">

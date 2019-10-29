@@ -1,17 +1,26 @@
 class ReviewsController < ApplicationController
-  skip_before_action :require_login, :only => [:create, :show]
   skip_before_action :find_order
+  skip_before_action :require_login, :only => [:create]
   
   def create
     @review = Review.new(review_params)
 
-    if @review.save
-      flash[:success] = "Your review has been added successfully"
-      product = @review.product
-      redirect_to product_path(product.id)
-      return
+    if @review.valid?
+      if current_user && @review.product.user_id == current_user.id
+        flash[:error] = "You can't review your own product!"
+        redirect_to product_path(@review.product.id)
+        return
+      elsif current_user && !current_user.reviews.where(product_id: @review.product_id).empty?
+        flash[:error] = "You can't review a product more than once!"
+        redirect_to product_path(@review.product.id)
+        return
+      elsif @review.save
+        flash[:success] = "Your review has been added successfully!"
+        redirect_to product_path(@review.product.id)
+        return
+      end
     else
-      flash.now[:error] = "Something went wrong! Review was not added."
+      flash[:error] = "Something went wrong! Review was not added."
       redirect_to root_path
       return
     end
@@ -21,7 +30,7 @@ class ReviewsController < ApplicationController
     review = Review.find_by(id: params[:id])
     if review
       product = review.product
-      if review.user_id == session[:user_id]
+      if review.user_id && review.user_id == session[:user_id]
         review.destroy
         flash[:success] = "Your review was deleted!"
         redirect_to product_path(product.id)
@@ -41,6 +50,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    return params.require(:review).permit(:rating, :description, :user_id, :product_id)
+    return params.require(:review).permit(:rating, :title, :description, :user_id, :product_id)
   end
 end

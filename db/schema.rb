@@ -74,6 +74,7 @@ ActiveRecord::Schema.define(version: 2019_10_29_212317) do
     t.string "description"
     t.bigint "user_id"
     t.bigint "product_id"
+    t.string "title"
     t.index ["product_id"], name: "index_reviews_on_product_id"
     t.index ["user_id"], name: "index_reviews_on_user_id"
   end
