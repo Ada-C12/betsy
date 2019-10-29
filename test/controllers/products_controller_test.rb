@@ -72,7 +72,7 @@ describe ProductsController do
       }
     }
 
-    it "creates a new product successfully with valid data by a logged in merchant, and redirects the user to the product page" do
+    it "creates a new product successfully with valid data by a logged in merchant and redirects to the product page if the user has a merchant name" do
       user = users(:ada)
       perform_login(user)
 
@@ -83,7 +83,24 @@ describe ProductsController do
       must_redirect_to product_path(Product.find_by(name: "new product"))
     end
 
-    it "cannot creates a new product if no merchant logged in, and redirects the user to root path" do
+    it "creates a new product successfully with valid data by a logged in merchant and redirects to the edit user page if the user does not have a merchant name" do
+      user = User.create(
+        uid: 357,
+        email: "supercoolemail@email.com",
+        provider: "github",
+        username: "cool_vender" 
+      )
+      perform_login(user)
+
+      expect {
+        post products_path, params: product_hash
+      }.must_differ "Product.count", 1
+
+      must_redirect_to edit_user_path
+      assert_equal "You merchant name is currently empty. Please add a merchant name to add your fruit stand to the Merchants List.", flash[:message]
+    end
+
+    it "cannot create a new product if no merchant logged in, and redirects the user to root path" do
       user = users(:ada)
 
       expect {
