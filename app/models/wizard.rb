@@ -39,4 +39,8 @@ class Wizard < ApplicationRecord
     end
     return orders.uniq
   end
+
+  def orders_by_status(input_status)
+    return self.orders.select { |order| order.status == input_status}
+  end
 end

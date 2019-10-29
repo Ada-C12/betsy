@@ -3,10 +3,47 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 .product-row {
-    margin-bottom: 30px;
+    margin-bottom: 3em;
 }
 
 .wizard-show-nav {
     display: flex;
     justify-content: center;
+}
+
+#wizard-show-item-photo {
+    width: 20vw;
+}
+
+.wizard-show-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.revenue {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-start: 1;
+}
+
+.orders {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-start: 2;
+}
+
+.revenue div:first-child {
+    grid-column: 1 / 2;
+}
+
+.revenue div:last-child {
+    grid-column: 2 / 3;
+}
+
+.orders div div:first-child {
+    grid-column-start: 3;
+}
+
+.orders div span:first-child {
+    grid-column-start: 4;
 }

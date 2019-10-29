@@ -1,8 +1,9 @@
+<section>
+	<p><%= @wizard.username%> </p>
+	<p><%= @wizard.email%>  </p>
 
-<p><%= @wizard.username%> </p>
-<p><%= @wizard.email%>  </p>
-
-<div> Total Revenue <%=@wizard.total_revenue%> </div>
+	<h4> Total Revenue: $<%=@wizard.total_revenue%> </h4>
+</section>
 
 <ul class="wizard-show-nav">
 	<li>
@@ -24,13 +25,40 @@
 	</li>
 </ul>
 
+
+<h3>Summary</h3>
 <div class="container">
+	<div class="row">
+		<h4 class="col-lg-6">Revenue</h4>
+		<h4 class="col-lg-6">Orders</h4>
+	</div>
+	<div class="row justify-content-md-start">
+		<div class="col-lg-6">
+			<p>Pending Orders Revenue................$<%= @wizard.total_revenue_by_status("pending") %></p>
+			<p>Paid Orders Revenue....................$<%= @wizard.total_revenue_by_status("paid") %></p>
+			<p>Complete Orders Revenue...................$<%= @wizard.total_revenue_by_status("complete") %></p>
+			<p>Cancelled Orders Revenue...................$<%=@wizard.total_revenue_by_status("cancelled") %></p>
+		</div>
+		
+		<div class="col-lg-6">
+			<p>Total Pending Orders................<%= @wizard.orders_by_status("pending").count %></p>
+			<p>Total Paid Orders.....................<%= @wizard.orders_by_status("paid").count %></p>
+			<p>Total Complete Orders................<%= @wizard.orders_by_status("complete").count %></p>
+			<p>Total Cancelled Orders................<%= @wizard.orders_by_status("cancelled").count %></p>
+		</div>
+
+	</section>
+</section>
+
+
+<div class="container">
+<h3><%= params[:status] ? params[:status].capitalize! : "All" %> Orders</h3>
 <% @orders.each do |order|%>
-  <p class="col-lg-12"> Order #<%= order.id%> </p>
+  <h4 class="col-lg-12"> <%= link_to "Order ##{order.id}", confirmation_path(order.id) %> </h4>
   <% order.order_items.each do |item| %>
 	<div class="row">
     <% if item.product.wizard == @wizard %>
-			<%= image_tag item.product.photo_url, alt: "Pictures of #{item.product.name}", class: "col-lg-2 img-thumbnail" %>
+			<%= link_to image_tag(item.product.photo_url, alt: "Pictures of #{item.product.name}", id: "wizard-show-item-photo"), product_path(item.product, class: "col-lg-2 img-thumbnail") %>
 		<% end %>
 		</div>
 	<% end %>
