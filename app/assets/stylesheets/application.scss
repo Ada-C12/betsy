@@ -152,10 +152,19 @@ margin-left: 2rem;
  }
 
 //  PRODUCT ADD TO CART
+// .no-gutters {
+//   margin-right: 0;
+//   margin-left: 0;
 
+//   > .col,
+//   > [class*="col-"] {
+//     padding-right: 0;
+//     padding-left: 0;
+//   }
+// }
 
-form input[type="text"], textarea, select, form input[type="submit"], form input[type="number"] {
-  border-radius: 5px;
-  border-width: 0;
-  display: block;
-}
+// form input[type="text"], textarea, select, form input[type="submit"], form input[type="number"] {
+//   border-radius: 5px;
+//   border-width: 0;
+//   display: block;
+// }
