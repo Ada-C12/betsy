@@ -36,30 +36,6 @@ describe OrderItemsController do
       assert_equal "Item could not be added to your basket.", flash[:error]
     end
 
-    #test failing. keeps creating a new order
-    # it "increases the quantity of the order item if the order already contains an order item with the same product" do
-    #   order = Order.first
-    #   order.order_items.destroy_all
-    #   expect(order.order_items).must_be_empty
-    #   product_id = @product.id
-      
-    #   order.order_items << OrderItem.create(order: order, product_id: product_id, quantity: 1)
-
-    #   order_items_hash = {
-    #     order_item: {
-    #       quantity: 2,
-    #       order: order, 
-    #       product: @product
-    #     }
-    #   }
-
-    #   expect {
-    #     post product_order_items_path(product_id), params: order_items_hash
-    #   }.wont_differ 'OrderItem.count'
-
-
-    # end
-
    #Do/can we test for session[:cart_id]???
   end
 
@@ -102,6 +78,27 @@ describe OrderItemsController do
 
       must_redirect_to cart_path
       assert_equal "Could not update item quantity.", flash[:error]
+    end
+
+    it "does not update the order item if the quantity entered is greater than the product stock" do
+      product = products(:strawberry_shoes)
+      expect(product.stock).must_equal 2
+
+      order_item = order_items(:order_item_2)
+      id = order_item.id
+
+      order_item_hash = {
+        order_item: {
+          quantity: 7
+        }
+      }
+
+      expect {
+        patch order_item_path(id), params: order_item_hash
+      }.wont_differ "OrderItem.count"
+
+      must_redirect_to cart_path
+      assert_equal "Quantity entered is greater than available stock for #{product.name}.", flash[:error]
     end
   end
 

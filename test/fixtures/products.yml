@@ -17,7 +17,7 @@ strawberry_shoes:
 banana_sweatshirt:
   name: "Banana Sweatshirt"
   price: 25
-  stock: 6
+  stock: 30
   img_url: http://fakeurl.com
   user: ada
   description: "Here is another description"

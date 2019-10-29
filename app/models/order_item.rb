@@ -14,5 +14,4 @@ class OrderItem < ApplicationRecord
 
     return self.update(quantity: new_quantity)
   end
-  
 end
