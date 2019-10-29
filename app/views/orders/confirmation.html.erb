@@ -1,0 +1,41 @@
+<section>
+  <h2>We've received your order</h2>
+  <h4><strong>Order no #<%= @order.id %></strong></h4>
+
+  <div class="container">
+    <h4>Delivery details</h4>
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-6">
+        <h5>Delivery for</h5>
+        <p><%= @order.name %></p>
+        <p><%= @order.email %></p>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Delivery method</h5>
+        <p>Standard Owl Delivery</p>
+      </div>
+    </div>
+    <div>
+      <h5>Address</h5>
+      <p><%= @order.owling_address %></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <h4>Order Summary</h4>
+    <% @order.order_items.each do |order_item| %>
+      <div class="row">
+        <div class="col col-lg-6">
+          <%= image_tag order_item.product.photo_url, alt: "Photo of #{order_item.product.name}", class: "img-thumbnail confirmation-img"  %>
+        </div>
+        <div class="col col-lg-6 align-self-center">
+          <p><strong><%= order_item.product.name %></strong></p>
+          <p><em><%= order_item.product.description %></em></p>
+          <p>Qty: <%= order_item.quantity %></p>
+          <p>Subtotal: <%= order_item.subtotal %></p>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</section>
