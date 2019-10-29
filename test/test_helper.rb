@@ -3,6 +3,7 @@ SimpleCov.start 'rails' do
   add_filter '/test/' # Tests should not be counted toward coverage.
   add_filter '/bin/'
   add_filter '/db/'
+  add_filter '/spec/'
 end
 
 ENV['RAILS_ENV'] ||= 'test'
