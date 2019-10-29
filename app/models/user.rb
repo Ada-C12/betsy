@@ -20,9 +20,10 @@ class User < ApplicationRecord
   def total_earned
     all_order_items = self.find_order_items
     total = 0 
-    if all_order_items.length > 0 
-      all_order_items.each do |orderitem|
-        total += orderitem.total
+    all_order_items.each do |item|
+    status = item.order.status
+      if status == "paid" || status == "completed"
+        total += item.total
       end 
     end 
     return total 
