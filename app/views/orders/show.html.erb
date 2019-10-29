@@ -1,29 +1,28 @@
-<% if @order.status != "pending" %>
-  <section>
-    <h2>THANK YOU FOR SHOPPING WITH KEGSY</h2>
-    <h2>Order Confirmation</h2>
-  </section>
+<section>
+  <h2>THANK YOU FOR SHOPPING WITH KEGSY</h2>
+  <h2>Order Confirmation</h2>
+</section>
 
-  <section>
-    <h2>Order Details</h2>
+<section>
+  <h2>Order Details</h2>
 
-    <div class = "columns small-6">
-      <ul>
-        <li>Order: #<%= @order.id %></li>
-        <li>Purchased On: <%= @order.created_at.to_date %></li>
-        <li>Order Status: <%= @order.status %></li>
-      </ul>
-    </div>
+  <div class = "columns small-6">
+    <ul>
+      <li>Order: #<%= @order.id %></li>
+      <li>Purchased On: <%= @order.created_at.to_date %></li>
+      <li>Order Status: <%= @order.status %></li>
+    </ul>
+  </div>
 
-    <div class = "columns small-6">
-      <ul>
-        <li>Name: <%= @order.cc_name %></li>
-        <li>Shipping Address: <%= @order.address %></li>
-        <li>Email: <%= @order.email %></li>
-      </ul>
-    </div>
-  </section>
-<% end %>
+  <div class = "columns small-6">
+    <ul>
+      <li>Name: <%= @order.cc_name %></li>
+      <li>Shipping Address: <%= @order.address %></li>
+      <li>Email: <%= @order.email %></li>
+    </ul>
+  </div>
+</section>
+
 
 <section>
   <h2>Products</h2>
@@ -36,12 +35,6 @@
 
     <section class = "columns small-12 medium-5">
       <%= link_to orderitem.product.name, product_path(orderitem.product) %>
-      <% if @order.status == "pending" %>
-      <p>
-      <%= link_to orderitem.product.name, product_path(orderitem.product) %> | 
-      <%= link_to orderitem.product.name, product_path(orderitem.product) %>
-      </p>
-      <% end %>
     </section>
 
     <section class = "columns small-12 medium-4">
@@ -61,10 +54,7 @@
       <p>$<%= @order.total %></p>
     </section>
 
-    <% if @order.status == "paid" %>
-      <p><%= link_to 'Cancel Order', cancel_order_path(id: @order.id), method: :patch, class:"btn btn-alert" %></p>
-    <% elsif @order.status == "pending" %>
-      <p><p><%= link_to 'Checkout', edit_order_path(id: @order.id), class:"btn btn-primary" %></p></p>
-    <% end %>
+    <p><%= link_to 'Cancel Order', cancel_order_path(id: @order.id), method: :patch, class:"btn btn-alert" %></p>
   </section>
+  
 </section>
