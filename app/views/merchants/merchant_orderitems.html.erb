@@ -1,0 +1,9 @@
+<h2>Merchant's Order Items</h2>
+
+<% @merchant_orderitems.each do |orderitem| %>
+   <section class="row checkout">
+    <section class = "columns small-12 medium-3">
+      <%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}", class: "img" %>
+    </section>
+
+<% end %>

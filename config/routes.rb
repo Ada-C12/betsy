@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
   resources :merchants, except: [:delete, :new, :show]
   get '/merchants/:id/products', to: 'products#merchant_products', as: 'merchant_products'
+  get '/merchants/:id/orderitems', to: 'merchants#merchant_orderitems', as: 'your_orderitems'
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "merchants#create", as: "auth_callback"
   delete "/logout", to: "merchants#destroy", as: "logout"
