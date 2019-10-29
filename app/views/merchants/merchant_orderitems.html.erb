@@ -20,15 +20,17 @@
       <th>Status</th>
       <th>Shipping</th>
       <% Merchant.find_merchants_orderitems(@current_merchant, "false").each do |orderitem| %>
-      <tr>
-        <td><%= link_to "Order ##{orderitem.order_id}", order_path(orderitem.order_id) %></td>
-        <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
-        <td><%= orderitem.order.created_at %></td>
-        <td>$<%= orderitem.product.price %> x <%= orderitem.quantity %></td>
-        <td>$<%= orderitem.subtotal %></td>
-        <td><%= orderitem.order.status %></td>
-        <td><%= link_to "Ship It", mark_shipped_path(orderitem.id), method: :patch, class: "btn btn-primary"%></td>
-      </tr>
+        <% if orderitem.order.status != "cancel" %>
+        <tr>
+          <td><%= link_to "Order ##{orderitem.order_id}", order_path(orderitem.order_id) %></td>
+          <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
+          <td><%= orderitem.order.created_at %></td>
+          <td>$<%= orderitem.product.price %> x <%= orderitem.quantity %></td>
+          <td>$<%= orderitem.subtotal %></td>
+          <td><%= orderitem.order.status %></td>
+          <td><%= link_to "Ship It", mark_shipped_path(orderitem.id), method: :patch, class: "btn btn-primary"%></td>
+        </tr>
+        <% end %>
     <% end %>
     </tbody>
   </table>
