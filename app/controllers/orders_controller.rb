@@ -29,12 +29,19 @@ class OrdersController < ApplicationController
       end
       flash[:success] = "Successfully checked out"
       session[:order_id] = nil
-      return redirect_to root_path
+      return redirect_to confirmation_path
     else
       flash.now[:error] = "Could not checkout"
       render :checkout
       @order.update_attributes(status: "pending")
       return
+    end
+  end
+
+  def confirmation
+    @order = Order.last
+    if @order.nil?
+      return head :not_found
     end
   end
   
