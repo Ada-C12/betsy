@@ -1,6 +1,6 @@
 <h2>hello, <%=@current_user.username%>!</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
-Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
+Total revenue as of <%= readable_date(Date.today) %>:  <%=currency_format(@current_user.total_earned)%>
 
 <%# ADD total revenue of all status that qualify(all status except for pending) HERE %>
 <section class="user-products__container">
@@ -22,7 +22,7 @@ Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
           <tr>     
             <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
             <td><%= link_to product.name, product_path(product) %></td>
-            <td><%= f.text_field :price%></td>
+            <td>$<%= f.text_field :price%></td>
             <td><%= product.stock%></td>
             <td><%= product.description %></td>
             <td><%= product.categories.first.name %></td>

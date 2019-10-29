@@ -3,16 +3,16 @@ module ApplicationHelper
   def readable_date(date)
     return "[unknown]" unless date
     return (
-      "<span class='date' title='".html_safe +
+      "<span title='".html_safe +
       date.to_s +
       "'>".html_safe +
-      time_ago_in_words(date) +
-      " ago</span>".html_safe
+       date.strftime("%b %d, %Y")+
+      "</span".html_safe
     )
   end
 
   def currency_format(num)
-    
+    return("$" + sprintf('%.2f', num))
   end
 
   def fruit_image(code, fruit)
