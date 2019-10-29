@@ -57,7 +57,7 @@
   <%# Merchant Nav Bar %>
   <%if session[:user_id]%>
     <% current_user = User.find_by(id: session[:user_id]) %>
-    <nav class="navbar navbar-expand-lg navbar-dark">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
       <%= link_to current_user.username, current_user_path, class: "navbar-brand" %>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -127,16 +127,16 @@
 </nav>
 
   <%# Flash Messages on each page %>
-    <%if flash%>
-      <section class="alert__container">
-      <ul>
-        <% flash.each do |name, message| %>
-          <li><%=name.capitalize%>: <%=message%></li>
-        <%end%>
-      </ul>
-      </section>
-    <%end %>
-    
+  <section class="flash">
+    <% flash.each do |name, message| %>
+      <% if name == "success" %>
+        <div class="alert alert-success" role="alert" class="<%= name %>"><%= message %></div>
+      <% else %>
+        <div class="alert alert-danger" role="alert" class="<%= name %>"><%= message %></div>
+      <% end %>
+    <% end %>
+  </section>
+  
   <%# Main content on each page %>
     <main>
     <%= yield %>

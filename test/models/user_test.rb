@@ -82,6 +82,16 @@ describe User do
         expect(product).must_be_instance_of Product
       end
     end
-  end
 
+    it 'can have many reviews' do
+      review1 = reviews(:good_review) 
+      review2 = reviews(:okay_review) 
+      user = users(:ada)
+      
+      expect(user.reviews.count).must_equal 2
+      user.reviews.each do |review|
+        expect(review).must_be_instance_of Review
+      end
+    end
+  end
 end
