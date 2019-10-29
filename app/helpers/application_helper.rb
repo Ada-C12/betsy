@@ -11,6 +11,10 @@ module ApplicationHelper
     )
   end
 
+  def currency_format(num)
+    
+  end
+
   def fruit_image(code, fruit)
     category = Category.find_by(name: fruit)
     if category
