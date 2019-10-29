@@ -1,6 +1,8 @@
 // Place all the styles related to the Homepages controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+
 // PARALLAX HOMEPAGE
 .wrapper {
   /* The height needs to be set to a fixed value for the effect to work.
@@ -37,9 +39,6 @@
   bottom: 0;
   left: 0;
 
-  /* Move the pseudo-element back away from the camera,
-   * then scale it back up to fill the viewport.
-   * Because the pseudo-element is further away, it appears to move more slowly, like in real life. */
   transform: translateZ(-1px) scale(1.5);
   /* Force the background image to fill the whole element. */
   background-size: 100%;
@@ -52,7 +51,7 @@
   background: white;
 }
 
-/* Sets the actual background images to adorable kitties. This part is crucial. */
+// Background images
 .bg1::after {
   background-image: url('https://cdn.pixabay.com/photo/2015/07/10/17/53/cheers-839865_1280.jpg');
 }
@@ -63,4 +62,8 @@
 
 .parallax-text {
   color: white;
+}
+
+.static-text {
+  color: darkgoldenrod;
 }

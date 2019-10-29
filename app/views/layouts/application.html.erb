@@ -12,16 +12,15 @@
 
   <body>
     <header class="app-header__header">
-      <div clas"sign"><a href= "http://localhost:3000/">
-        <span class="sign__word">KEGSY</span>
-        <%# <small>Drink your Ada troubles away</small> %>
+      <div class="logo"><a href= "http://localhost:3000/">
+        <span class="logo">KEGSY</span>
         </a>
       </div>
       
 
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">
-
+          <li class="nav-item app-header__nav_item"><%= link_to "Home", root_path %></li>
           <div class="dropdown">
           <li class="nav-item app-header__nav_item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= link_to "Products", products_path, method: :get %></li>
           
@@ -31,16 +30,14 @@
               <% end %>
             </div>
           </div>
-      
-        
-          
+    
           <li class="nav-item app-header__nav_item"><%= link_to "Merchants", merchants_path %></li>
           <li class="nav-item app-header__nav_item">
             <% if session[:merchant_id] %>
-              <%= link_to "Logged in as #{Merchant.find_by(id: session[:merchant_id]).username}", current_merchant_path, class: "btn btn-primary"  %>
-              <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary" %>
+              <%= link_to "Logged in as #{Merchant.find_by(id: session[:merchant_id]).username}", current_merchant_path %>
+              <%= link_to "Log out", logout_path, method: "delete" %>
             <% else %>
-              <%= link_to "Login with Github", github_login_path, class: "btn btn-primary" %>
+              <%= link_to "Login", github_login_path %>
             <% end %></li>
           <li class="nav-item app-header__nav_item"><%= link_to "Shopping Cart", cart_path %></li>
         </ul>

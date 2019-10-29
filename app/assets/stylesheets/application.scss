@@ -28,10 +28,6 @@ h1, h2, h3, h4, h5 {
    font-weight: bold;
 }
 
-a:hover {
-  text-decoration: none;
-}
-
 // PRODUCT IMAGES
 
 .img * {
@@ -104,6 +100,9 @@ margin-left: 2rem;
   text-decoration: none;
 }
 
+.logo {
+  text-align: center;
+}
 
 // FOOTER
 
@@ -174,4 +173,16 @@ margin-left: 2rem;
   font-size: 0.8em;
   letter-spacing: 0.05em;
   line-height: 1.8em;
+}
+
+// LINK FORMATTING
+
+a:hover {
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
 }
