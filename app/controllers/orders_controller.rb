@@ -22,6 +22,7 @@ class OrdersController < ApplicationController
       flash[:error] = "Order doesn't exist!"
       return redirect_to root_path
     else
+
     end
   end
   
