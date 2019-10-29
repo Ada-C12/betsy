@@ -45,4 +45,12 @@ cat_order:
   cc_exp: 09/23
   zip: 98124
   status: pending
-
+dog_order:
+  email: mrmouse@dland.com
+  address: 4444 ball rd.
+  cc_name: mickey mouse
+  cc_num: 44253234
+  cvv: 1456
+  cc_exp: 09/23
+  zip: 98124
+  status: paid
