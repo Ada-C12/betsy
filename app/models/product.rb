@@ -2,13 +2,14 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: {scope: :user_id}
   validates_length_of :name, minimum: 1, maximum: 50
   validates :price, presence: true
-  validates :quantity, presence: true
+  validates :stock, presence: true
   validates :user_id, presence: true
   validates :img_url, presence: true
   validates :description, presence: true
   
   belongs_to :user
   has_many :order_items, dependent: :nullify
+  has_many :reviews, dependent: :nullify
   has_and_belongs_to_many :categories
 
     
@@ -29,6 +30,8 @@ class Product < ApplicationRecord
       return true
     end
   end
+
+
 
   def update_quantity
   end

@@ -1,9 +1,9 @@
 <section>
   <h1 class="card-title"> <%= @product.name %></h1>
-  <%= image_tag (@product.img_url), class:"show-product-img", alt:"#{@product.name}product image" %> 
+  <%= product_img_link(product: @product, img_url: @product.img_url, product_class: "show-product-img")%> 
     <h2> $<%= @product.price %> </h2>
     <h4> <%= @product.description %> </h4>
-    <h5> Stock: <%= @product.quantity %> </h5>
+    <h5> Stock: <%= @product.stock %> </h5>
     <%= form_with model: OrderItem, url: product_order_items_path(@product.id) do |f| %>
       <%= f.label :quantity, class: "col-sm-2 col-form-label"%>
       <%= f.text_field :quantity, class: "form-control" %>
@@ -16,7 +16,7 @@
     <h5>
       Categories: 
       <% categories = @product.categories.map do |category| %>
-         <%= link_to category.name, category_products_path(category.id) %>,
+        <%= link_to category.name, category_products_path(category.id) %>,
       <% end %>
     </h5>
 </section>

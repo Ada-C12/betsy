@@ -11,10 +11,10 @@
   <% @user.products.each do |product| %>
     <ul>
       <%= image_tag product.img_url, alt: product.name + "image"%>
-      <li>name: <%=product.name%></li>
-      <li>product: <%=product.price%></li>
-      <li>stock: <%=product.quantity%></li>
-      <li>description: <%=product.description%></li>
+      <li>name: <%=link_to product.name, product_path(product.id) %></li>
+      <li>product: <%=product.price %></li>
+      <li>stock: <%=product.stock %></li>
+      <li>description: <%=product.description %></li>
     </ul>
   <% end %>
 <% else %>

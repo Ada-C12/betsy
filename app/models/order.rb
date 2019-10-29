@@ -6,7 +6,7 @@ class Order < ApplicationRecord
   validates :email, presence: true, format: { with: /@/, message: "Email format must be valid." } , if: :not_pending?
   validates :address, presence: true, if: :not_pending?
   validates :cc_name, presence: true, if: :not_pending? 
-  validates_numericality_of :cc_last4, within: 1000..9999, if: :not_pending?
+  validates :cc_last4, presence: true, inclusion: {within: 1000..9999}, if: :not_pending?
   validates :cc_exp, presence: true, if: :not_pending?
   validates_numericality_of :cc_cvv, greater_than: 0, if: :not_pending?
   validates :billing_zip, presence: true, if: :not_pending?
@@ -20,6 +20,15 @@ class Order < ApplicationRecord
       return true if order_item.product.user_id == session[:user_id]
     end
     return false
+  end
+
+  #This will be in the Cart page & Order confirmation page
+  def total
+    total = 0 
+    self.order_items.each do |orderitem|
+      total += orderitem.total 
+    end 
+    return total 
   end
 
 end
