@@ -1,13 +1,9 @@
 class ReviewsController < ApplicationController
-  #skip_before_action :require_login, :only => [:create, :show]
+  skip_before_action :require_login, :only => [:create, :show]
   skip_before_action :find_order
-
-  def new
-    @review = Review.new
-  end
-
+  
   def create
-    @review = Review.new(reivew_params)
+    @review = Review.new(review_params)
 
     if @review.save
       flash[:success] = "Your review has been added successfully"
@@ -16,7 +12,7 @@ class ReviewsController < ApplicationController
       return
     else
       flash.now[:error] = "Something went wrong! Review was not added."
-      render :new
+      redirect_to root_path
       return
     end
   end
@@ -65,6 +61,6 @@ class ReviewsController < ApplicationController
   private
 
   def review_params
-    return params.require(:review).permit(:rating, :description)
+    return params.require(:review).permit(:rating, :description, :user_id, :product_id)
   end
 end
