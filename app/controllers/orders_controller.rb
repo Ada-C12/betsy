@@ -1,8 +1,8 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login, only: [:cart, :checkout, :update_paid, :confirmation]
   skip_before_action :find_order, only: [:show, :update_paid]
-  before_action :find_order_params, only: [:show, :update_paid]
-
+  before_action :find_order_params, only: [:show, :update_paid, :cancel_order, :complete_order]
+  
   def show
     if !@order
       head :not_found 
@@ -30,11 +30,11 @@ class OrdersController < ApplicationController
     @order.update(order_params)
     @order.customer_id = session[:user_id]
     @order.status = "paid"
-
+    
     if @order.save
       flash[:success] = "Order #{@order.id} has been purchased successfully!"
       return redirect_to confirmation_path
-    
+      
     else
       @order.update(status: "pending")
       flash[:error] = "Something went wrong! Order was not paid.#{@order.errors.messages}"
@@ -53,6 +53,34 @@ class OrdersController < ApplicationController
     end
   end
   
+  def cancel_order
+    if !@order
+      flash[:error] = "Something went wrong, cannot cancel order!"
+    else
+      @order.status = "cancelled"
+      if @order.save
+        flash[:success] = "Order #{@order.id} has been cancelled successfully!"
+      else
+        flash[:error] = "Something went wrong, order is not cancelled!"
+      end
+    end
+    return redirect_to current_user_path 
+  end
+  
+  def complete_order
+    if !@order
+      flash[:error] = "Something went wrong, cannot complete order!"
+    else
+      @order.status = "completed"
+      if @order.save
+        flash[:success] = "Order #{@order.id} has been completed successfully!"
+      else
+        flash[:error] = "Something went wrong, order is not completed!"
+      end
+    end
+    return redirect_to current_user_path 
+  end
+  
   private
   
   def order_params
@@ -62,6 +90,6 @@ class OrdersController < ApplicationController
   def find_order_params
     @order = Order.find_by(id: params[:id])
   end
-
+  
 end
 
