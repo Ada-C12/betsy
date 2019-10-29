@@ -1,6 +1,6 @@
 <section>
   <h1 class="card-title"> <%= @product.name %></h1>
-  <%= image_tag (@product.img_url), class:"show-product-img", alt:"#{@product.name}product image" %> 
+  <%= image_tag (@product.img_url), class:"show-product-img", alt:"#{@product.name}product image" %>  
     <h2> $<%= @product.price %> </h2>
     <h4> <%= @product.description %> </h4>
     <h5> Stock: <%= @product.stock %> </h5>
@@ -16,7 +16,7 @@
     <h5>
       Categories: 
       <% categories = @product.categories.map do |category| %>
-         <%= link_to category.name, category_products_path(category.id) %>,
+        <%= link_to category.name, category_products_path(category.id) %>,
       <% end %>
     </h5>
 </section>
