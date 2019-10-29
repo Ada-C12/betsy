@@ -1,10 +1,10 @@
 <section>
-  <h2>Random Picks<h2>
+  <h2 class="product-heading homepage-heading">Random Picks<h2>
   <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
     <div class="carousel-inner">
       <% @products.each_with_index do |product, index| %>
         <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
-          <%= link_to image_tag(product.photo_url, alt: "First slide", class: "d-block w-100"), product_path(product.id) %>
+          <%= link_to image_tag(product.photo_url || "https://i.imgur.com/yciRdrY.jpg?2", alt: "First slide", class: "d-block w-100"), product_path(product.id) %>
           <div class="carousel-caption d-none d-md-block">
             <h5><strong><%= product.name %></strong></h5>
             <h5><small><%= humanized_money_with_symbol(product.price) %></small></h5>

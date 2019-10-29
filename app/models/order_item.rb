@@ -6,7 +6,11 @@ class OrderItem < ApplicationRecord
   validates :quantity, :numericality => {:only_integer => true, greater_than: 0}
 
   def subtotal
-    return self.quantity * self.product.price
+     subtotal_cents = self.quantity * self.product.price_cents
+     return Money.new(subtotal_cents)
   end
 
+  def updated_stock
+    return self.product.stock - self.quantity
+  end
 end

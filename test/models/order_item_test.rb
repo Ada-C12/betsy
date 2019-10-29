@@ -89,7 +89,7 @@ describe OrderItem do
   describe "Custom methods" do
     describe "subtotal" do
       it "accurately calculates the total" do
-        expect(order_items1.subtotal).must_equal 3000
+        expect(order_items1.subtotal.amount).must_equal 3000 * 10**-2
       end
 
       it "the total is 0 if there are no items" do

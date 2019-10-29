@@ -1,5 +1,4 @@
 class OrderItemsController < ApplicationController
-  
   def create
     product = Product.find_by(id: params[:product_id])
     if product.nil?
@@ -7,6 +6,14 @@ class OrderItemsController < ApplicationController
     end
     
     @order_item = OrderItem.new(order_items_params)
+
+    @order_item.shipped = false
+    @order_item.product = product
+
+    if @order_item.updated_stock < 0
+      flash[:error] = "Cannot add to cart. There are not enough #{@order_item.product.name}s in stock."
+      return redirect_to product_path(@order_item.product.id)
+    end
     
     if session[:order_id].nil?
       # cancels pending orders that are no longer in session and over a day old
@@ -27,9 +34,7 @@ class OrderItemsController < ApplicationController
         return redirect_to root_path
       end
     end 
-    
-    @order_item.shipped = false
-    @order_item.product = product
+
     @order_item.order = order
     
     if @order_item.save
