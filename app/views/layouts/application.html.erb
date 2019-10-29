@@ -1,15 +1,93 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Betsy</title>
+    <title>Kegsy</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag 'application', 'https://fonts.googleapis.com/css?family=Raleway&display=swap' %>
+    <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag 'favicon.ico' %>
   </head>
 
   <body>
-    <%= yield %>
+    <header class="app-header__header">
+      <div class="logo"><a href= "http://localhost:3000/">
+        <span class="logo"><%= image_tag "https://www.freelogodesign.org/file/app/client/thumb/d8efc1d4-8268-48d5-87f2-ba20d236b2f5_200x200.png?1572324533721"%></span>
+        </a>
+      </div>
+      
+
+      <nav class="app-header__nav">
+        <ul class="nav app-header__site-nav-container">
+          <li class="nav-item app-header__nav_item home"><%= link_to "Home", root_path %></li>
+          <div class="dropdown">
+          <li class="nav-item app-header__nav_item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= link_to "Products", products_path, method: :get %></li>
+          
+            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+              <% Type.all.each do |type|%>
+                <li> <%= link_to "#{type.name.capitalize}", type_path(type), class: "dropdown-item"  %> </li>
+              <% end %>
+            </div>
+          </div>
+    
+          <li class="nav-item app-header__nav_item"><%= link_to "Merchants", merchants_path %></li>
+          </ul> 
+          <span class="float-right">
+            <ul class="nav app-header__site-nav-container">
+              <li class="nav-item app-header__nav_item">
+                <% if session[:merchant_id] %>
+                  <%= link_to "Logged in as #{Merchant.find_by(id: session[:merchant_id]).username}", current_merchant_path %>
+                  <%= link_to "Log out", logout_path, method: "delete" %>
+                <% else %>
+                  <%= link_to "Login", github_login_path %>
+                <% end %></li>
+              <li class="nav-item app-header__nav_item cart-img">
+                <span class="cart-img">
+                  <%= link_to "Shopping Cart", cart_path %>
+                </span>
+              </li>     
+          </span>
+      </nav>
+    </header>
+
+    <% if flash[:result_text] or flash[:messages] %>
+    <section class="alert__container">
+      <div class="alert alert-<%= flash[:status].to_s == 'failure' ? 'warning' : flash[:status] %>">
+        <span><%= flash[:status].to_s == "failure" ? "A problem occurred: " : "" %><%= flash[:result_text] %></span>
+        <% if flash[:messages] %>
+          <ul>
+            <% flash[:messages].each do |name, problems| %>
+              <% problems.each do |problem| %>
+                <li><%= name %>: <%= problem %></li>
+              <% end %>
+            <% end %>
+          </ul>
+        <% end %>
+      </div>
+    </section>
+    <% end %>
+  
+    <main>
+      <%= yield %>
+    </main>
+
+    <footer class="app-footer__footer">
+      <section class="app-footer__nav"> 
+      <ul class="nav app-footer__site-nav-container">
+        <li class="nav-item app-footer__nav_item">Contact Us</li>
+        <li class="nav-item app-footer__nav_item">Order Status</li>
+        <li class="nav-item app-footer__nav_item">Shipping</li>
+        <li class="nav-item app-footer__nav_item">Returns & Exchanges</li>
+        <li class="nav-item app-footer__nav_item">About Us</li>
+      </ul>
+      <section>
+    <p class="copyright">© The Four Pack</p>
+    <p class="copyright">#ChooseKegsy</p>
+    </footer>
   </body>
+
+
+
+
 </html>

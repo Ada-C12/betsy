@@ -11,8 +11,198 @@
  * It is generally better to create a new file per style scope.
  *
  */
-    
+
     /* Custom bootstrap variables must be set or imported *before* bootstrap. */
-    @import "bootstrap";
-    /* Import scss content */
-    @import "**/*";
+@import "bootstrap";
+/* Import scss content */
+@import "**/*";
+
+// $primary-font: font-family: 
+
+body, h1, h2, h3, h4, h5 {
+   font-family: 'Raleway', sans-serif;
+   color: black;
+}
+
+h1, h2, h3, h4, h5 {
+   font-weight: bold;
+}
+
+// PRODUCT IMAGES
+
+.img * {
+  position: relative;
+  float: left;
+  width: 300px;
+  height: 300px;
+  background-position: 50% 50%;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+
+.img-description {
+  position: relative;
+}
+
+// HEADER
+
+.app-header__nav {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+
+.app-header__nav_item {
+margin-top: 1rem;
+}
+
+.app-header__site-nav-container .app-header__nav_item {
+margin-right: 2rem;
+}
+
+.app-header__user-nav-container .nav-item {
+margin-left: 2rem;
+}
+
+.app-header__header {
+   max-width: 100%;
+   background-color: white;
+   margin-bottom: 0.5rem;
+   padding: 2rem 1rem 0.5rem 1rem;
+  //  text-transform: uppercase;
+   h1 {
+     text-align: center;
+     margin: 25px auto 40px auto;
+     a {
+       color: white;
+       padding-right: 25px;
+       margin-right: 15px;
+       text-decoration: none;
+     }
+     small {
+       color: white;
+     }
+   }
+   p {
+     margin-bottom: 5px;
+   }
+ }
+
+.float-right {
+  float: right !important;
+}
+
+.dropdown:hover>.dropdown-menu {
+  display: block;
+}
+
+.dropdown>.dropdown-toggle:active {
+  /*Without this, clicking will make it sticky*/
+    pointer-events: none;
+}
+
+.dropdown-item {
+  text-decoration: none;
+}
+
+.logo {
+  text-align: center;
+}
+
+// FOOTER
+
+.app-footer__nav {
+display: flex;
+flex-direction: row;
+justify-content: space-between;
+}
+
+.app-footer__nav_item {
+margin-top: 1rem;
+}
+
+.app-footer__nav_item .nav-link {
+color: blueviolet;
+}
+
+.app-footer__site-nav-container .app-footer__nav_item {
+margin-right: 2rem;
+}
+
+.app-footer__user-nav-container .nav-item {
+margin-left: 2rem;
+}
+
+.app-footer__footer {
+   max-width: 100%;
+   background-color: white;
+   margin-bottom: 0.5rem;
+   padding: 2rem 1rem 0.5rem 1rem;
+   h1 {
+     text-align: center;
+     margin: 25px auto 40px auto;
+     a {
+       color: white;
+       padding-right: 25px;
+       margin-right: 15px;
+       border-right: white 2px solid;
+     }
+     small {
+       color: white;
+     }
+   }
+   p {
+     margin-bottom: 5px;
+   }
+ }
+
+//  PRODUCT SHOW
+.product-show h3{
+  font-size: 1.5em;
+  text-transform: uppercase;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid;
+}
+
+.description {
+  margin: 1em 0;
+  padding: 1em 0;
+  font-style: italic;
+  padding-bottom: 0.5em;
+}
+
+.types, .types ul, .nickname {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 1.8em;
+}
+
+// LINK FORMATTING
+
+a:hover {
+  color: darkgoldenrod;
+  text-decoration: none;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.home {
+  font-weight: bold;
+}
+// BUTTONS
+
+.btn-primary {
+  background-color: goldenrod;
+  border-color: goldenrod;
+}
+
+.copyright {
+  text-align: center;
+  font-size: small;
+}

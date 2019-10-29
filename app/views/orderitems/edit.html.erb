@@ -1,0 +1,35 @@
+<section class="forms">
+  <h1>Update Quantity</h1>
+
+  <section>
+    <article class = "columns small-12 large-4">
+      <% if @orderitem.product.photo_url != nil %>
+        <span class="img">
+        <%= image_tag "#{@orderitem.product.photo_url}", alt: "#{@orderitem.product.name}" %>
+        </span>
+      <% end %>
+    </article>
+
+    <article class = "columns small-12 large-8">
+      <%= link_to "#{@orderitem.product.name}", product_path(@orderitem.product) %>
+
+      <%= form_with model: @orderitem do |f| %>
+    
+        <div class="form-group">
+        <%= f.label :quantity %>
+
+        <% quantity_array = [] %>
+        <% @orderitem.product.stock.times do |i|%>
+          <% quantity_array << [i+1, i+1] %>
+        <% end %>
+
+        <%= f.select :quantity, quantity_array %>
+        </div>
+        
+        <div class="form-group">
+        <%= f.submit "Save", class:"btn btn-primary" %>
+        </div>
+      <% end %>
+    </article>
+  </section>
+</section>

@@ -1,0 +1,22 @@
+<section>
+  <h1>Products</h1>
+  <% if @products.empty? %>
+    <p> No products available </p>
+  <% end %>
+
+  <div class="container">
+    <div class="row">
+      <% @products.each do |product| %>
+        <% if product.retired == false%>
+          <div class="col-sm">
+          <span class="img-description"><%= product.name %></span>
+          <%= link_to product_path(product.id) do %>
+            <span class="img"><%= image_tag "#{product.photo_url}"%></span>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</section>
+

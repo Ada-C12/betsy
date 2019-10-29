@@ -1,0 +1,41 @@
+<div class="row product-show container ">
+  <div class="col-md-6">
+    <div class="col-md-12">
+      <div class="img"><%= image_tag "#{@product.photo_url}"%></div>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="col-md-12">
+      <h3><%= @product.name %><h3>
+      <small class="description"><%= @product.description %><small>
+      <small><p>Sold by: <%= link_to @product.merchant.username, merchant_products_path(@product.merchant.id)%></p></small>
+      <p>$<%= '%.2f' % @product.price %></p>
+      
+      <% if @product.retired %>
+        <p>Not currently for sale</p>
+      <% end %>
+      
+      <div class="new_order_product" id="new_order_product">
+        <%= form_with model: @orderitem, url: "/products/#{@product.id}/orderitems" do |f| %>
+          <%= f.label :quantity %>
+          <%= f.select :quantity, (1..@product.stock) %>
+          <div><%= f.submit "Add to Cart", method: :post, class: "btn btn-primary"%></div>
+        <% end %>
+      </div>
+
+      <% if !@product.types.empty? %>
+        <p class="types"><% @product.types.each do |type| %>
+          <%= link_to type.name, type_path(type) %>
+        <% end %>
+        </p>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+

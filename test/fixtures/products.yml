@@ -1,0 +1,104 @@
+heineken:
+  name: Heineken
+  description: Great tasting beer.
+  price: 11.11
+  photo_url:
+  stock: 3
+  merchant: brad
+  retired: false
+stella:
+  name: Stella Artois
+  description: People enjoy this beer.
+  price: 44.44
+  photo_url:
+  stock: 3
+  merchant: brad
+  retired: false
+sapporo:
+  name: Sapporo
+  description: Japanese standard beer.
+  price: 22.22
+  photo_url:
+  stock: 5
+  merchant: brad
+  retired: false
+corona:
+  name: Corona
+  description: Add a lime.
+  price: 33.33
+  photo_url:
+  stock: 4
+  merchant: brad
+  retired: true
+carrot:
+  name: Carrot
+  description: Orange vegetable.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+banana:
+  name: Banana
+  description: Yello fruit.
+  price: 2.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+peach:
+  name: Peach
+  description: Peach colored fruit.
+  price: 3.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+cat_food:
+  name: Hill Science Diet Cat Food
+  description: Food.
+  price: 10.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+kitty_litter:
+  name: Fresh Step Kitty Litter
+  description: Unscented. Oder absorbent.
+  price: 15.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+cat_toy:
+  name: Cat Toy
+  description: Feathers and catnip.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: brad
+  retired: false
+dog_food:
+  name: Hill Science Diet Dog Food
+  description: Food.
+  price: 10.00
+  photo_url:
+  stock: 10
+  merchant: casper
+  retired: false
+leash:
+  name: Leash
+  description: For walking.
+  price: 15.00
+  photo_url:
+  stock: 10
+  merchant: casper
+  retired: false
+dog_toy:
+  name: Dog Toy
+  description: Feathers and catnip.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: partydood
+  retired: false

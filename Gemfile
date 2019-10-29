@@ -66,6 +66,7 @@ gem 'jquery-turbolinks'
 gem 'bootstrap', '~> 4.1.3'
 group :development, :test do
   gem 'pry-rails'
+  gem 'pry-byebug'
 end
 
 group :development do
@@ -78,9 +79,15 @@ group :development do
   gem 'binding_of_caller'
   gem 'guard'
   gem 'guard-minitest'
+  gem 'dotenv-rails'
 end
 
 group :test do
   gem 'minitest-rails'
   gem 'minitest-reporters'
+  gem 'rails-controller-testing'
+  gem 'simplecov', require: false
 end
+
+gem "omniauth"
+gem "omniauth-github"
