@@ -1,0 +1,59 @@
+<section>
+  <div class="product-heading" id="cart-heading">
+    <h2>CHECKOUT</h2>
+    <h5 class="total">Total: $<%= @order.total %></h5>
+  </div>
+
+  <div class="checkout-form">
+    <%= form_with model: @order do |f| %>
+      <div class="form-group">
+        <%= f.label :name %>
+        <%= f.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :email %>
+        <%= f.text_field :email, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :owling_address %>
+        <%= f.text_field :owling_address, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :name_on_credit_card %>
+        <%= f.text_field :name_on_cc, class: "form-control" %>
+      </div>
+      
+      <div class="form-group">
+        <%= f.label :credit_card_number %>
+        <%= f.text_field :cc_num, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :expiration_month %>
+        <%= f.select :cc_exp_mo, [ '01','02','03','04','05','06','07','08','09','10','11','12' ], class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :expiration_year %>
+        <%= f.select :cc_exp_yr, [ '2019','2020','2021','2022','2023','2024','2025','2026','2027','2028','2029','2030' ], class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :security_code %>
+        <%= f.text_field :cc_cvv, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :billing_zip_code %>
+        <%= f.text_field :zip_code, class: "form-control" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.submit "Checkout", class: "btn btn-outline-secondary" %>
+      </div>
+    <% end %>
+  </div>
+</section>
