@@ -133,16 +133,16 @@ describe ProductsController do
         patch product_path(existing_product.id), params: update_product_hash
       }.must_differ "Product.count", 0
 
-      find_product = Product.find_by(id: existing_product.id)
+      product = Product.find_by(id: existing_product.id)
 
-      expect(find_product.name).must_equal update_product_hash[:product][:name]
-      expect(find_product.price).must_equal update_product_hash[:product][:price]
-      expect(find_product.stock).must_equal update_product_hash[:product][:stock]
-      expect(find_product.img_url).must_equal update_product_hash[:product][:img_url]
-      expect(find_product.description).must_equal update_product_hash[:product][:description]
-      expect(find_product.category_ids.first).must_equal update_product_hash[:product][:category_ids].first
+      expect(product.name).must_equal update_product_hash[:product][:name]
+      expect(product.price).must_equal update_product_hash[:product][:price]
+      expect(product.stock).must_equal update_product_hash[:product][:stock]
+      expect(product.img_url).must_equal update_product_hash[:product][:img_url]
+      expect(product.description).must_equal update_product_hash[:product][:description]
+      expect(product.category_ids.first).must_equal update_product_hash[:product][:category_ids].first
 
-      must_redirect_to current_user_path
+      must_redirect_to product_path(product.id)
     end
 
     it "cannot update a product if no merchant logged in, and redirects the user to the product page" do
