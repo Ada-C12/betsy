@@ -56,11 +56,23 @@ Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
     <% @current_user.products.each do |product| %>
       <% product.order_items.each do |order_item| %>
         <tr>
-          <%order = order_item.order %>
-          <td><%= link_to order.id, order_path(order.id)%></td>
-          <td><%= product.id %></td>
+          <% order = order_item.order %>
+          <td><%= link_to order.id, order_path(order.id) %></td>
+          <td><%= link_to product.id, product_path(product.id) %></td>
           <td><%= readable_date(order.created_at) %></td>
-          <td><%= order.status %></td>
+          <td>
+            <% if order.status == "paid" %>
+              <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Paid
+              </a>
+              <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
+                <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, class: "dropdown-item" %>
+                <%= link_to "Completed", complete_order_path(order.id), method: :patch, class: "dropdown-item" %>
+              </div>
+            <% else %>
+              <%= order.status.capitalize %>
+            <% end %>
+          </td>
           <td><%= order_item.total %>
           <td><%= product.categories.first.name %></td>
           <%# in this subtotal section, calculate the subtotal for that order item by calling the 'total' class method in Order_Item %>

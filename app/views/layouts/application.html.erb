@@ -102,6 +102,7 @@
               <% Category.where(category_type: type).each do |category| %>
                 <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
               <% end%>
+            </div>
           </li>
         <% end %>
         
