@@ -21,10 +21,15 @@
 
 body, h1, h2, h3, h4, h5 {
    font-family: 'Raleway', sans-serif;
+   color: black;
 }
 
 h1, h2, h3, h4, h5 {
    font-weight: bold;
+}
+
+a:hover {
+  text-decoration: none;
 }
 
 // PRODUCT IMAGES
@@ -55,10 +60,6 @@ justify-content: space-between;
 margin-top: 1rem;
 }
 
-.app-header__nav_item .nav-link {
-color: blueviolet;
-}
-
 .app-header__site-nav-container .app-header__nav_item {
 margin-right: 2rem;
 }
@@ -69,17 +70,17 @@ margin-left: 2rem;
 
 .app-header__header {
    max-width: 100%;
-   background-color: lightblue;
+   background-color: white;
    margin-bottom: 0.5rem;
    padding: 2rem 1rem 0.5rem 1rem;
    h1 {
      text-align: center;
      margin: 25px auto 40px auto;
      a {
-       color: black;
+       color: white;
        padding-right: 25px;
        margin-right: 15px;
-       border-right: white 2px solid;
+       text-decoration: none;
      }
      small {
        color: white;
@@ -130,14 +131,14 @@ margin-left: 2rem;
 
 .app-footer__footer {
    max-width: 100%;
-   background-color: lightblue;
+   background-color: white;
    margin-bottom: 0.5rem;
    padding: 2rem 1rem 0.5rem 1rem;
    h1 {
      text-align: center;
      margin: 25px auto 40px auto;
      a {
-       color: black;
+       color: white;
        padding-right: 25px;
        margin-right: 15px;
        border-right: white 2px solid;
