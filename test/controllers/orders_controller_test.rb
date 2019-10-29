@@ -1,53 +1,53 @@
 require "test_helper"
 
 describe OrdersController do
-  describe "show action" do
-    it "responds with a success when an order id given exists and the logged in user has products in this order" do
-      order = orders(:order_1)
-      user = users(:ada)
-      perform_login(user)
+  # describe "show action" do
+  #   it "responds with a success when an order id given exists and the logged in user has products in this order" do
+  #     order = orders(:order_1)
+  #     user = users(:ada)
+  #     perform_login(user)
      
-      get order_path(order.id)
-      must_respond_with :success
-    end
+  #     get order_path(order.id)
+  #     must_respond_with :success
+  #   end
 
-    it "responds with a redirect when an order id given exists and the logged in user didn't sell products in this order" do
-      order = orders(:order_1)
-      user = users(:betsy)
-      perform_login(user)
+  #   it "responds with a redirect when an order id given exists and the logged in user didn't sell products in this order" do
+  #     order = orders(:order_1)
+  #     user = users(:betsy)
+  #     perform_login(user)
       
-      get order_path(order.id)
-      must_redirect_to root_path
-    end
+  #     get order_path(order.id)
+  #     must_redirect_to root_path
+  #   end
 
-    it "responds with a not_found when id given does not exist" do
-      user = users(:betsy)
-      perform_login(user)
-      order_id = -10000
+  #   it "responds with a not_found when id given does not exist" do
+  #     user = users(:betsy)
+  #     perform_login(user)
+  #     order_id = -10000
 
-      get order_path(order_id)
-      must_respond_with :not_found
-    end
-  end
+  #     get order_path(order_id)
+  #     must_respond_with :not_found
+  #   end
+  # end
 
-  describe "cart action" do
-    it "gives back a successful response" do
-      get cart_path
-      must_respond_with :success
-    end
-  end
+  # describe "cart action" do
+  #   it "gives back a successful response" do
+  #     get cart_path
+  #     must_respond_with :success
+  #   end
+  # end
 
   describe "checkout action" do
-    # it "gives back a successful response" do
-    #   user = users(:ada)
-    #   perform_login(user)
+    let(:order){
+      Order.create(status: "pending")
+    }
+    it "gives back a successful response if there are some items in the cart" do
+      product = products(:lemon_shirt)
+      item = OrderItem.create(quantity: 2, product: product, order: order)
+      get checkout_path
 
-    #   expect {
-    #     post products_path, params: product_hash
-    #   }.must_differ "Product.count", 1
-
-    #   must_redirect_to product_path(Product.find_by(name: "new product"))
-    # end
+      must_respond_with :success
+    end
 
     # it "cannot creates a new product if no merchant logged in, and redirects the user to root path" do
     #   user = users(:ada)
@@ -60,7 +60,7 @@ describe OrdersController do
     # end
   end
 
-  # describe "update action" do
+  # describe "update_paid action" do
   #   let(:update_product_hash) {
   #     {
   #       product: {

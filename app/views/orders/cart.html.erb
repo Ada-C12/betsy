@@ -12,7 +12,7 @@
     <% end %>
     <%= link_to "Delete", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
     <h5 class="card-text"> Merchant:<%= order_item.product.user.merchant_name %>MAKE LINK!! </h5> 
-    <%= link_to "Order", checkout_path%>
+    <%= link_to "Order", checkout_path(@current_order.id)%>
   
   <% end %>
 <% else %>
