@@ -1,20 +1,16 @@
 class ProductsController < ApplicationController
+
+  before_action :determine_wizard, only: [:new, :create]
+
   def homepage
     @products = Product.five_products
   end
 
   def new
-    if params[:wizard_id]
-      @product = Product.new(wizard_id: params[:wizard_id])
-    end
+    @product = Product.new(wizard_id: params[:wizard_id])
   end
 
   def create
-    wizard = Wizard.find_by(id: params[:wizard_id])
-    unless wizard 
-      head :not_found 
-      return 
-    end 
     @product = Product.new(product_params)
     @product.wizard = Wizard.find_by(id: wizard.id)
     
@@ -23,6 +19,7 @@ class ProductsController < ApplicationController
       redirect_to wizard_path(wizard.id)
       return 
     else
+      flash[:error] = "Could not add product to shop"
       render :new, status: :bad_request
       return 
     end
