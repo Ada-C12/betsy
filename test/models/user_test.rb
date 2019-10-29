@@ -93,7 +93,5 @@ describe User do
         expect(review).must_be_instance_of Review
       end
     end
-
   end
-
 end
