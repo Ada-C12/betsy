@@ -151,20 +151,26 @@ margin-left: 2rem;
    }
  }
 
-//  PRODUCT ADD TO CART
-// .no-gutters {
-//   margin-right: 0;
-//   margin-left: 0;
+//  PRODUCT SHOW
+.product-show h3{
+  font-size: 1.5em;
+  text-transform: uppercase;
+  padding-bottom: 0.5em;
+  border-bottom: 1px solid;
+}
 
-//   > .col,
-//   > [class*="col-"] {
-//     padding-right: 0;
-//     padding-left: 0;
-//   }
-// }
+.description {
+  margin: 1em 0;
+  padding: 1em 0;
+  font-style: italic;
+  padding-bottom: 0.5em;
+}
 
-// form input[type="text"], textarea, select, form input[type="submit"], form input[type="number"] {
-//   border-radius: 5px;
-//   border-width: 0;
-//   display: block;
-// }
+.types, .types ul, .nickname {
+  padding: 0;
+  margin: 0;
+  text-transform: uppercase;
+  font-size: 0.8em;
+  letter-spacing: 0.05em;
+  line-height: 1.8em;
+}
