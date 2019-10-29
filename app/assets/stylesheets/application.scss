@@ -192,6 +192,9 @@ a {
   color: black;
 }
 
+.home {
+  font-weight: bold;
+}
 // BUTTONS
 
 .btn-primary {
@@ -199,14 +202,7 @@ a {
   border-color: goldenrod;
 }
 
-// SHOPPING CART
-
-// .cart-img {
-//   position: relative;
-//   float: left;
-//   width: 100px;
-//   height: 1000px;
-//   background-position: 50% 50%;
-//   background-repeat: no-repeat;
-//   background-size: cover;
-// }
+.copyright {
+  text-align: center;
+  font-size: small;
+}

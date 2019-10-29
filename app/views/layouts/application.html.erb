@@ -20,7 +20,7 @@
 
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">
-          <li class="nav-item app-header__nav_item"><%= link_to "Home", root_path %></li>
+          <li class="nav-item app-header__nav_item home"><%= link_to "Home", root_path %></li>
           <div class="dropdown">
           <li class="nav-item app-header__nav_item" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"> <%= link_to "Products", products_path, method: :get %></li>
           
@@ -62,17 +62,18 @@
     </main>
 
     <footer class="app-footer__footer">
-      <section class="app-footer__nav">
-        <ul class="nav app-footer__site-nav-container">
-          <li class="nav-item app-footer__nav_item">Contact Us</li>
-          <li class="nav-item app-footer__nav_item">Order Status</li>
-          <li class="nav-item app-footer__nav_item">Shipping</li>
-          <li class="nav-item app-footer__nav_item">Returns & Exchanges</li>
-          <li class="nav-item app-footer__nav_item">About Us</li>
-        </ul>
+      <section class="app-footer__nav"> 
+      <ul class="nav app-footer__site-nav-container">
+        <li class="nav-item app-footer__nav_item">Contact Us</li>
+        <li class="nav-item app-footer__nav_item">Order Status</li>
+        <li class="nav-item app-footer__nav_item">Shipping</li>
+        <li class="nav-item app-footer__nav_item">Returns & Exchanges</li>
+        <li class="nav-item app-footer__nav_item">About Us</li>
+      </ul>
       <section>
+    <p class="copyright">© The Four Pack</p>
+    <p class="copyright">#ChooseKegsy</p>
     </footer>
-    
   </body>
 
 
