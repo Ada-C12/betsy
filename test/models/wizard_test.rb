@@ -63,9 +63,9 @@ describe Wizard do
         auth_hash = {
           provider: "github",
           uid: 9876,
-          "info" => {
-            "email" => "wiz@wiz.org",
-            "nickname" => "Wizardly Wizard"
+          info: {
+            email: "wiz@wiz.org",
+            nickname: "Wizardly Wizard"
           }
         }
         new_wizard = Wizard.build_from_github(auth_hash)

@@ -1,5 +1,4 @@
 require "test_helper"
-require 'pry'
 describe WizardsController do
   
   
@@ -18,7 +17,7 @@ describe WizardsController do
     
     it "creates an account for a new user and redirects to the root route" do
       new_wizard = Wizard.new(provider: "github", uid: 99999, username: "testing", email: "test@wizard.com")
-      # binding.pry
+
       expect{
         perform_login(new_wizard)
       }.must_differ "Wizard.count", 1
