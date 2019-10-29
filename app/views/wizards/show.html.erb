@@ -1,0 +1,44 @@
+
+<p><%= @wizard.username%> </p>
+<p><%= @wizard.email%>  </p>
+
+<div> Total Revenue <%=@wizard.total_revenue%> </div>
+
+<ul class="wizard-show-nav">
+	<li>
+		<%= link_to "View Products", wizard_products_path(@wizard.id), class: "btn btn-dark"%>
+	</li>
+	<li>
+		<div class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+				Status
+			</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<%= link_to "All", wizard_path(@wizard.id), class:"dropdown-item" %>
+				<%= link_to "Pending", wizard_path(@wizard.id, status: "pending"), class:"dropdown-item" %>
+				<%= link_to "Paid", wizard_path(@wizard.id, status: "paid"), class:"dropdown-item" %>
+				<%= link_to "Complete", wizard_path(@wizard.id, status: "complete"), class:"dropdown-item" %>
+				<%= link_to "Cancelled", wizard_path(@wizard.id, status: "cancelled"), class:"dropdown-item" %>
+			</div>
+		</div>
+	</li>
+</ul>
+
+<div class="container">
+<% @orders.each do |order|%>
+  <p class="col-lg-12"> Order #<%= order.id%> </p>
+  <% order.order_items.each do |item| %>
+	<div class="row">
+    <% if item.product.wizard == @wizard %>
+			<%= image_tag item.product.photo_url, alt: "Pictures of #{item.product.name}", class: "col-lg-2 img-thumbnail" %>
+		<% end %>
+		</div>
+	<% end %>
+<% end %>
+</div>
+
+
+
+
+
+

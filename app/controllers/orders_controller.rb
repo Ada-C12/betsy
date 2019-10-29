@@ -2,7 +2,7 @@ class OrdersController < ApplicationController
   def cart
     @order = Order.find_by(id: session[:order_id])
   end
-  
+
   def checkout
     @order = Order.find_by(id: session[:order_id])
     if @order.nil?
@@ -10,14 +10,14 @@ class OrdersController < ApplicationController
       return redirect_to root_path
     end
   end
-  
+
   def update
     @order = Order.find_by(id: session[:order_id])
     if @order.nil?
       return head :not_found
     end
     @order.status = "paid"
-    
+
     if @order.update(order_params)
       @order.order_items.each do |order_item|
         updated_stock = order_item.updated_stock
@@ -44,9 +44,9 @@ class OrdersController < ApplicationController
       return head :not_found
     end
   end
-  
+
   private
-  
+
   def order_params
     params.require(:order).permit(:email, :owling_address, :name_on_cc, :name, :cc_num, :cc_exp_mo, :cc_exp_yr, :cc_cvv, :zip_code)
   end
