@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   
   resources :wizards, only: [:show]
   resources :wizards do
-    resources :products, only: [:index, :new, :create]
+    resources :products, only: [:index, :new, :create, :edit, :update]
   end
   
   resources :categories do
