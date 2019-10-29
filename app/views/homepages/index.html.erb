@@ -10,8 +10,7 @@
   <% random_products = Product.random_products(3) %>
   <% random_products.each do |product| %>
     <section class="card" style="width: 18rem;">
-      <% image = image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %>
-      <%= link_to image, product_path(product.id) %>
+      <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
       <div class="card-body">
           <h5> 
             <%= link_to product.name, product_path(product.id) %>
@@ -27,8 +26,7 @@
   <section class="card-group">
     <% deals.each do |product| %>
       <section class="card" style="width: 18rem;">
-        <% image = image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %>
-        <%= link_to image, product_path(product.id) %> 
+        <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%> 
         <div class="card-body">
           <h5> 
             <%= link_to product.name, product_path(product.id) %>
@@ -44,8 +42,7 @@
   <section class="card-group">
     <% products.each do |product| %>
       <section class="card" style="width: 18rem;">
-        <% image = image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
-        <%= link_to image, product_path(product.id) %>
+        <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
         <div class="card-body">
           <h5> 
             <%= link_to product.name, product_path(product.id) %>
@@ -62,8 +59,7 @@
     <% product = Category.products_by_category(cat).shuffle.first %>
     <section class="card" style="width: 18rem;">
       <h2> <%= cat.capitalize %> </h2>
-      <% image = image_tag (product.img_url), class:"card-img-top", alt:"#{product.name} product image" %> 
-      <%= link_to image, product_path(product.id) %>
+      <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
       <div class="card-body">
         <h5> 
         <%= link_to product.name, product_path(product.id) %>

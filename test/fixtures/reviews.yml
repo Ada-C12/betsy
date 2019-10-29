@@ -3,8 +3,13 @@ bad_review:
   description: "This product sucks!!"
   user: ada
   product: lemon_shirt
+okay_review:
+    rating: 3
+    description: "This product is okay!!"
+    user: ada
+    product: strawberry_shoes
 good_review:
-  rating: 1
+  rating: 5
   description: "This product is the best!!"
   user: gretchen
   product: lemon_shirt
