@@ -105,7 +105,7 @@ describe OrdersController do
       updated_order.status.must_equal 'paid'
       
       must_respond_with :redirect
-      must_redirect_to root_path
+      must_redirect_to confirmation_path
     end
     
     it "updates product stock when order successfully updates" do
@@ -148,5 +148,8 @@ describe OrdersController do
       must_respond_with :not_found
     end
   end
-  
+
+  def confirmation
+
+  end
 end
