@@ -17,7 +17,7 @@ class OrderItem < ApplicationRecord
     existing_quantity = self.quantity
     new_quantity = existing_quantity + quantity
 
-    self.update(quantity: new_quantity)
+    return self.update(quantity: new_quantity)
   end
   
 end
