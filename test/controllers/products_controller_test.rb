@@ -142,7 +142,7 @@ describe ProductsController do
       expect(find_product.description).must_equal update_product_hash[:product][:description]
       expect(find_product.category_ids.first).must_equal update_product_hash[:product][:category_ids].first
 
-      must_redirect_to product_path(Product.find_by(name: "lemon product"))
+      must_redirect_to current_user_path
     end
 
     it "cannot update a product if no merchant logged in, and redirects the user to the product page" do
