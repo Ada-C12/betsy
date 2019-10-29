@@ -3,6 +3,16 @@ brad:
   email: radbrad@frat.com
   uid: 13371337
   provider: github
+partydood:
+  username: partydood
+  email: partydoodles@gmail.com
+  uid: 12341234
+  provider: github
+casper:
+  username: casper
+  email: the_friendly_ghost@gmail.com
+  uid: 43214321
+  provider: github
 leo:
   username: leod
   email: leod@frat.com

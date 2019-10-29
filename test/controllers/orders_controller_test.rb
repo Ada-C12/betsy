@@ -286,6 +286,44 @@ describe OrdersController do
         expect(updated_order.errors.messages[:orderitems]).must_include "There are no items in your cart!"
       end
     end
+  end
+  
+  describe "guest user - merchant_order" do
+    it "does not allow gues users to access merchant_order path" do
+      get merchant_order_path(id: Order.first.id)
+      
+      must_redirect_to root_path
+      expect(flash[:error]).wont_be_nil
+    end
+  end
+  
+  describe "logged-in user - merchant_order" do 
+    it "does not allow merchants who's products are not a part of the order to access page" do
+      perform_login(merchants(:brad))
+      order_id = orders(:dog_order)
+      
+      get merchant_order_path(id: order_id)
+      
+      must_respond_with :redirect
+      expect(flash[:status]).must_equal :failure
+    end
     
+    it "returns not found for an invalid order id" do
+      perform_login(merchants(:casper))
+      order_id = -1
+      
+      get merchant_order_path(id: order_id)
+      
+      must_respond_with :not_found
+    end
+    
+    it "returns success for valid merchant and order id" do
+      perform_login(merchants(:casper))
+      order_id = orders(:dog_order)
+      
+      get merchant_order_path(id: order_id)
+      
+      must_respond_with :success
+    end
   end
 end

@@ -25,6 +25,7 @@ Rails.application.routes.draw do
   get '/cart', to: 'orders#cart', as: 'cart'
   patch '/orders/:id', to: 'orders#update'
   patch '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
+  get '/orders/:id/merchant_order', to: 'orders#merchant_order', as: 'merchant_order'
   
   
 end
