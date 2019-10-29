@@ -48,3 +48,18 @@ cat_toy_ok:
   order: cat_order
   product: cat_toy
   shipped: false
+dog_food_od:
+  quantity: 2
+  order: dog_order
+  product: dog_food
+  shipped: false
+leash_od:
+  quantity: 1
+  order: dog_order
+  product: leash
+  shipped: false
+dog_toy_od:
+  quantity: 3
+  order: dog_order
+  product: dog_toy
+  shipped: false

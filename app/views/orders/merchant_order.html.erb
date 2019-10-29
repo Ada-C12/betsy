@@ -1,0 +1,11 @@
+<h2>Order Information</h2>
+
+<section>
+  <ul>
+    <li>Name: <%= @order.cc_name %></li>
+    <li>Email Address: <%= @order.email %></li>
+    <li>Mailing Address: <%= @order.address %></li>
+    <li>Credit Card: **** **** ****<%= @order.cc_num[-4..-1] %></li>
+    <li>Expiration Date: <%= @order.cc_exp %></li>
+  </ul>
+</section>

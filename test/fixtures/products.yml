@@ -78,3 +78,27 @@ cat_toy:
   stock: 10
   merchant: brad
   retired: false
+dog_food:
+  name: Hill Science Diet Dog Food
+  description: Food.
+  price: 10.00
+  photo_url:
+  stock: 10
+  merchant: casper
+  retired: false
+leash:
+  name: Leash
+  description: For walking.
+  price: 15.00
+  photo_url:
+  stock: 10
+  merchant: casper
+  retired: false
+dog_toy:
+  name: Dog Toy
+  description: Feathers and catnip.
+  price: 5.00
+  photo_url:
+  stock: 10
+  merchant: partydood
+  retired: false
