@@ -89,17 +89,23 @@ describe ProductsController do
   end
 
   describe "Logged In Users Only" do
+    before do
+      perform_login(wizards(:wizard1))
+    end
     describe "new action" do
       it "succeeds if user is the Wizard given in params and Wizard ID matches logged in user's ID" do
+        get wizard_products_path(wizard1.id)
+        must_respond_with :success
       end
       it "responds with redirect if the logged in user is not the Wizard given in params" do
+        different_wizard = wizard_no_products
+        get wizard_products_path(different_wizard.id)
+        must_respond_with :redirect
       end
     end
     describe "create action" do
-      it "redirects if correct wizard is not logged in" do
-      end
-      it "creates a product given valid product data" do
-        new_product_params = {
+      let(:new_product_params) {
+        {
           product: {
             name: "Ancient Amulet",
             description: "Amulet that also qualifies as an artifact",
@@ -109,7 +115,13 @@ describe ProductsController do
             category_ids: [category1.id, category5.id]        
           }
         }
+      }
+      it "redirects if correct wizard is not logged in" do
+        post wizard_products_path(different_logged_in_wizard.id), params: new_product_params
 
+        must_respond_with :redirect
+      end
+      it "creates a product given valid product data" do
         expect {
           post wizard_products_path(wizard1.id), params: new_product_params
         }.must_change "Product.count", 1
@@ -134,6 +146,9 @@ describe ProductsController do
         }.wont_change "Product.count"
 
         must_respond_with :bad_request
+      end
+      it "responds with :not_found if Wizard is not found from params[:wizard_id]" do
+
       end
     end
   end
