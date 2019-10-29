@@ -23,7 +23,7 @@ class ProductsController < ApplicationController
       redirect_to wizard_path(wizard.id)
       return 
     else
-      render :new
+      render :new, status: :bad_request
       return 
     end
   end
