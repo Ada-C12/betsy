@@ -3,15 +3,36 @@ require "test_helper"
 describe MerchantsController do
 
   describe "Logged in Merchants" do 
-   
+    before do
+      perform_login(merchants(:brad))
+    end
 
     describe "current" do
-      it "responds with success when given current merchants id" do
-        perform_login(merchants(:brad))
+      it "responds with success when given current merchant" do
         get current_merchant_path
         must_respond_with :success
       end
     end
+
+    describe "destroy" do
+      it "responds with redirect when logging out merchant" do 
+        delete merchant_path(merchants(:brad))
+        must_respond_with :redirect
+        must_redirect_to root_path
+
+        expect(session[:merchant_id]).must_be_nil
+        expect(flash[:status]).must_equal :success
+        expect(flash[:result_text]).must_equal "Successfully logged out!"
+      end
+    end
+
+    describe "merchant_orderitems" do
+    it "responds with success" do 
+      get your_orderitems_path(merchants(:brad))
+      must_respond_with :success
+    end
+  end
+
   end
 
   describe "Guest Users" do 
@@ -81,12 +102,10 @@ describe MerchantsController do
 
     describe "current" do 
       it "responds with a not found flash and redirects to root path when id given does not exist" do
-       
         get current_merchant_path
 
         expect(flash[:error]).must_equal "You must be logged in as an authorized merchant to access this page."
   
-        
         must_respond_with :redirect
         must_redirect_to root_path
       end
