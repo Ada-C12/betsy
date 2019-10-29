@@ -19,7 +19,7 @@
         </div>
       </div>
       <% if @wizard && @wizard.id == session[:wizard_id] %>
-          <%= link_to "Edit Product", edit_wizard_product_path(@wizard.id), class: "btn btn-dark"%>
+          <%= link_to "Edit Product", edit_product_path(product.id), class: "btn btn-dark"%>
       <% end %>
     <% end %>
   </div>
