@@ -4,7 +4,7 @@ Rails.application.routes.draw do
   
   root to: "products#homepage"
   
-  resources :products, only: [:index, :show] do
+  resources :products, only: [:index, :show, :edit, :update] do
     resources :order_items, only: [:create]
     resources :reviews, only: [:new,:create]
   end
@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   
   resources :wizards, only: [:show]
   resources :wizards do
-    resources :products, only: [:index, :new, :create, :edit, :update]
+    resources :products, only: [:index, :new, :create]
   end
   
   resources :categories do
