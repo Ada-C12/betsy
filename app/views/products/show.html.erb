@@ -25,6 +25,8 @@
 <%= form_with model: Review, url: reviews_path, method: :post do |f| %>
   <%= f.label "Rating", class: "col-sm-2 col-form-label"%>
   <%= f.text_field :rating, class: "form-control" %>
+  <%= f.label "Title", class: "col-sm-2 col-form-label"%>
+  <%= f.text_field :title, class: "form-control" %>
   <%= f.label "Review", class: "col-sm-2 col-form-label"%>
   <%= f.text_field :description, class: "form-control" %>
   <%= f.hidden_field :user_id, :value => session[:user_id] %>
@@ -33,12 +35,20 @@
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
 
-<% @product.reviews.each do |review| %>
-  <% if review.user %>
-    <p> Reviewer: <%= review.user.username %> </p>
-  <% else %>
-    <p> Reviewer: Guest </p>
-  <% end %>
-  <p> Rating: <%= review.rating %> </p>
-  <p> Review: <%= review.description %> </p>
+
+  <% @product.reviews.each do |review| %>
+  <section class="review-containter">
+      <h2> <%= review.title %> - <%= review.rating %> Stars </h2>
+      <% review.rating.times do %>
+      <%= rating_img %>
+      <% end %>
+      <p> 
+        <% if review.user %>
+          <%= link_to review.user.username, user_path(review.user.id) %>
+        <% else %>
+          Guest
+        <% end %>
+      </p>
+      <p> <%= review.description %> </p>
+    </section>
 <% end %>
