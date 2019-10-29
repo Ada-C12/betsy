@@ -74,3 +74,4 @@ end
 
 puts "Added #{Type.count} type records"
 puts "#{type_failures.length} types failed to save"
+

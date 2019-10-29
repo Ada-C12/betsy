@@ -30,7 +30,11 @@
   <% @order.orderitems.each do |orderitem| %>
   <section class="row checkout">
     <section class = "columns small-12 medium-3">
+<<<<<<< HEAD
       <span class="img"><%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}" %></span>
+=======
+      <%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}", class: "img" %>
+>>>>>>> development
     </section>
 
     <section class = "columns small-12 medium-5">
