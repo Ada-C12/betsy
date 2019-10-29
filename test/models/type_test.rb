@@ -32,25 +32,25 @@ describe Type do
     end
   end
   
-  # describe "relationships" do
+  describe "relationships" do
   
-  #   xit "can have many products" do
-  #     #want to create products (2), and give them the same type, assertion is:
-  #     # type = :lager 
-  #     # type.products.count > 0
-  #     # 
-  #     new_type.save
-  #     type = Type.first
+    xit "can have many products" do
+      #want to create products (2), and give them the same type, assertion is:
+      # type = :lager 
+      # type.products.count > 0
+      # 
+      new_type.save
+      type = Type.first
   
-  #     expect(type.count).must_be :>=, 0
-  #     type.each do |name|
-  #       expect(type.name).must_be_instance_of Type
-  #     end
-  #   end #this isnt passing
+      expect(type.count).must_be :>=, 0
+      type.each do |name|
+        expect(type.name).must_be_instance_of Type
+      end
+    end #this isnt passing
   
-  #   it "can belong to many products" do
-  #     #want to create products (2), and give them the same type, assertion is:
-  #     # product1.type == product2.type
-  #   end
-  # end#end of relationship/Do
+    it "can belong to many products" do
+      #want to create products (2), and give them the same type, assertion is:
+      # product1.type == product2.type
+    end
+  end#end of relationship/Do
 end

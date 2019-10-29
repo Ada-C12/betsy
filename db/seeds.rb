@@ -52,3 +52,26 @@ end
 
 puts "Added #{Product.count} product records"
 puts "#{product_failures.length} products failed to save"
+
+# seed types
+TYPE_FILE = Rails.root.join('db', 'seed_data', 'types.csv')
+puts "Loading raw product data from #{TYPE_FILE}"
+
+type_failures = []
+CSV.foreach(TYPE_FILE, :headers => true) do |row|
+  type = Type.new
+  type.name = row['name']
+
+  successful = type.save
+  if !successful
+    type_failures << product
+    puts "Failed to save type: #{type.inspect}"
+    puts "#{type.errors.messages}"
+  else
+    puts "Created type: #{type.inspect}"
+  end
+end
+
+puts "Added #{Type.count} type records"
+puts "#{type_failures.length} types failed to save"
+

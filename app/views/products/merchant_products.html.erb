@@ -1,0 +1,21 @@
+<section>
+  <h3><%= @merchant.username%>'s Shop</h3>
+
+  <div class="container">
+      <div class="row">
+        <% if @merchant.products.length == 0 %>
+          <p>No products currently for sale</p>
+        <% end %>
+        <% @merchant.products.each do |product| %>
+          <% if product.retired == false%>
+            <div class="col-sm">
+            <span class="img-description"><%= product.name %></span>
+            <%= link_to product_path(product.id) do %>
+              <span class="img"><%= image_tag "#{product.photo_url}"%></span>
+              <% end %>
+            </div>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
+</section>

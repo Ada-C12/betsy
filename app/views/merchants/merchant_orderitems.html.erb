@@ -1,0 +1,21 @@
+<h2>Merchant's Order Items</h2>
+
+<section>
+  <% @merchant_orderitems.each do |orderitem| %>
+    <section class="row checkout">
+    <section class = "columns small-12 medium-3">
+      <%= link_to "Order ##{orderitem.order_id}", order_path(orderitem.order_id) %>
+      <%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}", class: "img" %>
+      <%= link_to orderitem.product.name, product_path(orderitem.product) %>
+      <%= orderitem.order.created_at %>
+    </section>
+
+    <section class = "columns small-12 medium-4">
+      $<%= orderitem.product.price %> x <%= orderitem.quantity %>
+      Subtotal: $<%= orderitem.subtotal %>
+      <%= orderitem.order.status %>
+      <%= orderitem.shipped %>
+    </section>
+
+</section>
+<% end %>

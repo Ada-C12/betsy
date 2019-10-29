@@ -1,17 +1,9 @@
 class MerchantsController < ApplicationController
-  before_action :require_login, except: [:index, :destroy]
-  skip_before_action :require_login, only: [:create]
+  before_action :require_login, except: [:index, :destroy, :create]
+ 
 
   def index
     @merchants = Merchant.all
-  end
-
-  def show
-    @merchant = Merchant.find_by(id: session[:merchant_id])
-    if @merchant.nil?
-      flash[:warning] = "Merchant with id #{params[:id]} was not found."
-      return redirect_to root_path
-    end
   end
 
   def create
@@ -19,13 +11,17 @@ class MerchantsController < ApplicationController
     merchant = Merchant.find_by(uid: auth_hash[:uid], provider: "github")
 
     if merchant
-      flash[:success] = "Logged in as returning merchant #{merchant.username}."
+      flash[:status] = :success
+      flash[:result_text] = "Logged in as returning merchant #{merchant.username}."  
     else
       merchant = Merchant.build_from_github(auth_hash)
       if merchant.save
-        flash[:success] = "Logged in as new merchant #{merchant.username}."
+        flash[:status] = :success
+        flash[:result_text] = "Logged in as new merchant #{merchant.username}." 
       else
-        flash[:error] = "Could not create new merchant account: #{merchant.errors.messages}"
+        flash[:status] = :failure
+        flash[:result_text] = "Could not create new merchant account"
+        flash[:messages] = merchant.errors.messages
         return redirect_to root_path
       end 
     end
@@ -36,17 +32,34 @@ class MerchantsController < ApplicationController
 
   def current
     @current_merchant = Merchant.find_by(id: session[:merchant_id])
-
-    unless @current_merchant
-      flash[:error] = "You must be logged in as an authorized merchant to access this page."
-      return redirect_to root_path
-    end
   end
 
   def destroy
     session[:merchant_id] = nil
-    flash[:success] = "Successfully logged out!"
+    flash[:status] = :success
+    flash[:result_text] = "Successfully logged out!"
 
     return redirect_to root_path
+  end
+
+  def merchant_orderitems
+     @merchant_orderitems = Orderitem.joins(product: :merchant).where(merchants: {id: session[:merchant_id]})
+
+     #.where("product.merchant_id==@current_merchant")
+
+    # @orderitems = Orderitem.where(product_id: )
+
+    #each product has a merchant so we care about the orderitem product_id
+    # @orderitems.each do |orderitem|
+    # product = Product.where(id: orderitem.product_id)
+    # end
+
+    # @current_merchant = Merchant.find_by(id: session[:merchant_id])
+
+    # @current_merechant.products.each do |product|
+    # if product.orderitems.shipped == false && orderitems.order.status == 'paid'
+  
+
+
   end
 end

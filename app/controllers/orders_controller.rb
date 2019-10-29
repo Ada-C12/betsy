@@ -6,11 +6,6 @@ class OrdersController < ApplicationController
     # If you don't have an order_id, you haven't added anthing to cart.
     if session[:order_id]
       @order = Order.find_by(id: session[:order_id])
-      
-      if @order.nil?
-        head :not_found
-        return
-      end
     else
       # This is the nice redirect for average users with empty carts.
       # Theoretically sdj render a dummy cart page 
@@ -21,21 +16,24 @@ class OrdersController < ApplicationController
     end
   end
   
+  # This is the payment information form.
   def edit ; end
   
+  # This is the confirm button to proceed with your order after payment information.
   def update
     @order.orderitems.each do |orderitem|
       if !orderitem.valid?
         flash.now[:status] = :failure
         flash.now[:result_text] = "Sorry. Some of the items in your cart are no longer available."
-        flash.now[:messages] << @orderitem.errors.messages
+        flash.now[:messages] = orderitem.errors.messages
+        
+        # NOT SURE HOW TO CHAIN ERROR MESSAGES TOGETHER, WILL NEED TO GO THROUGH THEM ONE BY ONE
       end
       
       if flash.now[:status] == :failure
-        return render :edit, status: :bad_request 
+        return redirect_to cart_path
       end
     end
-    
     
     # Stage the status to be "paid"
     @order.status = "paid"
@@ -59,10 +57,11 @@ class OrdersController < ApplicationController
     end
   end
   
+  # This is the order confirmation page. 
   def show 
     if @order.status == "pending"
       flash[:status] = :failure
-      flash[:result_text] = "Cannot cancel #{@order.status} orders."
+      flash[:result_text] = "Pending orders do not have access to this page."
       flash[:messages] = @order.errors.messages
       
       redirect_to root_path

@@ -17,6 +17,10 @@
 /* Import scss content */
 @import "**/*";
 
+main {
+  padding: 2rem;
+}
+
 // $primary-font: font-family: 
 
 body, h1, h2, h3, h4, h5 {
@@ -151,4 +155,5 @@ margin-left: 2rem;
      margin-bottom: 5px;
    }
  }
+
 

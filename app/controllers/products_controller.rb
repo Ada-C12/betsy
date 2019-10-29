@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :require_login, except: [:index, :show]
+  before_action :require_login, except: [:index, :show, :merchant_products]
   
   def index
     @products = Product.all
@@ -12,6 +12,7 @@ class ProductsController < ApplicationController
       redirect_to root_path
       return
     end
+    @orderitem = Orderitem.new
   end 
 
   # only merchants
@@ -74,6 +75,10 @@ class ProductsController < ApplicationController
       @product.retired = true
       @product.save
     end
+  end
+
+  def merchant_products
+    @merchant = Merchant.find_by(id: params[:id])
   end
 
   private
