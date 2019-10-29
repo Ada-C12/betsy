@@ -26,6 +26,13 @@ describe MerchantsController do
       end
     end
 
+    describe "merchant_orderitems" do
+    it "responds with success" do 
+      get your_orderitems_path(merchants(:brad))
+      must_respond_with :success
+    end
+  end
+
   end
 
   describe "Guest Users" do 
