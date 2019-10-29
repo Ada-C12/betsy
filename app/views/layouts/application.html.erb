@@ -15,8 +15,13 @@
       <nav>
         <ul>
           <li><h1><%= link_to "Lumos", root_path %></h1></li>
-          <li>Login</li>
-          <li>Sign Up</li>
+          <% if session[:wizard_id] %>
+            <li><%= link_to "Log out", logout_path, method: :delete %></li>
+            <li><%= "Profile" %></li>
+            
+          <% else %>
+            <li><%= link_to "Login", github_login_path %></li>
+          <% end %>
           <li><%= link_to "Cart", cart_path %></li>
         </ul>
       </nav>

@@ -1,8 +1,12 @@
 wizard1: 
+  provider: github
+  uid: 12345
   username: zedzorander 
   email: zedzo@greatestmage.com
 
 wizard_no_products:
+  provider: github
+  uid: 12334
   username: ihavenoproducts
   email: ihavenoproducts@nope.com
 
