@@ -1,24 +1,24 @@
 Only show page if order status = paid 
-<% if @order.status == "paid"%>
+<% if @current_order.status == "paid"%>
   <h2>Confirmation: Your order has been successfully placed!</h2>
 
   <h3>This page is for registered user to check the order details!</h3>
 
-  <h2>Order ID: <%= @order.id %></h2>
+  <h2>Order ID: <%= @current_order.id %></h2>
 
-  <h3>Order Status: <%= @order.status %></h3>
+  <h3>Order Status: <%= @current_order.status %></h3>
 
   <h2>Shipping info:</h2>
-  <h3>Name: <%= @order.name %></h3>
-  <h3>Email: <%= @order.email %></h3>
-  <h3>Address: <%= @order.address %></h3>
+  <h3>Name: <%= @current_order.name %></h3>
+  <h3>Email: <%= @current_order.email %></h3>
+  <h3>Address: <%= @current_order.address %></h3>
 
   <h2>Payment info:</h2>
-  <h3>Total: <%= @order.total%></h3>
-  <h3>Name: <%= @order.cc_name %></h3>
-  <h3>Card num: <%= @order.cc_last4 %></h3>
-  <h3>Exp: <%= @order.cc_exp %></h3>
-  <h3>CVV: <%= @order.cc_cvv %></h3>
-  <h3>Billing Zip: <%= @order.billing_zip %></h3>
+  <h3>Total: <%= @current_order.total%></h3>
+  <h3>Name: <%= @current_order.cc_name %></h3>
+  <h3>Card num: <%= @current_order.cc_last4 %></h3>
+  <h3>Exp: <%= @current_order.cc_exp %></h3>
+  <h3>CVV: <%= @current_order.cc_cvv %></h3>
+  <h3>Billing Zip: <%= @current_order.billing_zip %></h3>
   
 <%end %>

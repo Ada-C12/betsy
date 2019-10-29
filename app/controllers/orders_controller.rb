@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login, only: [:cart, :checkout, :update_paid, :confirmation]
-  skip_before_action :find_order, only: [:show, :checkout, :update_paid, :confirmation]
-  before_action :find_order_params, only: [:show, :checkout, :update_paid, :confirmation]
+  skip_before_action :find_order, only: [:show, :update_paid]
+  before_action :find_order_params, only: [:show, :update_paid]
 
   def show
     if !@order
@@ -17,10 +17,10 @@ class OrdersController < ApplicationController
   end
   
   def checkout
-    if @order.nil?
+    if @current_order.nil?
       flash[:error] = "Order doesn't exist!"
       return redirect_to root_path
-    elsif @order.order_items.empty?
+    elsif @current_order.order_items.empty?
       flash[:error] = "No item in the cart! Please add some items then checkout!"
       return redirect_to root_path
     end
@@ -28,23 +28,25 @@ class OrdersController < ApplicationController
   
   def update_paid
     @order.update(order_params)
-    @order.status = "paid"
     @order.customer_id = session[:user_id]
-    
+    @order.status = "paid"
+
     if @order.save
       flash[:success] = "Order #{@order.id} has been purchased successfully!"
-      return redirect_to confirmation_path(@order.id)
+      return redirect_to confirmation_path
+    
     else
-      flash.now[:error] = "Something went wrong! Order was not paid.#{@order.errors.messages}"
-      render cart_path
+      @order.update(status: "pending")
+      flash[:error] = "Something went wrong! Order was not paid.#{@order.errors.messages}"
+      redirect_to cart_path
       return
     end
   end
   
   def confirmation
-    if @order
+    if @current_order
       session[:cart_id] = nil
-      flash[:success] = "Order #{@order.id} has been successfully created!"
+      flash[:success] = "Order #{@current_order.id} has been successfully created!"
     else
       flash[:error] = "Order doesn't exist!"
       return redirect_to root_path
@@ -54,7 +56,7 @@ class OrdersController < ApplicationController
   private
   
   def order_params
-    return params.require(:order).permit(:name, :email, :address, :cc_name, :cc_last4, :cc_exp, :cc_cvv, :billing_zip)
+    return params.require(:order).permit(:name, :email, :address, :cc_name, :cc_last4, :cc_exp, :cc_cvv, :billing_zip, status: "paid")
   end
   
   def find_order_params
