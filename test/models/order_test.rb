@@ -318,5 +318,23 @@ describe Order do
         expect(updated_order.status).must_equal "complete"
       end
     end
+    
+    describe "is_order_of" do
+      it "returns true when merchant's product is included in order" do
+        dog_order = orders(:dog_order)
+        casper_id = merchants(:casper).id
+        partydood_id = merchants(:partydood).id
+        
+        expect(dog_order.is_order_of(casper_id)).must_equal true
+        expect(dog_order.is_order_of(partydood_id)).must_equal true
+      end
+      
+      it "returns false when merchant's product is not included in order" do
+        dog_order = orders(:dog_order)
+        brad_id = merchants(:brad).id
+        
+        expect(dog_order.is_order_of(brad_id)).must_equal false
+      end
+    end
   end
 end

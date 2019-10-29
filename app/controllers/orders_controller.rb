@@ -3,7 +3,7 @@ class OrdersController < ApplicationController
   before_action :require_login, only: [:merchant_order]
   
   before_action :find_order_from_session, only: [:edit, :update]
-  before_action :find_order_from_params, only: [:show, :cancel]
+  before_action :find_order_from_params, only: [:show, :cancel, :merchant_order]
   
   def cart
     # If you don't have an order_id, you haven't added anthing to cart.
