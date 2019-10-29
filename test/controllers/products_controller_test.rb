@@ -90,18 +90,15 @@ describe ProductsController do
 
   describe "Logged In Users Only" do
     describe "new action" do
-      it "succeeds if user is the Wizard given in params" do
+      it "succeeds if user is the Wizard given in params and Wizard ID matches logged in user's ID" do
       end
-      it "responds with redirect if the user is not the Wizard given in params" do
+      it "responds with redirect if the logged in user is not the Wizard given in params" do
       end
     end
     describe "create action" do
-      before do
-        
+      it "redirects if correct wizard is not logged in" do
       end
-      it "creates a product given valid product data and correct wizard is logged in" do
-        # Need to test that they're logged in
-
+      it "creates a product given valid product data" do
         new_product_params = {
           product: {
             name: "Ancient Amulet",
