@@ -7,7 +7,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
-    <%= favicon_link_tag asset_path('https://i.imgur.com/Q3BnKML.png') %>
+    <%= favicon_link_tag asset_path('https://i.imgur.com/02QEPJL.png') %>
   </head>
 
   <body>
@@ -73,6 +73,20 @@
       <div class="alert alert-success alert-container">
         <%= flash[:success] %>
       </div>
+    <% end %>
+
+    <% if @order %>
+      <section id="cart-validations">
+        <% if @order.errors.any? %>
+          <div>
+            <% @order.errors.each do |column, message| %>
+              <div class="validations">
+                <%= column %> <%= message %>
+              </div>
+            <% end %>
+          </div>
+        <% end %>
+      </section>
     <% end %>
 
     <%= yield %>

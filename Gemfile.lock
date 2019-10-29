@@ -48,7 +48,7 @@ GEM
     archive-zip (0.12.0)
       io-like (~> 0.3.0)
     arel (9.0.0)
-    autoprefixer-rails (9.6.5)
+    autoprefixer-rails (9.7.0)
       execjs
     better_errors (2.5.1)
       coderay (>= 1.0.0)
@@ -121,9 +121,15 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     jquery-turbolinks (2.1.0)
+      json (= 2.2.0)
+      jwt (= 2.2.1)
+      listen (= 3.1.5)
       railties (>= 3.1.0)
+      rb-fsevent (~> 0.9, >= 0.9.4)
+      rb-inotify (~> 0.9, >= 0.9.7)
+      ruby_dep (~> 1.2)
       turbolinks
-    json (2.1.0)
+    json (2.2.0)
     jwt (2.2.1)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -145,7 +151,7 @@ GEM
     minitest-rails (5.2.0)
       minitest (~> 5.10)
       railties (~> 5.2.0)
-    minitest-reporters (1.4.1)
+    minitest-reporters (1.4.2)
       ansi
       builder
       minitest (>= 5.0)
@@ -246,7 +252,7 @@ GEM
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
     shellany (0.0.1)
-    simplecov (0.17.0)
+    simplecov (0.17.1)
       docile (~> 1.1)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
