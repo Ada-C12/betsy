@@ -38,11 +38,12 @@ class MerchantsController < ApplicationController
     session[:merchant_id] = nil
     flash[:status] = :success
     flash[:result_text] = "Successfully logged out!"
-
-    return redirect_to root_path
+    redirect_to root_path
+    return 
   end
 
   def merchant_orderitems
     @current_merchant = Merchant.find_by(id: session[:merchant_id])
   end
+
 end

@@ -1,3 +1,10 @@
+require 'simplecov'
+SimpleCov.start 'rails' do
+  add_filter '/test/' # Tests should not be counted toward coverage.
+  add_filter '/bin/'
+  add_filter '/db/'
+end
+
 ENV['RAILS_ENV'] ||= 'test'
 require_relative '../config/environment'
 require 'rails/test_help'

@@ -14,15 +14,27 @@ class Merchant < ApplicationRecord
     return merchant
   end
 
-  def calculate_total_revenue
-    # if status isn't passed in, find all the merchants orderitems and 
-    # return total revenue
-    costs = []
-    order_items = merchant_orderitems
-    order_items.each do |orderitem|
-      p orderitem.product.cost
+  def self.find_merchants_orderitems(current_merchant)
+    Orderitem.joins(product: :merchant).where(merchants: {id: current_merchant.id})
+  end
+
+  def self.calculate_total_revenue(current_merchant)
+    orderitems = Merchant.find_merchants_orderitems(current_merchant)
+    prices = []
+    orderitems.each do |orderitem|
+      prices << orderitem.product.price * orderitem.quantity
+    end
+    return prices.sum
+
+  end
+
+  def revenue_for_shipped
+    revenue = 0
+    @merchant_orderitems.each do |orderitem|
+      if orderitem.shipped 
+        revenue += orderitem.product.price 
+      end
     end
 
-  end 
-
+  end
 end

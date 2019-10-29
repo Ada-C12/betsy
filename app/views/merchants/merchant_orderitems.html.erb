@@ -1,10 +1,7 @@
 <h2>Merchant's Order Items</h2>
 
 <section>
-
-
-@current_merchant.
-  <% @merchant_orderitems.each do |orderitem| %>
+  <% Merchant.find_merchants_orderitems(@current_merchant).each do |orderitem| %>
     <section class="row checkout">
     <section class = "columns small-12 medium-3">
       <%= link_to "Order ##{orderitem.order_id}", order_path(orderitem.order_id) %>
@@ -20,7 +17,7 @@
       <%= orderitem.shipped %>
     </section>
 
-    <%= @current_merchant.calculate_total_revenue %>
+    Total Revenue: <%= Merchant.calculate_total_revenue(@current_merchant)%>
 
 </section>
 <% end %>
