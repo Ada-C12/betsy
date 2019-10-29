@@ -1,5 +1,5 @@
 order_item_1:
-  quantity: 3
+  quantity: 4
   product: lemon_shirt
   order: order_1
 order_item_2:

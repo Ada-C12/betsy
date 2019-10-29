@@ -86,4 +86,20 @@ describe OrderItem do
       expect(order_item.order).must_equal @order
     end
   end
+
+  describe "increase_quantity" do
+    it "accurately increases the quantity of an existing order item" do
+      order_item = OrderItem.first
+      expect(order_item.quantity).must_be :<, 5
+      new_quantity = 5
+
+      order_item.increase_quantity(new_quantity)
+
+      expect(order_item.quantity).must_be :>, 5
+    end
+
+    #edge case?
+
+
+  end
 end
