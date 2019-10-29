@@ -10,3 +10,5 @@ ipa:
   name: ipa
 porter: 
   name: porter
+light: 
+  name: light

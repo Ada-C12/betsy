@@ -13,3 +13,8 @@ casper:
   email: the_friendly_ghost@gmail.com
   uid: 43214321
   provider: github
+leo:
+  username: leod
+  email: leod@frat.com
+  uid: 13373345
+  provider: github

@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   root to: 'homepages#index'
   
+  resources :types, only: [:show, :new, :create]
+  
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
   resources :products, except: [:destroy] do
     resources :orderitems, only: [:create]
@@ -25,5 +27,5 @@ Rails.application.routes.draw do
   patch '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
   get '/orders/:id/merchant_order', to: 'orders#merchant_order', as: 'merchant_order'
   
-  resources :types, only: [:show, :new, :create]
+  
 end

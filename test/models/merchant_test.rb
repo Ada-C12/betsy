@@ -116,16 +116,56 @@ describe Merchant do
         merchant = Merchant.build_from_github(auth_hash)
         merchant.save!
         
-        expect(Merchant.count).must_equal 4
+        expect(Merchant.count).must_equal 3
         
         expect(merchant.provider).must_equal auth_hash[:provider]
         expect(merchant.uid).must_equal auth_hash[:uid]
         expect(merchant.username).must_equal auth_hash["info"]["nickname"]
         expect(merchant.email).must_equal auth_hash["info"]["email"]
-        
-        
       end
     end
+    
+    describe "find_merchants_orderitems" do
+      it "returns an array of a merchant's orderitems" do
+        current_merchant = merchants(:brad)
+        result = Merchant.find_merchants_orderitems(current_merchant)
+        expect(result.first.product.merchant.id).must_equal current_merchant.id
+      end 
+    end
+    
+    describe "calculate_total_revenue" do
+      it "returns the total revenue for a merchant's orderitems" do
+        current_merchant = merchants(:brad)
+        result = Merchant.calculate_total_revenue(current_merchant)
+        expect(result).must_equal 181.1
+      end
+      
+      it "returns zero for the total revenue if merchant has no orderitems" do
+        current_merchant = merchants(:leo)
+        result = Merchant.calculate_total_revenue(current_merchant)
+        expect(result).must_equal 0
+      end
+      
+    end 
+    
+    describe "calc_rev_by_status" do
+      it "returns the total revenue for a merchant's orderitems" do
+        current_merchant = merchants(:brad)
+        result1 = Merchant.calc_rev_by_status(current_merchant, "true")
+        result2 = Merchant.calc_rev_by_status(current_merchant, "false")
+        
+        expect(result1).must_equal 14.0
+        expect(result2).must_equal 167.1
+      end
+      
+      it "returns zero for the total revenue if merchant has no orderitems" do
+        current_merchant = merchants(:leo)
+        result = Merchant.calc_rev_by_status(current_merchant, "true")
+        expect(result).must_equal 0
+      end
+    end
+    
+    
   end
   
 end
