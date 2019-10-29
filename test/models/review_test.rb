@@ -6,7 +6,6 @@ describe Review do
   end
 
   it "can be instantiated" do
-    # binding.pry
     assert(@review.valid?)
   end
 
@@ -100,8 +99,5 @@ describe Review do
 
         refute(@review.valid?)
     end
-  
   end
-
-
 end
