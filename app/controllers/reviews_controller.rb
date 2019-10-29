@@ -1,15 +1,17 @@
 class ReviewsController < ApplicationController
   skip_before_action :find_order
+  skip_before_action :require_login, :only => [:create]
   
   def create
     @review = Review.new(review_params)
+    current_user = User.find_by(id: session[:user_id])
 
     if @review.valid?
-      if @current_user && @review.product.user_id == @current_user.id
+      if current_user && @review.product.user_id == current_user.id
         flash[:error] = "You can't review your own product!"
         redirect_to product_path(@review.product.id)
         return
-      elsif @current_user && !@current_user.reviews.where(product_id: @review.product_id).empty?
+      elsif current_user && !current_user.reviews.where(product_id: @review.product_id).empty?
         flash[:error] = "You can't review a product more than once!"
         redirect_to product_path(@review.product.id)
         return
