@@ -33,7 +33,5 @@ module ApplicationHelper
     image = image_tag (product.img_url), class: product_class, alt:"#{product.name} product image"
     return link_to image, product_path(product.id)
   end
-  
-
 
 end
