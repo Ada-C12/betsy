@@ -28,7 +28,10 @@ module ApplicationHelper
     image = image_tag "https://live.staticflickr.com/65535/48971625483_e04b973cc8_o.png", alt:"cart fruit basket full image", class:"basket-img"
     return link_to image, cart_path
   end
-  
 
+  def product_img_link(product: product, img_url: img_url, product_class: product_class)
+    image = image_tag (product.img_url), class: product_class, alt:"#{product.name} product image"
+    return link_to image, product_path(product.id)
+  end
 
 end

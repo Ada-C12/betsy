@@ -45,6 +45,14 @@ describe Product do
     it "can have one user" do
       expect(@product.user).must_equal users(:ada)
     end
+  
+    it "can have many reviews" do
+      review1 = reviews(:good_review) 
+      review2 = reviews(:bad_review)
+      expect(@product.reviews.count).must_equal 2
+      expect(@product.reviews).must_include review1
+      expect(@product.reviews).must_include review2
+    end
   end
 
   describe "validations" do
