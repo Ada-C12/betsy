@@ -6,8 +6,20 @@ describe ProductsController do
   let(:product) { products(:product1) }
   let(:category1) { categories(:category1) } 
   let(:category5) { categories(:category5) }
+  let(:new_product_params) {
+    {
+      product: {
+        name: "Ancient Amulet",
+        description: "Amulet that also qualifies as an artifact",
+        stock: 1,
+        # photo_url,
+        price: 23.00,
+        category_ids: [category1.id, category5.id]        
+      }
+    }
+  }
 
-  describe "Guest and Logged In Users" do
+  describe "Guest Users" do
     describe "index action" do
       it "gives back a successful response" do
         get products_path
@@ -21,7 +33,27 @@ describe ProductsController do
         get products_path
         
         must_respond_with :success
-        
+      end
+    end
+
+    describe "new action" do
+      it "responds with redirect since user is guest and not logged in" do
+        get wizard_products_path(wizard1.id)
+        must_respond_with :redirect
+      end
+    end
+
+    describe "create action" do
+      it "responds with redirect since user is guest and not logged in" do
+        post wizard_products_path(wizard1.id), params: new_product_params
+        must_respond_with :redirect
+      end
+    end
+
+    describe "edit action" do
+      it "responds with redirect since user is guest and not logged in" do
+        get edit_wizard_products_path(wizard1.id)
+        must_respond_with :redirect
       end
     end
 
@@ -94,30 +126,18 @@ describe ProductsController do
     end
     describe "new action" do
       it "succeeds if user is the Wizard given in params and Wizard ID matches logged in user's ID" do
-        get wizard_products_path(wizard1.id)
+        get new_wizard_products_path(wizard1.id)
         must_respond_with :success
       end
 
       it "responds with redirect if the logged in user is not the Wizard given in params" do
         different_wizard = wizard_no_products
-        get wizard_products_path(different_wizard.id)
+        get new_wizard_products_path(different_wizard.id)
         must_respond_with :redirect
       end
     end
 
     describe "create action" do
-      let(:new_product_params) {
-        {
-          product: {
-            name: "Ancient Amulet",
-            description: "Amulet that also qualifies as an artifact",
-            stock: 1,
-            # photo_url,
-            price: 23.00,
-            category_ids: [category1.id, category5.id]        
-          }
-        }
-      }
       it "redirects if correct wizard is not logged in" do
         post wizard_products_path(different_logged_in_wizard.id), params: new_product_params
         must_respond_with :redirect
