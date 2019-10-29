@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   root to: 'homepages#index'
   
+  resources :types
+  # get 'types/new', to: 'types#new', as: 'new_type'
+  get 'types/:types_id', to: 'types#show_type', as: 'show_type'
+  # get 'type/browse', to: 'type#browse_type', as: 'browse_type'
+  
   patch '/products/:id/toggle_retire', to: 'products#toggle_retire', as: 'toggle_retire_product'
   resources :products, except: [:destroy] do
     resources :orderitems, only: [:create]
@@ -14,16 +19,10 @@ Rails.application.routes.draw do
   
   resources :orderitems, only: [:edit, :destroy]
   patch '/orderitems/:id', to: 'orderitems#update'
-<<<<<<< HEAD
-
-  resources :types, only: [:show, :new, :create] do 
-  end
-=======
   patch '/orderitems/:id/mark_shipped', to: 'orderitems#mark_shipped', as: 'mark_shipped'
   
   resources :orders, only: [:show, :edit]
   get '/cart', to: 'orders#cart', as: 'cart'
   patch '/orders/:id', to: 'orders#update'
   patch '/orders/:id/cancel', to: 'orders#cancel', as: 'cancel_order'
->>>>>>> cl/order
 end

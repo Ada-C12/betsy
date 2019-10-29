@@ -2,7 +2,7 @@ class TypesController < ApplicationController
   
   before_action :require_login, except: [:show]
   
-  
+
   def show
     @type = Type.find_by(id: params[:id])
     if @type.nil?
@@ -32,5 +32,7 @@ class TypesController < ApplicationController
       render :new, status: :bad_request
     end
   end
+
+  
   
 end
