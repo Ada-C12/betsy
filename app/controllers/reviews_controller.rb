@@ -4,7 +4,6 @@ class ReviewsController < ApplicationController
   
   def create
     @review = Review.new(review_params)
-    current_user = User.find_by(id: session[:user_id])
 
     if @review.valid?
       if current_user && @review.product.user_id == current_user.id
