@@ -57,7 +57,7 @@ class OrderitemsController < ApplicationController
         flash[:status] = :success
         flash[:result_text] = "Quantity has been updated."
         
-        redirect_to order_path(@orderitem.order)
+        redirect_to cart_path
         return
       else
         flash.now[:status] = :failure
@@ -81,7 +81,7 @@ class OrderitemsController < ApplicationController
       flash[:status] = :success
       flash[:result_text] = "#{@orderitem.product.name} removed from cart."
       
-      redirect_to order_path(@orderitem.order)
+      redirect_to cart_path
     else
       flash[:status] = :failure
       flash[:result_text] = "Cannot delete items that are part of a #{@orderitem.order.status} order."

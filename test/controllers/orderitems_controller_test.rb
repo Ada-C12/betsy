@@ -144,7 +144,7 @@ describe OrderitemsController do
       
       expect(updated_orderitem.quantity).must_equal 1
       
-      must_redirect_to order_path(updated_orderitem.order)
+      must_redirect_to cart_path
     end
     
     it "renders bad_request for invalid params data, and redirects" do
@@ -203,7 +203,7 @@ describe OrderitemsController do
       }.must_change 'Orderitem.count', 1
       
       must_respond_with :redirect
-      must_redirect_to order_path(current_order)
+      must_redirect_to cart_path
     end
     
     it "renders 404 not_found and does not update the DB for an invalid work ID" do
