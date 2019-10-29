@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-
+  before_action :wizard, only: [:new, :create]
   before_action :determine_wizard, only: [:new, :create]
 
   def homepage

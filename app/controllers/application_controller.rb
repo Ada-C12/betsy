@@ -2,11 +2,12 @@ class ApplicationController < ActionController::Base
 
   private
 
-  def determine_wizard
+  def wizard
     wizard = Wizard.find_by(id: params[:wizard_id])
+  end
 
+  def determine_wizard
     if wizard.nil?
-      flash
       render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found    
     elsif session[:wizard_id].nil?
       flash[:error] = "You must be logged in to create a new product"
