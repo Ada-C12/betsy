@@ -1,4 +1,7 @@
 class OrdersController < ApplicationController
+  before_action :current_merchant, only: [:merchant_order]
+  before_action :require_login, only: [:merchant_order]
+  
   before_action :find_order_from_session, only: [:edit, :update]
   before_action :find_order_from_params, only: [:show, :cancel]
   
@@ -94,6 +97,16 @@ class OrdersController < ApplicationController
       flash[:status] = :failure
       flash[:result_text] = "Something went wrong. Could not cancel order."
       flash[:messages] = @order.errors.messages
+      
+      redirect_back fallback_location: root_path
+      return
+    end
+  end
+  
+  def merchant_order
+    unless @order.is_order_of(session[:merchant_id])
+      flash[:status] = :failure
+      flash[:result_text] = "You do not have access to this page."
       
       redirect_back fallback_location: root_path
       return
