@@ -42,8 +42,12 @@
                 <% else %>
                   <%= link_to "Login", github_login_path %>
                 <% end %></li>
-              <li class="nav-item app-header__nav_item"><%= link_to "Shopping Cart", cart_path %></li>        
-            </span>
+              <li class="nav-item app-header__nav_item cart-img">
+                <span class="cart-img">
+                  <%= link_to "Shopping Cart", cart_path %>
+                </span>
+              </li>     
+          </span>
       </nav>
     </header>
 
