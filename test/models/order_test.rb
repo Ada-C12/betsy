@@ -4,7 +4,6 @@ describe Order do
   describe "validations" do 
     let(:all_orders){Order.all}
     
-    
     it "can be valid" do
       all_orders.each do |order|
         assert(order.valid?)
@@ -89,5 +88,9 @@ describe Order do
         expect(order_item).must_be_instance_of OrderItem
       end
     end
+  end
+
+  describe "custom methods" do 
+
   end
 end
