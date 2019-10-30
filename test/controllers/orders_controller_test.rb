@@ -150,6 +150,16 @@ describe OrdersController do
   end
   
   def confirmation
+    it "responds with success for valid ID" do
+      get confirmation_path(order1.id)
+      
+      must_respond_with :success
+    end
     
+    it "responds with not found for invalid ID" do
+      get confirmation_path(-20)
+      
+      must_respond_with :not_found
+    end
   end
 end
