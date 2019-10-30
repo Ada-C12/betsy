@@ -44,4 +44,13 @@ class User < ApplicationRecord
     return all_products
   end 
 
+  def filter_order_items(status)
+    order_items = []
+    self.find_products.each do |product|
+      product.order_items.each do |order_item|
+        order_items << order_item if order_item.order.status == status
+      end
+    end
+    return order_items
+  end
 end
