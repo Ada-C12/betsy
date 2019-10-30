@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
-  before_action :wizard, only: [:new, :create]
-  before_action :determine_wizard, only: [:new, :create]
+  before_action :product, only: [:edit]
+  before_action :wizard, only: [:new, :create, :edit]
+  before_action :determine_wizard, only: [:new, :create, :edit]
 
   def homepage
     @products = Product.five_products
@@ -51,7 +52,7 @@ class ProductsController < ApplicationController
     
     if @product.save
       flash[:success] = "Successfully Added #{@product.name}"
-      redirect_to wizard_path(wizard.id)
+      redirect_to product_path(@product.id)
       return 
     else
       flash[:error] = "Could not add product to shop"
@@ -60,6 +61,19 @@ class ProductsController < ApplicationController
     end
   end
 
+  def edit
+    @product = Product.find_by(id: params[:id])
+  end
+
+  def update
+    if product.update(product_params)
+      flash[:success] = "Successfully updated"
+      redirect_to product_path(product.id)
+      return
+    else
+      render :edit
+    end
+  end
 
   private
 
