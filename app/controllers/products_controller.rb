@@ -1,7 +1,9 @@
+require 'pry'
+
 class ProductsController < ApplicationController
-  before_action :product, only: [:edit]
-  before_action :wizard, only: [:new, :create, :edit]
-  before_action :determine_wizard, only: [:new, :create, :edit]
+  before_action :product, only: [:new, :create, :edit, :update]
+  before_action :wizard, only: [:new, :create, :edit, :update]
+  before_action :determine_wizard, only: [:new, :create, :edit, :update]
 
   def homepage
     @products = Product.five_products
@@ -50,6 +52,7 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.wizard = Wizard.find_by(id: wizard.id)
     
+    # binding.pry
     if @product.save
       flash[:success] = "Successfully Added #{@product.name}"
       redirect_to product_path(@product.id)
@@ -71,7 +74,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(product.id)
       return
     else
-      render :edit
+      render :edit, status: :bad_request
     end
   end
 

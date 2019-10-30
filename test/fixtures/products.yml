@@ -18,3 +18,12 @@ product2:
   photo_url: https://i.imgur.com/BCK4aAc.jpg
   retired: false
 
+product3: 
+  name: mist 
+  price_cents: 1500
+  description: selling the weather 
+  stock: 10
+  wizard: wizard2
+  categories: category1
+  photo_url: https://i.imgur.com/BCK4aAc.jpg
+  retired: false
