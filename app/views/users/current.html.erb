@@ -1,4 +1,10 @@
-<h2>hello, <%=@current_user.username%>!</h2>
+<h2>hello, 
+<%if@current_user.merchant_name%>
+  <%=@current_user.merchant_name%>!
+<%else%>
+  <%=@current_user.username%>!
+<%end%>  
+</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
 <% if @current_user.products.count > 0 %>
   <p>Total revenue as of <%=readable_date(Date.today)%> : 
@@ -27,7 +33,7 @@
     </thead>
     <tbody>
       <%if @current_user.products %>
-        <% @current_user.products.each do |product| %>
+        <% @current_user.products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
           <tr>  
             <td> <%=product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail")%></td>   
             <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
@@ -73,6 +79,7 @@
             <%= link_to "Completed", current_user_path(:status => "completed"), class: "dropdown-item" %>
           </div>
         </th>
+        <th> Quantity </th>
         <th> Total </th>
         <th> Category</th>
       </tr>
@@ -98,6 +105,7 @@
               <%= order.status.capitalize %>
             <% end %>
           </td>
+          <td><%= order_item.quantity %></td>
           <td><%= order_item.total %>
           <% if !order_item.product.categories.empty?%>
             <td><%= order_item.product.categories.first.name %></td>

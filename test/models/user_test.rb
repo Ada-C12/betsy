@@ -138,7 +138,7 @@ describe User do
       
       it "won't return any products if a user has none" do 
         user = users(:gretchen)
-        expect(user.find_products.first).must_equal nil 
+        expect(user.find_products.first).must_be_nil 
       end 
     end 
     
