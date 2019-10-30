@@ -1,5 +1,5 @@
 require "test_helper"
-
+require 'pry'
 describe ProductsController do
   let(:wizard1) { wizards(:wizard1) }
   let(:wizard_no_products) { wizards(:wizard_no_products) }
@@ -90,7 +90,7 @@ describe ProductsController do
 
   describe "Logged In Users Only" do
     before do
-      perform_login(wizards(:wizard1))
+      perform_login(wizard1)
     end
     describe "new action" do
       it "succeeds if user is the Wizard given in params and Wizard ID matches logged in user's ID" do
@@ -98,10 +98,14 @@ describe ProductsController do
         must_respond_with :success
       end
 
-      it "responds with redirect if the logged in user is not the Wizard given in params" do
-        different_wizard = wizard_no_products
-        get wizard_products_path(different_wizard.id)
+      it "redirects if correct wizard is not logged in" do
+        different_logged_in_wizard = wizard_no_products
+        # puts "session[:wizard_id]: #{session[:wizard_id]}"
+        # puts "different_logged_in_wizard.id: #{different_logged_in_wizard.id}"
+
+        get wizard_products_path(different_logged_in_wizard.id)
         must_respond_with :redirect
+        # responds with 200 OK but IRL redirects
       end
     end
 
@@ -119,6 +123,7 @@ describe ProductsController do
         }
       }
       it "redirects if correct wizard is not logged in" do
+        different_logged_in_wizard = wizard_no_products
         post wizard_products_path(different_logged_in_wizard.id), params: new_product_params
         must_respond_with :redirect
       end
