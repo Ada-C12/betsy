@@ -141,7 +141,7 @@ describe ProductsController do
       }
     }
 
-    it "updates an existing product successfully by a logged in merchant and redirects the product show page" do
+    it "updates an existing product successfully by a logged in merchant and redirects to the current user path" do
       user = users(:ada)
       perform_login(user)
       existing_product = products(:lemon_shirt)
@@ -159,7 +159,7 @@ describe ProductsController do
       expect(product.description).must_equal update_product_hash[:product][:description]
       expect(product.category_ids.first).must_equal update_product_hash[:product][:category_ids].first
 
-      must_redirect_to product_path(product.id)
+      must_redirect_to current_user_path
     end
 
     it "cannot update a product if no merchant logged in, and redirects the user to the product page" do
