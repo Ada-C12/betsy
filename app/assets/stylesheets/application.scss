@@ -47,13 +47,13 @@
 // main and footer on every page
 main {
   min-height: 100vh;
-  margin: 1%
+  margin: 3%;
 }
 
 footer {
   text-align: center;
   padding: 3%;
-  background-color: grey;
+  background-color: rgb(255, 172, 172);
   color: white;
 }
 
@@ -137,4 +137,23 @@ img {
 
 .product-thumbnail {
   max-width: 3em;
+}
+
+.fruitstand-img {
+  max-width: 1.6em;
+}
+
+.white-fruit-img {
+  max-width: 1.5em;
+  margin-right: 1%;
+}
+
+.rating-img {
+  max-width: 2rem;
+}
+
+.review-containter {
+  line-height: 0.5rem;
+  border-bottom: grey 1px solid;
+  margin: 2%;
 }

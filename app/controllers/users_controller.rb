@@ -10,10 +10,15 @@ class UsersController < ApplicationController
     end
     @products = @user.products.active
   end
-
+  
   def current
+    if params[:status].nil?
+      @order_items = @current_user.find_order_items
+    else
+      @order_items = @current_user.filter_order_items(params[:status])
+    end
   end
-
+  
   def create
     auth_hash = request.env["omniauth.auth"]
     user = User.find_by(uid: auth_hash[:uid], provider: params[:provider])
@@ -32,10 +37,10 @@ class UsersController < ApplicationController
     session[:user_id] = user.id 
     redirect_to root_path
   end
-
+  
   def edit
   end
-
+  
   def update
     if @current_user.update(user_params)
       flash[:success] = "User data updated successfully."
@@ -45,16 +50,17 @@ class UsersController < ApplicationController
       return render :edit
     end
   end
-
+  
   def destroy
     session[:user_id] = nil
     flash[:success] = "Successfully logged out!"
     redirect_to root_path 
   end 
-
+  
   private
-
+  
   def user_params
     return params.require(:user).permit(:uid, :merchant_name, :email, :provider, :username)
   end
+
 end

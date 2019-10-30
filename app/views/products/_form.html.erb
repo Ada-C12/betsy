@@ -1,6 +1,4 @@
 <%= form_with model: @product, class: product_form_class do |f| %>
-
-  <%# f.text_field :somenameofsomeattributeonbook ... in this case, :title %>
   <%= f.label :Name %>
   <%= f.text_field :name %>
 
@@ -13,33 +11,26 @@
   <%= f.label "Image URL" %>
   <%= f.text_field :img_url %>
 
-  <%= f.label "Description" %>
+  <%= f.label :Description %>
   <%= f.text_field :description %>
 
-
-<h1> MAKE THESE DROP DOWN BOXES? below!!!</h1>
   <section>
-    <%= f.label "Fruits: " %>
-    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "fruit"), :id, :name) %>
-  </section>
-  
-  <section>
-    <%= f.label "Themes: " %>
-    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "theme"), :id, :name) %>
+    <%= f.select(:category_ids, Category.where(category_type: "fruit").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Fruits"}, { :multiple => true, :size => 5 }) %>  
   </section>
 
   <section>
-    <%= f.label "Categories: " %>
-    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "category"), :id, :name) %>
+    <%= f.select(:category_ids, Category.where(category_type: "theme").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Themes"}, { :multiple => true, :size => 5 }) %>  
   </section>
 
   <section>
-    <%= f.label "Colors: " %>
-    <%= collection_check_boxes(:product, :category_ids, Category.where(category_type: "color"), :id, :name) %>
+    <%= f.select(:category_ids, Category.where(category_type: "category").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Categories"}, { :multiple => true, :size => 5 }) %>  
   </section>
 
-  
-  
+  <section>
+    <%= f.select(:category_ids, Category.where(category_type: "color").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Colors"}, { :multiple => true, :size => 5 }) %>  
+  </section>
+                            
   <%= f.submit submit_button_label, class: "product-form-button" %>
 
 <% end %>
+
