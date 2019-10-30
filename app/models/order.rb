@@ -29,6 +29,11 @@ class Order < ApplicationRecord
     end
     return order_items.sum
   end
+
+  def complete_order
+    self.status = "complete" if self.order_items.all? { |item| item.shipped == true }
+    self.save
+  end
   
   def self.cancel_abandoned_orders
     # pending_orders = Order.where(status: 'pending')

@@ -62,6 +62,22 @@ class OrderItemsController < ApplicationController
     end
   end
 
+  def shipped
+    order_item = OrderItem.find_by(id: params[:id])
+    
+    if order_item.nil?
+      return head :not_found
+    elsif order_item.update_attributes(shipped: true)
+      # completes order if all items shipped
+      order_item.order.complete_order
+      flash[:success] = "Successfully shipped #{order_item.quantity} of #{order_item.product.name}."
+      return redirect_back(fallback_location: :back)
+    else
+      flash[:error] = "A problem occurred: Could not ship #{order_item.product.name}"
+      return redirect_back(fallback_location: :back)
+    end
+  end
+
   def destroy
     order = Order.find_by(id: session[:order_id])
     order_item = OrderItem.find_by(id: params[:id])

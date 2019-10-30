@@ -47,3 +47,23 @@
 .orders div span:first-child {
     grid-column-start: 4;
 }
+
+.wizard-show-page-border {
+    border-bottom: 1px solid gray;
+    margin: 1em 0 1em 0;
+    padding-bottom: 1em;
+}
+
+.bottom-border {
+    border-bottom: 1px solid gray;
+    margin: 0 5em 0 5em;
+    padding-bottom: 1em; 
+}
+
+.bottom-border + h4 {
+    padding-top: 1em; 
+}
+
+h1 {
+    padding-top: 1em;
+}
