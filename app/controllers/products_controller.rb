@@ -33,7 +33,17 @@ class ProductsController < ApplicationController
   end
   
   def create
+    # raise
     @product = Product.new(product_params)
+
+    if params[:multiselect]
+      params[:multiselect].each do |id|
+        new_category = Category.where(id: id)
+        if !new_category.empty?
+          @product.categories << new_category
+        end
+      end
+    end
     @product.user_id = session[:user_id]
     
     if @product.save
