@@ -8,7 +8,19 @@ order1:
   cc_exp_yr: '2020'
   cc_cvv: 123
   zip_code: 12345
-  status: complete 
+  status: complete
+  
+order2: 
+  email: nob@poz.com
+  owling_address: 123 Magical Lane 
+  name: Nob Name 
+  name_on_cc: Nob Name
+  cc_num: '1234567890123456'
+  cc_exp_mo: '11'
+  cc_exp_yr: '2022'
+  cc_cvv: 234
+  zip_code: 23456
+  status: paid 
 
 pending_order: 
   status: pending 

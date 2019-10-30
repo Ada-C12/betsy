@@ -3,3 +3,9 @@ order_items1:
   product: product1
   order: order1
   shipped: false
+
+order_items2:
+  quantity: 1
+  product: product1
+  order: order2
+  shipped: false
