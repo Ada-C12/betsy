@@ -32,9 +32,12 @@ class OrdersController < ApplicationController
     @order.status = "paid"
     
     if @order.save
+      @order.order_items.each do |item|
+        item.product.stock = item.product.update_quantity(item.quantity, @order.status)
+        item.product.save
+      end 
       flash[:success] = "Order #{@order.id} has been purchased successfully!"
       return redirect_to confirmation_path
-      
     else
       @order.update(status: "pending")
       flash[:error] = "Something went wrong! Order was not paid.#{@order.errors.messages}"
@@ -61,6 +64,10 @@ class OrdersController < ApplicationController
         previous_status = @order.status
         @order.status = "cancelled"
         if @order.save
+          @order.order_items.each do |item|
+            item.product.stock = item.product.update_quantity(item.quantity, @order.status)
+            item.product.save
+          end 
           flash[:success] = "Order #{@order.id} has been cancelled successfully!"
         else
           @order.update(status: previous_status)

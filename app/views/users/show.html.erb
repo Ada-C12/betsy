@@ -9,7 +9,7 @@
 
 <% if @user.products.count > 0 %>
   <section class="cards-container">
-  <% @user.products.shuffle.each do |product| %>
+  <% @products.each do |product| %>
     <section class="card" style="width: 18rem;">
       <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
       <div class="card-body">

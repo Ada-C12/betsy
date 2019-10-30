@@ -29,7 +29,13 @@ class Product < ApplicationRecord
     end
   end
 
-  def update_quantity
+  def update_quantity(quantity, status)
+    if status == "paid" 
+      self.stock -= quantity 
+    elsif status == "cancelled"
+      self.stock += quantity 
+    end 
+    return self.stock
   end
 
   def avg_rating
