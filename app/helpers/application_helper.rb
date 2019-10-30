@@ -47,4 +47,9 @@ module ApplicationHelper
     stand_img = "https://live.staticflickr.com/65535/48982995833_9783f655fb_o.png"
     return image_tag (stand_img), alt:"fruitstand icon image", class: "fruitstand-img"
   end
+
+  def white_fruit_img
+    image = "https://www.iconsdb.com/icons/preview/white/apple-2-xxl.png"
+    return image_tag (image), alt:"fruit icon image", class: "white-fruit-img"
+  end
 end
