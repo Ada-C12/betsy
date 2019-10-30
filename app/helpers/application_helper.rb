@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def readable_date(date)
-    return "[unknown]" unless date
+    return "[unknown]" unless date.instance_of?(Date)
     return (
       "<span title='".html_safe +
       date.to_s +
@@ -12,6 +12,7 @@ module ApplicationHelper
   end
 
   def currency_format(num)
+    return nil unless num.instance_of?(Integer) || num.instance_of?(Float)
     return("$" + sprintf('%.2f', num))
   end
 
@@ -48,8 +49,8 @@ module ApplicationHelper
     return image_tag (stand_img), alt:"fruitstand icon image", class: "fruitstand-img"
   end
 
-  def white_fruit_img
-    image = "https://www.iconsdb.com/icons/preview/white/apple-2-xxl.png"
-    return image_tag (image), alt:"fruit icon image", class: "white-fruit-img"
+  def nav_fruit_img
+    image = "https://i.imgur.com/EaLaHqg.png"
+    return image_tag (image), alt:"fruit icon image", class: "nav-fruit-img"
   end
 end

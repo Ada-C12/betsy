@@ -18,3 +18,13 @@ order_2:
   cc_exp: 06/22
   cc_cvv: 888
   billing_zip: 90545
+order_3:
+  status: cancelled
+  name: Tommy Pickles
+  email: reptar@toys.com
+  address: 242 Toys Lane
+  cc_name: Tommy Pickles
+  cc_last4: 3843
+  cc_exp: 02/22
+  cc_cvv: 982
+  billing_zip: 23924

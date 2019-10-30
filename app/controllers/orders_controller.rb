@@ -35,6 +35,10 @@ class OrdersController < ApplicationController
       @order.status = "paid"
 
       if @order.update(order_params)
+        @order.order_items.each do |item|
+          item.product.stock = item.product.update_quantity(item.quantity, @order.status)
+          item.product.save
+        end 
         flash[:success] = "Order #{@order.id} has been purchased successfully!"
         return redirect_to confirmation_path
         
@@ -62,6 +66,10 @@ class OrdersController < ApplicationController
     else
       if @order.contain_orderitems?(@current_user)
         if @order.update(status: "cancelled")
+          @order.order_items.each do |item|
+            item.product.stock = item.product.update_quantity(item.quantity, @order.status)
+            item.product.save
+          end
           flash[:success] = "Order #{@order.id} has been cancelled successfully!"
         else
           flash[:error] = "Something went wrong, order is not cancelled!"

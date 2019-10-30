@@ -1,4 +1,10 @@
-<h2>hello, <%=@current_user.username%>!</h2>
+<h2>hello, 
+<%if@current_user.merchant_name%>
+  <%=@current_user.merchant_name%>!
+<%else%>
+  <%=@current_user.username%>!
+<%end%>  
+</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
 <% if @current_user.products.count > 0 %>
   <p>Total revenue as of <%=readable_date(Date.today)%> : 
@@ -35,16 +41,9 @@
       </tr>
     </thead>
     <tbody>
-      <%if @products %>
-        <% @products.each do |product| %>
-          <tr>
-            <td> 
-              <%if product.active %>
-                Active
-              <%else%>
-                Inactive
-              <%end%>
-            </td>
+      <%if @current_user.products %>
+        <% @current_user.products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
+          <tr>  
             <td> <%=product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail")%></td>   
             <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
             <td><%= f.text_field :name%></td>
@@ -60,7 +59,6 @@
             <td> <%= f.check_box :active %></td>
             <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
           <% end %>
-            <td> <%= link_to "Delete", product_path(product.id ), method: :delete, data: { confirm: "Really really delete?"}, class: "btn btn-primary" %>
           </tr>
         <% end %>
       <% end %>
@@ -89,6 +87,7 @@
             <%= link_to "Completed", current_user_path(:status => "completed"), class: "dropdown-item" %>
           </div>
         </th>
+        <th> Quantity </th>
         <th> Total </th>
         <th> Category</th>
       </tr>
@@ -114,6 +113,7 @@
               <%= order.status.capitalize %>
             <% end %>
           </td>
+          <td><%= order_item.quantity %></td>
           <td><%= order_item.total %>
           <% if !order_item.product.categories.empty?%>
             <td><%= order_item.product.categories.first.name %></td>

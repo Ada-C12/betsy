@@ -15,9 +15,6 @@ class ProductsController < ApplicationController
       else
         head :not_found
       end
-    else
-      head :not_found
-      return
     end
   end
   
@@ -76,27 +73,7 @@ class ProductsController < ApplicationController
       return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
-      render current_user_path
-      return
-    end
-  end
-  
-  def destroy
-    product = Product.find_by(id: params[:id])
-    if product
-      if product.user_id == session[:user_id]
-        product.destroy
-        flash[:success] = "Product #{product.name} was deleted!"
-        redirect_to root_path
-        return
-      else
-        flash[:error] = "You cannot delete a product not belonging to you!"
-        redirect_to root_path
-        return
-      end
-    else
-      flash[:error] = "The product doesn't exist!"
-      redirect_to root_path
+      redirect_to current_user_path
       return
     end
   end
