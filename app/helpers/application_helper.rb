@@ -42,4 +42,9 @@ module ApplicationHelper
     rating_img = "https://live.staticflickr.com/65535/48965531738_c70c61c848_o.png"
     return image_tag (rating_img), alt:"pineapple rating image", class: "rating-img"
   end
+
+  def fruitstand_img
+    stand_img = "https://live.staticflickr.com/65535/48982995833_9783f655fb_o.png"
+    return image_tag (stand_img), alt:"fruitstand icon image", class: "fruitstand-img"
+  end
 end

@@ -8,15 +8,25 @@
 </h2>
 
 <% if @user.products.count > 0 %>
-  <% @products.each do |product| %>
-    <ul>
-      <%= image_tag product.img_url, alt: product.name + "image"%>
-      <li>Name: <%=link_to product.name, product_path(product.id) %></li>
-      <li>Product: <%=currency_format(product.price)%></li>
-      <li>Stock: <%=product.stock %></li>
-      <li>Description: <%=product.description %></li>
-    </ul>
+  <section class="cards-container">
+  <% @user.products.shuffle.each do |product| %>
+    <section class="card" style="width: 18rem;">
+      <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
+      <div class="card-body">
+        <h5> <%= link_to product.name, product_path(product.id) %> </h5>
+        <p class="card-text"><%= currency_format(product.price) %> </p>
+      </div>  
+        <p>
+          <% product.categories.each do |category| %>
+            <%= link_to category.name, category_products_path(category.id) %>
+          <% end %>
+        </p>
+      </div>    
+    </section>
   <% end %>
+</section>
 <% else %>
   <p>Merchant's fruit stand is empty.</p>
 <% end %>
+
+
