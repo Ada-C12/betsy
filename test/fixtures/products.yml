@@ -22,3 +22,11 @@ banana_sweatshirt:
   user: ada
   description: "Here is another description"
   categories: banana
+orange_costume:
+  name: "Orange Costume"
+  price: 100
+  stock: 20
+  img_url: http://fakeurl.com
+  user: betsy
+  description: "It's got crystals."
+
