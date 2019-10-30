@@ -6,8 +6,20 @@ describe ProductsController do
   let(:product) { products(:product1) }
   let(:category1) { categories(:category1) } 
   let(:category5) { categories(:category5) }
+  let(:new_product_params) {
+    {
+      product: {
+        name: "Ancient Amulet",
+        description: "Amulet that also qualifies as an artifact",
+        stock: 1,
+        # photo_url,
+        price: 23.00,
+        category_ids: [category1.id, category5.id]        
+      }
+    }
+  }
 
-  describe "Guest and Logged In Users" do
+  describe "Guest Users" do
     describe "index action" do
       it "gives back a successful response" do
         get products_path
@@ -73,7 +85,7 @@ describe ProductsController do
       end
     end
 
-    describe "show" do
+    describe "show action" do
       it "responds with success when showing an existing valid product" do
         get product_path(product.id)
 
@@ -84,6 +96,20 @@ describe ProductsController do
         get product_path(-1)
 
         must_respond_with :not_found
+      end
+    end
+
+    describe "new action" do
+      it "redirects" do
+        get new_wizard_product_path(wizard1.id)
+        must_respond_with :redirect
+      end
+    end
+
+    describe "create action" do
+      it "redirects" do
+        post wizard_products_path(wizard1.id), params: new_product_params
+        must_respond_with :redirect
       end
     end
   end
@@ -100,27 +126,12 @@ describe ProductsController do
 
       it "redirects if correct wizard is not logged in" do
         different_wizard = wizard_no_products
-        puts "session[:wizard_id]: #{session[:wizard_id]}"
-        puts "different_wizard.id: #{different_wizard.id}"
-
         get new_wizard_product_path(different_wizard.id)
         must_respond_with :redirect
       end
     end
 
     describe "create action" do
-      let(:new_product_params) {
-        {
-          product: {
-            name: "Ancient Amulet",
-            description: "Amulet that also qualifies as an artifact",
-            stock: 1,
-            # photo_url,
-            price: 23.00,
-            category_ids: [category1.id, category5.id]        
-          }
-        }
-      }
       it "redirects if correct wizard is not logged in" do
         different_wizard = wizard_no_products
         post wizard_products_path(different_wizard.id), params: new_product_params
