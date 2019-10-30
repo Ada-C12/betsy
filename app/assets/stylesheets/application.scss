@@ -156,6 +156,11 @@ margin-left: 2rem;
    }
  }
 
+ .copyright {
+  text-align: center;
+  font-size: small;
+}
+
 //  PRODUCT SHOW
 .product-show h3{
   font-size: 1.5em;
@@ -195,6 +200,7 @@ a {
 .home {
   font-weight: bold;
 }
+
 // BUTTONS
 
 .btn-primary {
@@ -202,7 +208,3 @@ a {
   border-color: goldenrod;
 }
 
-.copyright {
-  text-align: center;
-  font-size: small;
-}
