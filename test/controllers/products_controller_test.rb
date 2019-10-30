@@ -117,18 +117,6 @@ describe ProductsController do
         must_redirect_to root_path
       end
     end
-
-    describe "destroy action" do
-      it "redirects to products index page and deletes no products if no merchant is logged in" do
-        product = products(:lemon_shirt)
-  
-        expect {
-          delete product_path(product.id)
-        }.wont_differ "Product.count"
-  
-        must_redirect_to root_path
-      end
-    end
   end
   
   describe "logged in user" do
