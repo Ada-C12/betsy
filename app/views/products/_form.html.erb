@@ -15,27 +15,22 @@
   <%= f.text_field :description %>
 
   <section>
-    <%= f.label "Fruits: " %>
-    <%= f.select :categories, Category.where(category_type: "fruit").map {|cat| cat.name.capitalize}, :multiple => true %>
-  </section>
-  
-  <section>
-    <%= f.label "Fruit Themes: " %>
-    <%= f.select :category, Category.where(category_type: "theme").map {|cat| cat.name.capitalize} %>
+    <%= f.select(:category_ids, Category.where(category_type: "fruit").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Fruits"}, { :multiple => true, :size => 5 }) %>  
   </section>
 
   <section>
-    <%= f.label "Product Type: " %>
-    <%= f.select :category, Category.where(category_type: "category").map {|cat| cat.name.capitalize} %>
+    <%= f.select(:category_ids, Category.where(category_type: "theme").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Themes"}, { :multiple => true, :size => 5 }) %>  
   </section>
 
   <section>
-    <%= f.label "Colors: " %>
-    <%= f.select :category, Category.where(category_type: "color").map {|cat| cat.name.capitalize} %>
+    <%= f.select(:category_ids, Category.where(category_type: "category").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Categories"}, { :multiple => true, :size => 5 }) %>  
   </section>
 
-  
-  
+  <section>
+    <%= f.select(:category_ids, Category.where(category_type: "color").map {|cat| [ cat.name, cat.id ] },{ :prompt => "Select Colors"}, { :multiple => true, :size => 5 }) %>  
+  </section>
+                            
   <%= f.submit submit_button_label, class: "product-form-button" %>
 
 <% end %>
+
