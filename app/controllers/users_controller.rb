@@ -13,14 +13,9 @@ class UsersController < ApplicationController
   
   def current
     if params[:status].nil?
-      @order_items = []
-      @current_user.products.each do |product|
-        product.order_items.each do |order_item|
-          @order_items << order_item
-        end
-      end
+      @order_items = @current_user.find_order_items
     else
-      @order_items = filter_orderitems(params[:status])
+      @order_items = @current_user.filter_order_items(params[:status])
     end
   end
   
@@ -66,16 +61,6 @@ class UsersController < ApplicationController
   
   def user_params
     return params.require(:user).permit(:uid, :merchant_name, :email, :provider, :username)
-  end
-  
-  def filter_orderitems(status)
-    order_items = []
-    @current_user.products.each do |product|
-      product.order_items.each do |order_item|
-        order_items << order_item if order_item.order.status == status
-      end
-    end
-    return order_items
   end
 
 end
