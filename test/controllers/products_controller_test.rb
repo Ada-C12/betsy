@@ -236,53 +236,5 @@ describe ProductsController do
         assert_equal "Something went wrong! Product can not be edited.", flash[:error]
       end
     end
-
-    describe "destroy action" do
-      it "successfully deletes an existing product by this merchant and then redirects to home page" do
-        product = products(:lemon_shirt)
-    
-        expect {
-          delete product_path(product.id) 
-        }.must_differ "Product.count", -1
-    
-        must_redirect_to root_path
-      end
-
-      it "won't delete an existing product by other merchants and then redirects to home page" do
-        logout_path
-        user = users(:betsy)
-        perform_login(user)
-        product = products(:lemon_shirt)
-    
-        expect {
-          delete product_path(product.id)
-        }.wont_differ "Product.count"
-    
-        must_redirect_to root_path
-      end
-      
-      it "redirects to products index page and deletes no products if no products exist" do
-        user = users(:betsy)
-        perform_login(user)
-    
-        expect {
-          delete product_path(-1000)
-        }.wont_differ "Product.count"
-    
-        must_redirect_to root_path
-      end
-
-      it "redirects to products index page and deletes no products if deleting a product with an id that has already been deleted" do
-        product = products(:lemon_shirt)
-        delete_id = product.id
-        product.destroy
-  
-        expect {
-          delete product_path(delete_id)
-        }.wont_differ "Product.count"
-  
-        must_redirect_to root_path
-      end
-    end
   end
 end
