@@ -15,9 +15,6 @@ class ProductsController < ApplicationController
       else
         head :not_found
       end
-    else
-      head :not_found
-      return
     end
   end
   
@@ -34,6 +31,15 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(product_params)
+
+    if params[:multiselect]
+      params[:multiselect].each do |id|
+        new_category = Category.where(id: id)
+        if !new_category.empty?
+          @product.categories << new_category
+        end
+      end
+    end
     @product.user_id = session[:user_id]
     
     if @product.save
@@ -67,7 +73,7 @@ class ProductsController < ApplicationController
       return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
-      render current_user_path 
+      redirect_to current_user_path
       return
     end
   end

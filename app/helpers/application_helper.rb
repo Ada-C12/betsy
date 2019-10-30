@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def readable_date(date)
-    return "[unknown]" unless date
+    return "[unknown]" unless date.instance_of?(Date)
     return (
       "<span title='".html_safe +
       date.to_s +
@@ -12,6 +12,7 @@ module ApplicationHelper
   end
 
   def currency_format(num)
+    return nil unless num.instance_of?(Integer) || num.instance_of?(Float)
     return("$" + sprintf('%.2f', num))
   end
 
@@ -38,7 +39,7 @@ module ApplicationHelper
     return link_to image, product_path(product.id)
   end
   
-def rating_img
+  def rating_img
     rating_img = "https://live.staticflickr.com/65535/48983817713_d25a3fba98_o.png"
     return image_tag (rating_img), alt:"pineapple rating image", class: "rating-img"
   end

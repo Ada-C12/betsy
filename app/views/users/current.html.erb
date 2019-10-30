@@ -18,6 +18,16 @@
   <table class="table">
     <thead>
       <tr>
+        <th>
+          <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Status
+          </a>
+          <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
+            <%= link_to "All", current_user_path, class: "dropdown-item" %>
+            <%= link_to "Active", current_user_path(:activestatus => true), class: "dropdown-item" %>
+            <%= link_to "Inactive", current_user_path(:activestatus => false), class: "dropdown-item" %>
+          </div>
+        </th>
         <th> Product </th>
         <th> Title</th>
         <th> Price</th>
@@ -26,7 +36,6 @@
         <th> Img url </th>
         <th> Category</th>
         <th> Active </th>
-        <th> ActiveStatus </th>
         <th> Edit </th>
         <th> Delete </th>
       </tr>
@@ -48,7 +57,6 @@
               <td><p> N/A</p></td>
             <%end %>
             <td> <%= f.check_box :active %></td>
-            <td> <%= product.active %>
             <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
           <% end %>
           </tr>
