@@ -40,6 +40,11 @@ h1, h2, h3, h4, h5 {
   background-size: cover;
 }
 
+.img-cart * {
+  width: 250px;
+  height: 250px;
+}
+
 .img-description {
   position: relative;
 }
@@ -205,4 +210,20 @@ a {
 .copyright {
   text-align: center;
   font-size: small;
+}
+
+// CART
+
+.cont-center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#text-just-center {
+  vertical-align: middle;
+}
+
+.text-bold {
+  font-size: 1.5rem
 }

@@ -1,31 +1,34 @@
 <section>
-  <h2>YOUR CART</h2>
+  <h2 class="h-center-text">YOUR CART</h2>
+
+  <table class="table">
+  <tbody>
 
   <% @order.orderitems.each do |orderitem| %>
-  <section class="row checkout">
-    <section class = "columns small-12 medium-3">
-      <span class="img"><%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}" %></span>
-    </section>
+  <tr>
+    <td>
+      <span class="img-cart cont-center"><%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}" %></span>
+    </td>
 
-    <section class = "columns small-12 medium-5">
-      <%= link_to orderitem.product.name, product_path(orderitem.product) %>
-      <% if @order.status == "pending" %>
+    <td id="text-just-center">
+      <h4><%= link_to orderitem.product.name, product_path(orderitem.product) %></h4>
+      <p>Quantity: <%= orderitem.quantity %></p>
       <p>
       <%= link_to "edit", edit_orderitem_path(id: orderitem.id) %> | 
       <%= link_to "delete", orderitem_path(id: orderitem.id), method: :delete, data: {confirm: "Are you sure?"} %>
       </p>
-      <% end %>
-    </section>
+    </td>
 
-    <section class = "columns small-12 medium-4">
-      <p>$<%= orderitem.product.price %> x <%= orderitem.quantity %></p>
-      <p>Subtotal: $<%= orderitem.subtotal %></p>
-    </section>
-
-  </section>
+    <td id="text-just-center">
+      <p><span class='text-bold'>$<%= orderitem.subtotal %></span> ($<%= orderitem.product.price %> each)</p>
+    </td>
+  </tr>
   <% end %>
 
-  <section class = "row total container">
+  </tbody>
+  </table>
+
+  <section>
     <section class = "columns small-9 large-8 align-right">
       <p>TOTAL</p>
     </section>
@@ -33,8 +36,8 @@
     <section class = "columns small-3 large-4 align-right">
       <p>$<%= @order.total %></p>
     </section>
-    
-    <p><%= link_to 'Checkout', edit_order_path(id: @order.id), class:"btn btn-primary" %></p>
   </section>
+
+  <p><%= link_to 'Checkout', edit_order_path(id: @order.id), class:"btn btn-primary" %></p>
   
 </section>
