@@ -162,6 +162,33 @@ describe OrdersController do
   end
   
   describe "confirmation action" do
+    before do 
+      product = products(:lemon_shirt)
+      @product_id = product.id
+      @order_item_hash = {
+        order_item: {
+          quantity: 1
+        }
+      }
+    end
+
+    it "gives back a successful response if the order is paid" do
+      post product_order_items_path(@product_id), params: @order_item_hash
+      
+      get confirmation_path
+      must_respond_with :success
+    end
     
+    it "responses with redirect if current order does not exist" do
+      post product_order_items_path(@product_id), params: @order_item_hash
+      OrderItem.destroy_all
+      Order.destroy_all
+
+      get confirmation_path
+
+      must_redirect_to root_path
+      assert_equal "Order doesn't exist!", flash[:error]
+    end
   end
+
 end
