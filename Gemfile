@@ -91,3 +91,6 @@ end
 
 gem "omniauth"
 gem "omniauth-github"
+
+
+gem 'bootstrap-multiselect-rails'
