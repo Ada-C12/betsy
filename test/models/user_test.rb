@@ -98,15 +98,20 @@ describe User do
   describe "custom methods" do 
 
     describe "total earned" do 
-      it "returns the total revenue a user has earned on the site" do
+      it "returns the total revenue a user has earned on orders that are completed and/or paid" do
         user = users(:ada)
         expect(user.total_earned).must_be_instance_of Float
         expect(user.total_earned).must_equal 330
       end 
 
-      it "returns 0 if the user has not sold any products" do 
+      it "returns 0 if the user has not sold any products, if no orders exist" do 
         user = User.create(username: "aaaawooo", email: "werewolf@mail.com", uid: 23542)
         expect(user.total_earned).must_equal 0 
+      end 
+
+      it "will not display total earned for orders that are cancelled " do 
+        user = users(:betsy)
+        expect(user.total_earned).must_equal 0
       end 
     end 
 

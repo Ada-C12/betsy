@@ -18,3 +18,7 @@ order_item_5:
   quantity: 1
   product: lemon_shirt
   order: order_2
+order_item_6:
+  quantity: 2
+  product: mango_slushie
+  order: order_3

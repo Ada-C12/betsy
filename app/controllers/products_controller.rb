@@ -61,7 +61,7 @@ class ProductsController < ApplicationController
       return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
-      render "/users/current" 
+      render current_user_path 
       return
     end
   end
