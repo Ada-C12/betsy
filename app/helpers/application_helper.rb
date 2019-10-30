@@ -38,8 +38,8 @@ module ApplicationHelper
     return link_to image, product_path(product.id)
   end
   
-  def rating_img
-    rating_img = "https://live.staticflickr.com/65535/48965531738_c70c61c848_o.png"
+def rating_img
+    rating_img = "https://live.staticflickr.com/65535/48983817713_d25a3fba98_o.png"
     return image_tag (rating_img), alt:"pineapple rating image", class: "rating-img"
   end
 
