@@ -1,5 +1,5 @@
 require "test_helper"
-
+require 'pry'
 describe ProductsController do
   let(:wizard1) { wizards(:wizard1) }
   let(:wizard_no_products) { wizards(:wizard_no_products) }
@@ -112,7 +112,7 @@ describe ProductsController do
       end
     end
 
-    describe "show" do
+    describe "show action" do
       it "responds with success when showing an existing valid product" do
         get product_path(product.id)
 
@@ -125,28 +125,43 @@ describe ProductsController do
         must_respond_with :not_found
       end
     end
+
+    describe "new action" do
+      it "redirects" do
+        get new_wizard_product_path(wizard1.id)
+        must_respond_with :redirect
+      end
+    end
+
+    describe "create action" do
+      it "redirects" do
+        post wizard_products_path(wizard1.id), params: new_product_params
+        must_respond_with :redirect
+      end
+    end
   end
 
   describe "Logged In Users Only" do
     before do
-      perform_login(wizards(:wizard1))
+      perform_login(wizard1)
     end
     describe "new action" do
       it "succeeds if user is the Wizard given in params and Wizard ID matches logged in user's ID" do
-        get new_wizard_products_path(wizard1.id)
+        get new_wizard_product_path(wizard1.id)
         must_respond_with :success
       end
 
-      it "responds with redirect if the logged in user is not the Wizard given in params" do
+      it "redirects if correct wizard is not logged in" do
         different_wizard = wizard_no_products
-        get new_wizard_products_path(different_wizard.id)
+        get new_wizard_product_path(different_wizard.id)
         must_respond_with :redirect
       end
     end
 
     describe "create action" do
       it "redirects if correct wizard is not logged in" do
-        post wizard_products_path(different_logged_in_wizard.id), params: new_product_params
+        different_wizard = wizard_no_products
+        post wizard_products_path(different_wizard.id), params: new_product_params
         must_respond_with :redirect
       end
 

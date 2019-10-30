@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   
-  
   root to: "products#homepage"
   
   resources :products, only: [:index, :show, :edit, :update] do
@@ -16,7 +15,6 @@ Rails.application.routes.draw do
   resources :order_items, only: [:update, :destroy]
   get "/cart", to: "orders#cart", as: "cart"
   
-  resources :wizards, only: [:show]
   resources :wizards do
     resources :products, only: [:index, :new, :create]
   end

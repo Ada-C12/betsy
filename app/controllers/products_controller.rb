@@ -1,7 +1,7 @@
 class ProductsController < ApplicationController
-  
-  before_action :determine_wizard, only: [:new, :create, :edit, :update]
-  
+  before_action :wizard, only: [:new, :create]
+  before_action :determine_wizard, only: [:new, :create]
+
   def homepage
     @products = Product.five_products
   end

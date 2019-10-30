@@ -1,15 +1,4 @@
 class WizardsController < ApplicationController
-  def show
-    # @wizard = Wizard.find_by(id: session[:wizard_id])
-    @wizard = Wizard.find_by(id: params[:id])
-
-    @orders = @wizard.orders
-
-    if params[:status]
-      @orders = @wizard.orders.select { |order| order.status == params[:status] }
-    end
-  end
-  
   def create
     auth_hash = request.env["omniauth.auth"]
     wizard = Wizard.find_by(uid: auth_hash[:uid], provider: "github")
