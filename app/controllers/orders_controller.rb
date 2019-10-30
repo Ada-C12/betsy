@@ -87,7 +87,7 @@ class OrdersController < ApplicationController
           flash[:error] = "Something went wrong, order is not completed!"
         end
       else
-        flash[:error] = "You're not allowed to cancel this order!"
+        flash[:error] = "You're not allowed to complete this order!"
       end
     end
     return redirect_to current_user_path 

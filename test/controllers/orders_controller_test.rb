@@ -230,5 +230,42 @@ describe OrdersController do
     end
   end
 
+  describe "complete_order action" do
+    before do 
+      @order = orders(:order_1)
+      @user = users(:ada)
+    end
 
+    it "changes the order status to completed and gives back a redirect response by logged in merchant who sells products in this order" do
+      perform_login(@user)
+      patch complete_order_path(@order.id)
+
+      find_order = Order.find(@order.id)
+      expect(find_order.status).must_equal 'completed'
+
+      must_redirect_to current_user_path
+
+      assert_equal "Order #{@order.id} has been completed successfully!", flash[:success]
+    end
+    
+    it "doesn't change the order status and gives back a redirect response by logged in merchant who doesn't sell products in this order" do
+      user = users(:gretchen)
+      perform_login(user)
+      patch complete_order_path(@order.id)
+
+      find_order = Order.find(@order.id)
+      expect(find_order.status).must_equal 'paid'
+      
+      must_redirect_to current_user_path
+      assert_equal "You're not allowed to complete this order!", flash[:error]
+    end
+
+    it "gives back a redirect response if order id is not found" do
+      perform_login(@user)
+      patch complete_order_path(-1)
+
+      must_redirect_to current_user_path
+      assert_equal "Something went wrong, cannot complete order!", flash[:error]
+    end
+  end
 end
