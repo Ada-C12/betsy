@@ -1,8 +1,5 @@
-
-
 class ReviewsController < ApplicationController
   def new
-    
     if params[:product_id]
       @review = Review.new(product_id: params[:product_id])
     end

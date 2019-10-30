@@ -17,12 +17,11 @@ Rails.application.routes.draw do
   get "/cart", to: "orders#cart", as: "cart"
   patch "/shipped/:id", to: "order_items#shipped", as: "shipped"
   
-  resources :wizards, only: [:show]
-  resources :wizards do
+  resources :wizards, only: [:show] do
     resources :products, only: [:index]
   end
   
-  resources :categories do
+  resources :categories, only: [:new, :create] do
     resources :products, only: [:index]
   end
 

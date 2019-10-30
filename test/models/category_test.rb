@@ -7,7 +7,7 @@ describe Category do
   it "can be instantiated" do
     expect(category1.valid?).must_equal true
   end
-
+  
   describe "validations" do
     it "must have a name" do
       category1.name = nil
@@ -23,9 +23,9 @@ describe Category do
       expect(new_invalid_category.errors.messages[:name]).must_equal ["has already been taken"]
     end
   end
-
+  
   describe "relations" do
-  it "can have many products" do
+    it "can have many products" do
       category1 = categories(:category1)
       expect(category1.products.count).must_be :>=, 0
       category1.products.each do |product|
@@ -33,25 +33,25 @@ describe Category do
       end
     end
   end
-
+  
   describe "custom methods" do
-  before do
-    @FIXED_CATEGORIES_COUNT = 6
-  end
+    before do
+      @FIXED_CATEGORIES_COUNT = 6
+    end
     describe "fixed_categories class method" do
       it "returns the categories where ids match ids in the constant FIXED_CATEGORY_IDS" do
         fixed_categories = Category.fixed_categories
         expect(fixed_categories.length).must_equal @FIXED_CATEGORIES_COUNT
       end
     end
-     
+    
     describe "more_categories class method" do
       it "returns the categories where ids do NOT match ids in the constant FIXED_CATEGORY_IDS" do
         more_categories = Category.more_categories
         expect(more_categories.length).must_equal Category.count - @FIXED_CATEGORIES_COUNT
       end
     end
-
+    
     describe "all_alphabetized class method" do
       it "returns categories in ascending alphabetical order" do
         all_alphabetized = Category.all_alphabetized
@@ -62,7 +62,7 @@ describe Category do
         end
       end
     end
-
+    
     describe "select_options_names_ids" do
       it "returns an array of arrays for menu buttons [[category.name, category.id]]" do
         select_options_names_ids = Category.select_options_names_ids
@@ -71,6 +71,6 @@ describe Category do
         expect(select_options_names_ids.first).must_be_instance_of Array
       end
     end
-
+    
   end
 end
