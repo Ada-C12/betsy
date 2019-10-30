@@ -94,18 +94,17 @@ describe ProductsController do
     end
     describe "new action" do
       it "succeeds if user is the Wizard given in params and Wizard ID matches logged in user's ID" do
-        get wizard_products_path(wizard1.id)
+        get new_wizard_product_path(wizard1.id)
         must_respond_with :success
       end
 
       it "redirects if correct wizard is not logged in" do
-        different_logged_in_wizard = wizard_no_products
-        # puts "session[:wizard_id]: #{session[:wizard_id]}"
-        # puts "different_logged_in_wizard.id: #{different_logged_in_wizard.id}"
+        different_wizard = wizard_no_products
+        puts "session[:wizard_id]: #{session[:wizard_id]}"
+        puts "different_wizard.id: #{different_wizard.id}"
 
-        get wizard_products_path(different_logged_in_wizard.id)
+        get new_wizard_product_path(different_wizard.id)
         must_respond_with :redirect
-        # responds with 200 OK but IRL redirects
       end
     end
 
@@ -123,8 +122,8 @@ describe ProductsController do
         }
       }
       it "redirects if correct wizard is not logged in" do
-        different_logged_in_wizard = wizard_no_products
-        post wizard_products_path(different_logged_in_wizard.id), params: new_product_params
+        different_wizard = wizard_no_products
+        post wizard_products_path(different_wizard.id), params: new_product_params
         must_respond_with :redirect
       end
 
