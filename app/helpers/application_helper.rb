@@ -7,7 +7,7 @@ module ApplicationHelper
       date.to_s +
       "'>".html_safe +
        date.strftime("%b %d, %Y")+
-      "</span".html_safe
+      "</span>".html_safe
     )
   end
 

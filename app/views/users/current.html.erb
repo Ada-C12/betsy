@@ -1,11 +1,12 @@
 <h2>hello, <%=@current_user.username%>!</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
-Total revenue as of <%= readable_date(Date.today) %>: <%=currency_format(@current_user.total_earned)%>
-<%if @current_user.total_earned > 0 %> 
-  <%= @current_user.total_earned %>
-<%else %>
+<% if @current_user.products.count > 0 %>
+  <p>Total revenue as of <%=readable_date(Date.today)%> : 
+    <%=currency_format(@current_user.total_earned)%></p>
+<% elsif @current_user.total_earned > 0 && @current_user.products.empty? %>
   <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
-<%end%> 
+<% end %> 
+</p>
 <section class="user-products__container">
   <h3 class="user-products__header">Manage your products</h3>
   <table class="table">
