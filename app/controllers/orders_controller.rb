@@ -1,6 +1,6 @@
 class OrdersController < ApplicationController
   skip_before_action :require_login, only: [:cart, :checkout, :update_paid, :confirmation]
-  skip_before_action :find_order, only: [:show, :update_paid]
+  skip_before_action :find_order, only: [:show, :update_paid, :cancel_order, :complete_order]
   before_action :find_order_params, only: [:show, :update_paid, :cancel_order, :complete_order]
   
   def show

@@ -30,40 +30,64 @@ describe OrdersController do
     end
   end
   
-  # describe "cart action" do
-  #   it "gives back a successful response" do
-  #     get cart_path
-  #     must_respond_with :success
-  #   end
-  # end
+  describe "cart action" do
+    it "gives back a successful response" do
+      product = products(:lemon_shirt)
+      product_id = product.id
+      order_item_hash = {
+        order_item: {
+          quantity: 1
+        }
+      }
+      post product_order_items_path(product_id), params: order_item_hash
+
+      get cart_path
+      must_respond_with :success
+    end
+  end
   
-  # describe "checkout action" do
-  #   let(:order){
-  #     Order.create(status: "pending")
-  #   }
-  #   it "gives back a successful response if there are some items in the cart" do
-  #     product = products(:lemon_shirt)
-  #     item = OrderItem.create(quantity: 2, product: product, order: order)
-  #     get checkout_path
+  describe "checkout action" do
+    before do 
+      product = products(:lemon_shirt)
+      @product_id = product.id
+      @order_item_hash = {
+        order_item: {
+          quantity: 1
+        }
+      }
+    end
+
+    it "gives back a successful response if there are some items in the cart" do
+      post product_order_items_path(@product_id), params: @order_item_hash
+
+      get checkout_path
       
-  #     must_respond_with :success
-  #   end
+      must_respond_with :success
+    end
     
-  #   it "responses with redirect if no item is in the cart" do
-  #     product = products(:lemon_shirt)
-  #     get checkout_path
+    it "responses with redirect if no item is in the cart" do
+      post product_order_items_path(@product_id), params: @order_item_hash
+
+      OrderItem.destroy_all
+
+      get checkout_path
       
-  #     must_redirect_to root_path
-  #     assert_equal "No item in the cart! Please add some items then checkout!", flash[:error]
-  #   end
+      must_redirect_to root_path
+      assert_equal "No item in the cart! Please add some items then checkout!", flash[:error]
+    end
     
-  #   it "responses with redirect if order doesn't exist" do
-  #     get checkout_path
+    it "responses with redirect if order doesn't exist" do
+      post product_order_items_path(@product_id), params: @order_item_hash
+
+      OrderItem.destroy_all
+      Order.destroy_all
+
+      get checkout_path
       
-  #     must_redirect_to root_path
-  #     assert_equal "Order doesn't exist!", flash[:error]
-  #   end
-  # end
+      must_redirect_to root_path
+      assert_equal "Order doesn't exist!", flash[:error]
+    end
+  end
   
   describe "update_paid action" do
     let(:order){
