@@ -39,10 +39,16 @@ class Product < ApplicationRecord
   end
 
   def avg_rating
+    reviews = self.reviews
+    if reviews.empty?
+      return nil
+    else
+      ratings = reviews.map { |review| review.rating }
+      return (ratings.sum / ratings.length).to_f.round(2)
+    end
   end
 
   def self.active
     return self.where(active:true)
   end 
-
 end
