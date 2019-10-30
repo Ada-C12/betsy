@@ -17,6 +17,11 @@ class UsersController < ApplicationController
     else
       @order_items = @current_user.filter_order_items(params[:status])
     end
+    if params[:activestatus].nil?
+      @products = @current_user.products
+    else
+      @products = @current_user.products.where(active: params[:activestatus])
+    end
   end
   
   def create

@@ -143,7 +143,7 @@ describe ProductsController do
         must_respond_with :success
       end
     end
-
+    
     describe "create action" do
       it "creates a new product successfully with valid data by a logged in merchant and redirects to the product page if the user has a merchant name" do
         expect {
