@@ -41,9 +41,9 @@
             <%else%>
               <td><p> N/A</p></td>
             <%end %>
-            <td> <%= f.check_box :active%></td>
+            <td> <%= f.check_box :active %></td>
             <td> <%= product.active %>
-            <td><%= f.submit "Update", submit_button_label: "Edit Product"%></td>
+            <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
           <% end %>
             <td> <%= link_to "Delete", product_path(product.id ), method: :delete, data: { confirm: "Really really delete?"}, class: "btn btn-primary" %>
           </tr>
