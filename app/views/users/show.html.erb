@@ -8,13 +8,13 @@
 </h2>
 
 <% if @user.products.count > 0 %>
-  <% @user.products.each do |product| %>
+  <% @products.each do |product| %>
     <ul>
       <%= image_tag product.img_url, alt: product.name + "image"%>
-      <li>name: <%=link_to product.name, product_path(product.id) %></li>
-      <li>product: <%=product.price %></li>
-      <li>stock: <%=product.stock %></li>
-      <li>description: <%=product.description %></li>
+      <li>Name: <%=link_to product.name, product_path(product.id) %></li>
+      <li>Product: <%=currency_format(product.price)%></li>
+      <li>Stock: <%=product.stock %></li>
+      <li>Description: <%=product.description %></li>
     </ul>
   <% end %>
 <% else %>

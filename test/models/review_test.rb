@@ -10,7 +10,7 @@ describe Review do
   end
 
   it "will have the required fields" do
-    [:rating, :description, :user_id, :product_id].each do |field|
+    [:rating, :title, :description, :user_id, :product_id].each do |field|
       expect(@review).must_respond_to field
     end
   end
@@ -72,24 +72,19 @@ describe Review do
       end
     end
 
-    describe 'user_id' do
-      it "must have a user_id" do
+    describe 'title' do
+      it "must have a title" do
         assert(@review.valid?)
-        @review.user_id = nil
+        @review.title = nil
 
         refute(@review.valid?)
       end
 
-      it "user_id must be unique in scope of product_id" do
+      it "title must be less than 150 char" do
         assert(@review.valid?)
-        user = @review.user
-        product = @review.product
-        invalid_review = Review.create(rating: 2, description: "desc", product_id: product.id, user_id: user.id)
-        refute(invalid_review.valid?)
+        @review.title = (1..151).to_a.join('')
 
-        different_product = products(:strawberry_shoes)
-        valid_review = Review.create(rating: 2, description: "desc", product_id: different_product.id, user_id: user.id)
-        assert(valid_review.valid?)
+        refute(@review.valid?)
       end
     end
     

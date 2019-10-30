@@ -31,4 +31,8 @@ class Order < ApplicationRecord
     return total 
   end
 
+  def self.new_order
+    order = Order.create(status: "pending")
+    return order
+  end
 end

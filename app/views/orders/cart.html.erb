@@ -8,12 +8,12 @@
 <h1>Welcome to your fruit basket! Please continue adding items until you are ready to place your order.</h2>
 
 <% if @current_order && @current_order.order_items.count > 0 %>
-  <h4> Basket Total: $<%=@current_order.total %></h4>
+  <h4> Basket Total: <%=currency_format(@current_order.total)%></h4>
   
   <% @current_order.order_items.each do |order_item| %>
     <%= product_img_link(product: order_item.product, img_url: order_item.product.img_url, product_class: "show-product-img")%>  
     
-    <h4> $<%= order_item.product.price %> </h4>
+    <h4><%=currency_format(order_item.product.price)%></h4>
     
     <%= form_with model: order_item, url: order_item_path(order_item.id) do |f| %>
       <%= f.label :quantity, class: "col-sm-2 col-form-label"%>

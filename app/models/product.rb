@@ -22,9 +22,7 @@ class Product < ApplicationRecord
   end
 
   def quantity_available?(quantity)
-    if quantity.nil? || quantity < 1
-      return nil
-    elsif quantity > self.quantity
+   if quantity > self.stock
       return false
     else
       return true
@@ -36,5 +34,9 @@ class Product < ApplicationRecord
 
   def avg_rating
   end
+
+  def self.active
+    return self.where(active:true)
+  end 
 
 end

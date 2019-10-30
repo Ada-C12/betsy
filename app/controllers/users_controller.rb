@@ -8,6 +8,7 @@ class UsersController < ApplicationController
       head :not_found
       return
     end
+    @products = @user.products.active
   end
   
   def current

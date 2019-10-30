@@ -14,7 +14,7 @@
       <div class="card-body">
           <h5> 
             <%= link_to product.name, product_path(product.id) %>
-            <small> $<%= product.price %> </small> 
+            <small><%=currency_format(product.price)%></small> 
           </h5>
       </div>  
     </section>
@@ -30,7 +30,7 @@
         <div class="card-body">
           <h5> 
             <%= link_to product.name, product_path(product.id) %>
-            <small> $<%= product.price %> </small> 
+            <small><%=currency_format(product.price)%></small> 
           </h5>
       </section>
     <% end %>
@@ -46,7 +46,7 @@
         <div class="card-body">
           <h5> 
             <%= link_to product.name, product_path(product.id) %>
-            <small> $<%= product.price %> </small> 
+            <small><%=currency_format(product.price)%></small> 
           </h5>
       </section>
     <% end %>
@@ -63,7 +63,7 @@
       <div class="card-body">
         <h5> 
         <%= link_to product.name, product_path(product.id) %>
-          <small> $<%= product.price %> </small> 
+          <small><%=currency_format(product.price)%></small> 
         </h5>
       <%= link_to "Shop All #{category.name.capitalize}", category_products_path(category.id), class:"btn btn-primary" %>  
     </section>
