@@ -38,7 +38,7 @@ describe ProductsController do
 
     describe "new action" do
       it "responds with redirect since user is guest and not logged in" do
-        get wizard_products_path(wizard1.id)
+        get new_wizard_product_path(wizard1.id)
         must_respond_with :redirect
       end
     end

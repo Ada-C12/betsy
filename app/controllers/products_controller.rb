@@ -40,7 +40,6 @@ class ProductsController < ApplicationController
       return
     end
   end
-  end
   
   def new
     @product = Product.new(wizard_id: params[:wizard_id])
@@ -62,10 +61,12 @@ class ProductsController < ApplicationController
   end
 
 
-private
+  private
 
-def product_params
-  product_params = params.require(:product).permit(:name, :description, :stock, :photo_url, :price, :category_ids => [])
-  product_params[:category_ids].reject!(&:blank?)
-  return product_params
+  def product_params
+    product_params = params.require(:product).permit(:name, :description, :stock, :photo_url, :price, :category_ids => [])
+    product_params[:category_ids].reject!(&:blank?)
+    return product_params
+  end
+
 end
