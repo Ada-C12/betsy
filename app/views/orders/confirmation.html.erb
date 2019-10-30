@@ -18,7 +18,7 @@
       </div>
     </div>
     <div>
-      <h5>Address</h5>
+      <h5>Owling Address</h5>
       <p><%= @order.owling_address %></p>
     </div>
   </div>
@@ -40,6 +40,22 @@
     <% end %>
     <div id="confirmation-total">
       <p><strong>Order Total</strong> ................................................................... $<%= @order.total %></p>
+    </div>
+  </div>
+
+  <div class="container">
+    <h4>Payment details</h4>
+    <div class="row justify-content-md-center">
+      <div class="col col-lg-6">
+        <h5>Credit Card</h5>
+        <p>Card number: <%= @order.cc_num.gsub(/.(?=.{4})/,'*')%></p>
+        <p>Exp. Date: <%= @order.cc_exp_mo %>/<%= @order.cc_exp_yr %></p>
+        <p>Amount: $<%= @order.total %></p>
+      </div>
+      <div class="col col-lg-6">
+        <h5>Billing Address</h5>
+        <p><%= @order.owling_address %></p>
+      </div>
     </div>
   </div>
 

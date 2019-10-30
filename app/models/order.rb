@@ -14,12 +14,22 @@ class Order < ApplicationRecord
   validates :cc_cvv, numericality: true, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :zip_code, numericality: true, length: { is: 5 }, presence: true, unless: Proc.new { |o| o.status == 'pending' }
   validates :status, presence: true
-
+  
   def total
     total_cents = self.order_items.reduce(0) { |sum, item| sum + item.subtotal }
     return Money.new(total_cents)
   end
-
+  
+  def wizard_items_total(wizard)
+    order_items = []
+    self.order_items.each do |order_item|
+      if wizard.products.include?(order_item.product)
+        order_items << order_item.subtotal
+      end
+    end
+    return order_items.sum
+  end
+  
   def self.cancel_abandoned_orders
     # pending_orders = Order.where(status: 'pending')
     # pending_orders.each do |order|

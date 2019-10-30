@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
   end
   
   def confirmation
-    @order = Order.last
+    @order = Order.find_by(id: params[:id])
     if @order.nil?
       return head :not_found
     end

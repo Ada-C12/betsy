@@ -56,12 +56,15 @@
 <% @orders.each do |order|%>
   <h4 class="col-lg-12"> <%= link_to "Order ##{order.id}", confirmation_path(order.id) %> </h4>
   <% order.order_items.each do |item| %>
+  
 	<div class="row">
     <% if item.product.wizard == @wizard %>
 			<%= link_to image_tag(item.product.photo_url, alt: "Pictures of #{item.product.name}", id: "wizard-show-item-photo"), product_path(item.product, class: "col-lg-2 img-thumbnail") %>
+			<p class="col-lg-5 align-self-center"> Quantity: <%= item.quantity %>........Subtotal: $<%= item.subtotal %></p>
 		<% end %>
 		</div>
 	<% end %>
+	<p>Order Total: $<%= order.wizard_items_total(@wizard) %></p>
 <% end %>
 </div>
 
