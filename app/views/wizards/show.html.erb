@@ -61,7 +61,7 @@
 					<%= link_to image_tag(item.product.photo_url, alt: "Pictures of #{item.product.name}", id: "wizard-show-item-photo"), product_path(item.product, class: "img-thumbnail") %>
 				</div class="col col-lg-2">
 				<div class="col col-lg-7">
-					<% unless item.shipped %>
+					<% if !item.shipped && item.order.status == "paid" %>
 						<p><%= link_to "Mark Item Shipped", shipped_path(item.id), class: "btn btn-dark" %></p>
 					<% end %>
 					<p><strong><%= item.order.status.upcase %></strong></p>
