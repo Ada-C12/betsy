@@ -79,12 +79,11 @@ Total revenue as of <%= readable_date(Date.today) %>: <%=currency_format(@curren
     </thead>
     <tbody>
     <% if @current_user.products %>
-      <% total_revenue = 0 %>
       <% @order_items.each do |order_item| %>
         <tr>
           <% order = order_item.order %>
           <td><%= link_to order.id, order_path(order.id) %></td>
-          <td><%= link_to order_item.product.id, product_path(order_item.product.id) %></td>
+          <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
           <td><%= readable_date(order.created_at) %></td>
           <td>
             <% if order.status == "paid" %>
