@@ -15,9 +15,6 @@ class ProductsController < ApplicationController
       else
         head :not_found
       end
-    else
-      head :not_found
-      return
     end
   end
   
@@ -67,7 +64,7 @@ class ProductsController < ApplicationController
       return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
-      render current_user_path
+      redirect_to current_user_path
       return
     end
   end
