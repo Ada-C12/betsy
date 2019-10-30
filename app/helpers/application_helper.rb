@@ -3,16 +3,16 @@ module ApplicationHelper
   def readable_date(date)
     return "[unknown]" unless date
     return (
-      "<span class='date' title='".html_safe +
+      "<span title='".html_safe +
       date.to_s +
       "'>".html_safe +
-      time_ago_in_words(date) +
-      " ago</span>".html_safe
+       date.strftime("%b %d, %Y")+
+      "</span".html_safe
     )
   end
 
   def currency_format(num)
-    
+    return("$" + sprintf('%.2f', num))
   end
 
   def fruit_image(code, fruit)
@@ -37,5 +37,9 @@ module ApplicationHelper
     image = image_tag (product.img_url), class: product_class, alt:"#{product.name} product image"
     return link_to image, product_path(product.id)
   end
-
+  
+  def rating_img
+    rating_img = "https://live.staticflickr.com/65535/48965531738_c70c61c848_o.png"
+    return image_tag (rating_img), alt:"pineapple rating image", class: "rating-img"
+  end
 end

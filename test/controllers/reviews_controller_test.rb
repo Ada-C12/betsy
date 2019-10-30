@@ -12,6 +12,7 @@ describe ReviewsController do
       {
         review: {
           rating: 2,
+          title: "Review Title",
           description: "description of a new product",
           user_id: betsy.id,
           product_id: lemon_shirt.id,
@@ -23,6 +24,7 @@ describe ReviewsController do
       {
         review: {
           rating: 10,
+          title: 1,
           description: "",
           user_id: -1,
           product_id: -1,
@@ -92,6 +94,4 @@ describe ReviewsController do
       must_redirect_to root_path
     end
   end
-
-
 end

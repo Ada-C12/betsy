@@ -69,6 +69,35 @@ describe OrderItemsController do
       must_respond_with :redirect
       assert_equal "Quantity entered is greater than available stock for #{product.name}.", flash[:error]
     end
+
+    it "does not create a new order item if the current order already contains an order item with the same product" do
+      OrderItem.destroy_all
+      product = products(:lemon_shirt)
+      product_id = product.id
+      order_item_hash = {
+        order_item: {
+          quantity: 1
+        }
+      }
+      post product_order_items_path(product_id), params: order_item_hash
+      order = Order.last
+      
+
+      order_item_hash_2 = {
+        order_item: {
+          quantity: 2
+        }
+      }
+
+      expect {
+        post product_order_items_path(product_id), params: order_item_hash_2
+      }.wont_differ 'OrderItem.count'
+
+      order_item = OrderItem.last
+      expect(order.order_items.length).must_equal 1
+      expect(order_item.quantity).must_equal 3
+      expect(order_item.product.name).must_equal product.name
+    end
   end
 
   describe "update" do
