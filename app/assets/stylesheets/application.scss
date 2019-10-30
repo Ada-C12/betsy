@@ -238,11 +238,9 @@ a {
   padding-bottom: 2em;
 }
 
-.align-right > h5 {
+.align-right > h4 {
   padding-bottom: 1em;
 }
-
-
 
 .hr-total {
   border: 1px solid black;
@@ -253,4 +251,35 @@ a {
 .h-center-text {
   text-align: center;
   padding: 2em;
+}
+
+.confirm-header {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  padding: 2em;
+}
+
+// .order h2 {
+//   font-weight: normal;
+// }
+
+#embed-title {
+  padding-bottom: 0.8em;
+}
+
+.confirm-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirm-info ul {
+  margin-bottom: 0;
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+.confirm-info strong {
+  font-size: 1.1em;
 }
