@@ -62,7 +62,7 @@
 				</div class="col col-lg-2">
 				<div class="col col-lg-7">
 					<% if !item.shipped && item.order.status == "paid" %>
-						<p><%= link_to "Mark Item Shipped", shipped_path(item.id), class: "btn btn-dark" %></p>
+						<p><%= link_to "Mark Item Shipped", shipped_path(item.id), class: "btn btn-dark", method: :patch %></p>
 					<% end %>
 					<p><strong><%= item.order.status.upcase %></strong></p>
 					<p><em>Order placed on <%= item.order.created_at.strftime("%b %d, %Y") %></em></p>

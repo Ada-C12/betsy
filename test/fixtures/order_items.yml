@@ -15,3 +15,9 @@ order_items3:
   product: product3
   order: order2
   shipped: false
+
+pending_order_items:
+  quantity: 1
+  product: product3
+  order: pending_order
+  shipped: false
