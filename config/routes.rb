@@ -15,7 +15,6 @@ Rails.application.routes.draw do
   resources :order_items, only: [:update, :destroy]
   get "/cart", to: "orders#cart", as: "cart"
   
-  resources :wizards, only: [:show]
   resources :wizards do
     resources :products, only: [:index, :new, :create]
   end
