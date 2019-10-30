@@ -44,7 +44,6 @@ Total revenue as of <%= readable_date(Date.today) %>: <%=currency_format(@curren
             <td> <%= product.active %>
             <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
           <% end %>
-            <td> <%= link_to "Delete", product_path(product.id ), method: :delete, data: { confirm: "Really really delete?"}, class: "btn btn-primary" %>
           </tr>
         <% end %>
       <% end %>

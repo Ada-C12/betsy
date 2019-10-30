@@ -72,26 +72,6 @@ class ProductsController < ApplicationController
     end
   end
   
-  def destroy
-    product = Product.find_by(id: params[:id])
-    if product
-      if product.user_id == session[:user_id]
-        product.destroy
-        flash[:success] = "Product #{product.name} was deleted!"
-        redirect_to root_path
-        return
-      else
-        flash[:error] = "You cannot delete a product not belonging to you!"
-        redirect_to root_path
-        return
-      end
-    else
-      flash[:error] = "The product doesn't exist!"
-      redirect_to root_path
-      return
-    end
-  end
-  
   private
 
   def find_product
