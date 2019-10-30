@@ -33,7 +33,6 @@ class ProductsController < ApplicationController
   end
   
   def create
-    # raise
     @product = Product.new(product_params)
 
     if params[:multiselect]
