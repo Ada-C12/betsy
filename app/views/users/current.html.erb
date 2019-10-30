@@ -45,20 +45,29 @@ Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
         <th> Product</th> 
         <%# #Will require a link to the product %>
         <th> Order date</th>
-        <th> Status</th>
+        <th>
+          <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Status
+          </a>
+          <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
+            <%= link_to "All", current_user_path, class: "dropdown-item" %>
+            <%= link_to "Paid", current_user_path(:status => "paid"), class: "dropdown-item" %>
+            <%= link_to "Cancelled", current_user_path(:status => "cancelled"), class: "dropdown-item" %>
+            <%= link_to "Completed", current_user_path(:status => "completed"), class: "dropdown-item" %>
+          </div>
+        </th>
         <th> Total </th>
         <th> Category</th>
       </tr>
     </thead>
     <tbody>
     <% if @current_user.products %>
-    <% total_revenue = 0 %>
-    <% @current_user.products.each do |product| %>
-      <% product.order_items.each do |order_item| %>
+      <% total_revenue = 0 %>
+      <% @order_items.each do |order_item| %>
         <tr>
           <% order = order_item.order %>
           <td><%= link_to order.id, order_path(order.id) %></td>
-          <td><%= link_to product.id, product_path(product.id) %></td>
+          <td><%= link_to order_item.product.id, product_path(order_item.product.id) %></td>
           <td><%= readable_date(order.created_at) %></td>
           <td>
             <% if order.status == "paid" %>
@@ -74,11 +83,10 @@ Total revenue as of <%= Date.today %>:  <%= @current_user.total_earned%>
             <% end %>
           </td>
           <td><%= order_item.total %>
-          <td><%= product.categories.first.name %></td>
+          <td><%= order_item.product.categories.first.name %></td>
           <%# in this subtotal section, calculate the subtotal for that order item by calling the 'total' class method in Order_Item %>
         </tr>
       <% end %>
-    <%end%>
     <%end%>
     </tbody>
   </table>
