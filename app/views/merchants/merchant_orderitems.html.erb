@@ -1,65 +1,74 @@
-<h2>Merchant's Order Items</h2>
-
-<section>
-  Total Revenue: <%= Merchant.calculate_total_revenue(@current_merchant)%>
+<section class="h-center-text-no-pad">
+  <h2>Merchant's Order Items</h2>
+  <h4>Total Revenue: $<%= '%.2f' % Merchant.calculate_total_revenue(@current_merchant) %></h4>
 </section>
 
 <section>
-  <table>
+  <div class="summary">
+    <h3>Unfulfilled Orders</h3>
+    <p><span class="bolded">Total Revenue: $</span><%= '%.2f' % Merchant.calc_rev_by_status(@current_merchant, "false") %></p>
+    <p><span class="bolded">Number of Orders: </span><%= Merchant.find_merchants_orderitems(@current_merchant, "false").length %></p>
+  </div>
+
+  <table class="table">
     <thead>
-      <h3>Unfulfilled Orders</h3>
-      <span>Total Revenue: </span><%= Merchant.calc_rev_by_status(@current_merchant, "false") %>
-      <span>Number of Orders: </span><%= Merchant.find_merchants_orderitems(@current_merchant, "false").length %>
+      <tr>
+        <th>Order Number</th>
+        <th>Product</th>
+        <th>Date Paid</th>
+        <th>Cost x Quantity</th>
+        <th>Subtotal</th>
+        <th>Status</th>
+        <th>Shipping</th>
+      </tr>
     </thead>
     <tbody>
-      <th>Order Number</th>
-      <th>Product</th>
-      <th>Date Paid</th>
-      <th>Cost x Quantity</th>
-      <th>Subtotal</th>
-      <th>Status</th>
-      <th>Shipping</th>
       <% Merchant.find_merchants_orderitems(@current_merchant, "false").each do |orderitem| %>
         <% if orderitem.order.status != "cancel" %>
-        <tr>
-          <td><%= link_to "Order ##{orderitem.order_id}", merchant_order_path(orderitem.order_id) %></td>
-          <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
-          <td><%= orderitem.order.created_at %></td>
-          <td>$<%= orderitem.product.price %> x <%= orderitem.quantity %></td>
-          <td>$<%= orderitem.subtotal %></td>
-          <td><%= orderitem.order.status %></td>
-          <td><%= link_to "Ship It", mark_shipped_path(orderitem.id), method: :patch, class: "btn btn-primary"%></td>
-        </tr>
+          <tr>
+            <td><%= link_to "Order ##{orderitem.order_id}", merchant_order_path(orderitem.order_id) %></td>
+            <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
+            <td><%= orderitem.order.created_at.to_date %></td>
+            <td>$<%= '%.2f' % orderitem.product.price %> x <%= orderitem.quantity %></td>
+            <td>$<%= '%.2f' % orderitem.subtotal %></td>
+            <td><%= orderitem.order.status %></td>
+            <td><%= link_to "Ship It", mark_shipped_path(orderitem.id), method: :patch, class: "btn btn-primary"%></td>
+          </tr>
         <% end %>
-    <% end %>
+      <% end %>
     </tbody>
   </table>
 </section>
 
 <section>
-  <table>
+  <div class="summary">
+    <h3>Shipped Orders</h3>
+    <p><span class="bolded">Total Revenue: $</span><%= '%.2f' % Merchant.calc_rev_by_status(@current_merchant, "true") %></p>
+    <p><span class="bolded">Number of Orders: </span><%= Merchant.find_merchants_orderitems(@current_merchant, "true").length %></p>
+  </div>
+
+  <table class="table">
     <thead>
-      <h3>Shipped Orders</h3>
-      <span>Total Revenue: </span><%= Merchant.calc_rev_by_status(@current_merchant, "true") %>
-      <span>Number of Orders: </span><%= Merchant.find_merchants_orderitems(@current_merchant, "true").length %>
+      <tr>
+        <th>Order Number</th>
+        <th>Product</th>
+        <th>Date Paid</th>
+        <th>Cost x Quantity</th>
+        <th>Subtotal</th>
+        <th>Status</th>
+      </tr>
     </thead>
     <tbody>
-      <th>Order Number</th>
-      <th>Product</th>
-      <th>Date Paid</th>
-      <th>Cost x Quantity</th>
-      <th>Subtotal</th>
-      <th>Status</th>
       <% Merchant.find_merchants_orderitems(@current_merchant, "true").each do |orderitem| %>
-      <tr>
-        <td><%= link_to "Order ##{orderitem.order_id}", merchant_order_path(orderitem.order_id) %></td>
-        <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
-        <td><%= orderitem.order.created_at %></td>
-        <td>$<%= orderitem.product.price %> x <%= orderitem.quantity %></td>
-        <td>$<%= orderitem.subtotal %></td>
-        <td><%= orderitem.order.status %></td>
-      </tr>
-    <% end %>
+        <tr>
+          <td><%= link_to "Order ##{orderitem.order_id}", merchant_order_path(orderitem.order_id) %></td>
+          <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>
+          <td><%= orderitem.order.created_at.to_date %></td>
+          <td>$<%= '%.2f' % orderitem.product.price %> x <%= orderitem.quantity %></td>
+          <td>$<%= '%.2f' % orderitem.subtotal %></td>
+          <td><%= orderitem.order.status %></td>
+        </tr>
+      <% end %>
     </tbody>
   </table>
 </section>
