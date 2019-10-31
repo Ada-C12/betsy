@@ -45,13 +45,17 @@ class ProductsController < ApplicationController
     if @product.save
       if @current_user.merchant_name.nil?
         flash[:success] = "Product #{@product.name} has been added successfully"
-        flash[:message] = "You merchant name is currently empty. Please add a merchant name to add your fruit stand to the Merchants List."
+        flash[:message] = "You merchant name is currently empty. Please add a merchant name to list your fruit stand with Fruitsy Merchants."
         return redirect_to edit_user_path
       else
         flash[:success] = "Product #{@product.name} has been added successfully"
         redirect_to product_path(@product.id)
         return
       end
+    elsif !@product.errors.empty?
+      flash.now[:error] = "New product was not added. Fix required fields before adding!"
+      render :new
+      return
     else
       flash.now[:error] = "Something went wrong! Product was not added."
       render :new
@@ -69,8 +73,6 @@ class ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       flash[:success] = "Product #{@product.name} has been updated successfully"
-      redirect_to current_user_path
-      return
     else
       flash.now[:error] = "Something went wrong! Product can not be edited."
       redirect_to current_user_path
