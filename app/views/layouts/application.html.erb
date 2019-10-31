@@ -136,12 +136,6 @@
             <% end %>
         </li>
       </ul>
-<%#       
-      <form class="form-inline my-2 my-lg-0">
-        <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-        <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
-      </form> %>
-      
       <%= form_tag(products_path, method: :get, class: "form-inline my-2 my-lg-0") do %>
         <%= text_field(:search, params[:search], class: "form-control mr-sm-2", placeholder: "Search") %>
         <%= submit_tag("Search", class: "btn btn-outline-success my-2 my-sm-0") %>
@@ -161,10 +155,11 @@
         <div class="alert alert-warning" role="alert" class="<%= name %>"><%= message %></div>
       <% elsif name == "errors" %>
         <div class="alert alert-warning" role="alert" class="<%= name %>">
+          <h4> Requirement Errors </h4>
           <% message.each do |column, error| %>
-            <h4> Requirement Errors </h4>
-            <strong> <%= column.capitalize %> </strong> 
-            <%= error.join(', ') %>
+            <div> <strong> <%= column.capitalize %> </strong> 
+              <%= error.join(', ') %>
+            </div> 
           <% end %>
         </div>
       <% end %>
