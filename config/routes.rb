@@ -3,7 +3,7 @@ Rails.application.routes.draw do
   
   root to: "products#homepage"
   
-  resources :products, only: [:index, :show] do
+  resources :products, only: [:index, :show, :edit, :update] do
     resources :order_items, only: [:create]
     resources :reviews, only: [:new,:create]
   end
@@ -17,8 +17,9 @@ Rails.application.routes.draw do
   get "/cart", to: "orders#cart", as: "cart"
   patch "/shipped/:id", to: "order_items#shipped", as: "shipped"
   
+  
   resources :wizards, only: [:show] do
-    resources :products, only: [:index]
+    resources :products, only: [:index, :new, :create]
   end
   
   resources :categories, only: [:new, :create] do

@@ -1,6 +1,4 @@
 require "test_helper"
-require 'pry'
-
 describe Product do
   let(:product1) { products(:product1) }
   describe "validations" do
