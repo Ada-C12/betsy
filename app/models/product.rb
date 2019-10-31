@@ -44,7 +44,7 @@ class Product < ApplicationRecord
       return nil
     else
       ratings = reviews.map { |review| review.rating }
-      return (ratings.sum / ratings.length).to_f.round(2)
+      return (ratings.sum.to_f / ratings.length).round(1)
     end
   end
 
