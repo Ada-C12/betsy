@@ -7,6 +7,9 @@
 
 <ul class="wizard-show-nav">
 	<li>
+		<%= link_to "Add Product", new_wizard_product_path(@wizard.id), class: "btn btn-dark" %>
+	</li>
+	<li>
 		<%= link_to "View Products", wizard_products_path(@wizard.id), class: "btn btn-dark" %>
 	</li>
 	<li>
