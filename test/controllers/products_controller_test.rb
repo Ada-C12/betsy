@@ -1,5 +1,4 @@
 require "test_helper"
-require 'pry'
 describe ProductsController do
   let(:wizard1) { wizards(:wizard1) }
   let(:wizard_no_products) { wizards(:wizard_no_products) }

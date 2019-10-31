@@ -1,5 +1,3 @@
-require 'pry'
-
 class ProductsController < ApplicationController
   before_action :product, only: [:edit, :update]
   before_action :wizard, only: [:new, :create, :edit, :update]
