@@ -1,6 +1,8 @@
 <section class="page-container">
   <% if @category %>
     <h1 class="page-title"> Shop All <%= @category.name.capitalize %> Products </h1>
+  <% elsif @search_result %>
+    <h1 class="page-title"> Search results for "<%= @search_result %>" </h1>
   <% else %>
     <h1 class="page-title"> Shop All Fruit Products </h1>
   <% end %>
