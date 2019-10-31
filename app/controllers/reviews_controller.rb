@@ -26,7 +26,7 @@ class ReviewsController < ApplicationController
       redirect_to product_path(product.id)
       return
     else
-      render :new
+      render :new, status: :bad_request
       return
     end
   end
