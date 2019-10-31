@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def readable_date(date)
-    return "[unknown]" unless date.instance_of?(Date)
+    return "[unknown]" unless date
     return (
       "<span title='".html_safe +
       date.to_s +
