@@ -1,130 +1,132 @@
-<h2>hello, 
-<%if@current_user.merchant_name%>
-  <%=@current_user.merchant_name%>!
-<%else%>
-  <%=@current_user.username%>!
-<%end%>  
-</h2>
-<p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
-<% if @current_user.products.count > 0 %>
-  <p>Total revenue as of <%=readable_date(Date.today)%> : 
-    <%=currency_format(@current_user.total_earned)%></p>
-<% elsif @current_user.products.empty? %>
-  <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
-<% end %> 
-</p>
-<section class="user-products__container">
-  <h3 class="user-products__header">Manage your products</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th>
-          <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Status
-          </a>
-          <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
-            <%= link_to "All", current_user_path, class: "dropdown-item" %>
-            <%= link_to "Active", current_user_path(:activestatus => true), class: "dropdown-item" %>
-            <%= link_to "Inactive", current_user_path(:activestatus => false), class: "dropdown-item" %>
-          </div>
-        </th>
-        <th> Product </th>
-        <th> Title</th>
-        <th> Price</th>
-        <th> Stock</th>
-        <th> Description</th>
-        <th> Img url </th>
-        <th> Category</th>
-        <th> Active </th>
-        <th> Edit </th>
+<section class="page-container">
+  <h2>hello, 
+  <%if@current_user.merchant_name%>
+    <%=@current_user.merchant_name%>!
+  <%else%>
+    <%=@current_user.username%>!
+  <%end%>  
+  </h2>
+  <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
+  <% if @current_user.products.count > 0 %>
+    <p>Total revenue as of <%=readable_date(Date.today)%> : 
+      <%=currency_format(@current_user.total_earned)%></p>
+  <% elsif @current_user.products.empty? %>
+    <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
+  <% end %> 
+  </p>
+  <section class="user-products__container">
+    <h3 class="user-products__header">Manage your products</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Status
+            </a>
+            <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
+              <%= link_to "All", current_user_path, class: "dropdown-item" %>
+              <%= link_to "Active", current_user_path(:activestatus => true), class: "dropdown-item" %>
+              <%= link_to "Inactive", current_user_path(:activestatus => false), class: "dropdown-item" %>
+            </div>
+          </th>
+          <th> Product </th>
+          <th> Title</th>
+          <th> Price</th>
+          <th> Stock</th>
+          <th> Description</th>
+          <th> Img url </th>
+          <th> Category</th>
+          <th> Active </th>
+          <th> Edit </th>
 
-      </tr>
-    </thead>
-    <tbody>
-      <%if @current_user.products %>
-        <% @current_user.products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
-          <tr> 
-            <td> </td>
-            <td> <%= product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail") %></td>   
-            <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
-            <td><%= f.text_field :name %></td>
-            <td>$<%= f.text_field :price %></td>
-            <td><%= f.text_field :stock %></td>
-            <td><%= f.text_field :description%></td>
-            <td><%= f.text_field :img_url %>
-            <%if !product.categories.empty? %>
-              <td><%= product.categories.first.name %></td>
-            <%else%>
-              <td><p> N/A</p></td>
-            <%end %>
-            <td> <%= f.check_box :active %></td>
-            <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
+        </tr>
+      </thead>
+      <tbody>
+        <%if @current_user.products %>
+          <% @current_user.products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
+            <tr> 
+              <td> </td>
+              <td> <%= product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail") %></td>   
+              <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
+              <td><%= f.text_field :name %></td>
+              <td>$<%= f.text_field :price %></td>
+              <td><%= f.text_field :stock %></td>
+              <td><%= f.text_field :description%></td>
+              <td><%= f.text_field :img_url %>
+              <%if !product.categories.empty? %>
+                <td><%= product.categories.first.name %></td>
+              <%else%>
+                <td><p> N/A</p></td>
+              <%end %>
+              <td> <%= f.check_box :active %></td>
+              <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
+            <% end %>
+            </tr>
           <% end %>
+        <% end %>
+    </tbody>
+    </table>
+  </section>
+
+  <section class="user-orders__container">
+    <h3 class="user-products__header">Manage your orders</h3>
+    <table class="table">
+      <thead>
+        <tr>
+          <th> Order id</th>
+          <%# #Will require a link to view individual order %>
+          <th> Product Name</th> 
+          <%# #Will require a link to the product %>
+          <th> Order date</th>
+          <th>
+            <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Status
+            </a>
+            <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
+              <%= link_to "All", current_user_path, class: "dropdown-item" %>
+              <%= link_to "Paid", current_user_path(:status => "paid"), class: "dropdown-item" %>
+              <%= link_to "Cancelled", current_user_path(:status => "cancelled"), class: "dropdown-item" %>
+              <%= link_to "Completed", current_user_path(:status => "completed"), class: "dropdown-item" %>
+            </div>
+          </th>
+          <th> Quantity </th>
+          <th> Total </th>
+          <th> Category</th>
+        </tr>
+      </thead>
+      <tbody>
+      <% if @current_user.products %>
+        <% @order_items.each do |order_item| %>
+          <tr>
+            <% order = order_item.order %>
+            <td><%= link_to order.id, order_path(order.id) %></td>
+            <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
+            <td><%= readable_date(order.created_at) %></td>
+            <td>
+              <% if order.status == "paid" %>
+                <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Paid
+                </a>
+                <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
+                  <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, class: "dropdown-item" %>
+                  <%= link_to "Completed", complete_order_path(order.id), method: :patch, class: "dropdown-item" %>
+                </div>
+              <% else %>
+                <%= order.status.capitalize %>
+              <% end %>
+            </td>
+            <td><%= order_item.quantity %></td>
+            <td><%= order_item.total %>
+            <% if !order_item.product.categories.empty?%>
+              <td><%= order_item.product.categories.first.name %></td>
+            <% elsif %>
+              <td> <p> N/A </p>
+            <% end %>
           </tr>
         <% end %>
-      <% end %>
-  </tbody>
-  </table>
+      <%end%>
+      </tbody>
+    </table>
+  </section>
+  <%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
 </section>
-
-<section class="user-orders__container">
-  <h3 class="user-products__header">Manage your orders</h3>
-  <table class="table">
-    <thead>
-      <tr>
-        <th> Order id</th>
-        <%# #Will require a link to view individual order %>
-        <th> Product Name</th> 
-        <%# #Will require a link to the product %>
-        <th> Order date</th>
-        <th>
-          <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Status
-          </a>
-          <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
-            <%= link_to "All", current_user_path, class: "dropdown-item" %>
-            <%= link_to "Paid", current_user_path(:status => "paid"), class: "dropdown-item" %>
-            <%= link_to "Cancelled", current_user_path(:status => "cancelled"), class: "dropdown-item" %>
-            <%= link_to "Completed", current_user_path(:status => "completed"), class: "dropdown-item" %>
-          </div>
-        </th>
-        <th> Quantity </th>
-        <th> Total </th>
-        <th> Category</th>
-      </tr>
-    </thead>
-    <tbody>
-    <% if @current_user.products %>
-      <% @order_items.each do |order_item| %>
-        <tr>
-          <% order = order_item.order %>
-          <td><%= link_to order.id, order_path(order.id) %></td>
-          <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
-          <td><%= readable_date(order.created_at) %></td>
-          <td>
-            <% if order.status == "paid" %>
-              <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                Paid
-              </a>
-              <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
-                <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, class: "dropdown-item" %>
-                <%= link_to "Completed", complete_order_path(order.id), method: :patch, class: "dropdown-item" %>
-              </div>
-            <% else %>
-              <%= order.status.capitalize %>
-            <% end %>
-          </td>
-          <td><%= order_item.quantity %></td>
-          <td><%= order_item.total %>
-          <% if !order_item.product.categories.empty?%>
-            <td><%= order_item.product.categories.first.name %></td>
-          <% elsif %>
-            <td> <p> N/A </p>
-          <% end %>
-        </tr>
-      <% end %>
-    <%end%>
-    </tbody>
-  </table>
-</section>
-<%= link_to "Back to Home", root_path, class: "btn btn-primary" %>

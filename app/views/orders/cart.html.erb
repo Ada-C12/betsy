@@ -1,32 +1,27 @@
-<% cart_order = Order.find_by(id:session[:cart_id]) %>
-  <% if cart_order &&  cart_order.order_items.count > 0 %>
-    <div> <%= cart_full_img_link %> </div>
-  <% else %>
-    <div> <%= cart_empty_img_link %> </div>
-  <% end %>
+<section class="page-container">
+  <h1 class="page-title" >Welcome To Your Fruit Basket!</h1>
 
-<h1 class="page-title" >Welcome to your Fruit Basket!</h1>
+  <% if @current_order && @current_order.order_items.count > 0 %>
+    <h4> Basket Total: <%=currency_format(@current_order.total)%></h4>
+    
+    <% @current_order.order_items.each do |order_item| %>
+      <%= product_img_link(product: order_item.product, img_url: order_item.product.img_url, product_class: "show-product-img")%>  
+      
+      <h4><%=currency_format(order_item.product.price)%></h4>
+      
+      <%= form_with model: order_item, url: order_item_path(order_item.id) do |f| %>
+        <%= f.label :quantity, class: "col-sm-2 col-form-label"%>
+        <%= f.text_field :quantity, class: "form-control" %>
+        <%= f.submit "Update", class: "btn btn-primary" %>
+      <% end %>
+      
+      <%= link_to "Delete", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
+      
+      <h5 class="card-text"> Merchant:<%= order_item.product.user.merchant_name %>MAKE LINK!! </h5> 
 
-<% if @current_order && @current_order.order_items.count > 0 %>
-  <h4> Basket Total: <%=currency_format(@current_order.total)%></h4>
-  
-  <% @current_order.order_items.each do |order_item| %>
-    <%= product_img_link(product: order_item.product, img_url: order_item.product.img_url, product_class: "show-product-img")%>  
-    
-    <h4><%=currency_format(order_item.product.price)%></h4>
-    
-    <%= form_with model: order_item, url: order_item_path(order_item.id) do |f| %>
-      <%= f.label :quantity, class: "col-sm-2 col-form-label"%>
-      <%= f.text_field :quantity, class: "form-control" %>
-      <%= f.submit "Update", class: "btn btn-primary" %>
     <% end %>
-    
-    <%= link_to "Delete", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
-    
-    <h5 class="card-text"> Merchant:<%= order_item.product.user.merchant_name %>MAKE LINK!! </h5> 
-
+    <%= link_to "Order", checkout_path, class:"btn btn-dark" %>
+  <% else %>
+    <h2>Your basket is empty! :(</h2>
   <% end %>
-  <%= link_to "Order", checkout_path, class:"btn btn-dark" %>
-<% else %>
-  <h2>Your basket is empty! :(</h2>
-<% end %>
+</section>
