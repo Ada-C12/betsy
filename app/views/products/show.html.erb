@@ -8,7 +8,7 @@
   <div class="col-md-6">
     <div class="col-md-12">
       <h3><%= @product.name %><h3>
-      <small class="description"><%= @product.description %><small>
+      <h4 class="prod-description"><%= @product.description %></h4>
       <small><p>Sold by: <%= link_to @product.merchant.username, merchant_products_path(@product.merchant.id)%></p></small>
       <p>$<%= '%.2f' % @product.price %></p>
       
