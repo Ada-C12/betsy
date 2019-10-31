@@ -90,6 +90,10 @@ footer {
   margin-bottom: 2%;
 }
 
+.page-container {
+  padding: 2%;
+}
+
 
 // cards styling for products
 .cards-container {
@@ -219,4 +223,15 @@ a:hover {
   background-repeat:no-repeat;
   background-size:cover;
   color: white;
+}
+
+
+.new-product-form {
+  display: flex;
+  justify-content: flex-start;
+  padding: 3%;
+}
+
+.text-fields {
+  margin-right: 5%
 }
