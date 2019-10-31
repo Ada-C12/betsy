@@ -1,3 +1,4 @@
+require 'pry'
 class OrderItemsController < ApplicationController
   def create
     product = Product.find_by(id: params[:product_id])
@@ -59,6 +60,25 @@ class OrderItemsController < ApplicationController
     else
       flash[:error] = "A problem occurred: Could not update #{order_item.product.name} quantity"
       return redirect_to cart_path
+    end
+  end
+
+  def shipped
+    order_item = OrderItem.find_by(id: params[:id])
+    
+    if order_item.nil?
+      return head :not_found
+    elsif order_item.order.status != "paid"
+      flash[:error] = "Order is not paid: Could not ship #{order_item.product.name}"
+      return redirect_back(fallback_location: wizard_path)
+    elsif order_item.update_attributes(shipped: true)
+      # completes order if all items shipped
+      order_item.order.complete_order
+      flash[:success] = "Successfully shipped #{order_item.quantity} of #{order_item.product.name}."
+      return redirect_back(fallback_location: wizard_path)
+    else
+      flash[:error] = "A problem occurred: Could not ship #{order_item.product.name}"
+      return redirect_back(fallback_location: wizard_path)
     end
   end
 

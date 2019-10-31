@@ -12,6 +12,6 @@ wizard_no_products:
 
 wizard2:
   provider: github
-  uid: 12446
-  username: wiz2
-  email: wiz2@wiz.com
+  uid: 23456
+  username: aname 
+  email: person@greatestmage.com

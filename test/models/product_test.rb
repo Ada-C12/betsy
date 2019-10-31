@@ -127,7 +127,7 @@ describe Product do
     it "can have many order_items" do
       valid_product = products(:product1)
       
-      expect(valid_product.order_items.count).must_equal 1
+      expect(valid_product.order_items.count).must_equal 2
       valid_product.order_items.each do |order_item|
         order_item.must_be_kind_of OrderItem
       end

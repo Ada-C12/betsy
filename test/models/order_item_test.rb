@@ -98,5 +98,11 @@ describe OrderItem do
         expect(order_items1.subtotal).must_equal 0
       end
     end
+
+    describe "updated stock" do
+      it "accurately calculates the updated_stock amount" do
+        expect(order_items1.updated_stock).must_equal 8
+      end
+    end
   end
 end
