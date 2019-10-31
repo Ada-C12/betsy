@@ -31,6 +31,11 @@ h1, h2, h3, h4, h5 {
    font-weight: bold;
 }
 
+.bolded {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+
 // PRODUCT IMAGES
 
 .img * {
@@ -41,6 +46,11 @@ h1, h2, h3, h4, h5 {
   background-position: 50% 50%;
   background-repeat: no-repeat;
   background-size: cover;
+}
+
+.img-cart * {
+  width: 250px;
+  height: 250px;
 }
 
 .img-description {
@@ -179,4 +189,119 @@ a {
 .btn-primary {
   background-color: goldenrod;
   border-color: goldenrod;
+}
+
+
+.copyright {
+  text-align: center;
+  font-size: small;
+}
+
+// CART
+
+.cont-center {
+  display: flex;
+  align-content: center;
+  justify-content: center;
+}
+
+#text-just-center {
+  vertical-align: middle;
+}
+
+.text-bold {
+  font-size: 1.5rem
+}
+
+.align-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  padding-right: 4em;
+  padding-left: 4em;
+  padding-top: 2em;
+  padding-bottom: 2em;
+}
+
+.align-right > h4 {
+  padding-bottom: 1em;
+}
+
+.hr-total {
+  border: 1px solid black;
+  margin-left: 5vw;
+  margin-right: 5vw;
+}
+
+.h-center-text {
+  text-align: center;
+  padding: 1.75em;
+}
+
+.confirm-header {
+  display: flex;
+  flex-direction: column;
+  justify-items: center;
+  align-items: center;
+  padding: 2em;
+}
+
+#embed-title {
+  padding-bottom: 0.8em;
+}
+
+.confirm-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+.confirm-info ul {
+  margin-bottom: 0;
+  list-style-type: none;
+  padding-inline-start: 0;
+}
+
+// Checkout Page
+
+.form-container{
+  padding: 2rem;
+  width: 75vw;
+}
+
+.h-center-text-no-pad {
+  text-align: center;
+}
+
+.order-forms {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.submit {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+// merchant_order_path
+
+.merch-order-ul ul {
+  margin-bottom: 0;
+  list-style-type: none;
+  padding-inline-start: 0;
+  line-height: 2em;
+  margin-left: 20vw;
+}
+
+// order fullfillment page
+
+.table-container {
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
+.summary > h3 {
+  padding-top: 2rem;
+  padding-bottom: 1rem;
 }

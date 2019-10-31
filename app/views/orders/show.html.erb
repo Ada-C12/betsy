@@ -1,62 +1,72 @@
-<section>
-  <h2>THANK YOU FOR SHOPPING WITH KEGSY</h2>
-  <h2>Order Confirmation</h2>
+<section class='order'>
+<section class="confirm-header">
+  <% if @order.status == 'cancel' %>
+    <h2>Your Order has been Cancelled<h2>
+
+  <% else %>
+    <h2>THANK YOU FOR SHOPPING WITH KEGSY</h2>
+
+    <% if @order.status == 'paid' %>
+      <p>Your order is on its way!</p>
+    <% else %>
+      <p>Your order is complete!</p>
+    <% end %>
+  <% end %>
 </section>
 
-<section>
-  <h2>Order Details</h2>
+<section class="confirm-info">
+  <ul>
+    <li><span class="bolded">Name:  </span> <%= @order.cc_name %></li>
+    <li><span class="bolded">Shipping Address:  </span> <%= @order.address %></li>
+    <li><span class="bolded">Email:  </span> <%= @order.email %></li>
+  </ul>
 
-  <div class = "columns small-6">
-    <ul>
-      <li>Order: #<%= @order.id %></li>
-      <li>Purchased On: <%= @order.created_at.to_date %></li>
-      <li>Order Status: <%= @order.status %></li>
-    </ul>
-  </div>
-
-  <div class = "columns small-6">
-    <ul>
-      <li>Name: <%= @order.cc_name %></li>
-      <li>Shipping Address: <%= @order.address %></li>
-      <li>Email: <%= @order.email %></li>
-    </ul>
-  </div>
+  <ul>
+    <li><span class="bolded">Order Number:  </span> <%= @order.id %></li>
+    <li><span class="bolded">Purchased On:  </span> <%= @order.created_at.to_date %></li>
+    <li><span class="bolded">Order Status:  </span> <%= @order.status %></li>
+  </ul>
 </section>
 
 
-<section>
-  <h2>Products</h2>
+
+<section class='order'>
+  <h3 class="h-center-text" id="embed-title">YOUR ORDER SUMMARY</h3>
+
+  <table class="table">
+  <tbody>
 
   <% @order.orderitems.each do |orderitem| %>
-  <section class="row checkout">
-    <section class = "columns small-12 medium-3">
-      <span class="img"><%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}" %></span>
-    </section>
+  <tr>
+    <td>
+      <span class="img-cart cont-center"><%= image_tag "#{orderitem.product.photo_url}", alt: "#{orderitem.product.name}" %></span>
+    </td>
 
-    <section class = "columns small-12 medium-5">
-      <%= link_to orderitem.product.name, product_path(orderitem.product) %>
-    </section>
+    <td id="text-just-center">
+      <h4><%= link_to orderitem.product.name, product_path(orderitem.product) %></h4>
+      <p>Quantity: <%= orderitem.quantity %></p>
+      <p>
+      <%# THIS SHOULD BE SHIPPED STATUS%>
+      </p>
+    </td>
 
-    <section class = "columns small-12 medium-4">
-      <p>$<%= orderitem.product.price %> x <%= orderitem.quantity %></p>
-      <p>Subtotal: $<%= orderitem.subtotal %></p>
-    </section>
-
-  </section>
+    <td id="text-just-center">
+      <p><span class='text-bold'>$<%= number_with_precision(orderitem.subtotal, :precision => 2) %></span> ($<%= number_with_precision(orderitem.product.price, :precision => 2) %> each)</p>
+    </td>
+  </tr>
   <% end %>
 
-  <section class = "row total container">
-    <section class = "columns small-9 large-8 align-right">
-      <p>TOTAL</p>
-    </section>
+  </tbody>
+  </table>
 
-    <section class = "columns small-3 large-4 align-right">
-      <p>$<%= @order.total %></p>
-    </section>
+  <hr class="hr-total">
 
+  <section class="align-right">  
+    <h4>TOTAL $<%= number_with_precision(@order.total, :precision => 2) %></h4>
     <% if @order.status != 'cancel' %>
-      <p><%= link_to 'Cancel Order', cancel_order_path(id: @order.id), method: :patch, class:"btn btn-alert" %></p>
+      <p><%= link_to 'Cancel Order', cancel_order_path(id: @order.id), method: :patch, class:"btn btn-danger" %></p>
     <% end %>
   </section>
-  
+</section>
+
 </section>
