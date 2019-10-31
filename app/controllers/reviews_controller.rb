@@ -19,6 +19,10 @@ class ReviewsController < ApplicationController
     end
   end
   
+  def new_product_review(product_id)
+    @review = Review.all
+  end
+  
   private
   
   def review_params
