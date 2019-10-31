@@ -1,4 +1,7 @@
-<section>
+<main class="wrapper main-content" role="main">
+<div class="grid">
+  <% merchant = User.find_by(id: @product.user_id)%>
+  <h5 class="card-text"><%= link_to @product.user.username, user_path(@product.user.id)  %></h5> 
   <h1 class="card-title"> <%= @product.name %></h1>
   <%= product_img_link(product: @product, img_url: @product.img_url, product_class: "show-product-img")%> 
     <h2><%=currency_format(@product.price) %> </h2>
@@ -17,8 +20,7 @@
     <% end %>
 
 
-    <% merchant = User.find_by(id: @product.user_id)%>
-    <h5 class="card-text"> Merchant:<%= link_to @product.user.username, user_path(@product.user.id)  %></h5> 
+
     <h5>
       Categories: 
       <% categories = @product.categories.map do |category| %>
@@ -41,27 +43,31 @@
   <%= f.submit "Submit", class: "btn btn-primary" %>
 <% end %>
 
-
-<h2> <%= @product.name %> Reviews </h2>
-  <% @product.reviews.order(rating: :desc).each do |review| %>
-  <section class="review-containter">
-    <div> 
-      <% review.rating.times do %>
-        <%= rating_img %>
+// Reviews
+  <h2> <%= @product.name %> Reviews </h2>
+  <% if !@product.reviews.empty? %>
+    <% @product.reviews.order(rating: :desc).each do |review| %>
+    <section class="review-containter">
+      <div> 
+        <% review.rating.times do %>
+          <%= rating_img %>
+        <% end %>
+      </div>
+      <h2> <%= review.title %>
+      <small> -
+        <% if review.user %>
+            <%= link_to review.user.username, user_path(review.user.id) %>
+        <% else %>
+            Guest
+        <% end %>
+      </small>
+      </h2>
+      <p> <%= review.description %> </p>
+      <% if session[:user_id] && review.user_id == session[:user_id] %>
+        <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
       <% end %>
-    </div>
-    <h2> <%= review.title %>
-    <small> -
-      <% if review.user %>
-          <%= link_to review.user.username, user_path(review.user.id) %>
-      <% else %>
-          Guest
-      <% end %>
-    </small>
-    </h2>
-    <p> <%= review.description %> </p>
-    <% if session[:user_id] && review.user_id == session[:user_id] %>
-      <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
-    <% end %>
-  </section>
-<% end %>
+    <%end%>
+    </section>
+  <% else %>
+    <p> No Reviews yet! </p>
+<%end %>

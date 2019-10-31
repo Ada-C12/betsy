@@ -37,13 +37,13 @@
         <th> Category</th>
         <th> Active </th>
         <th> Edit </th>
-        <th> Delete </th>
       </tr>
     </thead>
     <tbody>
       <%if @current_user.products %>
         <% @current_user.products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
           <tr>  
+            <td></td>
             <td> <%=product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail")%></td>   
             <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
             <td><%= f.text_field :name%></td>
