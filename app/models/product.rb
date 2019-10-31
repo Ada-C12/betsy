@@ -19,4 +19,13 @@ class Product < ApplicationRecord
     return Product.all.sample(5)
   end
 
+  def make_retired_true
+    self.retired = true
+    self.save
+  end
+
+  def make_retired_false
+    self.retired = false
+    self.save
+  end
 end

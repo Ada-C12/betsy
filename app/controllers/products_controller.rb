@@ -37,4 +37,19 @@ class ProductsController < ApplicationController
       return
     end
   end
+
+  def make_retired_true
+    @product = Product.find_by(id: params[:id])
+
+    @product.make_retired_true
+    
+    return redirect_back(fallback_location: :back)
+  end
+
+  def make_retired_false
+    @product = Product.find_by(id: params[:id])
+
+    @product.make_retired_false
+    return redirect_back(fallback_location: :back)
+  end
 end

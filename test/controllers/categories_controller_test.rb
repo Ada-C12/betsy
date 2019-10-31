@@ -25,7 +25,7 @@ describe CategoriesController do
       must_redirect_to wizard_path(wizard1.id)
     end
     
-    it "responds with bad_request and does not update the databse for invalid data" do
+    it "responds with bad_request and does not update the database for invalid data" do
       invalid_category = { category: { name: nil } }
       
       expect {
