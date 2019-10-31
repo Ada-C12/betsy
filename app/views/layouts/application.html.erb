@@ -37,7 +37,7 @@
             <ul class="nav app-header__site-nav-container">
               <li class="nav-item app-header__nav_item">
                 <% if session[:merchant_id] %>
-                  <span class="logged-in"><%= link_to "Logged in as #{Merchant.find_by(id: session[:merchant_id]).username}", current_merchant_path %></span>
+                  <span class="logged-in"><%= link_to "Welcome, #{Merchant.find_by(id: session[:merchant_id]).username}!", current_merchant_path %></span>
                   <%= link_to "Log out", logout_path, method: "delete" %>
                 <% else %>
                   <%= link_to "Login", github_login_path %>
