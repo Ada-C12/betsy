@@ -1,4 +1,5 @@
 class ReviewsController < ApplicationController
+  
   def new
     @review = Review.new
   end
@@ -16,6 +17,10 @@ class ReviewsController < ApplicationController
       flash.now[:messages] = @review.errors.messages
       render :new, status: :bad_request
     end
+  end
+  
+  def new_product_review(product_id)
+    @review = Review.all
   end
   
   private
