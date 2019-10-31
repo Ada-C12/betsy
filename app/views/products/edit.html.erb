@@ -1,6 +1,16 @@
-<div class="container">
-  <%= form_with model: @product, url: wizard_products_path do |f| %>
+<h2>Edit Product</h2>
+<% if @product.errors.any? %>
+  <ul class="errors">
+    <% @product.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
 
+<div class="container">
+  <%= form_with model: @product do |f| %>
   <div class="row justify-content-md-center">
     <%= f.label :name %>: 
   </div>
@@ -49,7 +59,7 @@
   </div>
 
   <div class="row justify-content-md-center"">
-    <%= f.submit submit_button_label, class: "btn btn-dark product-button top-padding"%>
+    <%= f.submit "Edit Product", class: "btn btn-dark product-button top-padding"%>
   </div>
 
   <% end %>
