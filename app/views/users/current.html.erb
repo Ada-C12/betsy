@@ -8,9 +8,9 @@
   </h2>
   <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
   <% if @current_user.products.count > 0 %>
-    <p>Total revenue as of <%=readable_date(Date.today)%> : 
+    <p>Total revenue as of today: 
       <%=currency_format(@current_user.total_earned)%></p>
-  <% elsif @current_user.products.empty? %>
+  <% else %>
     <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
   <% end %> 
   </p>

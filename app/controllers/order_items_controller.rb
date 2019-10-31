@@ -64,9 +64,9 @@ class OrderItemsController < ApplicationController
     order_item = OrderItem.find_by(id: params[:id])
     if order_item
       if order_item.destroy
-        flash[:success] = "#{@product.name} successfully removed from your basket!"
+        flash[:success] = "#{order_item.product.name} successfully removed from your basket!"
       else
-        flash.now[:error] = "A problem occurred. #{@product.name} was not successfully removed from your basket."
+        flash.now[:error] = "A problem occurred. #{order_item.product.name} was not successfully removed from your basket."
       end
     end
     return redirect_to cart_path

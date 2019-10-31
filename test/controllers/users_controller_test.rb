@@ -12,7 +12,7 @@ describe UsersController do
 
       must_redirect_to root_path
       expect(session[:user_id]).must_equal user.id
-      assert_equal "Logged in as user #{user.username}", flash[:success]
+      assert_equal "Welcome back #{user.username}! Enjoy browsing Fruitsy.", flash[:success]
     end
 
     it "logs in a new user and redirects them back to the root path" do
@@ -46,7 +46,8 @@ describe UsersController do
 
   describe "logged in user" do 
     before do
-      perform_login
+      @user = User.first
+      perform_login(@user)
     end
 
     describe "current" do
@@ -100,7 +101,7 @@ describe UsersController do
 
         expect(User.find_by(id: user.id).merchant_name).must_equal updated_user_data[:user][:merchant_name]
         must_redirect_to current_user_path
-        assert_equal "User data updated successfully.", flash[:success]
+        assert_equal "#{user.username} updated successfully!", flash[:success]
       end
 
       it "will not update an existing user if given invalid params" do
@@ -123,7 +124,7 @@ describe UsersController do
         expect(User.find_by(id: user.id).uid).wont_be_nil
         expect(User.find_by(id: user.id).email).wont_be_nil
         expect(User.find_by(id: user.id).username).wont_be_nil
-        expect(flash[:error]).must_include "Could not update user account"
+        expect(flash[:error]).must_include "Please provide all required fields to edit your account."
       end
     end
 
@@ -135,7 +136,7 @@ describe UsersController do
 
         must_redirect_to root_path
         expect(session[:user_id]).must_be_nil
-        assert_equal "Successfully logged out!", flash[:success]
+        assert_equal "You are successfully logged out, #{@user.username}!", flash[:success]
       end
 
       it "wont log out a nonexistent user" do 
