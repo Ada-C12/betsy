@@ -76,7 +76,7 @@ describe OrdersController do
       assert_equal "No item in the cart! Please add some items then checkout!", flash[:error]
     end
     
-    it "responses with redirect if order doesn't exist" do
+    it "gives back a 404 response if order doesn't exist" do
       post product_order_items_path(@product_id), params: @order_item_hash
 
       OrderItem.destroy_all
@@ -84,8 +84,7 @@ describe OrdersController do
 
       get checkout_path
       
-      must_redirect_to root_path
-      assert_equal "Order doesn't exist!", flash[:error]
+      must_respond_with :not_found
     end
   end
   
@@ -157,7 +156,13 @@ describe OrdersController do
       
       must_redirect_to cart_path
       
-      assert_equal "Something went wrong! Order was not paid.#{find_order.errors.messages}", flash[:error]
+      assert_equal "Something went wrong! Order was not paid.", flash[:error]
+    end
+
+    it "gives back a 404 response if order id is not found" do
+      patch order_path(-1), params: payment_params
+
+      must_respond_with :not_found
     end
   end
   
@@ -172,22 +177,39 @@ describe OrdersController do
       }
     end
 
+    let(:payment_params){
+      {
+        order: {
+          name: "Gretchen Wieners",
+          email: "so_fetch@aol.com",
+          address: "124 Main Street",
+          cc_name: "Dave Wieners",
+          cc_last4: 6666,
+          cc_exp: "12/23",
+          cc_cvv: 365,
+          billing_zip: '98122'
+        }
+      }
+    }
+
     it "gives back a successful response if the order is paid" do
       post product_order_items_path(@product_id), params: @order_item_hash
-      
+      order = Order.last 
+      order.status = 'paid'
+      order.update(payment_params[:order])
+
       get confirmation_path
       must_respond_with :success
     end
     
-    it "responses with redirect if current order does not exist" do
+    it "gives back a 404 if current order does not exist" do
       post product_order_items_path(@product_id), params: @order_item_hash
       OrderItem.destroy_all
       Order.destroy_all
 
       get confirmation_path
 
-      must_redirect_to root_path
-      assert_equal "Order doesn't exist!", flash[:error]
+      must_respond_with :not_found
     end
   end
 
@@ -221,12 +243,11 @@ describe OrdersController do
       assert_equal "You're not allowed to cancel this order!", flash[:error]
     end
 
-    it "gives back a redirect response if order id is not found" do
+    it "gives back a 404 response if order id is not found" do
       perform_login(@user)
       patch cancel_order_path(-1)
 
-      must_redirect_to current_user_path
-      assert_equal "Something went wrong, cannot cancel order!", flash[:error]
+      must_respond_with :not_found
     end
   end
 
@@ -260,12 +281,11 @@ describe OrdersController do
       assert_equal "You're not allowed to complete this order!", flash[:error]
     end
 
-    it "gives back a redirect response if order id is not found" do
+    it "gives back a 404 response if order id is not found" do
       perform_login(@user)
       patch complete_order_path(-1)
 
-      must_redirect_to current_user_path
-      assert_equal "Something went wrong, cannot complete order!", flash[:error]
+      must_respond_with :not_found
     end
   end
 end

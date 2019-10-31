@@ -16,8 +16,20 @@ describe Category do
   end
 
   describe "relationships" do
-    it "can have many products" do   
-      
+    it "can have many products" do
+      product = Product.create(
+        name: "Strawberrt Sunglasses",
+        price: 5,
+        stock: 10,
+        img_url: "https://img.com",
+        user: users(:ada),
+        description: "Here is a description"
+      )
+
+      @category.products << product
+
+      expect(@category.products.count).must_be :>, 1
+      expect(@category.products.first).must_be_instance_of Product
     end
   end
 

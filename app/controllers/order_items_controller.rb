@@ -14,27 +14,30 @@ class OrderItemsController < ApplicationController
       return head :not_found
     end
     
-    if !@product.quantity_available?(order_item_params[:quantity].to_i)
-      flash[:error] = "Quantity entered is greater than available stock for #{@product.name}."
+    input_quantity = order_item_params[:quantity].to_i
+
+    if !@product.quantity_available?(input_quantity)
+      flash[:error] = "Quantity entered (#{input_quantity}) is greater than available stock for #{@product.name}."
       return redirect_back(fallback_location: cart_path)
     elsif !@current_order.order_items.where(product: @product).empty?
       order_item = @current_order.order_items.where(product: @product).first
-      order_item.increase_quantity(order_item_params[:quantity].to_i)
-      flash[:success] = "Item successfully added to your basket."
+      order_item.increase_quantity(input_quantity)
+      flash[:success] = "#{@product.name} successfully added to your basket! (quantity: #{input_quantity})"
       return redirect_back(fallback_location: cart_path)
     else
       order_item = OrderItem.new(
         product: @product,
         order: @current_order,
-        quantity: order_item_params[:quantity]
+        quantity: input_quantity
       )
     end
 
     if order_item.save
-      flash[:success] = "Item successfully added to your basket."
+      flash[:success] = "#{@product.name} successfully added to your basket! (quantity: #{input_quantity})"
       return redirect_back(fallback_location: cart_path)
     else
-      flash[:error] = "Item could not be added to your basket."
+      flash[:error] = "#{@product.name} was not added to your basket."
+      flash[:errors] = order_item.errors.messages
       return redirect_back(fallback_location: :root)
     end
   end
@@ -42,32 +45,31 @@ class OrderItemsController < ApplicationController
   def update
     order_item = OrderItem.find_by(id: params[:id])
     product = order_item.product
+    input_quantity = order_item_params[:quantity].to_i
 
-    if product.quantity_available?(order_item_params[:quantity].to_i)
+    if product.quantity_available?(input_quantity)
       if order_item.update(order_item_params)
-        flash[:success] = "Item successfully updated."
+        flash[:success] = "#{product.name} successfully updated!"
       else
-        flash[:error] = "Could not update item quantity."
+        flash[:error] = "Could not update quantity for #{product.name}."
+        flash[:errors] = order_item.errors.messages
       end
     else
-      flash[:error] = "Quantity entered is greater than available stock for #{product.name}."
+      flash[:error] = "Quantity (#{input_quantity}) entered is greater than available stock for #{product.name}."
     end
     return redirect_to cart_path
   end
 
   def destroy
     order_item = OrderItem.find_by(id: params[:id])
-
-    if order_item.nil?
-      return redirect_to cart_path
-    else
+    if order_item
       if order_item.destroy
-        flash[:success] = "Item successfully removed from your basket."
+        flash[:success] = "#{order_item.product.name} successfully removed from your basket!"
       else
-        flash.now[:error] = "A problem occurred."
+        flash.now[:error] = "A problem occurred. #{order_item.product.name} was not successfully removed from your basket."
       end
-    return redirect_to cart_path
     end
+    return redirect_to cart_path
   end
 
   private

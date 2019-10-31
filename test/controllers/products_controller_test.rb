@@ -117,18 +117,6 @@ describe ProductsController do
         must_redirect_to root_path
       end
     end
-
-    describe "destroy action" do
-      it "redirects to products index page and deletes no products if no merchant is logged in" do
-        product = products(:lemon_shirt)
-  
-        expect {
-          delete product_path(product.id)
-        }.wont_differ "Product.count"
-  
-        must_redirect_to root_path
-      end
-    end
   end
   
   describe "logged in user" do
@@ -167,7 +155,7 @@ describe ProductsController do
         }.must_differ "Product.count", 1
   
         must_redirect_to edit_user_path
-        assert_equal "You merchant name is currently empty. Please add a merchant name to add your fruit stand to the Merchants List.", flash[:message]
+        assert_equal "You merchant name is currently empty. Please add a merchant name to list your fruit stand with Fruitsy Merchants.", flash[:message]
       end
 
       it "does not create a new product if given invalid params" do
@@ -176,7 +164,7 @@ describe ProductsController do
         }.wont_differ "Product.count"
 
         must_respond_with :success
-        assert_equal "Something went wrong! Product was not added.", flash[:error]
+        assert_equal "New product was not added. Fix required fields before adding!", flash[:error]
       end
     end
 

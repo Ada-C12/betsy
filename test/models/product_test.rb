@@ -83,20 +83,20 @@ describe Product do
 
     end
 
-    it "must have a price" do
+    it "must have a numeric price greater than zero" do
       @product.price = nil
 
       refute(@product.valid?)
       expect(@product.errors.messages).must_include :price
-      expect(@product.errors.messages[:price]).must_include "can't be blank"
+      expect(@product.errors.messages[:price]).must_include "is not a number"
     end
     
-    it "must have a quantity" do
+    it "must have a numeric quantity greater or equal to zero" do
       @product.stock = nil
 
       refute(@product.valid?)
       expect(@product.errors.messages).must_include :stock
-      expect(@product.errors.messages[:stock]).must_include "can't be blank"
+      expect(@product.errors.messages[:stock]).must_include "is not a number"
     end
 
     it "must have a user_id" do
@@ -204,6 +204,66 @@ describe Product do
         cancelled_status = "cancelled"
         expect(product.update_quantity(orderitem_quantity, cancelled_status)).must_equal 2
       end 
+    end
+
+    describe "average rating" do
+      it "returns an accurate average rating for a product" do
+        product = products(:lemon_shirt)
+        expect(product.reviews.count).must_be :>, 1
+        
+        result = product.avg_rating
+
+        expect(result).must_be_instance_of Float
+        expect(result).must_be_close_to 3.0, 0.01
+      end
+
+      it "returns nil if a product has no reviews" do
+        Review.destroy_all
+        product = Product.first
+
+        result = product.avg_rating
+
+        expect(result).must_be_nil
+      end
+    end
+
+    describe "self.active" do
+      it "returns an array of products that have an active status of true" do
+        products = Product.active
+
+        products.each do |product|
+          expect(product.active).must_equal true
+        end
+      end
+
+      it "returns an empty array of there are no products that are active" do
+        OrderItem.destroy_all
+        Product.destroy_all
+
+        result = Product.active
+
+        expect(result).must_be_empty
+      end
+    end
+
+    describe "self.search" do
+      it "returns an array of products that have an active status of true and the product's name includes the search keywords" do
+        products = Product.search('fruit')
+
+        products.each do |product|
+          expect(product.active).must_equal true
+          expect(product.name).must_include 'fruit'
+        end
+      end
+
+      it "returns an empty array of there are no products that are found" do
+        OrderItem.destroy_all
+        Product.destroy_all
+
+        result = Product.search('nothing')
+
+        expect(result).must_be_empty
+      end
     end
   end
 end

@@ -137,6 +137,18 @@ describe Order do
 
         expect(order.total).must_equal 125
       end 
-    end 
+    end
+
+    describe "self.new_order" do
+      it "creates a new order with the status of 'pending" do
+        expect{
+          Order.new_order
+        }.must_differ "Order.count", 1
+
+        order = Order.last
+
+        expect(order.status).must_equal "pending"
+      end
+    end
   end
 end

@@ -1,7 +1,7 @@
 module ApplicationHelper
   
   def readable_date(date)
-    return "[unknown]" unless date.instance_of?(Date)
+    return "[unknown]" unless date.instance_of?(ActiveSupport::TimeWithZone)
     return (
       "<span title='".html_safe +
       date.to_s +
@@ -50,7 +50,7 @@ module ApplicationHelper
   end
 
   def nav_fruit_img
-    image = "https://i.imgur.com/EaLaHqg.png"
+    image = "https://live.staticflickr.com/65535/48989157882_0b4f1fae44_o.png"
     return image_tag (image), alt:"fruit icon image", class: "nav-fruit-img"
   end
 end

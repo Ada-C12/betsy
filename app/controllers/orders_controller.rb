@@ -17,9 +17,9 @@ class OrdersController < ApplicationController
   end
   
   def checkout
-    if @current_order.nil?
-      flash[:error] = "Order doesn't exist!"
-      return redirect_to root_path
+    if !@current_order
+      head :not_found
+      return
     elsif @current_order.order_items.empty?
       flash[:error] = "No item in the cart! Please add some items then checkout!"
       return redirect_to root_path
@@ -27,77 +27,74 @@ class OrdersController < ApplicationController
   end
   
   def update_paid
-    @order.update(order_params)
-    @order.customer_id = session[:user_id]
-    @order.status = "paid"
-    
-    if @order.save
-      @order.order_items.each do |item|
-        item.product.stock = item.product.update_quantity(item.quantity, @order.status)
-        item.product.save
-      end 
-      flash[:success] = "Order #{@order.id} has been purchased successfully!"
-      return redirect_to confirmation_path
+    if !@order
+      head :not_found 
+      return 
     else
-      @order.update(status: "pending")
-      flash[:error] = "Something went wrong! Order was not paid.#{@order.errors.messages}"
-      redirect_to cart_path
-      return
+      @order.status = "paid"
+      if @order.update(order_params)
+        @order.order_items.each do |item|
+          item.product.stock = item.product.update_quantity(item.quantity, @order.status)
+          item.product.save
+        end 
+        flash[:success] = "Order #{@order.id} has been purchased successfully!"
+        return redirect_to confirmation_path
+        
+      else
+        flash[:error] = "Something went wrong! Order was not paid."
+        flash[:errors] = @order.errors.messages
+        return redirect_to cart_path
+      end
     end
   end
   
   def confirmation
-    if @current_order
+    if @current_order && @current_order.status == 'paid'
       session[:cart_id] = nil
-      flash[:success] = "Order #{@current_order.id} has been successfully created!"
     else
-      flash[:error] = "Order doesn't exist!"
-      return redirect_to root_path
+      head :not_found 
+      return 
     end
   end
   
   def cancel_order
     if !@order
-      flash[:error] = "Something went wrong, cannot cancel order!"
+      head :not_found 
+      return 
     else
       if @order.contain_orderitems?(@current_user)
-        previous_status = @order.status
-        @order.status = "cancelled"
-        if @order.save
+        if @order.update(status: "cancelled")
           @order.order_items.each do |item|
             item.product.stock = item.product.update_quantity(item.quantity, @order.status)
             item.product.save
-          end 
+          end
           flash[:success] = "Order #{@order.id} has been cancelled successfully!"
         else
-          @order.update(status: previous_status)
           flash[:error] = "Something went wrong, order is not cancelled!"
         end
       else
         flash[:error] = "You're not allowed to cancel this order!"
       end
+      return redirect_to current_user_path 
     end
-    return redirect_to current_user_path 
   end
   
   def complete_order
     if !@order
-      flash[:error] = "Something went wrong, cannot complete order!"
+      head :not_found 
+      return 
     else
       if @order.contain_orderitems?(@current_user)
-        previous_status = @order.status
-        @order.status = "completed"
-        if @order.save
+        if @order.update(status: "completed")
           flash[:success] = "Order #{@order.id} has been completed successfully!"
         else
-          @order.update(status: previous_status)
           flash[:error] = "Something went wrong, order is not completed!"
         end
       else
         flash[:error] = "You're not allowed to complete this order!"
       end
+      return redirect_to current_user_path 
     end
-    return redirect_to current_user_path 
   end
   
   private

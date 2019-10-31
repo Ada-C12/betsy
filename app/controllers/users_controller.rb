@@ -13,7 +13,10 @@ class UsersController < ApplicationController
   
   def current
     if params[:status].nil?
-      @order_items = @current_user.find_order_items
+      @order_items = []
+      @current_user.find_order_items.each do |order_item|
+        @order_items << order_item if order_item.order.status != 'pending'
+      end
     else
       @order_items = @current_user.filter_order_items(params[:status])
     end
@@ -28,14 +31,17 @@ class UsersController < ApplicationController
     auth_hash = request.env["omniauth.auth"]
     user = User.find_by(uid: auth_hash[:uid], provider: params[:provider])
     if user 
-      flash[:success] = "Logged in as user #{user.username}"
-      #Since these are returning users, we could refer to them as their merchant name!
+      if user.merchant_name
+        flash[:success] = "Welcome back #{user.merchant_name}! Manage your fruitstand or browse Fruitsy! "
+      else
+        flash[:success] = "Welcome back #{user.username}! Enjoy browsing Fruitsy."
+      end
     else
       user = User.build_from_github(auth_hash)
       if user.save
         flash[:success] = "Welcome to Fruitsy, #{user.username}!"
       else
-        flash[:error] = "Could not create user account #{user.errors.messages}"
+        flash[:error] = "Oops, something happened! Could not create user account, please try again."
         return redirect_to root_path 
       end 
     end
@@ -48,17 +54,18 @@ class UsersController < ApplicationController
   
   def update
     if @current_user.update(user_params)
-      flash[:success] = "User data updated successfully."
+      flash[:success] = "#{@current_user.username} updated successfully!"
       return redirect_to current_user_path
     else
-      flash.now[:error] = "Could not update user account #{@current_user.errors.messages}"
+      flash.now[:error] = "Please provide all required fields to edit your account."
       return render :edit
     end
   end
   
   def destroy
+    username = @current_user.username
     session[:user_id] = nil
-    flash[:success] = "Successfully logged out!"
+    flash[:success] = "You are successfully logged out, #{username}!"
     redirect_to root_path 
   end 
   
