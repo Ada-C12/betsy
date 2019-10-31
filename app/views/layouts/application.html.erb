@@ -8,16 +8,16 @@
     <%= stylesheet_link_tag  'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
     <%= favicon_link_tag 'favicon.ico' %>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
 
   <body>
     <header class="app-header__header">
-      <div class="logo"><a href= "http://localhost:3000/">
-        <span class="logo"><%= image_tag "https://www.freelogodesign.org/file/app/client/thumb/d8efc1d4-8268-48d5-87f2-ba20d236b2f5_200x200.png?1572324533721"%></span>
-        </a>
-      </div>
-      
-
+        <div class="logo">
+          <a href= "https://kegsy.herokuapp.com">
+            <span class="logo"><%= image_tag "https://www.freelogodesign.org/file/app/client/thumb/d8efc1d4-8268-48d5-87f2-ba20d236b2f5_200x200.png?1572324533721"%></span>
+          </a>
+        </div>
       <nav class="app-header__nav">
         <ul class="nav app-header__site-nav-container">
           <li class="nav-item app-header__nav_item home"><%= link_to "Home", root_path %></li>
@@ -37,7 +37,7 @@
             <ul class="nav app-header__site-nav-container">
               <li class="nav-item app-header__nav_item">
                 <% if session[:merchant_id] %>
-                  <%= link_to "Logged in as #{Merchant.find_by(id: session[:merchant_id]).username}", current_merchant_path %>
+                  <span class="logged-in"><%= link_to "Welcome, #{Merchant.find_by(id: session[:merchant_id]).username}!", current_merchant_path %></span>
                   <%= link_to "Log out", logout_path, method: "delete" %>
                 <% else %>
                   <%= link_to "Login", github_login_path %>
@@ -72,22 +72,13 @@
       <%= yield %>
     </main>
 
-    <footer class="app-footer__footer">
-      <section class="app-footer__nav"> 
-      <ul class="nav app-footer__site-nav-container">
-        <li class="nav-item app-footer__nav_item">Contact Us</li>
-        <li class="nav-item app-footer__nav_item">Order Status</li>
-        <li class="nav-item app-footer__nav_item">Shipping</li>
-        <li class="nav-item app-footer__nav_item">Returns & Exchanges</li>
-        <li class="nav-item app-footer__nav_item">About Us</li>
-      </ul>
-      <section>
-    <p class="copyright">© The Four Pack</p>
-    <p class="copyright">#ChooseKegsy</p>
+    <footer class="page-footer font-small">
+      <div class="footer-copyright text-center"><small>© 2019 Copyright: The Four Pack</small>
+        <a href="https://kegsy.herokuapp.com/" class="fa fa-facebook"></a>
+        <a href="https://kegsy.herokuapp.com/" class="fa fa-twitter"></a>
+        <a href="https://kegsy.herokuapp.com/" class="fa fa-instagram"></a>
+        <a href="https://kegsy.herokuapp.com/" class="fa fa-pinterest"></a>
+      </div>
     </footer>
   </body>
-
-
-
-
 </html>

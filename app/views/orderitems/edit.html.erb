@@ -1,35 +1,36 @@
-<section class="forms">
-  <h1>Update Quantity</h1>
+<section>
+  <h2 class="h-center-text">Update Quantity</h2>
 
-  <section>
-    <article class = "columns small-12 large-4">
-      <% if @orderitem.product.photo_url != nil %>
-        <span class="img">
-        <%= image_tag "#{@orderitem.product.photo_url}", alt: "#{@orderitem.product.name}" %>
-        </span>
-      <% end %>
-    </article>
+  <div class="row product-show container ">
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <div class="img"><%= image_tag "#{@orderitem.product.photo_url}", alt: "#{@orderitem.product.name}" %></div>
+      </div>
+    </div>
 
-    <article class = "columns small-12 large-8">
-      <%= link_to "#{@orderitem.product.name}", product_path(@orderitem.product) %>
+    <div class="col-md-6">
+      <div class="col-md-12">
+        <h3><%= @orderitem.product.name %><h3>
+        <small class="description"><%= @orderitem.product.description %><small>
+        <small><p>Sold by: <%= link_to @orderitem.product.merchant.username, merchant_products_path(@orderitem.product.merchant.id)%></p></small>
+        <p>$<%= '%.2f' % @orderitem.product.price %></p>
 
-      <%= form_with model: @orderitem do |f| %>
-    
-        <div class="form-group">
-        <%= f.label :quantity %>
-
-        <% quantity_array = [] %>
-        <% @orderitem.product.stock.times do |i|%>
-          <% quantity_array << [i+1, i+1] %>
-        <% end %>
-
-        <%= f.select :quantity, quantity_array %>
-        </div>
+        <div class="new_order_product" id="new_order_product">
+          <%= form_with model: @orderitem do |f| %>
         
-        <div class="form-group">
-        <%= f.submit "Save", class:"btn btn-primary" %>
+            <div class="form-group">
+            <%= f.label :quantity %>
+            <%= f.select :quantity, (1..@orderitem.product.stock) %>
+            </div>
+            
+            <div class="form-group">
+            <%= f.submit "Update Quantity", class:"btn btn-primary" %>
+            </div>
+          <% end %>
         </div>
-      <% end %>
-    </article>
-  </section>
+      </div>
+    </div>
+  </div>
 </section>
+
+
