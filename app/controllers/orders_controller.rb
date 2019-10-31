@@ -44,7 +44,7 @@ class OrdersController < ApplicationController
         
       else
         flash[:error] = "Something went wrong! Order was not paid."
-        flash[:errors] = @order.errors
+        flash[:errors] = @order.errors.messages
         return redirect_to cart_path
       end
     end

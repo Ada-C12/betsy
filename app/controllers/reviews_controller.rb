@@ -15,7 +15,7 @@ class ReviewsController < ApplicationController
         redirect_to product_path(@review.product.id)
         return
       elsif @review.save
-        flash[:success] = "Your review has been added successfully!"
+        flash[:success] = "Your #{Review.rating_sentiment(@review.rating)} review on #{@review.product.name} was added successfully!"
         redirect_to product_path(@review.product.id)
         return
       end

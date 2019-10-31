@@ -96,7 +96,6 @@ describe User do
   end 
   
   describe "custom methods" do 
-    
     describe "total earned" do 
       it "returns the total revenue a user has earned on orders that are completed and/or paid" do
         user = users(:ada)
