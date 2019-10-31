@@ -1,24 +1,25 @@
-<h2> Merchant <%= @current_merchant.username%>'s Dashboard</h2>
+<article class="table-container">
+  <h2 class="h-center-text-no-pad"> Merchant <%= @current_merchant.username%>'s Dashboard</h2>
 
-<section>
-  <%= link_to "Add New Product", new_product_path, class: "btn btn-primary" %>
-  <%= link_to "Create New Product Category", new_type_path, class: "btn btn-primary" %>
-  <%= link_to "View My Order Items", your_orderitems_path(@current_merchant), class: "btn btn-primary" %>
- 
+  <section class="d-flex justify-content-between">
+
+    <%= link_to "Add New Product", new_product_path, class: "btn btn-primary" %>
+    <%= link_to "Create New Product Category", new_type_path, class: "btn btn-primary" %>
+    <%= link_to "View My Order Items", your_orderitems_path(@current_merchant), class: "btn btn-primary" %>
   
+  </section>
 
-</section>
-
-<section>
-  <h2> List of Your Products </h2>
-  <ul>
-    <% @current_merchant.products.each do |product|%>
-      <%= image_tag "#{product.photo_url}"%>
-      <%= link_to product.name, product_path(product.id) %>
-      <%= link_to "Edit", edit_product_path(product), class: "btn btn-primary" %>
-    <% end %>
-  </ul>
-</section>
+  <section>
+    <h2 class="h-center-text-no-pad">Your Products </h2>
+    <ul>
+      <% @current_merchant.products.each do |product|%>
+        <%= image_tag "#{product.photo_url}"%>
+        <%= link_to product.name, product_path(product.id) %>
+        <%= link_to "Edit", edit_product_path(product), class: "btn btn-primary" %>
+      <% end %>
+    </ul>
+  </section>
+</article>
 
 
   
