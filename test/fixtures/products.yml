@@ -18,3 +18,12 @@ product2:
   photo_url: https://i.imgur.com/BCK4aAc.jpg
   retired: false
 
+product3: 
+  name: magic item
+  price_cents: 2000
+  description: does magic things 
+  stock: 8
+  wizard: wizard2
+  categories: category1
+  photo_url: https://i.imgur.com/BCK4aAc.jpg
+  retired: false

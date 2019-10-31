@@ -124,7 +124,7 @@ describe OrdersController do
       expect(product1.stock).must_equal 10
       
       put order_path(pending_order.id), params: @updates
-
+      
       product1.reload
       
       expect(product1.stock).must_equal 8
@@ -148,8 +148,18 @@ describe OrdersController do
       must_respond_with :not_found
     end
   end
-
+  
   def confirmation
-
+    it "responds with success for valid ID" do
+      get confirmation_path(order1.id)
+      
+      must_respond_with :success
+    end
+    
+    it "responds with not found for invalid ID" do
+      get confirmation_path(-20)
+      
+      must_respond_with :not_found
+    end
   end
 end
