@@ -15,9 +15,6 @@ class ProductsController < ApplicationController
       else
         head :not_found
       end
-    else
-      head :not_found
-      return
     end
   end
   
@@ -77,29 +74,8 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       flash[:success] = "Product #{@product.name} has been updated successfully"
     else
-      flash[:error] = "Product not updated. Fix required fields before updating."
-      flash[:errors] = @product.errors.messages
-    end
-    redirect_to current_user_path
-    return
-  end
-  
-  def destroy
-    product = Product.find_by(id: params[:id])
-    if product
-      if product.user_id == session[:user_id]
-        product.destroy
-        flash[:success] = "Product #{product.name} was deleted!"
-        redirect_to root_path
-        return
-      else
-        flash[:error] = "You cannot delete a product not belonging to you!"
-        redirect_to root_path
-        return
-      end
-    else
-      flash[:error] = "The product doesn't exist!"
-      redirect_to root_path
+      flash.now[:error] = "Something went wrong! Product can not be edited."
+      redirect_to current_user_path
       return
     end
   end

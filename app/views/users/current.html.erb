@@ -1,9 +1,15 @@
-<h2>hello, <%=@current_user.username%>!</h2>
+<h2>hello, 
+<%if@current_user.merchant_name%>
+  <%=@current_user.merchant_name%>!
+<%else%>
+  <%=@current_user.username%>!
+<%end%>  
+</h2>
 <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
 <% if @current_user.products.count > 0 %>
   <p>Total revenue as of <%=readable_date(Date.today)%> : 
     <%=currency_format(@current_user.total_earned)%></p>
-<% elsif @current_user.total_earned > 0 && @current_user.products.empty? %>
+<% elsif @current_user.products.empty? %>
   <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
 <% end %> 
 </p>
@@ -12,6 +18,16 @@
   <table class="table">
     <thead>
       <tr>
+        <th>
+          <a class="dropdown-toggle" href="#" id="DropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Status
+          </a>
+          <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
+            <%= link_to "All", current_user_path, class: "dropdown-item" %>
+            <%= link_to "Active", current_user_path(:activestatus => true), class: "dropdown-item" %>
+            <%= link_to "Inactive", current_user_path(:activestatus => false), class: "dropdown-item" %>
+          </div>
+        </th>
         <th> Product </th>
         <th> Title</th>
         <th> Price</th>
@@ -20,14 +36,13 @@
         <th> Img url </th>
         <th> Category</th>
         <th> Active </th>
-        <th> ActiveStatus </th>
         <th> Edit </th>
         <th> Delete </th>
       </tr>
     </thead>
     <tbody>
       <%if @current_user.products %>
-        <% @current_user.products.each do |product| %>
+        <% @current_user.products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
           <tr>  
             <td> <%=product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail")%></td>   
             <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
@@ -42,10 +57,8 @@
               <td><p> N/A</p></td>
             <%end %>
             <td> <%= f.check_box :active %></td>
-            <td> <%= product.active %>
             <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
           <% end %>
-            <td> <%= link_to "Delete", product_path(product.id ), method: :delete, data: { confirm: "Really really delete?"}, class: "btn btn-primary" %>
           </tr>
         <% end %>
       <% end %>
@@ -74,6 +87,7 @@
             <%= link_to "Completed", current_user_path(:status => "completed"), class: "dropdown-item" %>
           </div>
         </th>
+        <th> Quantity </th>
         <th> Total </th>
         <th> Category</th>
       </tr>
@@ -99,6 +113,7 @@
               <%= order.status.capitalize %>
             <% end %>
           </td>
+          <td><%= order_item.quantity %></td>
           <td><%= order_item.total %>
           <% if !order_item.product.categories.empty?%>
             <td><%= order_item.product.categories.first.name %></td>

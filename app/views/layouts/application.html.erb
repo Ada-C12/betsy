@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>🍉FRUiTSY 🍊</title>
+    <title>🍉fruitsy🍊</title>
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
 
@@ -17,10 +17,11 @@
 
     <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Modak&display=swap" rel="stylesheet">
   </head>
 
   <body>
-  <%# Fruit Image Links Fixed Nav %>
+    <%# Fruit Image Links Fixed Nav %>
     <section class="fruit-shape-links fixed-top">
       <%= fruit_image("48966256972_b25342b8df", "strawberry") %>
       <%= fruit_image("48966257187_4808931340", "apple") %>
@@ -36,68 +37,67 @@
       <%= fruit_image("48966077781_02aa2abeed", "grapes") %>
       <%= fruit_image("48965531818_7678560b94", "dragonfruit") %>
       <%= fruit_image("48966257017_39d2f25373", "peach") %>
-  </section>
-
-<nav class="all-nav-parts-container">
-  <%# Login/Login & Basket Nav %>
-  <nav class="login-basket-nav">
-  <% cart_order = Order.find_by(id:session[:cart_id]) %>
-    <% if cart_order &&  cart_order.order_items.count > 0 %>
-      <div class="cart-link"> <%= cart_full_img_link %> </div>
-    <% else %>
-      <div class="cart-link"> <%= cart_empty_img_link %> </div>
-    <% end %>
-    
-    <section class="login-loggout-container">
-      <%if session[:user_id]%>
-        <% user = User.find_by(id: session[:user_id])%>
-        <%= link_to "Logged in as #{user.username}", current_user_path, class: "current-user-btn btn btn-dark" %>
-        <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-dark logout-btn"%>
-      <%else %>
-        <%= link_to "Login with Github", github_login_path, class: "btn btn-dark "%>
-      <%end %>
     </section>
-  </nav>
-    
-  <%# Main Brand Name %>
-  <h1 class="top-brand-name">
-    <%= link_to "FRUiTSY", root_path %>
-  </h1>
 
-  <%# Merchant Nav Bar %>
-  <%if session[:user_id]%>
-    <% current_user = User.find_by(id: session[:user_id]) %>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <%= white_fruit_img %>
-      <%= link_to current_user.username, current_user_path, class: "navbar-brand" %>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarNavDropdown">
-        <ul class="navbar-nav ml-auto">
-          <li class="nav-item dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Manage My Fruit Stand
-            </a>
-            <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-              <%= link_to "View My Store", user_path(current_user.id), class: "dropdown-item" %>
-              <%= link_to "Manage My Store", current_user_path, class: "dropdown-item" %>
-              <%= link_to "Add New Product", new_product_path, class: "dropdown-item" %>
-              <%= link_to "Edit Merchant Name", edit_user_path, class: "dropdown-item" %>
-            </div>
-          </li>
-        </ul>
-      </div>
+    <nav class="all-nav-parts-container">
+    <%# Login/Login & Basket Nav %>
+    <nav class="login-basket-nav">
+    <% cart_order = Order.find_by(id:session[:cart_id]) %>
+      <% if cart_order &&  cart_order.order_items.count > 0 %>
+        <div class="cart-link"> <%= cart_full_img_link %> </div>
+      <% else %>
+        <div class="cart-link"> <%= cart_empty_img_link %> </div>
+      <% end %>
+      
+      <section class="login-loggout-container">
+        <%if session[:user_id]%>
+          <% user = User.find_by(id: session[:user_id])%>
+          <%= link_to "Logged in as #{user.username}", current_user_path, class: "current-user-btn btn btn-dark" %>
+          <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-dark logout-btn"%>
+        <%else %>
+          <%= link_to "Login with Github", github_login_path, class: "btn btn-dark "%>
+        <%end %>
+      </section>
     </nav>
-  <%end%>  
+      
+    <%# Main Brand Name %>
+    <h1 class="top-brand-name">
+      <%= link_to "FRUiTSY", root_path %>
+    </h1>
 
-  <%# Main Nav Bar with Category/Merchant Links %>
-  <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
-    <%= link_to "FRUiTSY", root_path, class:"navbar-brand" %>
+    <%# Merchant Nav Bar %>
+    <%if session[:user_id]%>
+      <% current_user = User.find_by(id: session[:user_id]) %>
+      <nav class="navbar navbar-expand-lg bg-merchant-nav">
+        <%= nav_fruit_img %> 
+        <%= link_to current_user.username, current_user_path, class: "navbar-brand" %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              Manage My Fruit Stand
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                <%= link_to "View My Store", user_path(current_user.id), class: "dropdown-item" %>
+                <%= link_to "Manage My Store", current_user_path, class: "dropdown-item" %>
+                <%= link_to "Add New Product", new_product_path, class: "dropdown-item" %>
+                <%= link_to "Edit Merchant Name", edit_user_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <%end%>  
+    <%# Main Nav Bar with Category/Merchant Links %>
+    <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
+      <%= link_to "FRUiTSY", root_path, class:"navbar-brand" %>
 
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
 
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
@@ -135,9 +135,9 @@
         <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
         <button class="btn btn-outline-success my-2 my-sm-0" type="submit">search</button>
       </form>
-    </div>
+      </div>
+    </nav>
   </nav>
-</nav>
 
   <%# Flash Messages on each page %>
   <section class="flash">
@@ -158,13 +158,12 @@
     <% end %>
   </section>
   
-  <%# Main content on each page %>
+    <%# Main content on each page %>
     <main>
     <%= yield %>
     </main>
   
-  </body>
-  
+</body>
   <%# Footer on each page %>
   <footer>
     © 2019 The Fruit Loops

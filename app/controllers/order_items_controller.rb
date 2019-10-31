@@ -18,7 +18,7 @@ class OrderItemsController < ApplicationController
       flash[:error] = "Quantity entered is greater than available stock for #{@product.name}."
       return redirect_back(fallback_location: cart_path)
     elsif !@current_order.order_items.where(product: @product).empty?
-      order_item = @current_order.order_items.where(product: @product).first
+      order_item = @current_order.order_items.find_by(product: @product)
       order_item.increase_quantity(order_item_params[:quantity].to_i)
       flash[:success] = "#{@product.name} successfully added to your basket!"
       return redirect_back(fallback_location: cart_path)
@@ -59,17 +59,14 @@ class OrderItemsController < ApplicationController
 
   def destroy
     order_item = OrderItem.find_by(id: params[:id])
-
-    if order_item.nil?
-      return redirect_to cart_path
-    else
+    if order_item
       if order_item.destroy
         flash[:success] = "#{@product.name} successfully removed from your basket!"
       else
         flash.now[:error] = "A problem occurred. #{@product.name} was not successfully removed from your basket."
       end
-    return redirect_to cart_path
     end
+    return redirect_to cart_path
   end
 
   private

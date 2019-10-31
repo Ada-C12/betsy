@@ -167,7 +167,43 @@ describe Product do
       end
     end
     
-    describe 'quantity_available?' do
+    describe "quantity_available?" do
+      it "returns false if the orderitem quantity is greater than product stock" do 
+        product = products(:strawberry_shoes)
+        quantity = product.stock + 1 
+        expect(product.quantity_available?(quantity)).must_equal false 
+      end
+      
+      it "returns true if order item quantity is less than product stock" do
+        product = products(:strawberry_shoes)
+        quantity = product.stock
+        expect(product.quantity_available?(quantity)).must_equal true 
+      end 
+    end
+
+    describe "update quantity" do 
+      it "subtracts a products quantity when it is in a paid order" do 
+        status = "paid"
+        product = products(:strawberry_shoes)
+        orderitem_quantity = product.stock
+        expect(product.update_quantity(orderitem_quantity, status)).must_equal 0
+      end 
+
+      it "increases a products quantity when it is in a cancelled order" do 
+        status = "cancelled"
+        product = products(:strawberry_shoes)
+        orderitem_quantity = product.stock
+        expect(product.update_quantity(orderitem_quantity, status)).must_equal 4
+      end 
+
+      it "subtracts quantity in a paid order, and adds it again when the order is cancelled" do 
+        status = "paid"
+        product = products(:strawberry_shoes)
+        orderitem_quantity = product.stock
+        expect(product.update_quantity(orderitem_quantity, status)).must_equal 0
+        cancelled_status = "cancelled"
+        expect(product.update_quantity(orderitem_quantity, cancelled_status)).must_equal 2
+      end 
     end
   end
 end
