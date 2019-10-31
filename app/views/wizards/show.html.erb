@@ -1,0 +1,78 @@
+<section>
+	<h1><%= @wizard.username %> </h2>
+	<p class="bottom-border"><em><%= @wizard.email %></em></p>
+
+	<h4> Total Revenue: $<%=@wizard.total_revenue%> </h4>
+</section>
+
+<ul class="wizard-show-nav">
+	<li>
+		<%= link_to "View Products", wizard_products_path(@wizard.id), class: "btn btn-dark" %>
+	</li>
+</ul>
+
+
+<h3 class="product-heading">Summary</h3>
+<div class="container">
+	<div class="row">
+		<h4 class="col-lg-6">Revenue</h4>
+		<h4 class="col-lg-6">Orders</h4>
+	</div>
+	<div class="row justify-content-md-start">
+		<div class="col-lg-6">
+			<p>Pending Orders Revenue................$<%= @wizard.total_revenue_by_status("pending") %></p>
+			<p>Paid Orders Revenue....................$<%= @wizard.total_revenue_by_status("paid") %></p>
+			<p>Complete Orders Revenue...................$<%= @wizard.total_revenue_by_status("complete") %></p>
+			<p>Cancelled Orders Revenue...................$<%=@wizard.total_revenue_by_status("cancelled") %></p>
+		</div>
+		
+		<div class="col-lg-6">
+			<p>Total Pending Orders................<%= @wizard.orders_by_status("pending").count %></p>
+			<p>Total Paid Orders.....................<%= @wizard.orders_by_status("paid").count %></p>
+			<p>Total Complete Orders................<%= @wizard.orders_by_status("complete").count %></p>
+			<p>Total Cancelled Orders................<%= @wizard.orders_by_status("cancelled").count %></p>
+		</div>
+
+	</section>
+</section>
+
+
+<div class="container">
+<h3 class="product-heading"><%= params[:status] ? params[:status].capitalize! : "All" %> Orders
+	<span class="dropdown">
+		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+			Status
+		</button>
+		<span class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+			<%= link_to "All", wizard_path(@wizard.id), class:"dropdown-item" %>
+			<%= link_to "Pending", wizard_path(@wizard.id, status: "pending"), class:"dropdown-item" %>
+			<%= link_to "Paid", wizard_path(@wizard.id, status: "paid"), class:"dropdown-item" %>
+			<%= link_to "Complete", wizard_path(@wizard.id, status: "complete"), class:"dropdown-item" %>
+			<%= link_to "Cancelled", wizard_path(@wizard.id, status: "cancelled"), class:"dropdown-item" %>
+		</span>
+	</span>
+</h3>
+<% @orders.each do |order|%>
+  <h4 class="col-lg-12 align-left"> <%= link_to "Order ##{order.id}", confirmation_path(order.id) %> </h4>
+  <% order.order_items.each do |item| %>
+		<% if item.product.wizard == @wizard %>
+			<div class="row">
+				<div>
+					<%= link_to image_tag(item.product.photo_url, alt: "Pictures of #{item.product.name}", id: "wizard-show-item-photo"), product_path(item.product, class: "img-thumbnail") %>
+				</div class="col col-lg-2">
+				<div class="col col-lg-7">
+					<% if !item.shipped && item.order.status == "paid" %>
+						<p><%= link_to "Mark Item Shipped", shipped_path(item.id), class: "btn btn-dark", method: :patch %></p>
+					<% end %>
+					<p><strong><%= item.order.status.upcase %></strong></p>
+					<p><em>Order placed on <%= item.order.created_at.strftime("%b %d, %Y") %></em></p>
+					<p><strong><%= item.product.name %></strong></p>
+					<p> Quantity: <%= item.quantity %>.....................Subtotal: $<%= item.subtotal %></p>
+				</div>
+			</div>
+		<% end %>
+	
+	<% end %>
+	<p class="wizard-show-page-border align-left"><strong>Order Total: $<%= order.wizard_items_total(@wizard) %></strong></p>
+<% end %>
+</div>

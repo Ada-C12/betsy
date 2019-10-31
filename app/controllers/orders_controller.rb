@@ -29,7 +29,7 @@ class OrdersController < ApplicationController
       end
       flash[:success] = "Successfully checked out"
       session[:order_id] = nil
-      return redirect_to confirmation_path
+      return redirect_to confirmation_path(@order.id)
     else
       flash.now[:error] = "Could not checkout"
       render :checkout
@@ -37,9 +37,9 @@ class OrdersController < ApplicationController
       return
     end
   end
-
+  
   def confirmation
-    @order = Order.last
+    @order = Order.find_by(id: params[:id])
     if @order.nil?
       return head :not_found
     end
