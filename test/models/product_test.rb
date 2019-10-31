@@ -83,20 +83,20 @@ describe Product do
 
     end
 
-    it "must have a price" do
+    it "must have a numeric price greater than zero" do
       @product.price = nil
 
       refute(@product.valid?)
       expect(@product.errors.messages).must_include :price
-      expect(@product.errors.messages[:price]).must_include "can't be blank"
+      expect(@product.errors.messages[:price]).must_include "is not a number"
     end
     
-    it "must have a quantity" do
+    it "must have a numeric quantity greater or equal to zero" do
       @product.stock = nil
 
       refute(@product.valid?)
       expect(@product.errors.messages).must_include :stock
-      expect(@product.errors.messages[:stock]).must_include "can't be blank"
+      expect(@product.errors.messages[:stock]).must_include "is not a number"
     end
 
     it "must have a user_id" do
