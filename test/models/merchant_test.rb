@@ -116,7 +116,7 @@ describe Merchant do
         merchant = Merchant.build_from_github(auth_hash)
         merchant.save!
         
-        expect(Merchant.count).must_equal 3
+        expect(Merchant.count).must_equal 5
         
         expect(merchant.provider).must_equal auth_hash[:provider]
         expect(merchant.uid).must_equal auth_hash[:uid]

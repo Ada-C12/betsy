@@ -104,7 +104,7 @@ class OrdersController < ApplicationController
   end
   
   def merchant_order
-    unless @order.is_order_of(session[:merchant_id])
+    unless @order.is_order_of(session[:merchant_id]) && @order.status != 'pending'
       flash[:status] = :failure
       flash[:result_text] = "You do not have access to this page."
       
