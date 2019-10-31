@@ -9,4 +9,17 @@ class Review < ApplicationRecord
   
   belongs_to :product
   belongs_to :user, optional: true
+
+  def self.rating_sentiment(rating)
+    if rating > 5 || rating < 1
+      return nil
+    elsif rating < 3
+      return "negative"
+    elsif rating > 3
+      return "positive"
+    elsif rating == 3
+      return "neutral"
+    end
+  end
+
 end

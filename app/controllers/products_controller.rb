@@ -55,6 +55,10 @@ class ProductsController < ApplicationController
         redirect_to product_path(@product.id)
         return
       end
+    elsif !@product.errors.empty?
+      flash.now[:error] = "New product was not added. Fix required fields before adding!"
+      render :new
+      return
     else
       flash.now[:error] = "Something went wrong! Product was not added."
       render :new
@@ -72,13 +76,12 @@ class ProductsController < ApplicationController
   def update
     if @product.update(product_params)
       flash[:success] = "Product #{@product.name} has been updated successfully"
-      redirect_to current_user_path
-      return
     else
-      flash.now[:error] = "Something went wrong! Product can not be edited."
-      render current_user_path
-      return
+      flash[:error] = "Product not updated. Fix required fields before updating."
+      flash[:errors] = @product.errors.messages
     end
+    redirect_to current_user_path
+    return
   end
   
   def destroy

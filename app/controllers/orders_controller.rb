@@ -33,11 +33,10 @@ class OrdersController < ApplicationController
     
     if @order.save
       flash[:success] = "Order #{@order.id} has been purchased successfully!"
-      return redirect_to confirmation_path
-      
+      return redirect_to confirmation_path   
     else
       @order.update(status: "pending")
-      flash[:error] = "Something went wrong! Order was not paid.#{@order.errors.messages}"
+      flash[:error] = "Order #{@order.id} has not be placed. Please try again!"
       redirect_to cart_path
       return
     end
@@ -46,7 +45,7 @@ class OrdersController < ApplicationController
   def confirmation
     if @current_order
       session[:cart_id] = nil
-      flash[:success] = "Order #{@current_order.id} has been successfully created!"
+      flash[:success] = "Order #{@current_order.id} is placed and paid!"
     else
       flash[:error] = "Order doesn't exist!"
       return redirect_to root_path

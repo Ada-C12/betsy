@@ -144,10 +144,16 @@
     <% flash.each do |name, message| %>
       <% if name == "success" %>
         <div class="alert alert-success" role="alert" class="<%= name %>"><%= message %></div>
-        <% elsif name == "error"%>
+      <% elsif name == "error"%>
         <div class="alert alert-danger" role="alert" class="<%= name %>"><%= message %></div>
-      <% else %>
-        <div class="alert alert-warning" role="alert" class="<%= name %>"><%= message %></div>
+      <% elsif name == "errors" %>
+        <div class="alert alert-warning" role="alert" class="<%= name %>">
+          <% message.each do |column, error| %>
+            <h4> Requirement Errors </h4>
+            <strong> <%= column.capitalize %> </strong> 
+            <%= error.join(', ') %>
+          <% end %>
+        </div>
       <% end %>
     <% end %>
   </section>
