@@ -74,10 +74,11 @@ class ProductsController < ApplicationController
     if @product.update(product_params)
       flash[:success] = "Product #{@product.name} has been updated successfully"
     else
-      flash.now[:error] = "Something went wrong! Product can not be edited."
-      redirect_to current_user_path
-      return
+      flash[:error] = "Something went wrong! Product can not be edited."
+      flash[:errors] = @product.errors.messages
     end
+    redirect_to current_user_path
+    return
   end
   
   private
