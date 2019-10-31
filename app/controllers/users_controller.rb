@@ -13,7 +13,10 @@ class UsersController < ApplicationController
   
   def current
     if params[:status].nil?
-      @order_items = @current_user.find_order_items
+      @order_items = []
+      @current_user.find_order_items.each do |order_item|
+        @order_items << order_item if order_item.order.status != 'pending'
+      end
     else
       @order_items = @current_user.filter_order_items(params[:status])
     end
