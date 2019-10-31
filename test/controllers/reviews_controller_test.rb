@@ -27,7 +27,7 @@ describe ReviewsController do
           title: 1,
           description: "",
           user_id: -1,
-          product_id: -1,
+          product_id: lemon_shirt.id,
         }
       }
     }
@@ -46,7 +46,7 @@ describe ReviewsController do
           post reviews_path, params: invalid_review_hash
         }.must_differ "Review.count", 0
 
-        must_redirect_to root_path
+        must_redirect_to product_path(lemon_shirt.id)
       end
     end
 
