@@ -3,10 +3,19 @@ require "test_helper"
 describe ReviewsController do
   describe "new" do
     let(:product) { products(:product1) }
-    it "responds with success" do
-      get new_product_review_path(product.id)
+    let(:wizard) { wizards(:wizard1)}
+    it "responds with success" do 
+      get new_product_review_path(product.id) 
       must_respond_with :success
-    end
+    end 
+    it "wizard can't review their own product" do 
+      perform_login(wizard)
+      get new_product_review_path(product.id) 
+
+      must_redirect_to product_path(product.id)
+
+
+    end 
   end
   describe "create" do
     let(:product) { products(:product1) }
