@@ -46,7 +46,7 @@
       <% current_user = User.find_by(id: session[:user_id]) %>
       <nav class="navbar navbar-expand-lg navbar-dark bg-merchant-nav">
         <%= nav_fruit_img %> 
-        <%= link_to current_user.username, current_user_path, class: "navbar-brand" %>
+        <%= link_to current_user.username, current_user_path, class: "navbar-brand", data: { turbolinks: false } %>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
         </button>
@@ -59,7 +59,7 @@
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
                 <%= link_to "View My Store", user_path(current_user.id), class: "dropdown-item" %>
-                <%= link_to "Manage My Store", current_user_path, class: "dropdown-item" %>
+                <%= link_to "Manage My Store", current_user_path, class: "dropdown-item", data: { turbolinks: false } %>
                 <%= link_to "Add New Product", new_product_path, class: "dropdown-item" %>
                 <%= link_to "Edit Merchant Name", edit_user_path, class: "dropdown-item" %>
               </div>
@@ -155,10 +155,11 @@
         <div class="alert alert-warning" role="alert" class="<%= name %>"><%= message %></div>
       <% elsif name == "errors" %>
         <div class="alert alert-warning" role="alert" class="<%= name %>">
+          <h4> Requirement Errors </h4>
           <% message.each do |column, error| %>
-            <h4> Requirement Errors </h4>
-            <strong> <%= column.capitalize %> </strong> 
-            <%= error.join(', ') %>
+            <div> <strong> <%= column.capitalize %> </strong> 
+              <%= error.join(', ') %>
+            </div> 
           <% end %>
         </div>
       <% end %>

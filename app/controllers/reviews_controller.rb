@@ -20,8 +20,9 @@ class ReviewsController < ApplicationController
         return
       end
     else
-      flash[:error] = "Something went wrong! Review was not added."
-      redirect_to root_path
+      flash[:error] = "Review was not added. Please check required fields before submitting."
+      flash[:errors] = @review.errors.messages
+      redirect_to product_path(@review.product.id)
       return
     end
   end
