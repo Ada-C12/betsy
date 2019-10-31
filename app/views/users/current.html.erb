@@ -8,9 +8,9 @@
   </h2>
   <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
   <% if @current_user.products.count > 0 %>
-    <p>Total revenue as of <%=readable_date(Date.today)%> : 
+    <p>Total revenue as of today: 
       <%=currency_format(@current_user.total_earned)%></p>
-  <% elsif @current_user.products.empty? %>
+  <% else %>
     <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
   <% end %> 
   </p>
@@ -41,10 +41,16 @@
         </tr>
       </thead>
       <tbody>
-        <%if @current_user.products %>
-          <% @current_user.products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
+        <%if @products %>
+          <% @products.sort_by{ |p| p.created_at}.reverse.each do |product| %>
             <tr> 
-              <td> </td>
+              <td>
+              <% if product.active %> 
+                Active
+              <% else %>
+                Inactive
+              <% end %>
+              </td>
               <td> <%= product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail") %></td>   
               <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
               <td><%= f.text_field :name %></td>

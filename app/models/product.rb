@@ -1,8 +1,8 @@
 class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: {scope: :user_id}
   validates_length_of :name, minimum: 1, maximum: 50
-  validates :price, presence: true
-  validates :stock, presence: true
+  validates :price, numericality: {greater_than: 0}
+  validates :stock, numericality: { only_integer: true, greater_than: -1}
   validates :user_id, presence: true
   validates :img_url, presence: true
   validates :description, presence: true
@@ -51,4 +51,12 @@ class Product < ApplicationRecord
   def self.active
     return self.where(active:true)
   end 
+
+  def self.search(search)
+    products = []
+    self.active.each do |product|
+      products << product if product.name.downcase.include?(search)
+    end
+    return products
+  end
 end

@@ -18,7 +18,7 @@ describe OrderItemsController do
       }.must_differ 'OrderItem.count', 1
       
       must_respond_with :redirect
-      assert_equal "Item successfully added to your basket.", flash[:success]
+      assert_equal "#{@product.name} successfully added to your basket! (quantity: #{order_items_hash[:order_item][:quantity]})", flash[:success]
     end
 
     it "does not create a new oder item if given invalid params and responds with a redirect" do
@@ -33,7 +33,7 @@ describe OrderItemsController do
       }.wont_differ 'OrderItem.count'
 
       must_respond_with :redirect
-      assert_equal "Item could not be added to your basket.", flash[:error]
+      assert_equal "#{@product.name} was not added to your basket.", flash[:error]
     end
 
     it "does not create a new order item if the product does not exit and responds with a 404" do
@@ -52,7 +52,7 @@ describe OrderItemsController do
       assert_equal "Product no longer exists.", flash[:error]
     end
 
-    it "does not create a new order item if the quanity entered is greater than the product stock" do
+    it "does not create a new order item if the quantity entered is greater than the product stock" do
       product = products(:strawberry_shoes)
       expect(product.stock).must_equal 2
 
@@ -67,7 +67,7 @@ describe OrderItemsController do
       }.wont_differ 'OrderItem.count'
 
       must_respond_with :redirect
-      assert_equal "Quantity entered is greater than available stock for #{product.name}.", flash[:error]
+      assert_equal "Quantity entered (#{order_item_hash[:order_item][:quantity]}) is greater than available stock for #{product.name}.", flash[:error]
     end
 
     it "does not create a new order item if the current order already contains an order item with the same product" do
@@ -121,7 +121,7 @@ describe OrderItemsController do
 
       expect(OrderItem.find_by(id: id).quantity).must_equal updated_order_item_hash[:order_item][:quantity]
       must_redirect_to cart_path
-      assert_equal "Item successfully updated.", flash[:success]
+      assert_equal "#{@order_item.product.name} successfully updated!", flash[:success]
     end
 
     it "does not update the order item if given invalid params and redirects to the cart path" do
@@ -138,7 +138,7 @@ describe OrderItemsController do
       }.wont_differ "OrderItem.count"
 
       must_redirect_to cart_path
-      assert_equal "Could not update item quantity.", flash[:error]
+      assert_equal "Could not update quantity for #{@order_item.product.name}.", flash[:error]
     end
 
     it "does not update the order item if the quantity entered is greater than the product stock" do
@@ -159,7 +159,7 @@ describe OrderItemsController do
       }.wont_differ "OrderItem.count"
 
       must_redirect_to cart_path
-      assert_equal "Quantity entered is greater than available stock for #{product.name}.", flash[:error]
+      assert_equal "Quantity (#{order_item_hash[:order_item][:quantity]}) entered is greater than available stock for #{product.name}.", flash[:error]
     end
   end
 
@@ -178,7 +178,7 @@ describe OrderItemsController do
       
       assert_nil(OrderItem.find_by(id: id))
       must_redirect_to cart_path
-      assert_equal "Item successfully removed from your basket.", flash[:success]
+      assert_equal "#{order_item.product.name} successfully removed from your basket!", flash[:success]
     end
 
     it "redirects to the cart path and deletes no order items if the order item does not exist" do

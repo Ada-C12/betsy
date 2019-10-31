@@ -83,20 +83,20 @@ describe Product do
 
     end
 
-    it "must have a price" do
+    it "must have a numeric price greater than zero" do
       @product.price = nil
 
       refute(@product.valid?)
       expect(@product.errors.messages).must_include :price
-      expect(@product.errors.messages[:price]).must_include "can't be blank"
+      expect(@product.errors.messages[:price]).must_include "is not a number"
     end
     
-    it "must have a quantity" do
+    it "must have a numeric quantity greater or equal to zero" do
       @product.stock = nil
 
       refute(@product.valid?)
       expect(@product.errors.messages).must_include :stock
-      expect(@product.errors.messages[:stock]).must_include "can't be blank"
+      expect(@product.errors.messages[:stock]).must_include "is not a number"
     end
 
     it "must have a user_id" do
@@ -241,6 +241,26 @@ describe Product do
         Product.destroy_all
 
         result = Product.active
+
+        expect(result).must_be_empty
+      end
+    end
+
+    describe "self.search" do
+      it "returns an array of products that have an active status of true and the product's name includes the search keywords" do
+        products = Product.search('fruit')
+
+        products.each do |product|
+          expect(product.active).must_equal true
+          expect(product.name).must_include 'fruit'
+        end
+      end
+
+      it "returns an empty array of there are no products that are found" do
+        OrderItem.destroy_all
+        Product.destroy_all
+
+        result = Product.search('nothing')
 
         expect(result).must_be_empty
       end
