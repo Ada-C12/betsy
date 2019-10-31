@@ -25,6 +25,7 @@
       align-items: center;
       justify-content: space-around;
       list-style: none;
+      padding-left: 0;
    }
    
 
@@ -63,3 +64,18 @@
       margin-top: 1em;
    }
    
+   body {
+      background-image: radial-gradient(farthest-corner at 40px 40px,
+           black, white 50%, rgb(0, 0, 0) 100%);
+      }
+
+   h1 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+   }
+
+   #logo {
+      transform: rotate(10deg);
+      width: 7rem;
+      padding: 0;
+   }
