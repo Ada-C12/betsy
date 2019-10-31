@@ -31,9 +31,7 @@ class OrdersController < ApplicationController
       head :not_found 
       return 
     else
-      @order.customer_id = session[:user_id]
       @order.status = "paid"
-
       if @order.update(order_params)
         @order.order_items.each do |item|
           item.product.stock = item.product.update_quantity(item.quantity, @order.status)
@@ -44,7 +42,7 @@ class OrdersController < ApplicationController
         
       else
         flash[:error] = "Something went wrong! Order was not paid."
-        flash[:errors] = @order.errors
+        flash[:errors] = @order.errors.messages
         return redirect_to cart_path
       end
     end

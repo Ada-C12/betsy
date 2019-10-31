@@ -3,8 +3,7 @@ require "test_helper"
 describe ApplicationHelper, :helper do
   describe "readable date" do
     it "returns a string with a date in 'Mon DD, YYYY' format if given a vaild date" do
-      date = Date.strptime("10/03/2019", '%m/%d/%Y')
-      expect(date).must_be_kind_of Date
+      date = ActiveSupport::TimeZone['UTC'].parse("03/10/2019")
 
       formatted_date = readable_date(date)
 

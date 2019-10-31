@@ -2,12 +2,18 @@ class ProductsController < ApplicationController
   before_action :find_product, only: [:show, :edit, :update]
   skip_before_action :require_login, :only => [:index, :show]
   skip_before_action :find_order
-
+  
   def index
     category_id = params[:category_id]
-
+    
     if category_id.nil?
-      @products = Product.active
+      if params[:search].nil?
+        @products = Product.active
+      else
+        @products = Product.search(params[:search].first)
+        @search_result = params[:search].first  
+        params[:search] = nil
+      end
     elsif category_id
       @category = Category.find_by(id: category_id)
       if @category
@@ -31,7 +37,7 @@ class ProductsController < ApplicationController
   
   def create
     @product = Product.new(product_params)
-
+    
     if params[:multiselect]
       params[:multiselect].each do |id|
         new_category = Category.where(id: id)
@@ -82,11 +88,11 @@ class ProductsController < ApplicationController
   end
   
   private
-
+  
   def find_product
     @product = Product.find_by(id: params[:id])
   end
-
+  
   def product_params
     return params.require(:product).permit(:name, :price, :stock, :img_url, :description, :active, category_ids: [])
   end
