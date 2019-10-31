@@ -1,8 +1,30 @@
 class ProductsController < ApplicationController
+  before_action :wizard, only: [:new, :create]
+  before_action :determine_wizard, only: [:new, :create]
+
   def homepage
     @products = Product.five_products
   end
-  
+
+  def new
+    @product = Product.new(wizard_id: params[:wizard_id])
+  end
+
+  def create
+    @product = Product.new(product_params)
+    @product.wizard = Wizard.find_by(id: wizard.id)
+    
+    if @product.save
+      flash[:success] = "Successfully Added #{@product.name}"
+      redirect_to wizard_path(wizard.id)
+      return 
+    else
+      flash[:error] = "Could not add product to shop"
+      render :new, status: :bad_request
+      return 
+    end
+  end
+
   def index
     wizard_id = params[:wizard_id]
     category_id = params[:category_id]
@@ -37,4 +59,12 @@ class ProductsController < ApplicationController
       return
     end
   end
+end
+
+private
+
+def product_params
+  product_params = params.require(:product).permit(:name, :description, :stock, :photo_url, :price, :category_ids => [])
+  product_params[:category_ids].reject!(&:blank?)
+  return product_params
 end
