@@ -1,7 +1,7 @@
 require 'pry'
 
 class ProductsController < ApplicationController
-  before_action :product, only: [:new, :create, :edit, :update]
+  before_action :product, only: [:edit, :update]
   before_action :wizard, only: [:new, :create, :edit, :update]
   before_action :determine_wizard, only: [:new, :create, :edit, :update]
 
@@ -52,7 +52,6 @@ class ProductsController < ApplicationController
     @product = Product.new(product_params)
     @product.wizard = Wizard.find_by(id: wizard.id)
     
-    # binding.pry
     if @product.save
       flash[:success] = "Successfully Added #{@product.name}"
       redirect_to product_path(@product.id)
@@ -66,14 +65,18 @@ class ProductsController < ApplicationController
 
   def edit
     @product = Product.find_by(id: params[:id])
+    
   end
 
   def update
-    if product.update(product_params)
+    @product = product
+
+    if @product.update(product_params)
       flash[:success] = "Successfully updated"
-      redirect_to product_path(product.id)
+      redirect_to product_path(@product.id)
       return
     else
+      flash.now[:error] = "Invalid Parameters"
       render :edit, status: :bad_request
     end
   end

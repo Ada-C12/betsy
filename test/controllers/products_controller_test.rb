@@ -206,7 +206,6 @@ describe ProductsController do
       it "creates a product given valid product data" do
         expect {
           post wizard_products_path(wizard1.id), params: valid_product_params
-          # binding.pry
         }.must_change "Product.count", 1
 
         must_respond_with :redirect
@@ -268,12 +267,6 @@ describe ProductsController do
         }.wont_change "Product.count"
 
         must_respond_with :bad_request
-      end
-
-      it "responds with :not_found if Wizard is not found from params[:wizard_id]" do
-        bogus_wizard_id = -1
-        post wizard_products_path(bogus_wizard_id), params: valid_product_params
-        must_respond_with :not_found
       end
     end
   end
