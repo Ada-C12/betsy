@@ -8,7 +8,7 @@
 
     <% @order.order_items.each do |order_item|%>
       <div class="row cart-row">
-        <%= link_to image_tag(order_item.product.photo_url, alt: "Picture of #{order_item.product.name}"), product_path(order_item.product.id, class: "col-5") %>
+        <%= link_to image_tag(order_item.product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : order_item.product.photo_url  , alt: "Picture of #{order_item.product.name}"), product_path(order_item.product.id, class: "col-5") %>
         <div class="col-4 cart-products">
           <h3><%= order_item.product.name %></h3>
 

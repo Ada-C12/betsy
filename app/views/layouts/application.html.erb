@@ -17,7 +17,7 @@
           <li><h1><%= link_to "Lumos", root_path %></h1></li>
           <% if session[:wizard_id] %>
             <li><%= link_to "Log out", logout_path, method: :delete %></li>
-            <li><%= "Profile" %></li>
+            <li><%= link_to "Profile", wizard_path(session[:wizard_id]) %></li>
             
           <% else %>
             <li><%= link_to "Login", github_login_path %></li>
@@ -67,26 +67,38 @@
 
     <% if flash[:error] %>
       <div class="alert alert-warning alert-container">
-        <%= flash[:error] %>
+        <strong><%= flash[:error] %></strong>
+        <% if @order %>
+          <section id="cart-validations">
+            <% if @order.errors.any? %>
+              <div>
+                <% @order.errors.each do |column, message| %>
+                  <div class="validations">
+                    <%= column %> <%= message %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </section>
+        <% end %>
+        <% if @category %>
+          <section id="cart-validations">
+            <% if @category.errors.any? %>
+              <div>
+                <% @category.errors.each do |column, message| %>
+                  <div class="validations">
+                    <%= column %> <%= message %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </section>
+        <% end %>
       </div>
-    <% elsif flash[:success] %>
+    <strong><% elsif flash[:success] %></strong>
       <div class="alert alert-success alert-container">
         <%= flash[:success] %>
       </div>
-    <% end %>
-
-    <% if @order %>
-      <section id="cart-validations">
-        <% if @order.errors.any? %>
-          <div>
-            <% @order.errors.each do |column, message| %>
-              <div class="validations">
-                <%= column %> <%= message %>
-              </div>
-            <% end %>
-          </div>
-        <% end %>
-      </section>
     <% end %>
 
     <%= yield %>

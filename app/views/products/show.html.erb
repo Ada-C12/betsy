@@ -5,7 +5,7 @@
 	</div>
 	<div class="row">
 		<div class="col-lg-6 product-photo">
-			<%= image_tag @product.photo_url || "https://i.imgur.com/yciRdrY.jpg?2", alt: "a picture of a #{@product.name}" %>
+			<%= image_tag @product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : @product.photo_url, alt: "a picture of a #{@product.name}" %>
 		</div>
 		<div class="col-lg-6 align-self-center">
 			<p>Seller: <%=@product.wizard.username%></p>
@@ -38,7 +38,7 @@
 	<%end%>
 
 </table>
-<div class="review-button">
+<div class="form-button">
     <%=link_to "Make a review", new_product_review_path(@product.id), class: "btn btn-dark"%>
 </div>
 </main>

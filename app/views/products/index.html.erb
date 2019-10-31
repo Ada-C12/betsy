@@ -12,12 +12,15 @@
   <div class="card-container">
     <% @products.each do |product| %>
       <div class="card" style="width: 18rem;">
-        <%= link_to image_tag(product.photo_url || "https://i.imgur.com/yciRdrY.jpg?2", alt: "Picture of #{product.name}", class: "img-thumbnail"), product_path(product.id) %>
+        <%= link_to image_tag(product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : product.photo_url, alt: "a picture of a #{product.name}", class: "img-thumbnail"), product_path(product.id) %>
         <div class="card-body">
           <h5 class="card-title"><%= link_to product.name, product_path(product.id) %></h5>
           <p class="card-text"><%= humanized_money_with_symbol(product.price) %></p>
         </div>
       </div>
+      <% if @wizard && @wizard.id == session[:wizard_id] %>
+          <%= link_to "Edit Product", edit_product_path(product.id), params: {wizard_id: product.wizard_id}, class: "btn btn-dark"%>
+      <% end %>
     <% end %>
   </div>
 
