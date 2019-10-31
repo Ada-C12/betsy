@@ -1,0 +1,16 @@
+<h2 class="product-heading">Create a category</h2>
+
+<div class="container"></div>
+    <%= form_with model: @category do |f| %>
+    <div class="row">
+        <%= f.label :name,class: "category-col"  %>
+    </div>
+    <div class="row">
+    <%= f.text_field :name, class: "category-col"%>
+    </div>
+    <div class="row">
+        <%= f.submit "Create Category", class: "btn btn-dark form-button category-col"%>
+    </div>
+<% end %>
+
+</div>

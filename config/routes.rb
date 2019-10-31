@@ -16,14 +16,15 @@ Rails.application.routes.draw do
   get "/cart", to: "orders#cart", as: "cart"
   patch "/shipped/:id", to: "order_items#shipped", as: "shipped"
   
-  resources :wizards do
+  
+  resources :wizards, only: [:show] do
     resources :products, only: [:index, :new, :create]
   end
   
-  resources :categories do
+  resources :categories, only: [:new, :create] do
     resources :products, only: [:index]
   end
-
+  
   get "/auth/github", as: "github_login"
   get "/auth/:provider/callback", to: "wizards#create", as: "auth_callback"
   delete "/logout", to: "wizards#destroy", as: "logout"
