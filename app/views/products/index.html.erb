@@ -1,18 +1,16 @@
 <% if @category %>
-  <h1> Shop All <%= @category.name.capitalize %> Products </h1>
+  <h1 class="page-title"> Shop All <%= @category.name.capitalize %> Products </h1>
 <% else %>
-  <h1> Shop All Fruit Products </h1>
+  <h1 class="page-title"> Shop All Fruit Products </h1>
 <% end %>
 
 <section class="cards-container">
   <% @products.shuffle.each do |product| %>
     <section class="card" style="width: 18rem;">
-      <section class="index-product-img-container">
-        <%= form_with model: OrderItem, url: product_order_items_path(product.id) do |f| %>
+      <%= form_with model: OrderItem, url: product_order_items_path(product.id) do |f| %>
         <%= f.hidden_field :quantity, :value => 1 %>
         <%= f.submit "+", class: "btn btn-dark quick-add-btn" %>
       <% end %>
-    </section>
       <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
       <div class="card-body">
       <h5> <%= link_to product.name, product_path(product.id) %> 
@@ -24,11 +22,6 @@
           <p class="card-text">  <%= fruitstand_img %> <strong><%=link_to product.user.username, user_path(product.user.id) %></strong> </p> 
         <% end %>
       </div>  
-        <p>
-          <% product.categories.each do |category| %>
-            <%= link_to category.name, category_products_path(category.id) %>
-          <% end %>
-        </p>
       </div>    
     </section>
   <% end %>
