@@ -19,6 +19,10 @@ class Product < ApplicationRecord
     return Product.all.sample(5)
   end
 
+  def self.list_unretired
+    return Product.all.reject { |product| product.retired == true }
+  end
+
   def make_retired_true
     self.retired = true
     self.save

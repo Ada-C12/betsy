@@ -10,7 +10,7 @@
   </h2>
 
   <div class="card-container">
-    <% @products.each do |product| %>
+    <% Product.list_unretired.each do |product| %>
       <div class="card" style="width: 18rem;">
         <%= link_to image_tag(product.photo_url || "https://i.imgur.com/yciRdrY.jpg?2", alt: "Picture of #{product.name}", class: "img-thumbnail"), product_path(product.id) %>
         <div class="card-body">
