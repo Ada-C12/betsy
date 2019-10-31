@@ -77,7 +77,7 @@ class ProductsController < ApplicationController
       flash[:error] = "Something went wrong! Product can not be edited."
       flash[:errors] = @product.errors.messages
     end
-    redirect_to current_user_path
+    redirect_to current_user_url
     return
   end
   

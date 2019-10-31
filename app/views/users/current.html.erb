@@ -38,7 +38,6 @@
           <th> Category</th>
           <th> Active </th>
           <th> Edit </th>
-
         </tr>
       </thead>
       <tbody>
@@ -59,7 +58,7 @@
                 <td><p> N/A</p></td>
               <%end %>
               <td> <%= f.check_box :active %></td>
-              <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
+                <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
             <% end %>
             </tr>
           <% end %>
