@@ -11,7 +11,7 @@ class ProductsController < ApplicationController
         @products = Product.active
       else
         @products = Product.search(params[:search].first)
-        @search_result = params[:search].first
+        @search_result = params[:search].first  
         params[:search] = nil
       end
     elsif category_id

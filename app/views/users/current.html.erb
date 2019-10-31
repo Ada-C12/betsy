@@ -54,8 +54,8 @@
               <td> <%= product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail") %></td>   
               <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
               <td><%= f.text_field :name %></td>
-              <td>$<%= f.text_field :price, :value => (number_with_precision(f.object.price, :precision => 2) || 0) %></td>
-              <td><%= f.text_field :stock %></td>
+              <td>$<%= f.text_field :price, :value => (number_with_precision(f.object.price, :precision => 2) || 0), :size=>"4" %></td>
+              <td><%= f.text_field :stock, :size=>"4" %></td>
               <td><%= f.text_field :description%></td>
               <td><%= f.text_field :img_url %>
               <%if !product.categories.empty? %>
