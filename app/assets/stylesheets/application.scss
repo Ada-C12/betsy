@@ -28,6 +28,11 @@ h1, h2, h3, h4, h5 {
    font-weight: bold;
 }
 
+.bolded {
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+
 // PRODUCT IMAGES
 
 .img * {
@@ -250,7 +255,7 @@ a {
 
 .h-center-text {
   text-align: center;
-  padding: 2em;
+  padding: 1.75em;
 }
 
 .confirm-header {
@@ -276,10 +281,6 @@ a {
   padding-inline-start: 0;
 }
 
-.confirm-info strong {
-  font-size: 1.1em;
-}
-
 // Checkout Page
 
 .form-container{
@@ -302,3 +303,16 @@ a {
   flex-direction: column;
   align-items: center;
 }
+
+// merchant_order_page
+
+.merch-order-ul ul {
+  margin-bottom: 0;
+  list-style-type: none;
+  padding-inline-start: 0;
+  line-height: 2em;
+  margin-left: 20vw;
+}
+
+
+

@@ -16,15 +16,15 @@
 
 <section class="confirm-info">
   <ul>
-    <li><strong>Name:  </strong> <%= @order.cc_name %></li>
-    <li><strong>Shipping Address:  </strong> <%= @order.address %></li>
-    <li><strong>Email:  </strong> <%= @order.email %></li>
+    <li><span class="bolded">Name:  </span> <%= @order.cc_name %></li>
+    <li><span class="bolded">Shipping Address:  </span> <%= @order.address %></li>
+    <li><span class="bolded">Email:  </span> <%= @order.email %></li>
   </ul>
 
   <ul>
-    <li><strong>Order Number:  </strong> <%= @order.id %></li>
-    <li><strong>Purchased On:  </strong> <%= @order.created_at.to_date %></li>
-    <li><strong>Order Status:  </strong> <%= @order.status %></li>
+    <li><span class="bolded">Order Number:  </span> <%= @order.id %></li>
+    <li><span class="bolded">Purchased On:  </span> <%= @order.created_at.to_date %></li>
+    <li><span class="bolded">Order Status:  </span> <%= @order.status %></li>
   </ul>
 </section>
 
