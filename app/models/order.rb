@@ -8,7 +8,7 @@ class Order < ApplicationRecord
   validates :cc_name, presence: true, if: :not_pending? 
   validates :cc_last4, presence: true, if: :not_pending?
   validates :cc_exp, presence: true, if: :not_pending?
-  validates_numericality_of :cc_cvv, greater_than: 0, if: :not_pending?
+  validates_numericality_of :cc_cvv, if: :not_pending?
   validates :billing_zip, presence: true, if: :not_pending?
   
   def not_pending?
