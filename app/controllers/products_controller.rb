@@ -12,12 +12,16 @@ class ProductsController < ApplicationController
     category_id = params[:category_id]
     
     if wizard_id.nil? && category_id.nil?
-      @products = Product.all
+      @products = Product.list_unretired
       
     elsif wizard_id
       @wizard = Wizard.find_by(id: wizard_id)
-      if @wizard
+      logged_in_wizard = Wizard.find_by(id: session[:wizard_id])
+
+      if logged_in_wizard && @wizard.id == logged_in_wizard.id
         @products = @wizard.products
+      elsif @wizard
+        @products = Product.list_unretired(@wizard)
       else
         flash[:error] = "That Wizard does not exist"
         return redirect_to root_path
@@ -83,7 +87,7 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     
     @product.make_retired_true
-    
+    flash[:success] = "Product successfully retired: Will not be shown to guests"
     return redirect_back(fallback_location: :back)
   end
   
@@ -91,6 +95,7 @@ class ProductsController < ApplicationController
     @product = Product.find_by(id: params[:id])
     
     @product.make_retired_false
+    flash[:success] = "Product successfully unretired: Will now be shown to guests"
     return redirect_back(fallback_location: :back)
   end
   

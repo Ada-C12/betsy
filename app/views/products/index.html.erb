@@ -10,22 +10,23 @@
   </h2>
 
   <div class="card-container">
-    <% Product.list_unretired.each do |product| %>
+    <% @products.each do |product| %>
       <div class="card" style="width: 18rem;">
         <%= link_to image_tag(product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : product.photo_url, alt: "a picture of a #{product.name}", class: "img-thumbnail"), product_path(product.id) %>
         <div class="card-body">
-          <% if product.retired %>
-            <%= link_to "Unretire", make_retired_false_path(product.id), method: :patch, class: "btn btn-dark" %>
-          <% else %>
-            <%= link_to "Retire", make_retired_true_path(product.id), method: :patch, class: "btn btn-dark" %>
+          <% if @wizard && @wizard.id == session[:wizard_id] %>
+            <%= link_to "Edit Product", edit_product_path(product.id), params: {wizard_id: product.wizard_id}, class: "btn btn-dark"%>
+
+            <% if product.retired %>
+              <%= link_to "Unretire", make_retired_false_path(product.id), method: :patch, class: "btn btn-dark" %>
+            <% else %>
+              <%= link_to "Retire", make_retired_true_path(product.id), method: :patch, class: "btn btn-dark" %>
+            <% end %>
           <% end %>
           <h5 class="card-title"><%= link_to product.name, product_path(product.id) %></h5>
           <p class="card-text"><%= humanized_money_with_symbol(product.price) %></p>
         </div>
       </div>
-      <% if @wizard && @wizard.id == session[:wizard_id] %>
-          <%= link_to "Edit Product", edit_product_path(product.id), params: {wizard_id: product.wizard_id}, class: "btn btn-dark"%>
-      <% end %>
     <% end %>
   </div>
 
