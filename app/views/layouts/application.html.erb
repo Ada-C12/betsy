@@ -117,7 +117,7 @@
               <% end %>
             </a>
             <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-              <% Category.where(category_type: type).each do |category| %>
+              <% Category.where(category_type: type).order(:name).each do |category| %>
                 <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
               <% end%>
             </div>
@@ -129,7 +129,7 @@
             Merchants
           </a>
           <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <% User.all.each do |user| %>
+            <% User.all.order(:merchant_name).each do |user| %>
               <% if user.merchant_name %>
                 <%= link_to user.merchant_name, user_path(user.id) , class:"dropdown-item" %>
               <% end %>    
