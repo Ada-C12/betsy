@@ -18,6 +18,9 @@
 @import "**/*";
 
 // $primary-font: font-family: 
+body {
+  padding-bottom: 60px;
+}
 
 body, h1, h2, h3, h4, h5 {
    font-family: 'Raleway', sans-serif;
@@ -57,21 +60,23 @@ h1, h2, h3, h4, h5 {
 // HEADER
 
 .app-header__nav {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  // padding-top: 5px;
+  // max-height: 10px;
 }
 
 .app-header__nav_item {
-margin-top: 1rem;
+  margin-top: 1rem;
 }
 
 .app-header__site-nav-container .app-header__nav_item {
-margin-right: 2rem;
+  margin-right: 2rem;
 }
 
 .app-header__user-nav-container .nav-item {
-margin-left: 2rem;
+  margin-left: 2rem;
 }
 
 .app-header__header {
@@ -79,7 +84,6 @@ margin-left: 2rem;
    background-color: white;
    margin-bottom: 0.5rem;
    padding: 2rem 1rem 0.5rem 1rem;
-  //  text-transform: uppercase;
    h1 {
      text-align: center;
      margin: 25px auto 40px auto;
@@ -96,6 +100,10 @@ margin-left: 2rem;
    p {
      margin-bottom: 5px;
    }
+ }
+
+ .logged-in {
+  padding-right: 25px;
  }
 
 .float-right {
@@ -121,52 +129,22 @@ margin-left: 2rem;
 
 // FOOTER
 
-.app-footer__nav {
-display: flex;
-flex-direction: row;
-justify-content: space-between;
+.fa {
+  padding: 20px;
+  font-size: 30px;
+  width: 30px;
+  text-align: center;
+  text-decoration: none;
+  border-radius: 50%;
 }
 
-.app-footer__nav_item {
-margin-top: 1rem;
+.row {
+  margin-left: 2rem;
+  text-align: center;
 }
-
-.app-footer__nav_item .nav-link {
-color: blueviolet;
-}
-
-.app-footer__site-nav-container .app-footer__nav_item {
-margin-right: 2rem;
-}
-
-.app-footer__user-nav-container .nav-item {
-margin-left: 2rem;
-}
-
-.app-footer__footer {
-   max-width: 100%;
-   background-color: white;
-   margin-bottom: 0.5rem;
-   padding: 2rem 1rem 0.5rem 1rem;
-   h1 {
-     text-align: center;
-     margin: 25px auto 40px auto;
-     a {
-       color: white;
-       padding-right: 25px;
-       margin-right: 15px;
-       border-right: white 2px solid;
-     }
-     small {
-       color: white;
-     }
-   }
-   p {
-     margin-bottom: 5px;
-   }
- }
 
 //  PRODUCT SHOW
+
 .product-show h3{
   font-size: 1.5em;
   text-transform: uppercase;
@@ -205,12 +183,14 @@ a {
 .home {
   font-weight: bold;
 }
+
 // BUTTONS
 
 .btn-primary {
   background-color: goldenrod;
   border-color: goldenrod;
 }
+
 
 .copyright {
   text-align: center;
