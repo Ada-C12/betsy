@@ -146,6 +146,8 @@
         <div class="alert alert-success" role="alert" class="<%= name %>"><%= message %></div>
       <% elsif name == "error"%>
         <div class="alert alert-danger" role="alert" class="<%= name %>"><%= message %></div>
+      <% elsif name == "message"%>
+        <div class="alert alert-warning" role="alert" class="<%= name %>"><%= message %></div>
       <% elsif name == "errors" %>
         <div class="alert alert-warning" role="alert" class="<%= name %>">
           <% message.each do |column, error| %>

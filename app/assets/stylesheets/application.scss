@@ -3,9 +3,6 @@
 /* Import scss content */
 @import "**/*";
 
-body {
-  background-color: rgb(254, 219, 105);
-}
 
 .bg-merchant-nav {
   background-color: rgb(161, 220, 145);
@@ -14,7 +11,6 @@ body {
 .navbar-toggler-icon{
   background-image: url("data:image/svg+xml;charset=utf8,%3Csvg viewBox='0 0 32 32' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath stroke='rgba(0,0,0, 0.5)' stroke-width='2' stroke-linecap='round' stroke-miterlimit='10' d='M4 8h24M4 16h24M4 24h24'/%3E%3C/svg%3E");
 }
-
 
 .top-brand-name {
   font-family: 'Modak', cursive;
@@ -56,12 +52,6 @@ p {
   padding-top: 7.5%;
 }
 
-.btn {
-  border:none;
-}
-.btn-dark {
-  background-color: rgb(255, 71, 71);
-}
 .logout-btn {
   margin-top: 2%
 }
@@ -97,23 +87,13 @@ footer {
 .card {
   display:flex;
   justify-content:space-evenly;
-  padding:1em;
-  border-color: red;
-  margin-bottom: 5em;
+  padding: 1em;
 }
 
-.category-title {
-  padding:2em;
-}
 // show product page
 .show-product-img {
-  position: relative;
-  float: left;
-  width:  100px;
-  height: 100px;
-  background-position: 50% 50%;
-  background-repeat:   no-repeat;
-  background-size:     cover;} 
+  max-width: 20%;
+} 
 
 // Fruit Links Header
 .fruit-img {
@@ -158,10 +138,6 @@ footer {
   display: flex;
 }
 
-.card-img-top {
-  max-width: 50%
-}
-
 // General
 ul {
   list-style: none;
@@ -178,11 +154,6 @@ a {
 a:hover {
   text-decoration: none;
   color: rgb(254, 219, 105);
-}
-
-img { 
-  max-width: 500px;
-  max-height: 500px;
 }
 
 .product-thumbnail {
@@ -205,4 +176,15 @@ img {
 
 .new-form-page {
   min-height: 300vh;
+}
+
+.quick-add-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+}
+
+.index-product-img-container {
+  position: relative;
+  text-align: center;
 }
