@@ -91,7 +91,18 @@ describe Product do
     end
     
     it "has and belongs to types" do
-      # WAIT FOR YAML FILES TO POPULATE
+      products(:cat_food).types << types(:cider)
+      products(:cat_food).types << types(:pilsner)
+      
+      updated_cat_food = Product.find_by(id: products(:cat_food).id)
+      
+      expect(updated_cat_food.types.count).must_equal 2
+      expect(updated_cat_food.types.find_by(name: "pilsner")).wont_be_nil
+      
+      updated_cider = Type.find_by(id: types(:cider).id)
+      
+      expect(updated_cider.products.count).must_equal 1
+      expect(updated_cider.products.find_by(name: "Hill Science Diet Cat Food")).wont_be_nil
     end
   end
   
