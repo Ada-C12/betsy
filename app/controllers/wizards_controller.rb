@@ -4,14 +4,19 @@ class WizardsController < ApplicationController
     if @wizard.nil?
       return head :not_found
     end
-    
+    if @wizard.id != session[:wizard_id]
+      flash[:error] = "Not authorized to view that page"
+      redirect_to root_path
+      return
+    end
+
     @orders = @wizard.orders
-    
+
     if params[:status]
       @orders = @wizard.orders.select { |order| order.status == params[:status] }
     end
   end
-  
+
   def create
     auth_hash = request.env["omniauth.auth"]
     wizard = Wizard.find_by(uid: auth_hash[:uid], provider: "github")
@@ -19,7 +24,7 @@ class WizardsController < ApplicationController
       flash[:success] = "Logged in as returning wizard #{wizard.username}"
     else
       wizard = Wizard.build_from_github(auth_hash)
-      
+
       if wizard.save
         flash[:success] = "Logged in as new wizard #{wizard.username}"
       else
@@ -30,12 +35,11 @@ class WizardsController < ApplicationController
     session[:wizard_id] = wizard.id
     redirect_to root_path
   end
-  
-  
+
   def destroy
     session[:wizard_id] = nil
     flash[:success] = "Successfully logged out!"
-    
+
     redirect_to root_path
   end
 end
