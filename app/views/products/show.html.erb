@@ -98,7 +98,7 @@
         </h4>
         <p> <%= review.description %> </p>
         <% if session[:user_id] && review.user_id == session[:user_id] %>
-          <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
+          <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-pretty" %>
         <% end %>
       </section>
     <% end %>
