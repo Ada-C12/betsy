@@ -1,0 +1,60 @@
+main {
+  color: whitesmoke;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.confsection {
+  padding-left: 3em;
+}
+
+.conful li {
+  font-size: larger;
+}
+
+#confirmation {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  padding-left: 3em;
+}
+
+#confirmation td, #confirmation th {
+  padding: 8px;
+}
+
+
+#confirmation thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  color: white;
+}
+
+#confirmation td img {
+  width: 100px;
+  height: 100px;
+}
+
+.material-icons {
+  color: whitesmoke;
+}
+
+a:link {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+a:visited {
+  text-decoration: none;
+  color:whitesmoke;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: grey;
+}
+
+a:active {
+  text-decoration: underline;
+  color: grey;
+}

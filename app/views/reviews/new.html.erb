@@ -1,0 +1,17 @@
+
+<%= form_with(model: @review, url: product_reviews_path(@product.id)) do |f| %>
+
+  <div class="form-group, forms", id="rating-selection">
+  <%= f.label :rating %>
+  <%= f.select :rating, [1,2,3,4,5], class: "form-control"%>
+  </div>
+
+  <div id="review-text">
+  <%= f.label :review_text %>
+  <%= f.text_area :review_text, class: "form-control"%>
+  </div>
+
+  <div id="review-submit">
+  <%= f.submit "Submit Review", class: "btn btn-dark" %>
+  </div>
+<% end %>

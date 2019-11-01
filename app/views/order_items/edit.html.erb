@@ -1,0 +1,9 @@
+<%= form_with(model: @order_item, url: order_order_item_path(@order.id)) do |f|%>
+  <div>
+    <%= f.label :qty %>
+    <%= f.text_field :qty %>
+  </div>
+  <div>
+    <%= f.submit "Submit Qty" %>
+  </div>
+<% end %>

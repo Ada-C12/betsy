@@ -1,0 +1,16 @@
+oi1:
+  qty: 3
+  product: :product_1
+  order: order1
+oi2:
+  qty: 2
+  product: :product_1
+  order: order2
+oi3:
+  qty: 2
+  product: :product_1
+  order: order3
+oi4:
+  qty: 3
+  product: :product_3
+  order: order3

@@ -1,0 +1,80 @@
+// Place all the styles related to the Homepages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// .carousel {
+//   width:350px;
+//   height:350px;
+// }
+.homepages-container {
+  font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  text-align:center;
+  display:grid;
+  padding: 0.5rem;
+}
+
+div.carousel-item, div.active {
+  text-align: center;
+}
+
+.carousel-caption {
+  color:black;
+  -webkit-text-fill-color: white;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color:black;
+  position: relative;
+  left: auto;
+  right: auto;
+}
+
+.newly_added__header {
+  text-align: center;
+  padding: 0.25rem;
+}
+
+#myCarousel img {
+  align-items: center;
+  margin:auto;
+}
+
+.homepages-container > .top_rated {
+  color:white;
+}
+
+.homepages-container {
+  display: grid;
+  grid-template-rows: 3;
+  grid-template-columns: 1;
+  align-content: center;
+}
+
+.newly-added {
+  grid-row-start: 1;
+  grid-row-end: 2;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  align-items: center;
+  padding: 1.5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+.spotlight {
+  grid-row-start: 2;
+  grid-row-end: 3;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  padding: 1.5rem;
+}
+
+.top_rated {
+  grid-row-start: 3;
+  grid-row-end: 4;
+  grid-column-start: 1;
+  grid-column-end: 2;
+  padding: 1.5rem;
+}
+
+.introduction {
+  padding: 2.5rem;
+}

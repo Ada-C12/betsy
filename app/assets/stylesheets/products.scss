@@ -1,0 +1,119 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.products-main * {
+  font-family: 'Noto Serif KR', serif;
+  letter-spacing: 2px;
+}
+
+.d-flex, .p-2 {
+  display: flex;
+  margin: 2em;
+  padding-top: 40px;
+}
+
+.card-columns {
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 4em;
+  height: auto;
+}
+
+.product-photo {
+  max-height: 80em;
+  width: auto;
+}
+
+.product {
+  align-items: center;
+}
+#not-found {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  display: flex;
+  justify-content: center;
+}
+
+.card-title a {
+  color: black;
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  color: #d4af37;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-around;
+  color: black;
+}
+
+.product-btn-container {
+  display: block;
+  float: right;
+  margin-right: 2em;
+  margin-top: 2em;
+}
+
+.products-title-container {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between
+}
+
+.product-show {
+  text-align: center;
+  padding-bottom: 15px;
+  padding-top: 5em;
+}
+
+#edit-link {
+  font-size: .5em;
+  text-align: right;
+}
+.product-image {
+  width: 40em;
+  height: auto;
+}
+
+.product-review-container {
+  width: 50%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 30px;
+  padding-top: 75px;
+}
+
+.product-review-container h2 {
+  font-weight: bold;
+}
+
+.product-review {
+  border-bottom: .5px solid white;
+  text-align: left;
+  padding-top: 15px;
+}
+
+#review-image {
+  width: 20px;
+  height: auto;
+}
+
+label[for="review_text"] {
+  display:none;
+}
+
+#review-submit {
+  padding-top: .5em;
+}
+
+.submit-review {
+  padding-top: 1em;
+}

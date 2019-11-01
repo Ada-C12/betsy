@@ -1,0 +1,118 @@
+<html>
+  <body>
+    <main id="dashboard">
+      <div class="dashboard-header">
+        <section class="dashsec">
+          <h2>Merchant Summary: <%= @user.name %></h2>
+          <p>Joined site <%= format_date(@user.created_at) %></p>
+        </section>
+
+        <section class="dashsec">
+          <%= link_to "Add a product", new_product_path, class:"btn btn-dark"%>
+          <%= link_to "View products", user_path(@user.id), class:"btn btn-dark"%>
+          <%= link_to "Add a category", new_category_path, class:"btn btn-dark"%>
+        </section>
+      </div>
+
+      <section class="dashsec">
+
+        <table class="dashboard-order-table table">
+          <thead id="dashhead">
+            <tr>
+              <th> Order Id </th>
+              <th> Order Status </th>
+              <th> Date Placed </th>
+              <th> Products </th>
+              <th> Qty </th>
+              <th> Subtotal </th>
+          </thead>
+          <tbody>
+            <% @user.order_list.each do |order| %>
+              <tr>
+                <% order = Order.find_by(id: order) %>
+                <td><%= link_to order.id, order_path( order.id ) %> </td>
+                <td>
+                  <% if order.status == "paid"%>
+                    <p><%= order.status.capitalize %> </p>
+                    <p><%= link_to "Mark as Complete", update_status_path(order.id), method: :patch, class:"btn btn-dark" %></p>
+                  <% else %>
+                    <%= order.status.capitalize%>
+                  <% end %>
+                </td>
+                <td>
+                <% if order.status != "pending"%>
+                  <%=format_date(order.order_place)%></td>
+                <% end %>
+                <td> 
+                  <% order.order_items.each do |item| %>
+                    <% if item.product.user_id == @user.id %>
+                      <p> <%= link_to item.product.name, product_path( item.product.id )%> </p> 
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% order.order_items.each do |item| %>
+                    <% if item.product.user_id == @user.id %>
+                      <p> <%=item.qty%> </p> 
+                    <% end %>
+                  <% end %>
+                </td>
+                <td>
+                  <% order.order_items.each do |item| %>
+                    <% if item.product.user_id == @user.id %>
+                      <p> <%=item.qty * item.product.price %> </p> 
+                    <% end %>
+                  <% end %>
+                </td>
+              </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </section>
+      <section class="dashsec">
+        <table class="dashboard-rev-table">
+          <thead>
+            <tr>
+              <th class="dashboard-rev-table-status"><h3>Revenue</h3></th>
+              <th class="dashboard-rev-table-info"> </th>
+              <th class="dashboard-rev-table-status"><h3>Orders</h3></th>
+              <th class="dashboard-rev-table-info"> </th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td class="dashboard-rev-table-status">Total Revenue for Pending Orders:</td>
+              <td class="dashboard-rev-table-info">$<%=@user.total_revenue("pending")%></td>
+              <td class="dashboard-rev-table-status">Total Pending Orders:</td>
+              <td class="dashboard-rev-table-info"><%=@user.order_list("pending").count%></td>
+            </tr>
+            <tr>
+              <td class="dashboard-rev-table-status">Total Revenue for Paid Orders:</td>
+              <td class="dashboard-rev-table-info">$<%=@user.total_revenue("paid")%></td>
+              <td class="dashboard-rev-table-status">Total Paid Orders:</td>
+              <td class="dashboard-rev-table-info"><%=@user.order_list("paid").count%></td>
+            </tr>
+            <tr>
+              <td class="dashboard-rev-table-status">Total Revenue for Complete Orders:</td>
+              <td class="dashboard-rev-table-info">$<%=@user.total_revenue("complete")%></td>
+              <td class="dashboard-rev-table-status">Total Complete Orders:</td>
+              <td class="dashboard-rev-table-info"><%=@user.order_list("complete").count%></td>
+            </tr>
+            <tr>
+              <td class="dashboard-rev-table-status">Total Revenue for Cancelled Orders:</td>
+              <td class="dashboard-rev-table-info">$<%=@user.total_revenue("cancelled")%></td>
+              <td class="dashboard-rev-table-status">Total Cancelled Orders:</td>
+              <td class="dashboard-rev-table-info"><%=@user.order_list("cancelled").count%></td>
+            </tr>
+            <tr>
+              <td class="dashboard-rev-table-status">Total Revenue:</td>
+              <td class="dashboard-rev-table-info">$<%=@user.total_revenue%></td>
+              <td class="dashboard-rev-table-status">Total Orders:</td>
+              <td class="dashboard-rev-table-info"><%=@user.order_list.count%></td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </main>
+  </body>
+</html>

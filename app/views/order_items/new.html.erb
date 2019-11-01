@@ -1,0 +1,9 @@
+<%= form_with(model: @order_item, url: product_order_items_path(@product.id)) do |f|%>
+  <div>
+    <%= f.label :qty %>
+    <%= f.select :qty, @product.qty.times.map { |qty| [qty + 1] } %>
+  </div>
+  <div>
+    <%= f.submit "Add to Cart", class: "btn btn-dark" %>
+  </div>
+<% end %>

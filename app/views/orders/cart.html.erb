@@ -1,0 +1,38 @@
+<main>
+  <h1 class="carth1">YOUR CART</h1>
+  <div class="divcart">
+  <%if @items.empty?%>
+    <h2>There's nothing in your cart</h2>
+    <%=link_to "Start Shopping", products_path %>
+  <%else%>
+    <table id="cart">
+      <thead>
+        <td>PRODUCT</td>
+        <td>QUANTITY</td>
+        <td>PRICE</td>
+        <td>REMOVE FROM CART</td>
+      </thead>
+    <% @items.each do |item| %>
+      <tbody>
+          <td><%= link_to Product.find(item.product_id).name, product_path(item.product_id) %></td>
+          <td><%=item.qty%></td>
+          <td>$<%=sprintf('%.2f',(item.qty * item.product.price))%>
+          <td><%= link_to order_order_item_path(@current_order.id, item.id), method: :delete do %>
+            <i class="material-icons">delete</i>
+          <% end %></td>
+      <%end%>
+        <tr>
+          <td>TOTAL: $<%=sprintf('%.2f', @current_order.total)%></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  <div class="divcart">
+    <button class="btn btn-dark">
+      <%=link_to "CHECKOUT", checkout_path%>
+    </button>
+  <%end%>
+  <div>
+
+  
+</main> 

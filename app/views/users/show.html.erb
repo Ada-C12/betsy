@@ -1,0 +1,48 @@
+
+<main>
+  <section>
+    <h2>Merchant Summary: <%= @user.name %></h2>
+    <p>Joined site <%= format_date(@user.created_at) %></p>
+  </section>
+
+<section>
+  <h3>Products (<%=@user.products.length%>)</h3>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>ITEM</th>
+        <th>PRICE</th>
+        <th>QUANTITY</th>
+        <th>CATEGORY</th>
+        <th>DATE ADDED</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% products = Product.where(user_id: @user.id)%>
+        <% products.each do |product| %>
+        <tr>
+          <td>
+            <%= link_to product.name, product_path(product.id) %> 
+          </td>
+          <td>$
+            <%= sprintf('%.2f', product.price) %>
+          </td>
+          <td>
+            <%= product.qty %>
+          </td>
+          <td>
+            <% product.categories.each do |cat| %>
+            <%= link_to cat.name, category_path(cat.id) %>
+            <%end%>
+          </td>
+          <td>
+            <%= format_date(product.created_at)%>
+          </td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>
+</section>
+</main>
+ 

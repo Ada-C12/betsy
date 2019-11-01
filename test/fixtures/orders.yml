@@ -1,0 +1,28 @@
+order1:
+  status: pending
+  email: my@email.com
+  address: 123 Cherry Lane
+  name: batman
+  ccnum: 3485764356543267
+  expdate: 09/13
+  ccv: 123
+  zip: 12345
+order2:
+  status: paid
+  email: my@email.com
+  address: 123 Cherry Lane
+  name: robin
+  ccnum: 3485764356543267
+  expdate: 10/12
+  ccv: 123
+  zip: 12345
+  order_place: <%= Time.now.utc.to_s(:db) %>
+order3:
+  status: complete
+  email: my@email.com
+  address: 123 Cherry Lane
+  name: batman
+  ccnum: 3485764356543267
+  expdate: 09/13
+  ccv: 123
+  zip: 12345

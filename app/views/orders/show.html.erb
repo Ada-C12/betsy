@@ -1,0 +1,8 @@
+<main>
+  <h2>Order #<%=@order.id%> Details</h2>
+  <ul>
+  <%@items.each do |item|%>
+    <li><%= link_to item.product.name, product_path(item.product_id) %></li>
+  <%end%>
+  </ul>
+</main>

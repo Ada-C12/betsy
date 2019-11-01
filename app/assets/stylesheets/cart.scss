@@ -1,0 +1,61 @@
+main {
+  font-family: 'Noto Serif KR', serif;
+}
+.divcart {
+  padding-bottom: 5em;
+  padding-left: 3em;
+}
+.carth1 {
+  color: whitesmoke;
+}
+
+#cart tbody {
+  color: whitesmoke;
+}
+
+#cart {
+  font-family: "Trebuchet MS", Arial, Helvetica, sans-serif;
+  border-collapse: collapse;
+  width: 80%;
+  padding-left: 3em;
+}
+
+#cart td, #cart th {
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+
+#cart thead {
+  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #054907;
+  color: white;
+}
+
+.material-icons {
+  color: whitesmoke;
+}
+
+a:link {
+  text-decoration: none;
+  color: whitesmoke;
+}
+
+a:visited {
+  text-decoration: none;
+  color:whitesmoke;
+}
+
+a:hover {
+  text-decoration: underline;
+  color: grey;
+}
+
+a:active {
+  text-decoration: underline;
+  color: grey;
+}
+
+

@@ -1,0 +1,110 @@
+// Place all the styles related to the Categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.category-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.category-btn-container {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 2em;
+}
+.new-category-btn {
+  font-size: 1.5em;
+}
+
+.new-category-btn:hover {
+  color: #d4af37;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+#categories-list-item a {
+  color: white;
+  text-decoration: none;
+  font-size: 3em;
+}
+
+#categories-list-item a:hover {
+  color: #d4af37;
+}
+
+.product-info {
+  padding-left: .8em;
+}
+
+.products-main * {
+  font-family: 'Noto Serif KR', serif;
+  letter-spacing: 2px;
+}
+
+.d-flex, .p-2 {
+  display: flex;
+  margin: 2em;
+  padding-top: 40px;
+}
+
+.card-columns {
+  justify-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  width: 4em;
+  height: auto;
+}
+
+.product-photo {
+  max-height: 80em;
+  width: auto;
+}
+
+.product {
+  align-items: center;
+}
+#not-found {
+  width: 100%;
+  object-fit: cover;
+}
+
+.card-title {
+  display: flex;
+  justify-content: center;
+}
+
+.card-title a {
+  color: black;
+  text-decoration: none;
+}
+
+.card-title a:hover {
+  color: #d4af37;
+}
+
+.card-body {
+  display: flex;
+  justify-content: space-around;
+  color: black;
+}
+
+.product-btn-container {
+  display: block;
+  float: right;
+  margin-right: 2em;
+  margin-top: 2em;
+}
+
+.products-title-container {
+  margin-bottom: 1em;
+  display: flex;
+  justify-content: space-between
+}

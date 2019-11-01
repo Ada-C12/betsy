@@ -1,0 +1,16 @@
+<main class="category-main">
+  <h1>All Categories</h1>
+
+  <section class="categories-container">
+    <ul class="categories-list">
+    <%@categories.each do |cat| %>
+      <li id="categories-list-item"><%= link_to cat.name.upcase, category_path(cat.id)%></li>
+    <%end%>
+    </ul>
+  </section>
+
+  <section class="category-btn-container">
+    <%= link_to "NEW CATEGORY", new_category_path, class:"btn btn-secondary new-category-btn" %>
+  </section>
+
+</main>

@@ -1,0 +1,23 @@
+<main>
+  <h2>List of Users</h2>
+
+  <section class="media-table">
+      <table class="table">
+        <thead>
+          <tr>
+            <th width="80">Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <% @users.each do |user| %>
+              <tr>
+                <td>
+                  <%= link_to user.name, user_path(id: user.id) %> 
+                </td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+  </section>
+</main>

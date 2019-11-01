@@ -1,0 +1,183 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+/* Custom bootstrap variables must be set or imported *before* bootstrap. */
+
+@import "bootstrap";
+/* Import scss content */
+@import "**/*";
+
+
+body {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  margin: 5px;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.alert___container {
+  background-color: #242424;
+}
+
+html, header {
+  background-color: black;
+}
+
+main {
+  background-color: #242424;
+}
+
+body, footer {
+  background-color: #242424;
+}
+
+h1 {
+  padding: .5em;
+}
+
+// found on https://codepen.io/liuzenan/pen/nCJpo
+
+.shimmer {
+  display: flex;
+  color:white;
+  
+  background: #d4af37 -webkit-gradient(linear, 100% 0, 0 0, from(#d4af37), color-stop(0.5, #FAFAD2), to(#d4af37));
+  font-family: 'Noto Serif KR', serif;
+  font-size: 3em;
+  font-style: italic;
+  
+  background-position: -4rem top; /*50px*/
+  background-repeat: no-repeat;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-animation-name: shimmer;
+  -webkit-animation-duration: 1.9s;
+  -webkit-animation-iteration-count: infinite;
+  -webkit-background-size: 20rem 100%; /*50px*/
+  
+}
+
+
+
+@-webkit-keyframes shimmer {
+    0% {
+        background-position: -4rem top; /*50px*/
+    }
+
+    70% {
+        background-position: 12.5rem top; /*200px*/
+    }
+
+    100% {
+        background-position: 12.5rem top; /*200px*/
+    }
+}
+
+ul {
+  list-style: none;
+  padding-inline-start: 0px;
+}
+
+#top-section {
+  display: flex;
+  justify-content: space-between;
+}
+
+#site-title {
+  float: left;
+  grid-column:1;
+  grid-row:1;
+}
+
+#cart-section {
+  margin-top: 4em;
+  margin-right: 7em;
+}
+
+.app-header__header {
+  max-width: 100%;
+  padding: 2rem 1rem 0.5rem 1rem;
+  display: grid;
+  text-transform: uppercase;
+  font-family: 'Noto Serif KR', serif;
+}
+
+.app-header__nav {
+  grid-column:1;
+  grid-row:2;
+  background-color: black;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  letter-spacing: 2px;
+  font-family: 'Noto Serif KR', serif;
+  color: white;
+}
+
+.app-header__nav li {
+  margin: 10px;
+}
+
+.nav-link a:hover {
+  color: #d4af37;
+}
+
+.nav-item a:hover {
+  color: #d4af37;
+}
+
+#dashboard footer {
+  color: white;
+}
+
+.dashboard-header {
+  text-align: center;
+  padding-bottom: 10px;
+}
+
+.nav-link:hover {
+  color: #d4af37;
+}
+
+.nav-item a:hover {
+  color: #d4af37;
+}
+
+a.dropdown-item {
+  color: black;
+}
+
+#footer {
+  background: black;
+  color: white;
+}
+
+#footer-list {
+  padding-top: 10px;
+}
+
+#footer-list li a:hover {
+  color: #d4af37;
+}
+
+.copyright {
+  text-align: center;
+  font-size: .75em;
+}
+
+.dropdown-items {
+  color: black;
+}
+
