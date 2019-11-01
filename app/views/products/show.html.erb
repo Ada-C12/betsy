@@ -77,28 +77,34 @@
       <% end %>
 </section>
 
+<% if !@product.reviews.empty? %>
 <section class="all-reviews-container">
   <h2> <%= @product.name %> Reviews </h2>
     <% @product.reviews.order(rating: :desc).each do |review| %>
-    <section class="review-containter">
-      <div> 
-        <% review.rating.times do %>
-          <%= rating_img %>
+      <section class="review-containter">
+        <div> 
+          <% review.rating.times do %>
+            <%= rating_img %>
+          <% end %>
+        </div>
+        <h4> <%= review.title %>
+        <small> -
+          <% if review.user %>
+              <%= link_to review.user.username, user_path(review.user.id) %>
+          <% else %>
+              Guest
+          <% end %>
+        </small>
+        </h4>
+        <p> <%= review.description %> </p>
+        <% if session[:user_id] && review.user_id == session[:user_id] %>
+          <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
         <% end %>
-      </div>
-      <h4> <%= review.title %>
-      <small> -
-        <% if review.user %>
-            <%= link_to review.user.username, user_path(review.user.id) %>
-        <% else %>
-            Guest
-        <% end %>
-      </small>
-      </h4>
-      <p> <%= review.description %> </p>
-      <% if session[:user_id] && review.user_id == session[:user_id] %>
-        <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-pretty" %>
-      <% end %>
-    </section>
-  <% end %>
+      </section>
+    <% end %>
 </section>
+<% else %>
+  <section class="all-reviews-container">
+    <h2> There are no reviews for this product yet! </h2>
+  </section>
+<%end%>

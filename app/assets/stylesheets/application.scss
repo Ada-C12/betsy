@@ -386,12 +386,25 @@ th, th a{
   font-weight: bold;
 }
 
+// Edit User Page
+.edit-header {
+  padding: 1em;
+  font-weight:bold;
+  text-align:center;
+}
+.edit-user {
+  margin-left:25%;
+  margin-right:25%;
+}
+
+
 .cart-table{
   table-layout: fixed;
   width: 75%;
   margin-left: 10rem;
   font-size: 1em;
 }
+
 
  #checkout-section {
    display: flex;
@@ -445,9 +458,15 @@ th, th a{
   margin-bottom: 1%;
 }
 
-.checkout-container {
-  margin-left: 5%;
-  margin-top: 5%;
+// Checkout Page
+
+.checkout-header{
+  margin-bottom:3%;
+}
+
+.checkout-card {
+  margin-left:20%;
+  margin-right:20%;
 }
 
 .checkout-billing-container {
@@ -460,6 +479,8 @@ th, th a{
 
 .submit-btn {
   margin-top: 2%;
+  margin-left: 15%;
+  margin-right:20%;
 }
 
 .order-items-display {
