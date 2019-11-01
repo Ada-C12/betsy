@@ -8,16 +8,19 @@
       </div>
     </div>
 
-    <div class="col-md-6">
+    <div class="col-md-6 product-info">
       <div class="col-md-12">
-        <h3><%= @orderitem.product.name %><h3>
-        <small class="description"><%= @orderitem.product.description %><small>
+        <h3><%= @orderitem.product.name %></h3>
+        <small class="prod-description product-show"><%= @orderitem.product.description %></small>
         <small><p>Sold by: <%= link_to @orderitem.product.merchant.username, merchant_products_path(@orderitem.product.merchant.id)%></p></small>
         <p>$<%= '%.2f' % @orderitem.product.price %></p>
 
+        <% if @orderitem.product.retired %>
+          <p>Not currently for sale</p>
+        <% end %>
+
         <div class="new_order_product" id="new_order_product">
           <%= form_with model: @orderitem do |f| %>
-        
             <div class="form-group">
             <%= f.label :quantity %>
             <%= f.select :quantity, (1..@orderitem.product.stock) %>
@@ -32,5 +35,3 @@
     </div>
   </div>
 </section>
-
-
