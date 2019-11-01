@@ -1,34 +1,34 @@
 <section>
   <div class="product-heading" id="cart-heading">
-    <h2>CHECKOUT</h2>
+    <h2>Checkout</h2>
     <h5 class="total">Total: $<%= @order.total %></h5>
   </div>
 
-  <div class="checkout-form">
+  <div class="checkout-form white-text">
     <%= form_with model: @order do |f| %>
       <div class="form-group">
         <%= f.label :name %>
-        <%= f.text_field :name, class: "form-control" %>
+        <%= f.text_field :name, class: "form-control text-area-color" %>
       </div>
 
       <div class="form-group">
         <%= f.label :email %>
-        <%= f.text_field :email, class: "form-control" %>
+        <%= f.text_field :email, class: "form-control text-area-color" %>
       </div>
 
       <div class="form-group">
         <%= f.label :owling_address %>
-        <%= f.text_field :owling_address, class: "form-control" %>
+        <%= f.text_field :owling_address, class: "form-control text-area-color" %>
       </div>
 
       <div class="form-group">
         <%= f.label :name_on_credit_card %>
-        <%= f.text_field :name_on_cc, class: "form-control" %>
+        <%= f.text_field :name_on_cc, class: "form-control text-area-color" %>
       </div>
       
       <div class="form-group">
         <%= f.label :credit_card_number %>
-        <%= f.text_field :cc_num, class: "form-control" %>
+        <%= f.text_field :cc_num, class: "form-control text-area-color" %>
       </div>
 
       <div class="form-group">
@@ -43,16 +43,16 @@
 
       <div class="form-group">
         <%= f.label :security_code %>
-        <%= f.text_field :cc_cvv, class: "form-control" %>
+        <%= f.text_field :cc_cvv, class: "form-control text-area-color" %>
       </div>
 
       <div class="form-group">
         <%= f.label :billing_zip_code %>
-        <%= f.text_field :zip_code, class: "form-control" %>
+        <%= f.text_field :zip_code, class: "form-control text-area-color" %>
       </div>
 
       <div class="form-group">
-        <%= f.submit "Checkout", class: "btn btn-outline-secondary" %>
+        <%= f.submit "Checkout", class: "btn btn-secondary" %>
       </div>
     <% end %>
   </div>

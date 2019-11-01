@@ -1,8 +1,8 @@
 <section>
-	<h1><%= @wizard.username %> </h2>
-	<p class="bottom-border"><em><%= @wizard.email %></em></p>
+	<h1 class="halo"><%= @wizard.username %> </h2>
+	<p class="bottom-border halo"><em><%= @wizard.email %></em></p>
 
-	<h4> Total Revenue: $<%=@wizard.total_revenue%> </h4>
+	<h4 class="halo"> Total Revenue: $<%=@wizard.total_revenue%> </h4>
 </section>
 
 <ul class="wizard-show-nav">
@@ -18,21 +18,21 @@
 </ul>
 
 
-<h3 class="product-heading">Summary</h3>
+<h3 class="product-heading halo">Summary</h3>
 <div class="container">
 	<div class="row">
-		<h4 class="col-lg-6">Revenue</h4>
-		<h4 class="col-lg-6">Orders</h4>
+		<h4 class="col-lg-6 white-text">Revenue</h4>
+		<h4 class="col-lg-6 white-text">Orders</h4>
 	</div>
 	<div class="row justify-content-md-start">
-		<div class="col-lg-6">
+		<div class="col-lg-6 white-text">
 			<p>Pending Orders Revenue................$<%= @wizard.total_revenue_by_status("pending") %></p>
 			<p>Paid Orders Revenue....................$<%= @wizard.total_revenue_by_status("paid") %></p>
 			<p>Complete Orders Revenue...................$<%= @wizard.total_revenue_by_status("complete") %></p>
 			<p>Cancelled Orders Revenue...................$<%=@wizard.total_revenue_by_status("cancelled") %></p>
 		</div>
 		
-		<div class="col-lg-6">
+		<div class="col-lg-6 white-text">
 			<p>Total Pending Orders................<%= @wizard.orders_by_status("pending").count %></p>
 			<p>Total Paid Orders.....................<%= @wizard.orders_by_status("paid").count %></p>
 			<p>Total Complete Orders................<%= @wizard.orders_by_status("complete").count %></p>
@@ -43,7 +43,7 @@
 </section>
 
 
-<div class="container">
+<div class="container halo">
 <h3 class="product-heading"><%= params[:status] ? params[:status].capitalize! : "All" %> Orders
 	<span class="dropdown">
 		<button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -64,7 +64,7 @@
 		<% if item.product.wizard == @wizard %>
 			<div class="row">
 				<div>
-					<%= link_to image_tag(item.product.photo_url, alt: "Pictures of #{item.product.name}", id: "wizard-show-item-photo"), product_path(item.product, class: "img-thumbnail") %>
+					<%= link_to image_tag(item.product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : item.product.photo_url, alt: "Pictures of #{item.product.name}", id: "wizard-show-item-photo"), product_path(item.product, class: "img-thumbnail") %>
 				</div class="col col-lg-2">
 				<div class="col col-lg-7">
 					<% if !item.shipped && item.order.status == "paid" %>

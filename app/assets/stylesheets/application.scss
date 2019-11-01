@@ -19,6 +19,7 @@
    * {
       text-align: center;
       font-family: 'Montserrat', sans-serif;
+      
    }
 
 	ul {
@@ -32,11 +33,6 @@
 
    a {
       color: black
-   }
-
-   a:hover {
-      text-decoration: none;
-      color: darkslategrey;
    }
 
    .cart-row {
@@ -74,7 +70,7 @@
    
    body {
       background-image: radial-gradient(farthest-corner at 40px 40px,
-           black, white 50%, rgb(0, 0, 0) 100%);
+           black, white 40%, rgb(0, 0, 0) 100%);
       }
 
    h1 {
@@ -98,3 +94,60 @@
       padding: 0;
    }
 
+   body {
+      background-image: url('magic-bg-8');
+      width: 100%;
+      height: 90vh;
+      background-repeat: no-repeat;
+      background-position: center center;
+      background-size: cover;
+      background-attachment: fixed;
+   }
+
+
+   .background-opacity {
+      color: black;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
+   }
+
+   a:hover {
+      text-decoration: none;
+      color: darkslategrey;
+   }
+
+   .lumos {
+      background-image: linear-gradient(to right, white, slategray, white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-animation: glow 1s ease-in-out infinite alternate;
+      -moz-animation: glow 1s ease-in-out infinite alternate;
+      animation: glow 1s ease-in-out infinite alternate;
+   }
+
+   @-webkit-keyframes glow {
+      from {
+         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
+      }
+      to {
+         text-shadow: 0 0 20px #fff, 0 0 30px slategray, 0 0 40px slategray, 0 0 50px slategray 0 0 60px slategray, 0 0 70px slategray, 0 0 80px slategray;
+      }
+   }
+
+   .halo  {
+      color: black;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
+   }
+
+   .white-text {
+      color: white;
+   }
+
+   .text-area-color {
+      background-color: gray;
+      color: white;
+      opacity: 0.7,
+   }
+
+   .wizard-show-nav li {
+      padding: 0 0.5em 0 0.5em;
+   }

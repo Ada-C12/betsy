@@ -1,4 +1,4 @@
-<h2>Write a review</h2>
+<h2 class="product-heading">Write a review</h2>
 <% if @review.errors.any? %>
   <ul class="errors">
     <% @review.errors.each do |column, message| %>
@@ -18,7 +18,7 @@
     <%= f.label :review_comment %>
   </div>
   <div class="row justify-content-md-center">
-  <%= f.text_area :review_comment,:cols => "50", :rows => "6" %>
+  <%= f.text_area :review_comment,:cols => "50", :rows => "6", class: "text-area-color" %>
   </div>
   <div class="row justify-content-md-center">
     <%= f.submit "Create Review", class: "btn btn-dark form-button"%>

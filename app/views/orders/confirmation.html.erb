@@ -1,4 +1,4 @@
-<section class="confirmation">
+<section class="confirmation halo">
   <h2>We've received your order</h2>
   <h4><strong>Order no #<%= @order.id %></strong></h4>
   <p><em>Created on <%= @order.created_at.strftime("%b %d, %Y") %></em></p>
@@ -28,7 +28,7 @@
     <% @order.order_items.each do |order_item| %>
       <div class="row confirmation-row">
         <div class="col col-lg-6">
-          <%= link_to image_tag(order_item.product.photo_url, alt: "Photo of #{order_item.product.name}", class: "img-thumbnail"), product_path(order_item.product.id, class: "confirmation-img")  %>
+          <%= link_to image_tag(order_item.product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : order_item.product.photo_url, alt: "Photo of #{order_item.product.name}", class: "img-thumbnail"), product_path(order_item.product.id, class: "confirmation-img")  %>
         </div>
         <div class="col col-lg-6 align-self-center">
           <p><strong><%= order_item.product.name %></strong></p>
