@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Betsy</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <script src="https://kit.fontawesome.com/a84a561c8e.js" crossorigin="anonymous"></script>
+  </head>
+
+  <body>
+    <header class="app_header">
+      <!-- <img src='https://lh3.googleusercontent.com/ozqDFFoNBgyNr_FNVVZFP9zH2K6iKsBcw1waZgVdAwGg3PelWXoNv1qChiviBAVuvIBgn9E17M7535YsqqTbJkHH3Axf3oN3K4x_6m4xNIc4oneHRAossp6YLrkF3WkRkVNgZzUojg=w2400' /> -->
+      <h1 class="app_header__title">
+        <%= link_to "plantsy", root_path %>
+      </h1>
+      <nav class="top_nav">
+        <div class="btn-group page_nav">
+          <%= link_to "Products", products_path, class: "btn btn-primary" %>
+          <%= link_to "Categories", categories_path, class: "btn btn-primary" %>
+          <%= link_to "Merchants", users_path, class: "btn btn-primary" %>
+        </div>
+        <div class="user_nav">
+          <% current_user = User.find_by(id: session[:user_id]) %>
+          <% if current_user %>
+            <a href=<%= dashboard_path(current_user.id) %> class="btn btn-light">My Dashboard</a>
+            <%= link_to "Log Out", logout_path, method: :delete, class: "btn btn-light" %>
+          <% else %>
+            <a href=<%= github_login_path %> class="btn btn-light"><i class="fab fa-github"></i>  Login with Github</a>
+          <% end %>
+          <% if session[:order_id] != nil %>
+            <a href=<%= order_path(session[:order_id]) %> class="btn btn-light shopping-cart">
+              <i class="fas fa-shopping-cart"></i>
+              <%# badge will show count of items in cart %>
+              <%# badge should only show up if there is at least one item in cart %>
+              <% order = Order.find_by(id: session[:order_id]) %>
+              <% if order %>
+                <% count = order.count_items() %>
+                <% if count > 0 %>
+                  <span class="badge badge-primary badge-pill">
+                    <%= count %>
+                  </span>
+                <% end %>
+              <% end %>
+            </a>
+          <% end %>
+        </div>
+      </nav>
+    </header>
+
+    <% if flash.any? %>
+      <section>
+        <% if flash[:success] %>
+          <div class="flash alert alert-success">
+            <%= flash[:success] %>
+          </div>
+        <% elsif flash[:error] && flash.keys.count > 1 %>
+          <div class="flash alert alert-warning">
+            <div>
+              A problem occurred: <%= flash[:error] %>
+            </div>
+            <ul>
+              <% flash.each do |name, message| %>
+                <% unless name == "error" %>
+                  <li><%= name %>: <%= message %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          </div>
+        <% else %>
+          <div class="flash alert alert-warning">
+            <div>
+              <strong>A problem occurred:</strong>
+            </div>
+          <ul>
+            <% flash.each do |name, message| %>
+              <li><%= name.capitalize %>: <%= message %></li>
+            <% end %>
+            </ul>
+          </div>
+        <% end %>
+      </section>
+    <% end %>
+
+    <%= yield %>
+
+    <footer class="footer">
+      <div class="footer__site_buttons">
+        <div>
+          <%= link_to "About Us", about_path, class: "btn btn-secondary" %>
+
+          <a href="<%= about_path %>#faq" class="btn btn-secondary">FAQ</a>
+        </div>
+        <%= link_to "Register as Merchant", register_account_path, class: "btn btn-secondary" %>
+      </div>
+      <div class="footer__offsite_buttons">
+        <i class="fab fa-instagram btn btn-secondary"></i>
+        <i class="fab fa-facebook btn btn-secondary"></i>
+        <i class="fab fa-pinterest btn btn-secondary"></i>
+        <i class="fab fa-twitter-square btn btn-secondary"></i>
+      </div>
+      <div class="footer__site_copywrite">
+        © Ada Orchids 2019
+      </div>
+    </footer>
+  </body>
+</html>

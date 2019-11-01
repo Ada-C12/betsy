@@ -1,0 +1,58 @@
+<main>
+<section class="show_page">
+  <h3 class="show_page__header">
+  Order Summary
+  </h3>
+
+<div class="order_data">
+  <div class="order-num">  
+    <p>Order # <%= @order.id %></p>
+  </div>
+
+<table class="table order_table">
+  <thead>
+    <tr>
+      <th>Product Name</th>
+      <th>Change Quantity</th>
+      <th>Quantity</th>
+      <th>Price</th>
+      <th>Subtotal</th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+  <tr>
+  <% @order.order_items.each do |oi| %>
+    <td><%= link_to oi.product.name, product_path(oi.product_id) %></td>
+    
+    <td>
+    <%= form_with model: @order_items, url: order_item_path(oi.id) do |f| %>
+    <input type="hidden" name="_method" value="patch">
+      <%= f.select :quantity, (1..20) %>
+      <%= f.submit "Update", class:"btn btn-primary" %>
+    <% end %>
+    </td>
+    <td><%= oi.quantity %></td>
+    <td>$<%= render_price(oi.product.price) %></td>
+    <td>$<%= render_price(oi.subtotal) %></td>
+    <td><%= link_to "Remove", order_item_path(oi.id), method: :delete, class:"btn btn-primary" %></td>
+    </tr>
+  <% end %>
+    <tr></tr>
+    <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>TOTAL: $<%= render_price(@order.total) %></td>
+    <td></td>
+    </tr>
+    </tbody>
+  </table>
+
+  <div class="order-checkout-button">
+    <%= link_to "CONTINUE SHOPPING", products_path, method: :get, class:"btn btn-primary" %>
+    <%= link_to "CHECKOUT", edit_order_path, method: :get, class: "btn btn-primary" %>
+  </div>
+</section>
+</main>

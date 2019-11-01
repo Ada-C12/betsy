@@ -1,0 +1,70 @@
+// Place all the styles related to the Categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$green: #428625;
+$lightgreen: #68a418;
+$darkgreen: #2e5e1a;
+$verydarkgreen: #174326;
+$brightgreen: #b7f702;
+$midgreen: #428625;
+$palegreen: #c8eaaf;
+
+.category_title, .category_nav {
+  text-align: center;
+  margin-bottom: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+  color: $verydarkgreen;
+  // border: 1px solid;
+  background-color: $palegreen;
+}
+
+.index_page_category-container {  
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  margin-left: 10%;
+  margin-right: 20%;
+  margin-bottom: 2%;
+  // border: 2px solid #431c5d;
+}
+
+.category_text {
+  text-align: center;
+  color: $lightgreen;
+  margin-bottom: 5%;
+  margin-left: 18%;
+}
+
+.product_image_category {
+  width: 300px;
+  height: 300px;
+  border-radius: 10%;
+  margin-left: 27%;
+  margin-right: 10%;
+  opacity: 0.9;
+  object-fit: cover
+}
+
+
+.index_page_category-container {
+  column-gap: 1em;
+  row-gap: 3em;
+  width: 60%;
+  margin: auto;
+  margin-bottom: 5rem;
+}
+
+.category_title {
+  margin-bottom: 0;
+}
+
+.category_nav {
+  margin-bottom: 2rem;
+}
+
+.category_nav.nav-pills .nav-link.active, .category_nav.nav-pills .show > .nav-link {
+  background-color: $lightgreen;
+  font-style: italic;
+}

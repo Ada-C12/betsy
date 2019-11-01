@@ -1,0 +1,58 @@
+<main>
+<section class="show_page_product">
+  
+  <div>
+    <img src= <%= @product.photo_url %> alt=<%= @product.name %> class="product_image_show">
+  </div>
+  
+  <div class="product_data">
+    <h4><strong><%= @product.name %></strong></h4>
+    <p><strong>Ratings summary: <%= render_rating(@product.calculate_average_rating) %></strong></p>
+    </br>
+    <p>Description: <%= @product.description.capitalize %></p>
+    <p>Stock: <%= @product.available_stock(session[:order_id]) %> units</p>
+    <p>Price: $<%= @product.price %></p>
+    <%= form_with model: @order_items, url: product_order_items_path(@product.id) do |f| %>
+      <%= f.select :quantity, (1..10) %>
+      <%= f.submit "ADD TO CART", class:"btn btn-primary" %>
+    <%end%>
+  </div>
+  
+  <div class="product_data_extra">
+    <a class="btn btn-primary" <%= link_to "CONTINUE SHOPPING", products_path, method: :get %>
+    </br>
+    </br>
+      <% if session[:order_id] != nil %>
+        <a class="btn btn-primary" <%= link_to "GO TO CART", order_path(session[:order_id]), method: :get %>
+      <% end %>
+    </br>
+    </br>
+    </br>
+    <p><strong>Free shipping</strong></p>
+    <p>Free shipping in orders above $50</p>  
+  </div>
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Rating</th>
+        <th>Reviews</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @product.reviews.each do |review| %>
+        <tr>
+          <td><%= render_rating(review.rating) %></td>
+          <td><%= review.comment %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+
+  <div class="new_rating">
+    <% if session[:user_id].nil? || session[:user_id] != @product.user_id %>
+      <%=render partial: 'shared/review_form'%>
+    <% end %>
+  </div>
+</section>
+</main>

@@ -1,0 +1,216 @@
+// Place all the styles related to the Homepages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$green: #428625;
+$lightgreen: #68a418;
+$highlight_lightgreen: #5da22c;
+$midgreen: #428625;
+$darkgreen: #2e5e1a;
+$verydarkgreen: #174326;
+$brightgreen: #b7f702;
+$palegreen: #c8eaaf;
+$whitegreen: #d6efc3;
+
+$transparent_palegreen: rgba(200,234,175,0.9);
+$transparent_darkgreen: rgba(46, 94, 26,0.9);
+
+// CAROUSEL
+#homepage_hero_carousel {
+  margin-top: 2rem;
+  border-top: 2px solid $green;
+  border-bottom: 2px solid $green;
+}
+
+#homepage_hero_carousel img {
+  height: 35em;
+  width: 100%;
+  object-fit: cover;
+}
+
+.carousel-caption {
+  color: white;
+  background-color: $transparent_darkgreen;
+  border-radius: 3rem;
+
+  margin-bottom: 1.5rem;
+}
+
+.carousel-caption h5 {
+  text-decoration: underline;
+}
+
+.carousel-caption:hover {
+  background-color: $transparent_palegreen;
+  color: black;
+}
+
+.carousel-caption:hover > *:last-child {
+  display: none;
+}
+
+.carousel-caption:hover::after {
+  content: "See Product";
+  font-size: 1.2em;
+  color: $brightgreen;
+
+  background-color: $transparent_darkgreen;
+  border-radius: 1.2rem;
+  padding: 0.3rem 1rem;
+}
+
+
+// SHOP BY CATEGORY SECTION
+.homepage__shop {
+  width: 90%;
+  margin: auto;
+}
+
+.homepage_category_title {
+  background-color: $palegreen;
+  padding: 1rem;
+}
+
+.homepage_category_wrapper {
+  margin: 3rem 0;
+  border: 2px solid $palegreen;
+
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.homepage_product_card_wrapper {
+  display: flex;
+  overflow-x: auto;
+}
+
+.card {
+  width: 20em;
+  min-width: 20em;
+  margin: 0 1rem;
+  text-align: center;
+  border-color: $palegreen;
+  border-radius: 0;
+
+  margin-bottom: -1px;
+}
+
+.card img {
+  height: 15em;
+  object-fit: cover;
+  border-radius: 0;
+}
+
+// Register as Merchant Page
+
+.sign_up {
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  margin: 8rem 0;
+}
+
+.sign_up h2 {
+  margin-bottom: 2rem;
+}
+
+.sign_up a {
+  width: max-content;
+  margin: auto;
+
+  font-size: 1.5em;
+  margin-top: 2rem;
+}
+
+.sign_up .fa-github {
+  color: white;
+}
+
+// About page
+
+.about_us > .main_header {
+  margin-top: 3rem;
+  text-align: center;
+
+  padding: 1rem 0;
+  background-color: $palegreen;
+  border-top: 2px solid $green;
+  border-bottom: 2px solid $green;
+}
+
+.about_us > section {
+  width: 90%;
+  margin: 5rem auto;
+}
+
+.about_us .header {
+  border-bottom: 2px solid $lightgreen;
+  margin-bottom: 2rem;
+}
+
+.team_member_photo {
+  border-radius: 1rem;
+  margin: 1rem;
+}
+
+.team_member {
+  position: relative;
+}
+
+.team_member_header {
+  position: absolute;
+  bottom: 45px;
+  left: 70px;
+
+  background-color: $green;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.2rem;
+}
+
+.faq_container {
+  display: flex;
+  flex-direction: column;
+}
+
+.faq_item {
+  margin: 3rem;
+}
+
+.faq_question {
+  font-size: 1.2em;
+  background-color: $palegreen;
+  padding: 1.5rem;
+  border-radius: 0.2rem;
+}
+
+.faq_question::before {
+  content: "Q: "
+}
+
+.about_nav {
+  text-align: center;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.nav-item {
+  margin: 0 0.5rem;
+}
+
+.about_nav_item + .about_nav_item::before {
+  content: "•";
+  color: $darkgreen;
+}
+
+.about_us .go_to_top {
+  display: none;
+  font-size: 0.9em;
+}
+
+.about_us .header:hover .go_to_top {
+  display: inline;
+}

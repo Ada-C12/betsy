@@ -1,0 +1,182 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+$green: #428625;
+$lightgreen: #68a418;
+$darkgreen: #2e5e1a;
+$verydarkgreen: #174326;
+$brightgreen: #b7f702;
+$midgreen: #428625;
+
+.show_page_product {
+  margin-left: 1%;
+  margin-top: 2%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.show_page__header {
+  background-color: $palegreen;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.product_image_show {
+  width: 300px;
+  height: 300px;
+  margin-bottom: 10%;
+  margin-left: 20%;
+  margin-top: 2%;
+  object-fit: cover;
+  border-radius: 10%;
+  opacity: 0.9;
+}
+
+.product_data {
+  margin-top: 2%;
+  margin-left: 7%;
+  margin-bottom: 3%;
+}
+
+.product_data_extra {
+  margin-top: 5%;
+  margin-left: 6%;
+}
+
+.index_page_product-container {  
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  margin-left: 10%;
+  margin-right: 10%;
+  margin-bottom: 4%;
+}
+
+a {
+  text-decoration: none;
+  color: $darkgreen;
+}
+
+a:hover {
+  text-decoration: none;
+  color: $lightgreen;
+}
+
+.product_image {
+  width: 300px;
+  height: 300px;
+  border-radius: 10%;
+  margin-left: 5%;
+  opacity: 0.9;
+  object-fit: cover
+}
+
+.product_text {
+  margin-right: 8%;
+  margin-bottom: 10%;
+  text-align: center;
+}
+
+.checkbox-inline {
+  display: flex;
+  justify-content: space-between;
+  vertical-align: -1px;
+}
+
+.product-forms {
+  margin-top: 2%;
+  margin-left: 10%;
+  margin-right: 10%;
+}
+
+.table {
+  margin-top: 3%;
+  margin-left: 5%;
+  margin-right: 5%;
+  margin-bottom: 2%;
+}
+
+.index_page_product-container {
+  column-gap: 1em;
+  row-gap: 3em;
+  width: 80%;
+  margin: auto;
+  margin-bottom: 5rem;
+}
+
+@media only screen and (max-width: 1000px) {
+  .index_page_product-container, .index_page_category-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media only screen and (max-width: 650px) {
+  .index_page_product-container, .index_page_category-container {
+    display: grid;
+    grid-template-columns: 1fr;
+  }
+}
+
+.product_data_index, .category_data_index {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.product_data_index *, .category_data_index * {
+  margin: 0;
+}
+
+.product_img_container {
+  // so that text will be relative to this
+  position: relative;
+}
+
+.image {
+  // opacity faces in and out
+  transition: .5s ease;
+  margin-bottom: 1em;
+  border: 1px solid $darkgreen;
+}
+
+.link {
+  // opacity faces in and out
+  transition: .5s ease;
+  // makes it invisible normally
+  opacity: 0;
+  // absolute relative to container
+  position: absolute;
+  // position 50% in from top and left
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  -ms-transform: translate(-50%, -50%);
+  // align text center
+  text-align: center;
+}
+
+.product_img_container:hover .image {
+  // make image fade on hover
+  opacity: 0.3;
+}
+
+.product_img_container:hover .link {
+  // make text appear on hover
+  opacity: 1;
+}
+
+.link_text {
+  background-color: $lightgreen;
+  color: white;
+  font-size: 1.2em;
+  padding: 0.8em 1.4em;
+}
+
+.new_rating {
+  font-weight: bold;
+  margin-left: 5%; 
+  margin-bottom: 3%;
+}

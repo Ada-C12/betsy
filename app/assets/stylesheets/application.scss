@@ -1,0 +1,187 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+/* Custom bootstrap variables must be set or imported *before* bootstrap. */
+@import "bootstrap";
+/* Import scss content */
+@import "**/*";
+
+body {
+  font-family: 'Courier New', Courier, monospace;
+}
+
+$green: #428625;
+$lightgreen: #68a418;
+$highlight_lightgreen: #5da22c;
+$midgreen: #428625;
+$darkgreen: #2e5e1a;
+$verydarkgreen: #174326;
+$brightgreen: #b7f702;
+$palegreen: #c8eaaf;
+$whitegreen: #d6efc3;
+
+
+.app_header {
+  background-image: url(https://lh3.googleusercontent.com/i8VrQ6W2Gk-S8TvGyngqNVJMmoVRGqUljMHYqXyzUQC1hFmeey1eqVK3rE5WjvHrsyHROEnQaoLX67gP7G5NMRmsx1orzqR8fZmGv2LFrNeXqgRNlQYaZnLSKP2ccOaXDWpFJugmRA=w2400);
+  padding: 2.5rem;
+}
+
+.app_header__title, .app_header__title a {
+  color: #ACDF87;
+  font-weight: bold;
+  margin-bottom: 2rem;
+  text-decoration: none;
+}
+
+.top_nav {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.user_nav {
+  margin-left: auto;
+}
+
+.flash {
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+
+.page_nav a {
+  color: white;
+}
+
+.btn-primary {
+  background-color: $lightgreen;
+  border-color: $green;
+}
+
+.btn-primary:hover {
+  background-color: $green;
+  border-color: $midgreen;
+}
+
+.btn-light {
+  background-color: $palegreen;
+  border-color: $whitegreen;
+}
+
+.btn-light:hover {
+  background-color: $lightgreen;
+}
+
+.btn-secondary {
+  color: #0a1d10;
+  background-color: $midgreen;
+  border-color: $green;
+}
+
+.btn-secondary:hover {
+  color: $highlight_lightgreen;
+  background-color: #1a360f;
+  border-color: $midgreen;
+}
+
+.btn-secondary:not(:disabled):not(.disabled):active, .btn-secondary:not(:disabled):not(.disabled).active, .show > .btn-secondary.dropdown-toggle {
+  background-color: $lightgreen;
+  border-color: $lightgreen;
+}
+
+.shopping-cart:hover {
+  background-color: $highlight_lightgreen;
+}
+
+.shopping-cart:hover .badge {
+  background-color: $palegreen;
+  color: $midgreen;
+}
+
+.github-login {
+  color: $verydarkgreen;
+}
+
+.fa-github {
+  color: $verydarkgreen;
+}
+
+.fa-shopping-cart {
+  color: $midgreen;
+}
+
+.btn-light:hover, .btn-light:hover .fa-shopping-cart {
+  color: $darkgreen;
+  color: $brightgreen;
+}
+
+.footer {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 3fr 1fr;
+
+  background-color: $darkgreen;
+}
+
+.footer__site_buttons, .footer__offsite_buttons {
+  padding: 1rem 2rem 1rem 2rem;
+  align-self: center;
+}
+
+.footer__site_buttons {
+  grid-column-start: 1;
+  grid-column-end: 2;
+  grid-row-start: 1;
+  grid-row-end: 2;
+
+  display: flex;
+  flex-flow: column wrap;
+}
+
+.footer__offsite_buttons {
+  grid-column-start: 2;
+  grid-column-end: 3;
+  grid-row-start: 1;
+  grid-row-end: 2;
+  justify-self: end;
+
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-gap: 1rem;
+}
+
+.footer__offsite_buttons > * {
+  font-size: 1.5em;
+}
+
+.footer__site_copywrite {
+  grid-column-start: 1;
+  grid-column-end: 3;
+  grid-row-start: 2;
+  grid-row-end: 3;
+  justify-self: stretch;
+  text-align: center;
+
+  color: $green;
+  background-color: $verydarkgreen;
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.footer__site_buttons > * {
+  width: max-content;
+  margin: 0.5rem;
+}
