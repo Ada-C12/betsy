@@ -75,6 +75,16 @@ describe Product do
       
     end
     
+    it "is invalid if stock is less than zero" do
+      is_invalid = products(:product1)
+      is_invalid.stock = -1
+      
+      refute(is_invalid.valid?)
+      expect(is_invalid.errors.messages).must_include :stock
+      expect(is_invalid.errors.messages[:stock]).must_equal ["must be greater than 0"]
+      
+    end
+    
     it "is invalid if there is no wizard" do
       is_invalid = products(:product1)
       is_invalid.wizard = nil
@@ -95,7 +105,7 @@ describe Product do
       expect(is_invalid.errors.messages[:retired]).must_equal ["is not included in the list"]
     end
   end
-
+  
   describe "monetize price_cents" do
     it "stores a money object in .price with amount equal to price_cents in USD" do
       expect(product1.price).must_be_instance_of Money
