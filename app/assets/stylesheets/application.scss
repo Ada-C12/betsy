@@ -198,12 +198,12 @@ form {
 }
 
 a {
-  color: black
+  color: rgb(75, 140, 76);
 }
 
 a:hover {
   text-decoration: none;
-  color: rgb(94, 170, 95);
+  color:#9D6AB9;
 }
 
 
@@ -285,8 +285,7 @@ th, th a{
 // show product page
 
 .show-product-img {
-  max-width: 35%;
-  max-height: 35%;
+  max-height: 300px;
   border: solid 10px #9D6AB9;
   box-shadow: 4px 8px rgba(136, 136, 136, 0.5);
   margin-right: 5%;
@@ -298,14 +297,14 @@ th, th a{
 }
 
 .product-show-head {
-  margin-top: 3%;
-  margin-bottom: 3%;
+  margin-top: 2%;
+  margin-bottom: 2%;
   font-weight: bolder;
   color: rgb(113, 72, 134);
 }
 
 .product-show-merchant {
-  margin-bottom: 3%;
+  margin-bottom: 2%;
   font-weight: bold;
 }
 
@@ -326,6 +325,7 @@ th, th a{
   font-weight: bold;
   margin: 1% 0
 }
+
 .rating-form {
   display: flex;
   flex-direction: column;
@@ -402,7 +402,7 @@ th, th a{
 
 #checkout-button {
   max-width: 8rem;
-}
+} 
 
 .cart-quantity {
   max-width: 4rem;
@@ -505,4 +505,20 @@ th, th a{
 
 .product-description {
   color: rgb(94, 170, 95);
+}
+// current user page
+.current-user tr {
+  text-align: center;
+}
+
+.current-user h2 {
+  margin: 2% 0;
+}
+
+.current-user h3 {
+  margin: 4% 0 2% 0
+}
+
+.current-user .username {
+  color: rgb(113, 72, 134);
 }
