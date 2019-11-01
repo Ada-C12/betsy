@@ -1,7 +1,14 @@
-<section class="confirmaton-page-container">
-  <h1> Thank you for ordering on fruitsy! </h1>
-  <h2> We appreiciate your business and hope to see you again soon! </h2>
-  <h4> You will receive a confirmation email shortly at <%= @current_order.email %>. </h4>
+<section class="page-container">
+<section class="confirmation-welcome">
+  <h1> <strong> Thank you for ordering on fruitsy! </strong> </h1>
+  <h2> We appreciate your business and hope to see you again soon. </h2>
+  <h4> You will receive a confirmation email shortly at
+  <strong> <%= @current_order.email %> </strong> </h4>
+  <h4> Order <strong> <%= @current_order.id %> </strong> status is
+    <strong> <%= @current_order.status %> </strong>
+    - <%= currency_format(@current_order.total) %>
+  </h4>
+</section>
 
   <% if @current_order.status == "paid" %>
     <section class="confirmation-img-container">
@@ -12,16 +19,9 @@
         <%= image_tag url, alt:"product image", class:"confirmation-img product-thumbnail" %>
       <% end %>
     </section>
-
-    <section class="confirmation-order-container">
-      <h4> Order <strong> <%= @current_order.id %> </strong> status is
-        <strong> <%= @current_order.status %> </strong>
-        - <%= currency_format(@current_order.total) %>
-      </h4>
-    </section>
-
-  <h2> Shipping Details </h2>
+  
     <section class="confirmation-shipping-container">
+    <h2> Shipping Details </h2>
       <table class="table confirmation-table">
         <thead>
           <tr>
@@ -40,8 +40,7 @@
       <table class="table">
     </section>
 
-
-<h2> Billing Details </h2>
+    <h2> Billing Details </h2>
     <section class="confirmation-shipping-container">
       <table class="table confirmation-table">
         <thead>

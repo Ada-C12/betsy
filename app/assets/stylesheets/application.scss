@@ -366,17 +366,24 @@ th, th a{
   max-width: 4rem;
 }
 .confirmation-img {
-  max-width: 10%
+  max-width: 10%;
+  border: solid 2px #9D6AB9;
+  box-shadow: 1px 3px rgba(136, 136, 136, 0.5);
 }
 
 .confirmation-img-container {
   display: flex;
   justify-content: space-evenly;
-  margin-right: 5%;
-  margin-left: 5%;
+  margin: 5%;
 }
 
 .confirmation-shipping-container {
   margin-left: 10%;
   margin-right: 10%;
+}
+
+
+.confirmation-welcome {
+  text-align: center;
+  margin-top: 3%;
 }
