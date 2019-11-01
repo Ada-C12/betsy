@@ -1,7 +1,6 @@
 require "test_helper"
 
 describe Type do
-  
   let (:new_type) { 
     Type.new(name: "Lager")
   }
@@ -28,12 +27,10 @@ describe Type do
       bad_type = Type.new(name: "1time")
       
       expect {bad_type.save}.wont_change "Type.count"
-      
     end
   end
   
   describe "relationships" do
-    
     it "[type] can have many products" do
       types(:light).products << products(:stella)
       types(:light).products << products(:corona)
@@ -46,22 +43,14 @@ describe Type do
     end
     
     it "[type] can belong to many products" do
-      #want to create products (2), and give them the same type, assertion is:
-      
       products(:sapporo).types << types(:light)
       products(:corona).types << types(:light)
-      # types(:light).products << products(:corona)
-      
+
       updated_product = Product.find_by(id: products(:sapporo).id)
-      # updated_product = Product.new
-      
       expect(updated_product.types.find_by(id: products(:stella).id)).must_equal nil
       expect(updated_product.types.find_by(id: products(:corona).id)).must_equal nil
       expect(updated_product.types.count).must_equal 1
     end
-    
   end
-  
-  
-end#end of relationship/Do
+end
 

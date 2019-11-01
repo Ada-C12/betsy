@@ -15,14 +15,11 @@ class ProductsController < ApplicationController
     @orderitem = Orderitem.new
     @review = Review.new
   end 
-  
-  
-  # only merchants
+
   def new
     @product = Product.new
   end
-  
-  # only merchants
+
   def create
     @product = Product.new(product_params)
     @merchant = Merchant.find_by(id: session[:merchant_id])
@@ -41,7 +38,6 @@ class ProductsController < ApplicationController
     end
   end
   
-  # only merchants
   def edit
     @product = Product.find_by(id: params[:id])
     
@@ -52,7 +48,6 @@ class ProductsController < ApplicationController
     end
   end 
   
-  # only merchants
   def update
     @product = Product.find_by(id: params[:id])
     @product.update_attributes(product_params)
@@ -68,7 +63,6 @@ class ProductsController < ApplicationController
     end
   end
   
-  # only merchants
   def toggle_retire
     @product = Product.find_by(id: params[:id])
     if @product.retired == true

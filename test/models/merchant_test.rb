@@ -145,7 +145,6 @@ describe Merchant do
         result = Merchant.calculate_total_revenue(current_merchant)
         expect(result).must_equal 0
       end
-      
     end 
     
     describe "calc_rev_by_status" do
@@ -164,8 +163,5 @@ describe Merchant do
         expect(result).must_equal 0
       end
     end
-    
-    
   end
-  
 end
