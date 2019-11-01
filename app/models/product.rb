@@ -55,7 +55,7 @@ class Product < ApplicationRecord
   def self.search(search)
     products = []
     self.active.each do |product|
-      products << product if product.name.downcase.include?(search)
+      products << product if product.name.downcase.include?(search.downcase)
     end
     return products
   end
