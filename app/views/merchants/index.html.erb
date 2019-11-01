@@ -1,7 +1,7 @@
-<h2> Shop by Merchant </h2>
-<ul>
-  <% @merchants.each do |merchant| %>
 
-    <li><%= link_to merchant.username, merchant_products_path(merchant.id) %></li>
+<h2 class="h-center-text-no-pad" > Shop by Merchant </h2>
+<section class="merchants">
+  <% @merchants.each do |merchant| %>
+    <%= link_to merchant.username, merchant_products_path(merchant.id), class: "merchant_name text-center" %>
   <% end %>
-</ul>
+</section>
