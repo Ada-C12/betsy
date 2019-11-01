@@ -1,0 +1,85 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+/* Custom bootstrap variables must be set or imported *before* bootstrap. */
+@import "bootstrap";
+/* Import scss content */
+@import "**/*";
+
+body {
+  padding-top: 65px;
+  background: #efefef;
+}
+.sidebar-sticky {
+  position: sticky;
+  top: 0;
+  height: calc(100vh - 70px);
+  padding-top: 0.5rem;
+  overflow-x: hidden;
+  overflow-y: auto;
+}
+// * {
+//     background: coral;
+// }
+// main {
+//     margin: 100px;
+//     background: coral;
+
+//
+
+.body {
+  background: #ececec;
+}
+img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+// h1 {
+//   font-family: Trattatello, fantasy;
+// }
+
+.nav-item .nav-link {
+  // font-family: Trattatello;
+  // color: blueviolet;
+}
+.typewriter {
+  // overflow: hidden;
+  color: blue;
+  white-space: nowrap;
+  margin: 0 auto;
+  // letter-spacing: 0.1em;
+  animation: typing 3.5s steps(40, end), blink-caret 0.75s step-end 7;
+}
+.side-nav {
+  height: 100vh;
+}
+
+.card-img-top {
+  height: 180px !important;
+  object-fit: cover;
+}
+
+.bg-primary,
+.btn-primary {
+  background: #feb236;
+  border-color: #feb236;
+  color: #000;
+}
+.btn-primary:hover {
+  background: #c68300;
+  border-color: #c68300;
+  color: #fff;
+}

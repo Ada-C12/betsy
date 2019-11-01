@@ -1,0 +1,83 @@
+<div class="row mt-2">
+  <div class="col-lg-3">
+    <section class="mb-5">
+      <div class="card">
+        <div class="card-header">
+          Merchants
+        </div>
+        <div class="card-body">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <%= link_to "Products", dashboard_path(item: "products"), class:"nav-link active" %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Categories", dashboard_path(item: "categories"), class:"nav-link " %>
+            </li>
+            <li class="nav-item">
+              <%= link_to "Order Fulfillment", fulfillment_path, class:"nav-link " %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </section>
+  </div>
+  <%# <h2> PRODUCTS </h2> %>
+  <div class="col-lg-9 card">
+    <div class="card-body">
+      <div class="container">
+        <div class="row justify-content-end mb-4">
+          <% if @products%>
+            <%= link_to "Add Product", new_product_path, class:"btn btn-primary" %>
+          <% else %>
+            <%= link_to "Add Category", new_category_path, class:"btn btn-success" %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <% if @products%>
+            <th scope="col">Id</th>
+            <th scope="col">Name</th>
+            <th scope="col">Category</th>
+            <th scope="col">Stock</th>
+            <th scope="col">Price</th>
+            <th scope="col">Status</th>
+            <th scope="col">Edit</th>
+          <% else %>
+            <th scope="col">Id</th>
+            <th scope="col">Label</th>
+            <th scope="col">Edit</th>
+          <% end %>
+        </tr>
+      </thead>
+      <tbody>
+        <% if @products%>
+          <% @products.each do |product| %>
+            <tr>
+              <th scope="row"><%= product.id %></th>
+              <td><%= product.name %></td>
+              <td>
+                <%product.categories.each do |category|%>
+                  <span class="badge badge-secondary"><%= category.label%></span>
+                <% end %>
+              </td>
+              <td><%= product.stock %></td>
+              <td><%= product.price %></td>
+              <td><%= product.retired %></td>
+              <td> <%= link_to "Edit", edit_product_path(product.id), class:"btn btn-success " %></td>
+            </tr>
+          <% end %>
+        <% else %>
+          <% @categories.each do |category| %>
+            <tr>
+              <th scope="row"><%= category.id %></th>
+              <td><%= category.label %></td>
+              <td> <%= link_to "Edit", edit_category_path(category.id), class:"btn btn-success " %></td>
+            </tr>
+          <% end %>
+        <% end %>
+      </tbody>
+    </table>
+  </div>

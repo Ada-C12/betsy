@@ -1,0 +1,121 @@
+valid:
+  username: john
+  email: john@example.com
+  cc_name: test
+  cc_number: test
+  cvv: test
+  billing_zip: 12929
+  street_address: 14242
+  city: Seattle
+  state: WA
+  mailing_zip: 12929
+
+invalid_without_username:
+  email: john2@example.com
+  cc_name: test
+  cc_number: test
+  cvv: test
+  billing_zip: 12929
+  street_address: 14242
+  city: Seattle
+  state: WA
+  mailing_zip: 12929
+
+invalid_without_email:
+  username: amy
+  cc_name: test
+  cc_number: test
+  cvv: test
+  billing_zip: 12929
+  street_address: 14242
+  city: Seattle
+  state: WA
+  mailing_zip: 12929
+
+invalid_duplicate_username:
+  username: amy
+  email: test123@gmail.com
+  cc_name: test2
+  cc_number: test
+  cvv: test
+  billing_zip: 12929
+  street_address: 14242
+  city: Seattle
+  state: WA
+  mailing_zip: 12929
+
+# u_0:
+#   # id: 0
+#   username: guest
+#   email: mrtea@gmail.com
+#   street_address: 2432  Duck Creek Road
+#   city: Platteville
+#   state: CO
+#   mailing_zip: 98112
+#   cc_name: Tea Soak
+#   cc_number: 358682578002068
+#   cc_expiration: 1021
+#   cvv: 345
+#   billing_zip: 80651
+#   provider: github
+#   uid: 123
+
+u_1:
+  username: mr_tea
+  email: mrtea@gmail.com
+  street_address: 2432  Duck Creek Road
+  city: Platteville
+  state: CO
+  mailing_zip: 98112
+  cc_name: Tea Soak
+  cc_number: 358682578002068
+  cc_expiration: 1021
+  cvv: 345
+  billing_zip: 80651
+  provider: github
+  uid: 123
+
+u_2:
+  username: mycroft
+  email: mycroft@gmail.com
+  street_address: 2648  Hedge Street
+  city: Lenexa
+  state: WA
+  mailing_zip: 96834
+  cc_name: Wheeled Kane
+  cc_number: 6011393976149255
+  cc_expiration: 1121
+  cvv: 666
+  billing_zip: 90892
+  provider: github
+  uid: 456
+
+u_3:
+  username: hello_kitty
+  email: hellokitty@hotmail.com
+  street_address: 1694  Modoc Alley
+  city: Portland
+  state: MI
+  mailing_zip: 34227
+  cc_name: Hello Cat
+  cc_number: 5599370810560063
+  cc_expiration: 0821
+  cvv: 777
+  billing_zip: 08880
+  provider: github
+  uid: 789
+
+u_4:
+  username: sally
+  email: sally@yahoo.com
+  street_address: 3252  Emma Street
+  city: Salem
+  state: TX
+  mailing_zip: 76112
+  cc_name: Gretchen del Valle
+  cc_number: 4199213496260607
+  cc_expiration: 0821
+  cvv: 999
+  billing_zip: 67834
+  provider: github
+  uid: 1011

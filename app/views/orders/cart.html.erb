@@ -1,0 +1,47 @@
+<main>
+  <section>
+    <h2 id = "cart" >Cart</h2>
+      <% if @order.order_items.empty? %>
+        <h4 id = "emptiness-statement" >your cart is empty</h4>
+      <% end %>
+  </section>
+
+<section id = orders>
+  <table>
+    <h2 id = "order-details"> Order Details </h2>
+    <theader>
+      <tr class = "table-headers">
+        <td>Item</td>
+        <td>Quantity</td>
+        <td>Price</td>
+        <td>Item Subtotal</td>
+        <td>Remove?</td>
+      </tr>
+    </theader>
+    <tbody>
+      <% @order.order_items.each do |order_item| %>
+        <tr>
+          <td><%= link_to order_item.product.name, product_path(order_item.product.id) %></td>
+          <td>
+            <%= form_with model: order_item, url: update_cart_path(order_item) do |f| %>
+              <%= f.text_field :quantity %>
+              <%= f.submit "update" %>
+            <% end %>
+          </td>
+          <td>$<%= Order.formatter order_item.product.price %></td>
+          <td>$<%= Order.formatter order_item.total %></td>
+          <td><%= link_to "remove", remove_from_cart_path(order_item.id), method: :delete %></td>
+        </tr>
+      <% end %>
+    </tbody>
+    </table>
+  </section>
+
+<section>
+  <h2 id= "sum"> Total Price: $<%= Order.formatter @order.revenue %> </h2>
+
+  <h4><strong><%= link_to "Click here to complete this purchase!", complete_purchase_path(@order.id) %></strong></h4>
+  </section>
+  </table>
+
+</main>

@@ -1,0 +1,70 @@
+# valid:
+#   name: john
+#   email: john@example.com
+
+# invalid_without_username:
+#   email: john2@example.com
+
+# invalid_without_email:
+#   username: amy
+
+# invalid_duplicate_username:
+#   username: john
+#   email: test2@test.com
+
+# need to changes for my test work
+
+#===================================
+p_1:
+  name: ADULT RED FEZ HAT
+  description: People will ask, “What's that on your head?” and all you need to say is, “It's a fez. I wear a fez now. Fezzes are cool.” It will make you appear as if you're part of some exclusive men's or women's club that only the coolest of the cool can be part of, and only as long as they have one of these classy felt fezzes.
+  price: 20000
+  photo_url: https://www.halloweencostumes.com/adult-red-fez-hat.html?mpid=168108&gclid=CjwKCAjw9L_tBRBXEiwAOWVVCcZ3Go-h_dgQ33yj-qr5AZtbeQCR1iZPH2x0I15yFuLKjkpUt9gJKBoC1OcQAvD_BwE
+  user: u_1
+  retired: Active
+  stock: 100
+
+p_2:
+  name: Aladdin Golden Scarab Beetle Mirrors
+  description: The Golden Scarab Beetle has a few tricks up its sleeve - like revealing the Cave of Wonders and your reflection!
+  price: 500
+  photo_url: https://hottopic.scene7.com/is/image/HotTopic/11708689_hi?$pdp_hero_zoom$
+  user: u_2
+  retired: Active
+  stock: 100
+
+p_3:
+  name: Magic Carpet
+  description: A replica of the flying carpet.
+  price: 100
+  photo_url: https://www.therpf.com/forums/attachments/tgqefqi-jpg.1027451/
+  user: u_2
+  retired: Active
+  stock: 20
+
+p_4:
+  name: Abu
+  description: HE'S SO CUTE!!!!
+  price: 5000
+  photo_url: https://primatestore.com/forsale/73_brazillian_2.jpg
+  user: u_2
+  retired: Retired
+  stock: 1
+
+p_5:
+  name: Lago
+  description: I can't take it anymore if I gotta choke down on one of those moldy disgusting crackers
+  price: 3000
+  photo_url: https://images.prod.meredith.com/product/cf5dd7e7a9e880c84adf078a109c172d/1556063274673/l/disney-aladdin-mini-plush-iago
+  user: u_3
+  retired: Active
+  stock: 0
+
+p_6:
+  name: Jafar's snake staff
+  description: Look into my eyes
+  price: 4000
+  photo_url: https://vignette.wikia.nocookie.net/evil/images/5/5d/Jafar%27s_Snake_Staff.jpg/revision/latest?cb=20190224000021
+  user: u_3
+  retired: Retired
+  stock: 0

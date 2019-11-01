@@ -1,0 +1,29 @@
+<article>
+  <header>
+    <h6><strong><%= link_to "Order #{ (order).id }", order_path((order).id) %> </strong> status: <%= (order).status %></h6>
+  </header>
+  <table>
+    <theader>
+      <tr class="table-headers">
+        <td>Product</td>
+        <td>Quantity</td>
+        <td>Subtotal</td>
+        <td>Status</td>
+      </tr>
+    </theader>
+    <tbody>
+      <% (order_items).each do |oi| %>
+        <tr>
+          <td><%= link_to oi.product.name, product_path(oi.product.id) %></td>
+          <td><%= oi.quantity %></td>
+          <td>$<%= oi.total %></td>
+          <% if oi.shipping_status == "shipped" %>
+            <td> shipped </td>
+          <% else %>
+            <td> <%= link_to "mark shipped", mark_shipped_path(oi.id), method: :patch %></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</article>

@@ -1,0 +1,46 @@
+<div class="row mt-2">
+  <div class="col-lg-3">
+    <section class="mb-5">
+      <div class="card">
+        <div class="card-header">
+          Merchants
+        </div>
+        <div class="list-group list-group-flush">
+          <% @users.each do |user|%>
+            <%= link_to user.username, user_path(user.id), class:"list-group-item list-group-item-action" %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+    <section>
+      <div class="card">
+        <div class="card-header">
+          Categories
+        </div>
+        <div class="list-group list-group-flush">
+          <% @categories.each do |category|%>
+            <%= link_to category.label, user_path(category.id), class:"list-group-item list-group-item-action" %>
+          <% end %>
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-lg-9">
+    <div class="row">
+      <% @products.each do |product|%>
+        <div class="col-sm-4 d-flex mb-4">
+          <div class="card">
+            <img src=<%= product.photo_url %> class="card-img-top img-fluid" alt="..." style="max-height: 120px">
+            <div class="card-body">
+              <h5 class="card-title"><%= product.name %></h5>
+              <p class="card-text"> <%= product.description %>
+                <%= product.price %>
+                <%= product.stock %></p>
+              <a href="#" class="btn btn-primary">Go somewhere</a>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>
