@@ -1,0 +1,27 @@
+uid,merchant_name,email,provider,username
+111,Abigail Apple,a_abigail@email.com,github,AppleAbigail
+222,Banana Bob,b_bob@email.com,github,BananaBob
+333,Cantalope Candice,c_candice@email.com,github,CantalopeCandice
+444,Durian Daniel,d_daniel@email.com,github,DurianDaniel
+555,Elderberry Emily,e_emily@email.com,github,ElderberryEmily
+666,Fig Frannie,f_frannie@email.com,github,FigFrannie
+777,Grapefruit Gus,g_gus@email.com,github,GrapefruitGus
+888,Honeydew Hannah,h_hannah@email.com,github,HoneydewHannah
+999,Indian Prune Ivana,i_ivana@email.com,github,IndianIvana
+101010,Jackfruit Jack,j_jack@email.com,github,JackfruitJack
+111111,Kiwi Karen,k_karen@email.com,github,KiwiKaren
+121212,Lychee Lindsay,l_lindsay@email.com,github,LycheeLindsay
+131313,Mango Mandy,m_mandy@email.com,github,MangoMandy
+141414,Nectarine Nadine,n_nadine@email.com,github,NectarineNadine
+151515,Orange Oliver,o_oliver@email.com,github,OrangeOliver
+161616,Papaya Pete,p_pete@email.com,github,PapayaPete
+171717,Queen Anne Cherry,q_cherry@email.com,github,QueenCherry
+181818,Raspberry Ramone,r_ramone@email.com,github,RaspberryRamone
+191919,Strawberry Steve,s_steve@email.com,github,StrawberrySteve
+202020,Tangerine Tanya,t_tanya@email.com,github,TangerineTanya
+212121,Ugli Fruit Ulma,u_ulma@email.com,github,UgliUlma
+222222,Vanilla Bean Venessa,v_venessa@email.com,github,VanillaVenessa
+232323,Watermelon Walter,w_walter@email.com,github,WatermelonWalter
+242424,Xigua Xinran,x_xinran@email.com,github,XiguaXinran
+252525,Yangmei Yoel,y_yoel@email.com,github,YangmeiYoel
+262626,Zuchinni Zach,z_zach@email.com,github,ZuchinniZach

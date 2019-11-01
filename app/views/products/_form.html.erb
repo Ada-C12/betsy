@@ -1,0 +1,74 @@
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('.category-type__multiselect').multiselect({
+            includeSelectAllOption: true,
+            enableFiltering: true
+        });
+    });
+</script>
+
+<section class="page-container">
+  <hr/>
+  <h2>Add A New Product</h2>
+
+  <%= form_with model: @product, method: :post, action: "/products", class: "form-horizontal new-product-form" do |f| %>
+
+    <section class="text-fields">
+      <div class="form-group">
+        <%= f.label :Name %>
+        <%= f.text_field :name, class: "form-text" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :Price %>
+        <%= f.text_field :price, class: "form-text" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :Stock %>
+        <%= f.text_field :stock, class: "form-text" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label "Image URL" %>
+        <%= f.text_field :img_url, class: "form-text" %>
+      </div>
+
+      <div class="form-group">
+        <%= f.label :Description %>
+        <%= f.text_field :description, class: "form-text" %>
+      </div>
+    </section>
+    
+    <section class="category-selectors">
+    <% ["fruit", "theme", "color", "category"].each do |type| %>
+      <% products = Category.where(category_type: type) %>
+
+      <div class="form-group">
+        <label class="col-sm-2 control-label">
+          <% if type == "category" %>
+            Product Type
+          <% else %>
+            <%= type.capitalize %>
+          <% end %>
+        </label>
+        <div class="col-sm-10">
+            <select class="category-type__multiselect" name="multiselect[]" multiple="multiple">
+                <% products.each do |product| %>
+                <% id = product.id.to_s %>
+                <% name = product.name.capitalize %>                
+                  <option value=<%=id%>><%=name%></option>
+                <% end %>
+            </select>
+        </div>
+      </div>
+    <% end %>
+
+    <div class="form-group">
+      <div class="col-sm-offset-2 col-sm-10">
+          <button type="submit" class="btn btn-green">Add Product</button>
+      </div>
+    </div>
+  </section>
+<% end %>
+</section>

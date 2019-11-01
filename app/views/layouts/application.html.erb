@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>🍉fruitsy🍊</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+
+    <!-- Include Twitter Bootstrap and jQuery: -->
+    <link rel="stylesheet" href="css/bootstrap.min.css" type="text/css"/>
+    <script type="text/javascript" src="js/jquery.min.js"></script>
+    <script type="text/javascript" src="js/bootstrap.min.js"></script>
+
+    <!-- Include the plugin's CSS and JS: -->
+    <script type="text/javascript" src="js/bootstrap-multiselect.js"></script>
+    <link rel="stylesheet" href="css/bootstrap-multiselect.css" type="text/css"/>
+
+    <%= stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Lato|Modak&display=swap" rel="stylesheet">
+
+  </head>
+
+  <body>
+
+  <%# Fruit Image Links Fixed Nav %>
+    <section class="fruit-shape-links sticky-top">
+      <%= fruit_image("48966256972_b25342b8df", "strawberry") %>
+      <%= fruit_image("48966257187_4808931340", "apple") %>
+      <%= fruit_image("48965531768_24fce80958", "orange") %>
+      <%= fruit_image("48966077751_5e88d3a52a", "mango") %>
+      <%= fruit_image("48965531738_c70c61c848", "pineapple") %>
+      <%= fruit_image("48966077756_d140d28fbe", "lemon") %>
+      <%= fruit_image("48965531848_7477ccc902", "banana") %>
+      <%= fruit_image("48966256962_f7655d0227", "watermelon") %>
+      <%= fruit_image("48966077851_25c938e75c", "avocado") %>
+      <%= fruit_image("48965531803_a181744b80", "kiwi") %>
+      <%= fruit_image("48965531838_40b12131ee", "berry") %>
+      <%= fruit_image("48966077781_02aa2abeed", "grapes") %>
+      <%= fruit_image("48965531818_7678560b94", "dragonfruit") %>
+      <%= fruit_image("48966257017_39d2f25373", "peach") %>
+    </section>
+  
+  <%# Merchant Nav Bar %>
+    <%if session[:user_id]%>
+      <% current_user = User.find_by(id: session[:user_id]) %>
+      <nav class="navbar navbar-expand-lg navbar-dark bg-merchant-nav">
+        <%= link_to nav_fruit_img, current_user_path, class:"nav-fruit-img" %>
+        <%= link_to current_user.username, current_user_path, class: "navbar-brand", data: { turbolinks: false } %>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNavDropdown">
+          <ul class="navbar-nav ml-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" id="dropdown-text" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <%= fruitstand_img %>
+              Manage My Fruit Stand
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdown-text">
+                <%= link_to "Manage My Store", current_user_path, class: "dropdown-item", data: { turbolinks: false }%>
+                <%= link_to "View My Store", user_path(current_user.id), class: "dropdown-item" %>
+                <%= link_to "Add New Product", new_product_path, class: "dropdown-item" %>
+                <%= link_to "Edit Merchant Name", edit_user_path, class: "dropdown-item" %>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    <%end%>  
+
+    <nav class="all-nav-parts-container">
+    <%# Login/Login & Basket Nav %>
+    <nav class="login-basket-nav">
+      <section class="login-loggout-container">
+        <%if session[:user_id]%>
+          <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-green logout-btn"%>
+        <%else %>
+          <%= link_to "Login with Github", github_login_path, class: "btn btn-green "%>
+        <%end %>
+      </section>
+
+      <% cart_order = Order.find_by(id:session[:cart_id]) %>
+      <% if cart_order &&  cart_order.order_items.count > 0 %>
+        <div class="cart-link"> <%= cart_full_img_link%> </div>
+      <% else %>
+        <div class="cart-link"> <%= cart_empty_img_link%> </div>
+      <% end %>
+    </nav>
+      
+    <%# Main Brand Name %>
+    <h1 class="top-brand-name">
+      <%= link_to "FRUiTSY", root_path %>
+    </h1>
+
+    <%# Main Nav Bar with Category/Merchant Links %>
+    <nav class="nav navbar navbar-expand-lg navbar-light bg-light">
+      <%= link_to "FRUiTSY", root_path, class:"navbar-brand" %>
+
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <%= link_to "All Fruits", products_path, class:"nav-link" %>
+        </li>
+        
+        <% ["fruit", "theme", "category", "color"].each do |type| %>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <% if type == "category" %>
+                Product Type
+              <% else %>
+                <%= type.capitalize %>
+              <% end %>
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <% Category.where(category_type: type).order(:name).each do |category| %>
+                <%= link_to category.name.capitalize, category_products_path(category.id) , class:"dropdown-item" %>
+              <% end%>
+            </div>
+          </li>
+        <% end %>
+        
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            Merchants
+          </a>
+          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            <% User.all.order(:merchant_name).each do |user| %>
+              <% if user.merchant_name %>
+                <%= link_to user.merchant_name, user_path(user.id) , class:"dropdown-item" %>
+              <% end %>    
+            <% end %>
+        </li>
+      </ul>
+      <%= form_tag(products_path, method: :get, class: "form-inline my-2 my-lg-0") do %>
+        <%= text_field(:search, params[:search], class: "form-control mr-sm-2", placeholder: "Search") %>
+        <%= submit_tag("Search", class: "btn btn-outline-success my-2 my-sm-0") %>
+      <% end %>
+      </div>
+    </nav>
+  </nav>
+
+  <%# Flash Messages on each page %>
+  <section class="flash">
+    <% flash.each do |name, message| %>
+      <% if name == "success" %>
+        <div class="alert alert-success" role="alert" class="<%= name %>"><%= message %></div>
+      <% elsif name == "error"%>
+        <div class="alert alert-danger" role="alert" class="<%= name %>"><%= message %></div>
+      <% elsif name == "message"%>
+        <div class="alert alert-warning" role="alert" class="<%= name %>"><%= message %></div>
+      <% elsif name == "errors" %>
+        <div class="alert alert-warning" role="alert" class="<%= name %>">
+          <h4> Requirement Errors </h4>
+          <% message.each do |column, error| %>
+            <div> <strong> <%= column.capitalize %> </strong> 
+              <%= error.join(', ') %>
+            </div> 
+          <% end %>
+        </div>
+      <% end %>
+    <% end %>
+  </section>
+  
+    <%# Main content on each page %>
+    <main>
+    <%= yield %>
+    </main>
+  
+</body>
+  <%# Footer on each page %>
+  <footer>
+    © 2019 The Fruit Loops
+  </footer>
+</html>

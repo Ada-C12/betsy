@@ -1,0 +1,76 @@
+<section class="page-container">
+  <section class="checkout-welcome">
+    <h1> <strong> Checkout </strong> </h1>
+    <h2 class="checkout-header">Please provide shipping and billing details to complete your order.</h2>
+  </section>
+
+  <%= form_with model: @current_order, url: order_path(id: @current_order.id) do |f| %>
+  <div class="card checkout-card">
+    <section class="checkout-shipping-container">
+      <h2 class="checkout-header"> Shipping Details </h2>
+
+      <div class="form-group row">
+        <%= f.label :Name, class: "col-sm-5 col-form-label"%>
+        <div class="col-5">
+        <%= f.text_field :name, class: "form-control", type: "text", placeholder: "Bonnie Banana"  %>
+        </div>
+      </div>
+      
+      <div class="form-group row">
+        <%= f.label :Email, class: "col-sm-5 col-form-label" %>
+        <div class="col-5">
+        <%= f.text_field :email, class: "form-control", type: "email", placeholder: "BBanana@example.com" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label :Address, class: "col-sm-5 col-form-label" %>
+        <div class="col-5">
+        <%= f.text_field :address, class: "form-control", type: "text", placeholder: "123 Kiwi Ave Apt. 23, Fruitville, WA 99999"%>
+        </div>
+      </div>
+    </section>
+  </div>
+
+    <div class="card checkout-card">
+      <h2 class="checkout-header">Billing Details</h2>
+
+      <div class="form-group row">
+        <%= f.label "Credit Card Name", class: "col-sm-5 col-form-label" %>
+        <div class="col-5">
+        <%= f.text_field :cc_name, class: "form-control", type: "text", placeholder: "Bonnie B Banana" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "Credit Card Last 4 Digits", class: "col-sm-5 col-form-label" %>
+        <div class="col-5">
+        <%= f.text_field :cc_last4, class: "form-control", type: "text", placeholder: "4321" %>
+        </div>  
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "Exp Date", class: "col-sm-5 col-form-label" %>
+        <div class="col-5">
+        <%= f.text_field :cc_exp, class: "form-control", type: "text", placeholder: "01/21" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "CVV", class: "col-sm-5 col-form-label" %>
+        <div class="col-5">
+        <%= f.text_field :cc_cvv, class: "form-control", type: "text", placeholder: "321" %>
+        </div>
+      </div>
+
+      <div class="form-group row">
+        <%= f.label "Billing Zip Code", class: "col-sm-5 col-form-label" %>
+        <div class="col-5">
+        <%= f.text_field :billing_zip, class: "form-control", type: "text", placeholder: "99999" %>
+        </div>
+      </div>
+    <%= f.submit "Submit Order", class:"btn btn-green submit-btn" %>
+    </div>
+    <% end %>
+  </div>
+</section>

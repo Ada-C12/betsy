@@ -1,0 +1,18 @@
+ada:
+  uid: 1111
+  merchant_name: Ada's Apple Abyss
+  email: ada@fruitstand.com
+  provider: github
+  username: ada759
+betsy:
+  uid: 2222
+  merchant_name: The Bluest Berry
+  email: bbb@blueberry.com
+  provider: github
+  username: btimes3
+gretchen:
+  uid: 3333
+  merchant_name:
+  email: gretchen@fruitstand.com
+  provider: github
+  username: gretch_is_fetch

@@ -1,0 +1,26 @@
+<main>
+<section class="order-show-page">
+
+<h1>Order Details</h1>
+
+<h3>Order ID: <%= @order.id %></h3>
+<h3>Order Status: <%= @order.status %></h3>
+
+<section class='table'>
+<h2>Shipping info:</h2>
+<p>Name: <%= @order.name %></p>
+<p>Email: <%= @order.email %></p>
+<p>Address: <%= @order.address %></p>
+</section>
+
+<section class='table'>
+<h2>Payment info:</h2>
+<p>Name: <%= @order.cc_name %></p>
+<p>Card num: <%= @order.cc_last4 %></p>
+<p>Exp: <%= @order.cc_exp %></p>
+<p>CVV: <%= @order.cc_cvv %></h3>
+<p>Billing Zip: <%= @order.billing_zip %></p>
+</section>
+
+</section>
+</main>

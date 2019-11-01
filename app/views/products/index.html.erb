@@ -1,0 +1,32 @@
+<section class="page-container">
+  <% if @category %>
+    <h1 class="page-title"> Shop All <%= @category.name.capitalize %> Products </h1>
+  <% elsif @search_result %>
+    <h1 class="page-title"> Search results for "<%= @search_result %>" </h1>
+  <% else %>
+    <h1 class="page-title"> Shop All Fruit Products </h1>
+  <% end %>
+
+  <section class="cards-container">
+    <% @products.shuffle.each do |product| %>
+      <section class="card" style="width: 18rem;">
+        <%= form_with model: OrderItem, url: product_order_items_path(product.id) do |f| %>
+          <%= f.hidden_field :quantity, :value => 1 %>
+          <%= f.submit "+", class: "btn btn-green quick-add-btn" %>
+        <% end %>
+        <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
+        <div class="card-body">
+        <h5> <%= link_to product.name, product_path(product.id) %> 
+          <small> <%=currency_format(product.price)%> </small> 
+        </h5>
+          <% if product.user.merchant_name %>
+            <p class="card-text"><strong>  <%= fruitstand_img %>  <%= link_to product.user.merchant_name, user_path(product.user.id) %></strong> </p> 
+          <% else %>
+            <p class="card-text">  <%= fruitstand_img %> <strong><%=link_to product.user.username, user_path(product.user.id) %></strong> </p> 
+          <% end %>
+        </div>  
+        </div>    
+      </section>
+    <% end %>
+  </section>
+</section>
