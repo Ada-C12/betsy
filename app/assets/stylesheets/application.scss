@@ -305,3 +305,16 @@ a {
   padding-top: 2rem;
   padding-bottom: 1rem;
 }
+
+// Merchant Dashboard
+
+.button-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.button-flex > * {
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 1.75em;
+}
