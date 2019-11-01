@@ -30,29 +30,32 @@
         <% end %>
         </p>
       <% end %>
+    </div>
   </div>
 </div>
+
+
 <section class="all-reviews">
-<h5>Reviews</h5>
- <table class="table">
+<div class="reviews-container">
+  <h4>Reviews</h4>
+  <table class="table">
     <thead>
       <tr>
-      <th scope="col">Date</th>
-      <th scope="col">Rating</th>
-      <th scope="col">Description</th>
+        <th>Date</th>
+        <th>Rating</th>
+        <th>Description</th>
       </tr>
     </thead>
     <tbody>
       <% @product.reviews.each do |review| %>
           <tr>
-          <td><%= review.created_at.strftime("%D") %></td>
-          <th scope="row"><%= review.rating%></th>
-          <td><%= review.text_review %></td>
+            <td><%= review.created_at.strftime("%D") %></td>
+            <td><%= review.rating%></td>
+            <td><%= review.text_review %></td>
           </tr>
-        <%end%>
-      </span>
+      <% end %>
     </tbody>
-  </section>
-</table>
-<%= link_to "Leave a Review", new_product_review_path(@product.id), class: "btn btn-primary" %> 
+  </table>
+  <%= link_to "Leave a Review", new_product_review_path(@product.id), class: "btn btn-primary" %> 
+</div>
 </section>
