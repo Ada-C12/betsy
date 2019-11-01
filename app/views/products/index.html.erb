@@ -1,6 +1,6 @@
-<% @products.each_slice(3) do |product| %>
+<% @products.each_slice(3) do |split_product| %>
   <div class="row">
-    <% @products.each do |product| %>
+    <% split_product.each do |product| %>
       <div class="col-md-4"><%= product.name %>
         <p class="caption center-block"><%= link_to product_path(product.id) do %></p>
           <p class="img"><%= image_tag "#{product.photo_url}"%></p>
