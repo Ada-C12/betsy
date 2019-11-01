@@ -1,14 +1,14 @@
-<div class="row product-show container ">
+<div class="row product-show container">
   <div class="col-md-6">
     <div class="col-md-12">
       <div class="img"><%= image_tag "#{@product.photo_url}"%></div>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 product-info">
     <div class="col-md-12">
-      <h3><%= @product.name %><h3>
-      <h4 class="prod-description"><%= @product.description %></h4>
+      <h3><%= @product.name%></h3>
+      <small class="prod-description product-show"><%= @product.description %></small>
       <small><p>Sold by: <%= link_to @product.merchant.username, merchant_products_path(@product.merchant.id)%></p></small>
       <p>$<%= '%.2f' % @product.price %></p>
       
