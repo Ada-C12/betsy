@@ -1,0 +1,31 @@
+// Place all the styles related to the Merchants controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.h-center-text-no-pad {
+  margin-bottom: 2rem;
+}
+
+.d-flex {
+  flex-wrap: wrap;
+  padding-right: 3rem;
+  padding-left: 3rem;
+  margin-bottom: 2rem;
+}
+
+.merchant_name {
+  width: 30%;
+  color: goldenrod;
+  margin-bottom: 10px;
+}
+
+.merchants {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  margin-left: 15%;
+  margin-right: 15%;
+  margin-bottom: 5%;
+  margin-top: 5%;
+  padding-left: 11%;
+}
