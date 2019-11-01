@@ -159,7 +159,7 @@ describe OrderItemsController do
       }.wont_differ "OrderItem.count"
 
       must_redirect_to cart_path
-      assert_equal "Quantity (#{order_item_hash[:order_item][:quantity]}) entered is greater than available stock for #{product.name}.", flash[:error]
+      assert_equal "Quantity entered (#{order_item_hash[:order_item][:quantity]}) is greater than available stock for #{product.name}.", flash[:error]
     end
   end
 

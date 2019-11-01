@@ -6,44 +6,43 @@
       <table class="table cart-table">
         <thead>
           <tr>
-            <th scope="col"></th>
-            <th scope="col">Product Name</th>
-            <th scope="col">Unit Price</th>
-            <th scope="col">Quantity</th>
-            <th scope="col"></th>
-            <th scope="col"></th>
+            <th scope="col" class="cart-img"></th>
+            <th scope="col" class="cart-name">Product Name</th>
+            <th scope="col" class="cart-price">Unit Price</th>
+            <th scope="col" class="cart-quantity">Quantity</th>
+            <th scope="col" class="cart-update"></th>
+            <th scope="col" class="cart-remove"></th>
           </tr>
         </thead>
         <tbody>
           <% @current_order.order_items.each do |order_item| %>
           <tr>
-            <td>
+            <td class="text-center">
               <%= product_img_link(product: order_item.product, img_url: order_item.product.img_url, product_class: "product-thumbnail-cart")%></td>
             <td><%= link_to order_item.product.name, product_path(order_item.product.id)%>
             </td>
             <td><%=currency_format(order_item.product.price)%></td>
             <%= form_with model: order_item, url: order_item_path(order_item.id) do |f| %>
-              <div class="form-group-row">
-              <td class="col-2">
-                  <%= f.text_field :quantity, class: "form-control" %>
-              </td>
-              </div>
               <td>
-                <%= f.submit "Update", class: "btn btn-primary" %>
+                  <%= f.text_field :quantity, :size => "2", class: "form-control"%>
+              </td>
+              <td>
+                <%= f.submit "Update", class: "btn btn-primary"%>
               </td>
             <% end %>
-            <td>
-              <%= link_to "Delete", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
+            <td class="text-center cart-remove">
+              <%= link_to "Remove", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
             </td>
           <% end %>
         </tbody>
       </table>
-    </section>
       <div id="checkout-section">
-        <h4 class="checkout-section" id="cart-total"> Basket Total: <%=currency_format(@current_order.total)%></h4>
-        <%= link_to "Checkout", checkout_path, class:"btn btn-dark pull-right", id: "checkout-button" %>
+        <h4 id="cart-total"> Basket Total: <%=currency_format(@current_order.total)%></h4>
+        <%= link_to "Checkout", checkout_path, class:"btn btn-dark", id: "checkout-button" %>
       </div>
+    </section>
   <% else %>
-    <h2>Your basket is empty! :(</h2>
+    <img src="https://live.staticflickr.com/65535/48971625503_83d9d1c039_o.png pcc", alt="cart fruit basket empty image", id="large-cart">
+    <h2 class="text-center">Your basket is empty.</h2>
   <% end %>
 </section>
