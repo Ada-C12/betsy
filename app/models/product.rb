@@ -9,7 +9,7 @@ class Product < ApplicationRecord
   validates :price_cents, presence: true
   validates :price_cents, numericality: { only_integer: true, greater_than: 0 }
   validates :stock, presence: true
-  validates :stock, numericality: { only_integer: true }
+  validates :stock, numericality: { only_integer: true, greater_than: 0 }
   validates :wizard, presence: true
   validates_inclusion_of :retired, in: [true, false]
   
