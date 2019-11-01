@@ -1,0 +1,13 @@
+<h1>Fulfillments for Merchant <%= @merchant.username %></h1>
+
+<%= @ordered_products.each do |orderproduct| %>
+  <ul>
+    <li>Order #: <%= orderproduct.order_id %></li>
+    <li>Product #: <%= orderproduct.product_id %></li>
+    <li>Quantity: <%= orderproduct.quantity %></li>
+  </ul>
+<% end %>
+
+count: <%= @ordered_products.length %>
+
+merchant products: <%= @merchant.products.length %>

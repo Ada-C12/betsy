@@ -1,0 +1,16 @@
+<main>
+<h1>Add New Category</h1>
+<p>Please note: new categories will be seen across all Petsy Etsy merchants</p>
+<%= form_with model: @category, class: 'create-category' do |f| %>
+<p>Please provide the following information to add a new category to our database:</p>
+
+<div class="form-group">
+  <%= f.label :name %>
+  <%= f.text_field :name, class: "form-control"%>
+</div>
+
+<div class="form-group">
+  <%= f.submit "Create Category", class: "category-button" %>
+<% end %>
+</div>
+<main>

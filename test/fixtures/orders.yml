@@ -1,0 +1,40 @@
+a:
+  status: "paid"
+  name: "Jane Doe"
+  email: "jane@petsy.com"
+  mailing_address: "123 Main Street"
+  zip: 98110
+  name_on_cc: "Jane X. Doe"
+  cc_number: 1234567890123456
+  cc_cvc: 123
+  cc_exp: "12/31/56"
+b:
+  status: "paid"
+  name: "Dane Joe"
+  email: "dane@petsy.com"
+  mailing_address: "135 Main Street"
+  zip: 98130
+  name_on_cc: "Dane X. Joe"
+  cc_number: 1234567890123456
+  cc_cvc: 123
+  cc_exp: "11/14/56"
+c:
+  status: "paid"
+  name: "Zane Ko"
+  email: "zane@petsy.com"
+  mailing_address: "323 Main Street"
+  zip: 58110
+  name_on_cc: "Zane X. Ko"
+  cc_number: 1234567890123456
+  cc_cvc: 123
+  cc_exp: "12/01/56"
+d:
+  status: "paid"
+  name: "Lane Foe"
+  email: "lane@petsy.com"
+  mailing_address: "987 Main Street"
+  zip: 98550
+  name_on_cc: "Lane X. Foe"
+  cc_number: 1234567890123456
+  cc_cvc: 123
+  cc_exp: "01/30/56"

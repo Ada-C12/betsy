@@ -1,0 +1,17 @@
+<div class="container">
+  <br>
+  <h1 class="h2" align="center">All Costumes</h1>
+
+  <% if @products.length == 0 %>
+  <br>
+  <br>
+  <h2 align="center">We are currently updating our inventory, please check back soon!</h2>
+  <% end %>
+
+  <div class="row" align="center">
+    <% @products.sort_ascending.each do |product|%>
+      <%= render partial: "products/product", locals: { product: product }%>
+    <% end %>
+  </div>
+</div>
+

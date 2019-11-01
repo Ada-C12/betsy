@@ -1,0 +1,44 @@
+<h3> <%= verb_name %> Your Order </h3>
+
+<% if @order.errors.any? %>
+  <ul class="errors">
+    <% @order.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<h4> Purchaser Information </h4>
+<%= form_with model: @order do |f| %>
+  <%= f.label 'Name: '%>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label 'Email Address: '%>
+  <%= f.text_field :email %>
+  <br>
+  <%= f.label 'Mailing Address: '%>
+  <%= f.text_field :mailing_address %>
+  <br>
+  <%= f.label 'Zip Code: '%>
+  <%= f.text_field :zip %>
+  <br>
+  <%= f.label 'Name on Credit Card: '%>
+  <%= f.text_field :name_on_cc %>
+  <br>
+  <%= f.label 'Credit Card Number: '%>
+  <%= f.text_field :cc_number %>
+  <br>
+  <%= f.label 'Credit Card Expiration Date: '%>
+  <%= f.text_field :cc_exp %>
+  <br>
+  <%= f.label 'Credit Card CVC: '%>
+  <%= f.text_field :cc_cvc %>
+  <br>
+  <%= f.hidden_field :status, :value => "paid" %>
+
+  <div>
+    <%= f.submit "Complete Order", class: 'btn btn-success' %>
+  </div>
+<% end %>

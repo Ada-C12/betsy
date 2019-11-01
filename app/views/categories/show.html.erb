@@ -1,0 +1,9 @@
+<div class="container">
+  <h3 align="center"><%= @category.name %> Costumes</h3>
+    <div class="row" align="center">
+        <% @category.products.sort_ascending.each do |product| %>
+        <%= render partial: "products/product", locals: { product: product }%>
+        <% end %>
+      <br>
+    </div>
+  </div>

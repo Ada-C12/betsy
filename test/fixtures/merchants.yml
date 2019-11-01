@@ -1,0 +1,20 @@
+mariya:
+  username: mariya
+  email: mariay@petsy.com
+  uid: 1234
+  provider: github
+gyjin:
+  username: gyjin
+  email: ga-young@petsy.com
+  uid: 1345
+  provider: github
+julia:
+  username: julia
+  email: julia@petsy.com
+  uid: 1456
+  provider: github
+janice:
+  username: janice
+  email: janice@petsy.com
+  uid: 1567
+  provider: github

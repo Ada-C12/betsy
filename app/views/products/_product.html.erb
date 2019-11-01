@@ -1,0 +1,15 @@
+<div class="product-card col-lg-3 col-md-4 col-sm-6 col-12">
+  <div>
+    <%= link_to product_path(product.id) do %>
+      <img class="product-image" src="<%= product.photo%>">
+    <% end %>
+  </div>
+  <div>
+    <div><%= product.name %></div>
+    <div>$<%= '%.2f' % product.price %></div>
+    <div>
+      <%= product.average_rating ? "#{product.average_rating} / 5 (#{product.reviews.count} reviews)" : 'No reviews yet' %>
+    </div>
+  </div>
+</div>
+  

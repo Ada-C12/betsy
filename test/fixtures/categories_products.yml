@@ -1,0 +1,15 @@
+one:
+  category_id: puppy, superhero
+  product_id: batman
+two:
+  category_id: puppy, dog
+  product_id: taco
+three:
+  category_id: kitty
+  product_id: clown
+four:
+  category_id: cat, superhero
+  product_id: magician
+five:
+  category_id: kitty, puppy
+  product_id: batman

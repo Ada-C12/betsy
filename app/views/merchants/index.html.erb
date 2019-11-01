@@ -1,0 +1,10 @@
+<h2>List of all Merchants</h2>
+<ul>
+  <% @all_merchants.each do |merchant| %>
+  <li> Merchant username: <%= link_to merchant.username, merchant_path(merchant.id) %> </li>
+    <ul>
+      <li> Products: <%= merchant.products.count %> </li>
+      <li> Joined on: <%= merchant.created_at %> </li>
+    </ul>
+  <% end %>
+</ul>

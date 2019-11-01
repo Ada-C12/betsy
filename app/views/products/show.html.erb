@@ -1,0 +1,36 @@
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-7">
+      <img style="width:100%" src="<%= @product.photo%>">
+    </div>
+    <div class="col-5">
+      <h1 class="h2"><%= @product.name%></h1>
+      <div>Price: $<%= '%.2f' % @product.price%></div>
+      <div>Currently in stock: <%= @product.stock%></div>
+      <div class="product-rating"><%= @product.average_rating ? "#{@product.average_rating} / 5 (#{@product.reviews.count} reviews)" : 'No reviews yet'%></div>
+      <p class="product-description"> <%= @product.description%></p>
+      <%= button_to 'Add to Cart', product_orderproducts_path(@product.id), class: "btn-primary btn btn-block btn-lg" %>
+    </div>
+  </div>
+
+  <div class="row product-review-header">
+    <h3 class="col">Reviews</h3>
+    <% unless Product.find_by(id: params[:id]).merchant_id == session[:merchant_id] %>
+      <a class="col-auto btn btn-secondary btn-lg" href="/products/<%= @product.id %>/reviews/new">Write a Review</a>
+    <% end %>
+  </div>
+
+  <% @product.reviews.sort_descending.each do |review|%>
+    <div class="row product-review-row">
+      <div class="col-3 product-review-rating"> <%= review.rating%> / 5 </div>
+      <% if review.text == "" %>
+      <p>No review text provided</p> 
+      <% else %>
+      <q class="col-9 product-review-quote">
+      <%= review.text%>
+      </q>
+      <% end %>
+
+    </div>
+  <% end%>
+</div>

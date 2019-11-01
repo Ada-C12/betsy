@@ -1,0 +1,32 @@
+<div class="container mt-5">
+    <h3> Contents of Your Cart</h3>
+  <% orderproducts = @order.orderproducts %>
+      <ol>
+      <% orderproducts.each do |orderproduct| %>
+      <div class="row">
+      <div class="col-3">
+        <%= link_to product_path(orderproduct.product.id) do %>
+        <img class="product-image", style="width:200px;height:200px", src="<%= orderproduct.product.photo%>">
+        <% end %>
+      </div>
+      <div class="col-4">
+      <li> <%= link_to orderproduct.product.name, product_path(orderproduct.product)%>
+        <%= form_with model: orderproduct, class: 'update-orderproduct', url: orderproduct_path(orderproduct), method: :patch do |f| %>
+        <%= f.label 'Quantity: '%>
+        <%= f.select :quantity, (1..orderproduct.product.stock), selected: orderproduct.quantity %>
+        <br>
+        <%= f.submit 'Update Quantity', class: 'btn btn-secondary' %>
+        <% end %>
+        <br>
+        <%= button_to 'Delete Item', orderproduct_path(orderproduct.id), method: :delete, class: "btn btn-primary btn-sm", data: {confirm: "Are you sure?"} %>
+        <br>
+      </div>
+    </div>
+    </li>
+    <br>
+      <% end %>
+  </ol>
+
+<a class="col-auto btn btn-secondary btn-lg" href="/products" >Keep Shopping</a>
+<a class="col-auto btn btn-secondary btn-lg" href="/orders/<%= @order.id %>/edit">Checkout</a>
+</div>

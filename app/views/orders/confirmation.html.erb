@@ -1,0 +1,26 @@
+<div class="container-fluid text-center text-md-left">
+<% @order = Order.find_by(id: params[:id]) %>
+<h3> Thank you for your order! </h3>
+<br>
+<table class = "table">
+  <thead>
+    <tr>
+      <th> Item </th>
+      <th> Quantity </th>
+      <th> Subtotal </th>
+    </tr>
+  </thead>
+  <% total = 0 %>
+  <% @order.orderproducts.each do |op| %>
+  <tr>
+    <td> <%= link_to op.product.name, product_path(op.product.id) %> </td>
+    <td> <%= op.quantity %> </td>
+    <td> $<%= sprintf "%.2f", op.product.price %> </td>
+    <% total += op.product.price %>
+  </tr>
+  <% end %>
+</table>
+
+<h4> Order total: $<%= sprintf "%.2f", total %> </h4>
+<h4> Order placed: <%= readable_date(@order.updated_at.to_s) %> </h4>
+<h4> Order status: <%= @order.status %>

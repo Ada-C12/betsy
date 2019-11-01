@@ -1,0 +1,24 @@
+op1:
+  quantity: 3
+  product: magician
+  order: d
+op2:
+  quantity: 1
+  product: batman
+  order: d
+op3:
+  quantity: 4
+  product: magician
+  order: a
+op4:
+  quantity: 2
+  product: taco
+  order: b
+op5:
+  quantity: 9
+  product: clown
+  order: c
+op6:
+  quantity: 5
+  product: taco
+  order: c
