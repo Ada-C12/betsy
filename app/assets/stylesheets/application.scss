@@ -186,6 +186,11 @@ a:hover {
 }
 
 
+.product-thumbnail-cart {
+  max-width: 3em;
+  border: 3px solid #9D6AB9;
+}
+
 .product-thumbnail {
   max-width: 3em;
 }
@@ -193,8 +198,6 @@ a:hover {
 .fruitstand-img {
   max-width: 1.6em;
 }
-
-
 
 .new-form-page {
   min-height: 300vh;
@@ -285,4 +288,27 @@ th, th a{
 .form-row {
   padding: 1%;
   font-weight: bold;
+}
+
+#checkout-section {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 2;
+  max-width: 20%;
+  justify-items: end;
+  margin-left: auto;
+  margin-right: 5em;
+}
+
+#cart-total {
+  grid-column: 1/span 2;
+}
+
+#checkout-button {
+  grid-column: 2;
+  grid-row-start: 2;
+}
+
+.cart-quantity {
+  max-width: 4rem;
 }
