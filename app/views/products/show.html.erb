@@ -1,0 +1,67 @@
+
+<div class="container w-100">
+  <div class="row">
+    <div class="col">
+    <%= image_tag(@product.photo_URL,  alt: "bread", class: "baguette", style: 'width: 100%') %>
+    
+ 
+    </div>
+    <div class="col">
+      <section class="product-details">
+        <h3><%= @product.name %></h3>
+        <p><%= link_to @product.merchant.name, merchant_path(@product.merchant) %></p>
+
+        <p><%= number_to_currency(@product.price) %></p>
+        <p><%= @product.description %></p>
+       
+        <p>Categories: <% @product.categories.each do |category| %>
+        <li><%= link_to category.name, category_path(category) %></li>
+          <%end%></p>
+      </section>
+      
+      <section class="product-buttons">
+
+        <%= form_tag order_items_path, method: :post do %>    
+          <%= label_tag :quantity, "Quantity" %>
+          <%= select_tag(:quantity, options_for_select((1..@product.stock), 1))%>
+          <%= hidden_field_tag :product_id, @product.id %>
+          <%= submit_tag "Add To Carb", class: "btn btn-secondary"%>
+        <% end %> 
+        </section>
+
+        <% if @current_merchant && @product.merchant_id == @current_merchant.id %>
+          <% if @product.active %>
+                <%= link_to "Retire", retire_path(@product), method: "retire", class: "btn btn-secondary"%>
+          <% else %>
+            <%= link_to "Reactivate", retire_path(@product), method: "retire", class: "btn btn-secondary"%>
+          <% end %> 
+        <% end %> 
+
+    </div>
+    <div class="w-100"></div>
+
+    <div class="col">
+    
+    <%= link_to "Add a Review", new_product_review_path(@product), class: "btn btn-secondary" %>
+
+    <h3>Reviews (<%= @product.reviews.count %>)</h3>
+      
+      <% @product.reviews.each do |review| %>
+      <section class="review">
+        <ul>Rating: <% review.rating.times do %>🥖<% end %></ul>
+        <ul><%= review.text %></ul>
+      </section>
+    <% end %>
+    </div>
+
+    <div class="col">
+    </div>
+
+  </div>
+</div>
+
+
+
+
+</section>
+

@@ -1,0 +1,12 @@
+.categoryform{
+  margin: 1rem;
+}
+
+.categories-list {
+  list-style-type: none;
+}
+// # important tag: https://stackoverflow.com/questions/12810227/override-css-styles-set-for-html-tag
+.category-button a {
+  color: #fff !important;
+}
+

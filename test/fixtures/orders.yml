@@ -1,0 +1,27 @@
+a:
+  customer_name: Sea Wolf
+  email_address: seawolf@gmail.com
+  mailing_address: 1234 Happy Town, Seattle, WA
+  cc_number: 1111111111111111
+  cc_expiration: 12/20
+  cc_security_code: 123
+  zip_code: 99999
+  cart_status: pending
+b:
+  customer_name: Mr. Besalu
+  email_address: besalu@yahoo.com
+  mailing_address: 1234 Sad Town, Seattle, WA 
+  cc_number: 1111111111111112
+  cc_expiration: 12/21
+  cc_security_code: 111
+  zip_code: 55555
+  cart_status: paid
+c:
+  customer_name: Ms. Macrina
+  email_address: macrina@macrina.com
+  mailing_address: 1222 Golden Place, Seattle, WA
+  cc_number: 1111111111111113
+  cc_expiration: 12/22
+  cc_security_code: 124
+  zip_code: 88888
+  cart_status: cancelled

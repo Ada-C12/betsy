@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Baguettsy</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link href="https://fonts.googleapis.com/css?family=Annie+Use+Your+Telescope&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+  
+    <section>
+      
+      <nav class="navbar navbar-expand-lg navbar-light">
+      <h2 class="toptitle font-weight-bold"><%= link_to "Baguettsy", root_path %></h2>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+
+            <li class="nav-item nav-link">
+              <%= link_to "View All Products", products_path %></li>
+            </li>
+            
+            <li class="nav-item dropdown">
+              <%= link_to "Browse by Category", categories_path, class:"nav-link dropdown-toggle", id:"navbarDropdown", role:"button", data_toggle:"dropdown", aria_haspopup:"true", aria_expanded:"false" %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% @all_categories.each do |category| %>
+                <%= link_to category.name, category_path(category), class:"dropdown-item" %>
+                <%end%>
+              </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <%= link_to "Browse by Merchant", merchants_path, class:"nav-link dropdown-toggle", id:"navbarDropdown", role:"button", data_toggle:"dropdown", aria_haspopup:"true", aria_expanded:"false" %>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <% @all_merchants.each do |merchant| %>
+                <%= link_to merchant.name, merchant_path(merchant), class:"dropdown-item"%>
+                <%end%>
+              </div>
+            </li>
+
+            <li class="nav-item nav-link">
+              <%= link_to "Find My Order", find_my_order_path %>
+            </li>
+
+          </ul>
+
+          <ul class="nav navbar-nav navbar-right auto">
+            
+            <% if session[:order_id] %>	
+              <li class="nav-item">
+                <button type="button" class="btn btn-light nav-link"><%= link_to "View Shopping Carb", order_path(session[:order_id]) %></button>	
+              </li>	
+            <% end %>
+            
+            <% if session[:merchant_id] %>
+
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle nav-link" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                  Welcome, <%= session[:merchant_name] %>! 
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                  <%= link_to "View Dashboard", dashboard_path(session[:merchant_id]), class:"dropdown-item" %>
+                  <%= link_to "Log out", logout_path, method: "delete", class:"dropdown-item" %>
+                </div>
+              </li>
+            <% else %>
+            <li class="nav-item">
+              <button type="button" class="btn btn-light nav-link"><%= link_to "Login with Github", github_login_path %></button>
+            </li>
+        <% end %>
+          </li>
+          </ul>
+        </div>
+      </nav>
+    </section>
+  
+  
+    <section class="flash">	
+    <% if flash[:result_text] or flash[:messages] %>
+      <section class="alert__container">
+        <div class="alert alert-<%= flash[:status].to_s == 'failure' ? 'warning' : flash[:status] %>">
+          <span><%= flash[:status].to_s == "failure" ? "A problem occurred: " : "" %><%= flash[:result_text] %></span>
+          <% if flash[:messages] %>
+            <ul>
+              <% flash[:messages].each do |name, problems| %>
+                <% problems.each do |problem| %>
+                  <li><%= name %>: <%= problem %></li>
+                <% end %>
+              <% end %>
+            </ul>
+          <% end %>
+        </div>
+      </section>
+    <% end %>
+    </section>	
+
+    <%= yield %>
+  </body>
+
+<footer class="page-footer font-small mdb-color pt-4">
+
+  <!-- Footer Links -->
+  <div class="container text-center text-md-left">
+
+    <!-- Footer links -->
+    <div class="row text-center text-md-left mt-3 pb-3">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Hey, You!</h6>
+        <p>Our site may look professional, but we're just a couple of coding students with a passion for bread. Please don't give us any personal information!  </p>
+      </div>
+      <!-- Grid column -->
+
+      <hr class="w-100 clearfix d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-2 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Discover</h6>
+        <p>
+          Blog</a>
+        </p>
+        <p>
+          Stories</a>
+        </p>
+        <p>
+          Gallery</a>
+        </p>
+        <p>
+          Commercial</a>
+        </p>
+      </div>
+      <!-- Grid column -->
+
+      <hr class="w-100 clearfix d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-3 col-lg-2 col-xl-2 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Useful links</h6>
+        <p>
+          Contact Us</a>
+        </p>
+        <p>
+          About Us</a>
+        </p>
+        <p>
+          Careers</a>
+        </p>
+        <p>
+          Help</a>
+        </p>
+      </div>
+
+      <!-- Grid column -->
+      <hr class="w-100 clearfix d-md-none">
+
+      <!-- Grid column -->
+      <div class="col-md-4 col-lg-3 col-xl-3 mx-auto mt-3">
+        <h6 class="text-uppercase mb-4 font-weight-bold">Contact</h6>
+        <p>
+          Seattle, WA 10000, US</p>
+        <p>
+        info@gmail.com</p>
+        <p>
+         + 01 234 567 88</p>
+        <p>
+         + 01 234 567 89</p>
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Footer links -->
+
+    <hr>
+
+    <!-- Grid row -->
+    <div class="row d-flex align-items-center">
+
+      <!-- Grid column -->
+      <div class="col-md-7 col-lg-8">
+
+        <!--Copyright-->
+        <p class="text-center text-md-left">&#129366; © 2019 Copyright:
+            <strong> Breadwinners &#129366;</strong>
+          </a>
+        </p>
+
+      </div>
+      <!-- Grid column -->
+
+      <!-- Grid column -->
+      <div class="col-md-5 col-lg-4 ml-lg-0">
+
+        <!-- Social buttons -->
+        <div class="text-center text-md-right">
+          <ul class="list-unstyled list-inline">
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-facebook-f"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-twitter"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-google-plus-g"></i>
+              </a>
+            </li>
+            <li class="list-inline-item">
+              <a class="btn-floating btn-sm rgba-white-slight mx-1">
+                <i class="fab fa-linkedin-in"></i>
+              </a>
+            </li>
+          </ul>
+        </div>
+
+      </div>
+      <!-- Grid column -->
+
+    </div>
+    <!-- Grid row -->
+
+  </div>
+  <!-- Footer Links -->
+
+</footer>
+</html>

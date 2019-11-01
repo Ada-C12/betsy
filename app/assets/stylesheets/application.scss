@@ -1,0 +1,187 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+/* Custom bootstrap variables must be set or imported *before* bootstrap. */
+@import "bootstrap";
+/* Import scss content */
+@import "**/*";
+
+a:hover{
+   text-decoration: none;
+   color: #544538;
+}
+
+.navbar {
+   background-color: #ece1cb;
+}
+
+.nav-item{
+   margin-left: 1rem;
+   a{
+      color: #614936;
+   }
+   .btn{
+      padding-left: 1rem;
+      padding-right: 1rem;
+      margin-top: .5rem;
+   }
+}
+
+.navbar-light .navbar-nav .nav-link {
+   color: #614936;
+}
+
+
+.nav-link{
+   font-family: 'Annie Use Your Telescope', cursive;
+   color: #614936;
+}
+
+.dropdown{
+   font-family: 'Annie Use Your Telescope', cursive;
+}
+
+.btn{
+   background-color:#614936;
+   color: white;
+   a {
+      color: white;
+   }
+}
+
+.btn:hover{
+   color: white;
+   background-color: #544538;
+}
+
+.toptitle a, h1, h2, h3{
+   font-family: 'Annie Use Your Telescope', cursive;
+   font-size: 3rem;
+   text-decoration: none;
+   color: #614936;
+}
+
+h1{
+   margin: 1rem;
+   text-decoration: underline;
+}
+
+.product-filter {
+   display: flex;
+}
+
+.product-filter h1 {
+   flex-grow: 1;
+}
+
+.sort {
+   display: flex;
+}
+.collection-sort {
+   margin: 1rem;
+   display: flex;
+   flex-direction: column;
+}
+
+.products {
+   margin: 2rem;
+   display: flex;
+   flex-wrap: wrap;
+}
+
+.product-card {
+   padding: 2%;
+   margin: 1rem;
+   width: 20%;
+}
+
+.product-image img {
+   display: block;
+   max-width: 100%;
+}
+
+.product-info {
+   margin-top: auto;
+}
+
+.pagelist li{
+   font-size: 2rem;
+   margin: 1rem;
+   padding-left: 2rem;
+   font-family: 'Annie Use Your Telescope', cursive;
+   a{
+      color: #614936;
+   }
+}
+
+.dropdown:hover .dropdown-menu {
+   display: block;
+   margin-top: 0; 
+}
+
+h6 {
+   padding: 0px 0px 0px 15px
+}
+
+footer {
+   background-color: #ece1cb;
+   color: #614936;
+}
+
+.find-order{
+   margin: 1.5rem;
+}
+
+footer a:link {
+   color: #614936;
+}
+
+.product-details{
+   a{
+      color: #614936;
+   }
+}
+
+
+.checkoutpage{
+   p{
+      font-family: 'Annie Use Your Telescope', cursive;
+      color: #614936;
+      font-size: 1.5rem;
+   }
+
+   .form-group{
+      font-family: 'Annie Use Your Telescope', cursive;
+      font-size: 1.2rem;
+      color: #614936;
+      margin-left: 2rem;
+   }
+
+   .form-control{
+      width: 30%
+   }
+}
+
+.newproduct{
+   font-family: 'Annie Use Your Telescope', cursive;
+   
+   .form-control{
+      width: 30%
+   }
+   .form-group{
+      font-size: 1.2rem;
+      color: #614936;
+      margin-left: 2rem;
+   }
+}
