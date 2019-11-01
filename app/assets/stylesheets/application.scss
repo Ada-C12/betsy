@@ -243,7 +243,7 @@ th, th a{
 // show product page
 
 .show-product-img {
-  max-width: 30%;
+  max-width: 20%;
   max-height: 30%;
   border: solid 10px #9D6AB9;
   box-shadow: 4px 8px rgba(136, 136, 136, 0.5);
@@ -289,10 +289,6 @@ th, th a{
   font-weight: bold;
 }
 
-.confirmation-img {
-  max-width: 10%
-}
-
 .confirmation-img-container {
   display: flex;
   justify-content: space-evenly;
@@ -300,6 +296,7 @@ th, th a{
   margin-left: 5%;
 }
 
-.confirmation-order-container, .confirmation-shipping-container, .confirmation-payment-container {
-  text-align:center;
+.confirmation-shipping-container {
+  margin-left: 10%;
+  margin-right: 10%;
 }
