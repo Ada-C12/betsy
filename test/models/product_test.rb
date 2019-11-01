@@ -146,9 +146,9 @@ describe Product do
   describe "custom methods" do
     describe "five_products" do
       it "returns 5 products" do
-        Product.create(name: 'new-product-1', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: category1, photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
-        Product.create(name: 'new-product-2', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: category1, photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
-        Product.create(name: 'new-product-3', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: category1, photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
+        Product.create(name: 'new-product-1', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: [category1], photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
+        Product.create(name: 'new-product-2', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: [category1], photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
+        Product.create(name: 'new-product-3', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: [category1], photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
         
         expect(Product.all.length).must_equal 6
         
