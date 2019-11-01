@@ -93,7 +93,7 @@ class ProductsController < ApplicationController
     
     @product.make_retired_true
     flash[:success] = "Product successfully retired: Will not be shown to guests"
-    return redirect_back(fallback_location: :back)
+    return redirect_back(fallback_location: wizard_products_path(params[:id]))
   end
   
   def make_retired_false
@@ -106,7 +106,7 @@ class ProductsController < ApplicationController
     
     @product.make_retired_false
     flash[:success] = "Product successfully unretired: Will now be shown to guests"
-    return redirect_back(fallback_location: :back)
+    return redirect_back(fallback_location: wizard_products_path(params[:id]))
   end
   
   private
