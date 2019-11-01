@@ -30,23 +30,32 @@
         <% end %>
         </p>
       <% end %>
-  <%# once we reach this area, everything is italicized %>
+    </div>
   </div>
 </div>
-<div id="reviews">
-    <%= link_to "Leave a Review", new_product_review_path(@product.id), class: "btn btn-primary" %> 
+
+
+<section class="all-reviews">
+<div class="reviews-container">
+  <h4>Reviews</h4>
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Rating</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
       <% @product.reviews.each do |review| %>
-        <span><% review.rating.times do %>
-        <i class="fas fa-beer", aria-hidden="true"></i>
-        <%end%>
-        <% (5-review.rating).to_i.times do %>
-        <i class="fas fa-beer", aria-hidden="true"></i>
-      <%end%></span>
-      <h4><%= review.text_review%></h4> 
-      <h6><%= review.rating%></h6> 
-<%end%>
-  <%= link_to "Back", products_path, class: "btn btn-primary" %>
+          <tr>
+            <td><%= review.created_at.strftime("%D") %></td>
+            <td><%= review.rating%></td>
+            <td><%= review.text_review %></td>
+          </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <%= link_to "Leave a Review", new_product_review_path(@product.id), class: "btn btn-primary" %> 
 </div>
-
-
 </section>

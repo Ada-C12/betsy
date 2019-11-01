@@ -168,6 +168,19 @@ h1, h2, h3, h4, h5 {
   line-height: 1.8em;
 }
 
+// REVIEWS
+
+.all-reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.5em;
+}
+
+.reviews-container {
+  width: 75vw;
+}
+
 // LINK FORMATTING
 
 a:hover {
