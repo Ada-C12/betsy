@@ -2,14 +2,14 @@ name,description,price,photo_url,stock,merchant_id,retired,type_ids
 Angry Orchard,Very upset apples.,14,https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/hca/hb9/11214855667742.png,10,1,false,2
 Tesla,Only one model.,5.99,https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/hae/h2d/10027525079070.png,10,2,false,1
 Portable Cooler,Only Bezos can sell stuff like this,39.99,https://m.media-amazon.com/images/I/81TuDwDvdfL._AC_UL640_FMwebp_QL65_.jpg,10,3,false,4
-Gold Apple - Strongbow,Mac OS. A classic.,14.99,https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/hfc/11975689109534.png,10,1,false,2
+Red Solo Cup,You only get one.And it's probably already been used before.,0.99,https://resources.cleanitsupply.com/LARGE/USSCO/88678.JPG,100,3,false,3
 Rosé Hard Cider - Crispin,Looking for a cider you can drink at brunch? You've found the one.,14.99,https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/hb8/h3f/11941466734622.png,10,1,false,2
+Brewing in Seattle,A book about brewing in Seattle,16.99,https://images-na.ssl-images-amazon.com/images/I/71gVFhjVAvL.jpg,10,3,false,6
 Motorized Cooler, Don't drink and drive folks,899.99,https://images-na.ssl-images-amazon.com/images/I/91TnxbRj%2BDL._AC_SL1500_.jpg,5,2,false,4
-Beer Bikemobile,More environmentally friendly than Elon's cars (cheaper too)!,9000,http://www.ddmotorsystems.com/upload/PartyBike1.jpg,2,2,false,4
-Red Solo Cup,You only get one.,0.99,https://images-na.ssl-images-amazon.com/images/I/41rzp2UwtfL._AC_.jpg,100,3,false,3
-Ping Pong Balls,Buy them here or find free ones under your local frat boy's couch,4.99,https://images-na.ssl-images-amazon.com/images/I/71OUThFusOL._AC_SL1500_.jpg,10,3,false,4
+Gold Apple - Strongbow,Mac OS. A classic.,14.99,https://www.totalwine.com/dynamic/490x/media/sys_master/twmmedia/h1e/hfc/11975689109534.png,10,1,false,2
+Ping Pong Balls,Buy them here or find free ones under your local frat boy's couch,4.99,https://images-na.ssl-images-amazon.com/images/I/71OUThFusOL._SX425_.jpg,10,3,false,4
 South Africa T-shirt,Elon may not be a team player but you can be!,19.99,https://m.media-amazon.com/images/I/81bYSGkozVL._AC_UL720_.jpg,10,2,false,4
 Socks,Weird socks for your weird brother-in-law.,3.99,https://m.media-amazon.com/images/I/91c4lmkyKLL._AC_UL640_FMwebp_QL65_.jpg,10,3,false,6
 Seattle Cider Co.,Nicknamed Microsoft. Seattle's no Silicon Valley but they make a mean cider.,4.99,https://d1ynl4hb5mx7r8.cloudfront.net/wp-content/uploads/2016/06/03135026/seattle_cider_berry-250x300.jpg,10,1,false,2
-Brewing in Seattle,A book about brewing in Seattle,16.99,https://images-na.ssl-images-amazon.com/images/I/71gVFhjVAvL.jpg,10,3,false,6
+Beer Bikemobile,More environmentally friendly than Elon's cars (cheaper too)!,9000,http://www.ddmotorsystems.com/upload/PartyBike1.jpg,2,2,false,4
 The Beer Geek Handbook,If you are buying this... you are a geek.,12.99,https://d17lzgq6gc2tox.cloudfront.net/product/three_d_cover_image/original/9781612125312_3D.png,10,3,false,6
