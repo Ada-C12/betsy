@@ -12,16 +12,13 @@
 <div class="container">
   <%= form_with model: @review, url: product_reviews_path do |f| %>
   <div class="row justify-content-md-center">
-    <%= f.label :rating %>: 
+    <%= f.label :rating %>:<%= f.select :rating, [ 1,2,3,4,5 ] %>
   </div>
   <div class="row justify-content-md-center">
-    <%= f.select :rating, [ 1,2,3,4,5 ] %>
-  </div>
-  <div class="row justify-content-md-center ">
     <%= f.label :review_comment %>
   </div>
   <div class="row justify-content-md-center">
-  <%= f.text_area :review_comment,:cols => "50", :rows => "6"%>
+  <%= f.text_area :review_comment,:cols => "50", :rows => "6" %>
   </div>
   <div class="row justify-content-md-center">
     <%= f.submit "Create Review", class: "btn btn-dark form-button"%>

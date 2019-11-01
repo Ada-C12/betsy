@@ -2,14 +2,14 @@
 
 <div class="container"></div>
     <%= form_with model: @category do |f| %>
-    <div class="row">
-        <%= f.label :name,class: "category-col"  %>
+    <div class="row justify-content-md-center">
+        <%= f.label :name  %>
     </div>
-    <div class="row">
-    <%= f.text_field :name, class: "category-col"%>
+    <div class="row justify-content-md-center">
+    <%= f.text_field :name%>
     </div>
-    <div class="row">
-        <%= f.submit "Create Category", class: "btn btn-dark form-button category-col"%>
+    <div class="row justify-content-md-center">
+        <%= f.submit "Create Category", class: "btn btn-dark form-button"%>
     </div>
 <% end %>
 
