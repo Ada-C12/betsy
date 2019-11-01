@@ -21,6 +21,10 @@ nav {
   text-shadow: 0px 2px 3px #555;
 }
 
+.top-brand-name a:hover {
+  color: rgb(254, 219, 105);
+}
+
 p {
   font-family: 'Lato', sans-serif;
 }
@@ -182,9 +186,14 @@ a {
 
 a:hover {
   text-decoration: none;
-  color: rgb(254, 219, 105);
+  color: rgb(94, 170, 95);
 }
 
+
+.product-thumbnail-cart {
+  max-width: 3em;
+  border: 3px solid #9D6AB9;
+}
 
 .product-thumbnail {
   max-width: 3em;
@@ -332,4 +341,41 @@ th, th a{
 .form-row {
   padding: 1%;
   font-weight: bold;
+}
+
+#checkout-section {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 2;
+  max-width: 20%;
+  justify-items: end;
+  margin-left: auto;
+  margin-right: 5em;
+}
+
+#cart-total {
+  grid-column: 1/span 2;
+}
+
+#checkout-button {
+  grid-column: 2;
+  grid-row-start: 2;
+}
+
+.cart-quantity {
+  max-width: 4rem;
+}
+.confirmation-img {
+  max-width: 10%
+}
+
+.confirmation-img-container {
+  display: flex;
+  justify-content: space-evenly;
+  margin-right: 5%;
+  margin-left: 5%;
+}
+
+.confirmation-order-container, .confirmation-shipping-container, .confirmation-payment-container {
+  text-align:center;
 }
