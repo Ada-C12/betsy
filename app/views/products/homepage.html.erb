@@ -5,7 +5,7 @@
       <% @products.each_with_index do |product, index| %>
         <div class="carousel-item <%= index == 0 ? 'active' : '' %>">
           <%= link_to image_tag(product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : product.photo_url, alt: "First slide", class: "d-block w-100"), product_path(product.id) %>
-          <div class="carousel-caption d-none d-md-block">
+          <div class="carousel-caption">
             <h5><strong><%= product.name %></strong></h5>
             <h5><small><%= humanized_money_with_symbol(product.price) %></small></h5>
           </div>
