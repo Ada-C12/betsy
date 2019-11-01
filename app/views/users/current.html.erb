@@ -107,8 +107,8 @@
                   Paid
                 </a>
                 <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
-                  <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, class: "dropdown-item" %>
-                  <%= link_to "Completed", complete_order_path(order.id), method: :patch, class: "dropdown-item" %>
+                  <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, data: {confirm: "Are you sure you want to cancel the order?"}, class: "dropdown-item" %>
+                  <%= link_to "Completed", complete_order_path(order.id), method: :patch, data: {confirm: "Are you sure you want to complete the order?"}, class: "dropdown-item" %>
                 </div>
               <% else %>
                 <%= order.status.capitalize %>
