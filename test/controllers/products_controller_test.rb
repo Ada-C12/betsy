@@ -35,7 +35,7 @@ describe ProductsController do
         stock: nil,
         img_url: "new_img.com",
         description: "description of a new product"
-     }
+      }
     }
   }
    
@@ -45,12 +45,19 @@ describe ProductsController do
         get products_path
         must_respond_with :success
       end
+
       it "gives back a successful response when provided category_id" do
         category = categories(:lemon)
         get category_products_path(category)
         must_respond_with :success
       end
     
+      it "gives back a successful response when provided params[:search]" do
+        category = categories(:lemon)
+        get products_path, params: {search: 'lemon'}
+        must_respond_with :success
+      end
+
       it "returns 404 response when no category found" do
         get category_products_path(-1)
         must_respond_with :not_found
