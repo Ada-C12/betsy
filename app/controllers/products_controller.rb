@@ -59,7 +59,7 @@ class ProductsController < ApplicationController
       redirect_to product_path(@product.id)
       return 
     else
-      flash[:error] = "Could not add product to shop"
+      flash[:error] = "A problem occurred: Could not add product to shop"
       render :new, status: :bad_request
       return 
     end

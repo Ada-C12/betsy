@@ -7,7 +7,7 @@
 		<div class="col-lg-6 product-photo">
 			<%= image_tag @product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : @product.photo_url, alt: "a picture of a #{@product.name}" %>
 		</div>
-		<div class="col-lg-6 align-self-center">
+		<div class="col-lg-6 align-self-center white-text">
 			<p>Seller: <%=@product.wizard.username%></p>
 			<% if @product.retired %>
 				<p><em>Retired</em></p>
@@ -24,7 +24,7 @@
 <table class="container reviews">
 	<thead>
 		<tr>
-			<th class="align-self-center">Reviews</th>
+			<th class="align-self-center halo">Reviews</th>
 		</tr>
 	</thead>
 
@@ -32,11 +32,11 @@
 	<%@product.reviews.each do |review|%>
   <tr>
   <%review.rating.times do%>
-  <td> <%= image_tag 'https://i.imgur.com/02QEPJL.png', class: "review-photo"%> </td>
+  <td> <%= image_tag 'https://i.imgur.com/BPqVHL0.png', class: "review-photo"%> </td>
   <%end%>
   </tr>
   <tr class="review-tr">
-    <td><%= review.review_comment%></td>
+    <td class="white-text"><%= review.review_comment%></td>
   </tr>
 	<%end%>
 

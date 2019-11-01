@@ -19,6 +19,7 @@
    * {
       text-align: center;
       font-family: 'Montserrat', sans-serif;
+      
    }
 
 	ul {
@@ -132,8 +133,11 @@
       }
    }
 
-   .user-nav  {
+   .halo  {
       color: black;
       text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
    }
 
+   .white-text {
+      color: white;
+   }
