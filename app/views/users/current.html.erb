@@ -58,7 +58,7 @@
               <td><%= f.text_field :description %></td>
               <td><%= f.text_field :img_url, :size=>"10" %>
               <td> <%= f.check_box :active %></td>
-                <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
+                <td><%= f.submit "Update", submit_button_label: "Edit Product", class: "btn btn-pretty" %></td>
             <% end %>
             </tr>
           <% end %>
@@ -127,5 +127,5 @@
       </tbody>
     </table>
   </section>
-  <%= link_to "Back to Home", root_path, class: "btn btn-primary" %>
+  <%= link_to "Back to Home", root_path, class: "btn btn-green" %>
 </section>
