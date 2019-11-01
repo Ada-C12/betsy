@@ -1,4 +1,4 @@
-<h2>Edit Product</h2>
+<h2 class="product-heading">Edit Product</h2>
 <% if @product.errors.any? %>
   <ul class="errors">
     <% @product.errors.each do |column, message| %>
@@ -9,13 +9,13 @@
   </ul>
 <% end %>
 
-<div class="container cat-container">
+<div class="container cat-container halo">
   <%= form_with model: @product do |f| %>
   <div class="row justify-content-md-center">
     <%= f.label :name %>: 
   </div>
   <div class="row justify-content-md-center">
-    <%= f.text_field :name %>
+    <%= f.text_field :name, class: "text-area-color" %>
   </div>
 
   <div class="row justify-content-md-center">
@@ -23,7 +23,7 @@
   </div>
   <div class="row justify-content-md-center">
     <%= currency_symbol() %>
-    <%= f.number_field :price, step: 0.01 %>
+    <%= f.number_field :price, step: 0.01, class: "text-area-color" %>
   </div>
 
   <div class="row justify-content-md-center">
@@ -41,21 +41,21 @@
     <%= f.label :description %>
   </div>
   <div class="row justify-content-md-center">
-  <%= f.text_area :description, :cols => "50", :rows => "6"%>
+  <%= f.text_area :description, :cols => "50", :rows => "6", class: "text-area-color"%>
   </div>
 
   <div class="row justify-content-md-center">
     <%= f.label :stock %>: 
   </div>
   <div class="row justify-content-md-center">
-    <%= f.number_field :stock %>
+    <%= f.number_field :stock, class: "text-area-color" %>
   </div>
 
   <div class="row justify-content-md-center">
     <%= f.label :photo_url %>: 
   </div>
   <div class="row justify-content-md-center">
-    <%= f.text_field :photo_url %>
+    <%= f.text_field :photo_url, class: "text-area-color" %>
   </div>
 
   <div class="row justify-content-md-center"">
