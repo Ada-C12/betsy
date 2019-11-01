@@ -44,5 +44,41 @@ describe ReviewsController do
       
       must_respond_with :bad_request
     end
+    
+    it "responds with not_found for invalid product id" do
+      valid_hash = {
+        review: {
+          rating: 5,
+          product: products(:sapporo)
+        },
+      }
+      
+      expect {
+        post product_reviews_path(product_id: -1), params: valid_hash
+      }.wont_change "Review.count"
+      
+      must_respond_with :not_found
+    end
+    
+    it "does not allow merchants to review their own products" do
+      perform_login(merchants(:brad))
+      
+      expect(session[:merchant_id]).must_equal merchants(:brad).id
+      
+      valid_hash = {
+        review: {
+          rating: 5,
+          product: products(:sapporo)
+        },
+      }
+      
+      expect {
+        post product_reviews_path(product_id: products(:sapporo).id), params: valid_hash
+      }.wont_change "Review.count"
+      
+      expect(flash[:result_text]).must_include "Users cannot review their own products!"
+      
+      must_redirect_to product_path(products(:sapporo))
+    end
   end
 end

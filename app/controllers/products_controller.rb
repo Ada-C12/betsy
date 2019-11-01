@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   def index
     @products = Product.all
   end
-
+  
   def show
     @product = Product.find_by(id: params[:id])
     if @product.nil?
@@ -13,6 +13,7 @@ class ProductsController < ApplicationController
       return
     end
     @orderitem = Orderitem.new
+    @review = Review.new
   end 
 
   def new
@@ -36,17 +37,27 @@ class ProductsController < ApplicationController
       render :new, status: :bad_request
     end
   end
+<<<<<<< HEAD
 
+=======
+  
+  # only merchants
+>>>>>>> 667b53c88e33571886627d39259132edadd83a36
   def edit
     @product = Product.find_by(id: params[:id])
-
+    
     if @product.nil?
       flash[:status] = :failure
       flash[:result_text] = "#{@product} doesn't exist."
       redirect_to products_path
     end
   end 
+<<<<<<< HEAD
 
+=======
+  
+  # only merchants
+>>>>>>> 667b53c88e33571886627d39259132edadd83a36
   def update
     @product = Product.find_by(id: params[:id])
     @product.update_attributes(product_params)
@@ -61,7 +72,12 @@ class ProductsController < ApplicationController
       render :edit, status: :bad_request
     end
   end
+<<<<<<< HEAD
 
+=======
+  
+  # only merchants
+>>>>>>> 667b53c88e33571886627d39259132edadd83a36
   def toggle_retire
     @product = Product.find_by(id: params[:id])
     if @product.retired == true
@@ -72,13 +88,13 @@ class ProductsController < ApplicationController
       @product.save
     end
   end
-
+  
   def merchant_products
     @merchant = Merchant.find_by(id: params[:id])
   end
-
+  
   private
-
+  
   def product_params
     params.require(:product).permit(:name, :description, :price, :photo_url, :stock, :retired, type_ids: [])
   end
