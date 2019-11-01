@@ -1,34 +1,34 @@
-<h2 class="page-title">
-  <%= fruitstand_img %>
-    Welcome to
-  <% if @user.merchant_name %>
-    <%= @user.merchant_name %>
-  <% else %>
-    <%= @user.username %>
-  <% end %>
-  's Shop!
-</h2>
+<section class="page-container">
+  <h2 class="page-title">
+    <%= fruitstand_img %>
+      Welcome to
+    <% if @user.merchant_name %>
+      <%= @user.merchant_name %>
+    <% else %>
+      <%= @user.username %>
+    <% end %>
+    's Shop!
+  </h2>
 
-<% if @user.products.count > 0 %>
-  <section class="cards-container">
-  <% @products.each do |product| %>
-    <section class="card" style="width: 18rem;">
-      <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
-      <div class="card-body">
-        <h5> <%= link_to product.name, product_path(product.id) %> </h5>
-        <p class="card-text"><%= currency_format(product.price) %> </p>
-      </div>  
-        <p>
-          <% product.categories.each do |category| %>
-            <%= link_to category.name, category_products_path(category.id) %>
-          <% end %>
-        </p>
-      </div>    
-    </section>
+  <% if @user.products.count > 0 %>
+    <section class="cards-container">
+    <% @products.each do |product| %>
+      <section class="card" style="width: 18rem;">
+        <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
+        <div class="card-body">
+          <h5> <%= link_to product.name, product_path(product.id) %> </h5>
+          <p class="card-text"><%= currency_format(product.price) %> </p>
+        </div>  
+          <p>
+            <% product.categories.each do |category| %>
+              <%= link_to category.name, category_products_path(category.id) %>
+            <% end %>
+          </p>
+        </div>    
+      </section>
+    <% end %>
+  </section>
+  <% else %>
+    <p>Merchant's fruit stand is empty.</p>
   <% end %>
 </section>
-<% else %>
-  <p>Merchant's fruit stand is empty.</p>
-<% end %>
-
-
