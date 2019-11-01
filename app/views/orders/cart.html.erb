@@ -13,7 +13,7 @@
           <h3 class="halo"><%= order_item.product.name %></h3>
 
           <%= form_with model: OrderItem, method: :patch, url: order_item_path(order_item.id) do |f| %>
-            <%= f.label :quantity %>
+            <%= f.label :quantity, class: "halo" %>
             <%= number_field(:order_item, :quantity, min: 1, value: order_item.quantity) %>
             <%= f.submit "Update", class: "btn btn-dark" %>
           <% end %>
