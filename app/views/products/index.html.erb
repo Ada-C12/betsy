@@ -12,7 +12,7 @@
       <section class="card" style="width: 18rem;">
         <%= form_with model: OrderItem, url: product_order_items_path(product.id) do |f| %>
           <%= f.hidden_field :quantity, :value => 1 %>
-          <%= f.submit "+", class: "btn btn-secondary quick-add-btn" %>
+          <%= f.submit "+", class: "btn btn-green quick-add-btn" %>
         <% end %>
         <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
         <div class="card-body">

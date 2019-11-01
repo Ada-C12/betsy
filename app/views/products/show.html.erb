@@ -14,7 +14,11 @@
     <section class="product-details">
       <h2> <%=currency_format(@product.price) %> </h2>
       <h5> <%= @product.description %> </h5>
-      <h5> Average Rating: <%= @product.avg_rating %> </h5>
+      <% if @product.avg_rating %>
+        <h5> Average Rating: <%= @product.avg_rating %> </h5>
+      <% else %>
+        <h5> Average Rating: no customer review</h5>
+      <% end %>
       <h5> Stock: 
       <% if @product.stock > 0 %>
         <%= @product.stock %> 
@@ -30,16 +34,16 @@
             <%= f.text_field :quantity, :value => 1, class: "form-control" %>
           </div>
         </div>
-        <%= f.submit "add to cart", class: "btn btn-primary" %>
+        <%= f.submit "add to cart", class: "btn btn-pretty" %>
       <% end %>
-    </section>
 
-    <h5>
-      Categories: 
-      <% categories = @product.categories.map do |category| %>
-        <%= link_to category.name, category_products_path(category.id) %>,
-      <% end %>
-    </h5>
+      <h5>
+        Categories: 
+        <% categories = @product.categories.map do |category| %>
+          <%= link_to category.name, category_products_path(category.id) %>,
+        <% end %>
+      </h5>
+    </section>
   </section>
 
   <section class="rating-form">
@@ -65,7 +69,7 @@
         <%= f.hidden_field :user_id, :value => session[:user_id] %>
         <%= f.hidden_field :product_id, :value => @product.id %>
 
-        <%= f.submit "Submit", class: "btn btn-primary" %>
+        <%= f.submit "Submit", class: "btn btn-pretty" %>
       <% end %>
 </section>
 
