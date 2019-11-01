@@ -13,11 +13,11 @@
     <%= product_img_link(product: @product, img_url: @product.img_url, product_class: "show-product-img")%> 
     <section class="product-details">
       <h2> <%=currency_format(@product.price) %> </h2>
-      <h5> <%= @product.description %> </h5>
+      <h5 class="product-description"> <%= @product.description %> </h5>
       <% if @product.avg_rating %>
         <h5> Average Rating: <%= @product.avg_rating %> </h5>
       <% else %>
-        <h5> Average Rating: no customer review</h5>
+        <h5> Average Rating: no customer review yet :(</h5>
       <% end %>
       <h5> Stock: 
       <% if @product.stock > 0 %>
@@ -34,7 +34,7 @@
             <%= f.text_field :quantity, :value => 1, class: "form-control" %>
           </div>
         </div>
-        <%= f.submit "add to cart", class: "btn btn-pretty" %>
+        <%= f.submit "add to cart", class: "btn btn-pretty", id: "add-cart-btn" %>
       <% end %>
 
       <h5>
@@ -47,23 +47,24 @@
   </section>
 
   <section class="rating-form">
-    <h2> Add A Review For <%= @product.name %></h2>
-    <%= form_with model: Review, url: reviews_path, method: :post do |f| %>
+    <h2> Add a review for <%= @product.name %></h2>
+    
+    <%= form_with model: Review, url: reviews_path, method: :post, class:"review-product-form" do |f| %>
       <div class="form-row">
         <%= f.label "Rating", class: "col-sm-2 col-form-label"%>
         <%= f.select :rating, (1..5).to_a, class: "col-sm-2 col-form-label" %>
       </div>
       
       <div class="form-row">
-        <div class="col-md-4">
-        <%= f.label "Title", class: "col-form-label"%>
-          <%= f.text_field :title, class: "form-control" %>
+        <div class="col">
+        <%= f.label "Title", class: "col-form-label" %>
+        <%= f.text_field :title, class: "form-control", type: "text", placeholder: "Example Review Title" %>
         </div>
       </div>
       <div class="form-row">
-        <div class="col-md-6">
+        <div class="col">
           <%= f.label "Review", class: "col-form-label"%>
-          <%= f.text_area :description, class: "form-control" %>
+          <%= f.text_area :description, class: "form-control", type: "text", placeholder: "Leave reviews on Fruitsy products..." %>
         </div>
       </div>
         <%= f.hidden_field :user_id, :value => session[:user_id] %>

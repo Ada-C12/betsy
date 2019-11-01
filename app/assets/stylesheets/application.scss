@@ -251,6 +251,16 @@ a:hover {
   font-weight: bold;
 }
 
+.review-product-form {
+  border: 4px solid #9D6AB9;
+  box-shadow: 4px 8px rgba(136, 136, 136, 0.5);
+  color: #9D6AB9;
+  font-weight: bold;
+  background-color: white;
+  padding: 2%;
+  max-width: 60%;
+}
+
 
 .text-fields {
   margin-right: 5%;
@@ -300,7 +310,7 @@ th, th a{
 }
 
 .add-to-cart-form {
-  margin: 5% 0;
+  margin: 0.5% 0;
 }
 
 .rating-form .btn {
@@ -491,4 +501,8 @@ th, th a{
   margin-right: auto;
   max-height: 50vh;
   margin-bottom: 20px;
+}
+
+.product-description {
+  color: rgb(94, 170, 95);
 }
