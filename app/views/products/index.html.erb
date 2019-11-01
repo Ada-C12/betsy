@@ -1,21 +1,11 @@
-<section>
-  <h3>Shop All Products</h3>  
-  <% if @products.empty? %>
-    <p> No products available </p>
-  <% end %>
-
-  <div class="container">
-    <div class="row">
-      <% @products.each do |product| %>
-        <% if product.retired == false%>
-          <div class="col-sm">
-          <span class="img-description"><%= product.name %></span>
-          <%= link_to product_path(product.id) do %>
-            <span class="img"><%= image_tag "#{product.photo_url}"%></span>
-            <% end %>
-          </div>
-        <% end %>
-      <% end %>
-    </div>
+<% @products.each_slice(3) do |product| %>
+  <div class="row">
+    <% @products.each do |product| %>
+      <div class="col-md-4"><%= product.name %>
+        <p class="caption center-block"><%= link_to product_path(product.id) do %></p>
+          <p class="img"><%= image_tag "#{product.photo_url}"%></p>
+          <% end %>
+      </div>
+    <% end %>
   </div>
-</section>
+<% end %>

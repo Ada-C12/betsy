@@ -45,9 +45,9 @@
     <td id="text-just-center">
       <h4><%= link_to orderitem.product.name, product_path(orderitem.product) %></h4>
       <p>Quantity: <%= orderitem.quantity %></p>
-      <p>
-      <%# THIS SHOULD BE SHIPPED STATUS%>
-      </p>
+      <% if orderitem.shipped %>
+        <p class="shipped-font">Shipped!</p>
+      <% end %>
     </td>
 
     <td id="text-just-center">
