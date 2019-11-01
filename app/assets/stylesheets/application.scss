@@ -32,9 +32,7 @@ p {
 // navbar header on every page
 .top-brand-name {
   text-align: center;
-  font-size: 7rem;
-  padding-bottom: 2%;
-  margin-top: 2%;
+  font-size: 6rem;
 }
 .top-brand-name a {
   color: white
@@ -87,10 +85,11 @@ footer {
 }
 
 .page-title {
-  padding: 3%;
+  padding: 1%;
   background-color: rgba(94, 170, 95, 0.5);
   color: white;
-  margin-bottom: 2%;
+  margin-bottom: 1%;
+  border-radius: 15px;
 }
 
 .page-container {
@@ -133,9 +132,9 @@ footer {
   max-width: 7vw;
 }
 
-.nav-fruit-img{
-  max-width: 2.5em;
-  margin-right: 1%;
+.nav-fruit-img {
+  max-width: 2em;
+  margin-right: 1%
 }
 
 .fruit-shape-links {
@@ -209,12 +208,15 @@ a:hover {
 
 .homepage-container {
   padding: 3%;
+  padding-bottom: 10%
 }
 
 .homepage-container h2 {
-  margin-top: 2%;
-  padding: 2%;
+  margin-top: 1%;
+  padding: 1%;
   font-weight: bold;
+  font-size: 2.5rem;
+  border-bottom: 1px solid rgba(128, 128, 128,0.5)
 }
 
 
