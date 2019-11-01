@@ -191,6 +191,12 @@ a {
   border-color: goldenrod;
 }
 
+.btn-primary:hover {
+  background-color: goldenrod;
+  border-color: goldenrod;
+  color: black;
+}
+
 
 .copyright {
   text-align: center;
@@ -284,6 +290,12 @@ a {
   align-items: center;
 }
 
+.shipped-font {
+  color: #286090;
+  font-family: Helvetica, sans-serif;
+  font-weight: bold;
+}
+
 // merchant_order_path
 
 .merch-order-ul ul {
@@ -304,4 +316,36 @@ a {
 .summary > h3 {
   padding-top: 2rem;
   padding-bottom: 1rem;
+}
+
+// New Product Form
+
+.checks label {
+  margin-left: 3px;
+  margin-right: 15px;
+}
+
+// Merchant list
+
+.merchant_name {
+  color: goldenrod;
+  padding-right: 10%;
+}
+
+.merchant_name:hover {
+  color: black;
+}
+
+
+// Merchant Dashboard
+
+.button-flex {
+  display: flex;
+  justify-content: center;
+}
+
+.button-flex > * {
+  margin-left: 2em;
+  margin-right: 2em;
+  margin-bottom: 1.75em;
 }
