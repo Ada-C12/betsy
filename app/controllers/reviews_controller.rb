@@ -1,6 +1,6 @@
 class ReviewsController < ApplicationController
   skip_before_action :find_order
-  skip_before_action :require_login, :only => [:create]
+  skip_before_action :require_login, only: [:create]
   
   def create
     @review = Review.new(review_params)

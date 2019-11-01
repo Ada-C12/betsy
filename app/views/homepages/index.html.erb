@@ -1,5 +1,5 @@
 <section class="homepage-container">
-<h1 class="page-title">The Sweetest Platform For All Things Fruit! </h1>
+  <h1 class="page-title">The Sweetest Platform For All Things Fruit! </h1>
 
   <h2> Discover Products </h2>
   <section class="card-group">
@@ -20,7 +20,7 @@
   <h2> Deals Under $10 </h2>
   <% deals = Product.deals_under(10).first(5) %>
   <section class="card-group">
-      <% deals.each do |product| %>
+    <% deals.each do |product| %>
       <section class="card" style="width: 18rem;">
         <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%> 
         <div class="card-body">
@@ -30,25 +30,27 @@
           </h5>
         </div>
       </section>
-      <% end %>
-    </section>
+    <% end %>
+  </section>
 
   <% ["citrus", "berry", "tropical"].each do |theme| %>
     <h2 class="category-title"> <%= theme.capitalize %> </h2>
-    <% products = Category.products_by_category(theme).shuffle.first(3) %>
-    <section class="card-group">
-      <% products.each do |product| %>
-        <section class="card" style="width: 18rem;">
-          <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
-          <div class="card-body">
-            <h5> 
-              <%= link_to product.name, product_path(product.id) %>
-              <small><%=currency_format(product.price)%></small> 
-            </h5>
-        </section>
-      <% end %>
-    </section>
-  <% end %>
-  </section>
+    <% if Category.products_by_category(theme) %>
+      <% products = Category.products_by_category(theme).shuffle.first(3) %>
+      <section class="card-group">
+        <% products.each do |product| %>
+          <section class="card" style="width: 18rem;">
+            <%= product_img_link(product: product, img_url: product.img_url, product_class: "card-img-top")%>
+            <div class="card-body">
+              <h5> 
+                <%= link_to product.name, product_path(product.id) %>
+                <small><%=currency_format(product.price)%></small> 
+              </h5>
+            </div>
+          </section>
+        <% end %>
+      </section>
+    <% end %>
+  <%end%>
 
 </section>
