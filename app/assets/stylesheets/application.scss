@@ -103,15 +103,10 @@
       background-attachment: fixed;
    }
 
-   nav  {
-      background-image: linear-gradient(to right, white, black, white);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-   }
 
-   .text-gradient {
+   .background-opacity {
       color: black;
-      background-color: rgb(255, 255, 255), 0.6;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
    }
 
    a:hover {
@@ -123,3 +118,27 @@
    //    text-decoration: none;
    //    color: darkslategrey;
    // }
+
+   .lumos {
+      background-image: linear-gradient(to right, white, slategray, white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      -webkit-animation: glow 1s ease-in-out infinite alternate;
+      -moz-animation: glow 1s ease-in-out infinite alternate;
+      animation: glow 1s ease-in-out infinite alternate;
+   }
+
+   @-webkit-keyframes glow {
+      from {
+         text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
+      }
+      to {
+         text-shadow: 0 0 20px #fff, 0 0 30px slategray, 0 0 40px slategray, 0 0 50px slategray 0 0 60px slategray, 0 0 70px slategray, 0 0 80px slategray;
+      }
+   }
+
+   .user-nav  {
+      color: black;
+      text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
+   }
+
