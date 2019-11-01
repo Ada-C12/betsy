@@ -189,6 +189,12 @@ a:hover {
   color: rgb(94, 170, 95);
 }
 
+
+.product-thumbnail-cart {
+  max-width: 3em;
+  border: 3px solid #9D6AB9;
+}
+
 .product-thumbnail {
   max-width: 3em;
 }
@@ -196,8 +202,6 @@ a:hover {
 .fruitstand-img {
   max-width: 1.6em;
 }
-
-
 
 .new-form-page {
   min-height: 300vh;
@@ -243,23 +247,63 @@ th, th a{
 // show product page
 
 .show-product-img {
-  max-width: 20%;
-  max-height: 30%;
+  max-width: 35%;
+  max-height: 35%;
   border: solid 10px #9D6AB9;
   box-shadow: 4px 8px rgba(136, 136, 136, 0.5);
-  margin-left: 3%;
   margin-right: 5%;
   float: left;
 } 
 
+.product-show-head, .product-show-merchant {
+  margin-left: 5%
+}
+
+.product-show-head {
+  margin-top: 3%;
+  margin-bottom: 3%;
+  font-weight: bolder;
+  color: rgb(113, 72, 134);
+}
+
+.product-show-merchant {
+  margin-bottom: 3%;
+  font-weight: bold;
+}
+
+.add-to-cart-form {
+  margin: 5% 0;
+}
+
+.product-show {
+  margin-left: 5% 
+}
+
+.product-show h5 {
+  font-weight: bold;
+  margin: 1% 0
+}
 .rating-form {
   display: flex;
   flex-direction: column;
-  margin-top: 15%;
+  margin-top: 10%;
   border-top: grey 1px solid;
-  padding: 2%;
+  padding: 5%
 }
 
+.rating-form h2 {
+  font-weight: bolder;
+  color: rgb(113, 72, 134);
+}
+
+.rating-form form {
+  margin: 2% 0
+}
+
+.rating-form div.form-row {
+  padding: 1% 0;
+
+}
 .product-details {
   display: flex;
   flex-direction: column;
@@ -277,16 +321,52 @@ th, th a{
 .all-reviews-container {
   border-bottom: grey 1px solid;
   border-top: grey 1px solid;
-  padding: 2%;
+  padding: 5% 0;
 }
+
 .all-reviews-container h2 {
   font-weight: bolder;
-  color: #9D6AB9;
+  color: rgb(113, 72, 134);
+  margin-left: 5%;  
+}
+
+.review-containter {
+  margin: 5% 5% 2% 5%
+}
+
+.review-containter h4, .review-containter p{
+  margin: 1% 0
 }
 
 .form-row {
   padding: 1%;
   font-weight: bold;
+}
+
+#checkout-section {
+  display: grid;
+  grid-template-columns: 2;
+  grid-template-rows: 2;
+  max-width: 20%;
+  justify-items: end;
+  margin-left: auto;
+  margin-right: 5em;
+}
+
+#cart-total {
+  grid-column: 1/span 2;
+}
+
+#checkout-button {
+  grid-column: 2;
+  grid-row-start: 2;
+}
+
+.cart-quantity {
+  max-width: 4rem;
+}
+.confirmation-img {
+  max-width: 10%
 }
 
 .confirmation-img-container {

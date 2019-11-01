@@ -6,9 +6,9 @@ class Order < ApplicationRecord
   validates :email, presence: true, format: { with: /@/, message: "Email format must be valid." } , if: :not_pending?
   validates :address, presence: true, if: :not_pending?
   validates :cc_name, presence: true, if: :not_pending? 
-  validates :cc_last4, presence: true, if: :not_pending?
+  validates_numericality_of :cc_last4, greater_than_or_equal_to: 1000, less_than_or_equal_to: 9999, if: :not_pending?
   validates :cc_exp, presence: true, if: :not_pending?
-  validates_numericality_of :cc_cvv, if: :not_pending?
+  validates_numericality_of :cc_cvv, greater_than_or_equal_to: 100, less_than_or_equal_to: 9999, if: :not_pending?
   validates :billing_zip, presence: true, if: :not_pending?
   
   def not_pending?
