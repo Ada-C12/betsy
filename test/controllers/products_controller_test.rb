@@ -166,6 +166,23 @@ describe ProductsController do
       end
     end
 
+    describe "make_retired_true" do
+      it "redirects to root if not logged in as wizard product belongs to" do
+        patch make_retired_true(product.id)
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
+
+    describe "make_retired_false" do
+      it "redirects to root if not logged in as wizard product belongs to" do
+        patch make_retired_false(product.id)
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
   end
 
   describe "Logged In Users Only" do
