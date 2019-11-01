@@ -40,7 +40,10 @@
       <h5>
         Categories: 
         <% categories = @product.categories.map do |category| %>
-          <%= link_to category.name, category_products_path(category.id) %>,
+          <%= link_to category.name, category_products_path(category.id) %>
+          <% if category != @product.categories.last %>
+            |
+          <% end %>
         <% end %>
       </h5>
     </section>
