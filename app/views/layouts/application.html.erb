@@ -82,9 +82,9 @@
 
       <% cart_order = Order.find_by(id:session[:cart_id]) %>
       <% if cart_order &&  cart_order.order_items.count > 0 %>
-        <div class="cart-link"> <%= cart_full_img_link %> </div>
+        <div class="cart-link"> <%= cart_full_img_link%> </div>
       <% else %>
-        <div class="cart-link"> <%= cart_empty_img_link %> </div>
+        <div class="cart-link"> <%= cart_empty_img_link%> </div>
       <% end %>
     </nav>
       
