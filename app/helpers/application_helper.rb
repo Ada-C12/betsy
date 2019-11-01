@@ -53,4 +53,9 @@ module ApplicationHelper
     image = "https://live.staticflickr.com/65535/48989157882_0b4f1fae44_o.png"
     return image_tag (image), alt:"fruit icon image", class: "nav-fruit-img"
   end
+
+  def phone_icon
+    image = "https://live.staticflickr.com/65535/48994322702_80ca570ef1_o.png"
+    return image_tag (image), alt:"phone icon image", class: "phone-icon"
+  end
 end
