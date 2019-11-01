@@ -1,26 +1,38 @@
-<h1 class="page-title"> Confirmation </h1>
+<section class="confirmaton-page-container">
+  <h1> Thank you for ordering on fruitsy! </h1>
+  <h2> We appreiciate your business and hope to see you again soon! </h2>
+  <h4> You will receive a confirmation email shortly at <%= @current_order.email %>. </h4>
 
-Only show page if order status = paid 
-<% if @current_order.status == "paid"%>
-  <h2>Confirmation: Your order has been successfully placed!</h2>
+  <% if @current_order.status == "paid" %>
+    <section class="confirmation-img-container">
+      <% img_urls = @current_order.order_items.map do |order_item| %>
+          <% order_item.product.img_url %>
+      <% end %>
+      <% img_urls.each do |url| %>
+        <%= image_tag url, alt:"product image", class:"confirmation-img" %>
+      <% end %>
+    </section>
 
-  <h3>This page is for registered user to check the order details!</h3>
+    <section class="confirmation-order-container">
+      <h4> Order status: <strong> <%= @current_order.status %> </strong> </h4>
+      <h4> Order number is: <strong> <%= @current_order.id %> </strong> </h4>
+    </section>
 
-  <h2>Order ID: <%= @current_order.id %></h2>
+    <section class="confirmation-shipping-container">
+      <h4>Shipping Info:</h4>
+      <p>Name: <%= @current_order.name %> </p>
+      <p>Email: <%= @current_order.email %> </p>
+      <p>Address: <%= @current_order.address %> </p>
+    </section>
 
-  <h3>Order Status: <%= @current_order.status %></h3>
-
-  <h2>Shipping info:</h2>
-  <h3>Name: <%= @current_order.name %></h3>
-  <h3>Email: <%= @current_order.email %></h3>
-  <h3>Address: <%= @current_order.address %></h3>
-
-  <h2>Payment info:</h2>
-  <h3>Total: <%= @current_order.total%></h3>
-  <h3>Name: <%= @current_order.cc_name %></h3>
-  <h3>Card num: <%= @current_order.cc_last4 %></h3>
-  <h3>Exp: <%= @current_order.cc_exp %></h3>
-  <h3>CVV: <%= @current_order.cc_cvv %></h3>
-  <h3>Billing Zip: <%= @current_order.billing_zip %></h3>
-  
-<%end %>
+    <section class="confirmation-payment-container">
+      <h4>Payment Details:</h4>
+      <p>Total: <%= @current_order.total %> </p>
+      <p>Name: <%= @current_order.cc_name %> </p>
+      <p>Card num: <%= @current_order.cc_last4 %> </p>
+      <p>Exp: <%= @current_order.cc_exp %> </p>
+      <p>CVV: <%= @current_order.cc_cvv %> </p>
+      <p>Billing Zip: <%= @current_order.billing_zip %> </p>
+    </section>
+  <% end %>
+</section>

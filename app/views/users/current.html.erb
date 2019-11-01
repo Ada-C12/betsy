@@ -38,7 +38,6 @@
           <th> Category</th>
           <th> Active </th>
           <th> Edit </th>
-
         </tr>
       </thead>
       <tbody>
@@ -55,8 +54,8 @@
               <td> <%= product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail") %></td>   
               <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
               <td><%= f.text_field :name %></td>
-              <td>$<%= f.text_field :price, :value => (number_with_precision(f.object.price, :precision => 2) || 0) %></td>
-              <td><%= f.text_field :stock %></td>
+              <td>$<%= f.text_field :price, :value => (number_with_precision(f.object.price, :precision => 2) || 0), :size=>"4" %></td>
+              <td><%= f.text_field :stock, :size=>"4" %></td>
               <td><%= f.text_field :description%></td>
               <td><%= f.text_field :img_url %>
               <%if !product.categories.empty? %>
@@ -65,7 +64,7 @@
                 <td><p> N/A</p></td>
               <%end %>
               <td> <%= f.check_box :active %></td>
-              <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
+                <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
             <% end %>
             </tr>
           <% end %>
