@@ -2,7 +2,7 @@ class Product < ApplicationRecord
   validates :name, presence: true, uniqueness: {scope: :user_id}
   validates_length_of :name, minimum: 1, maximum: 50
   validates :price, numericality: {greater_than: 0}
-  validates :stock, numericality: { only_integer: true, greater_than: -1}
+  validates :stock, numericality: { only_integer: true, greater_than_or_equal_to: 0}
   validates :user_id, presence: true
   validates :img_url, presence: true
   validates :description, presence: true
@@ -44,7 +44,7 @@ class Product < ApplicationRecord
       return nil
     else
       ratings = reviews.map { |review| review.rating }
-      return (ratings.sum / ratings.length).to_f.round(2)
+      return (ratings.sum.to_f / ratings.length).round(1)
     end
   end
 

@@ -1,30 +1,31 @@
 
 <section class="page-container">
   
-    <h1> <%= @product.name %></h1>
+    <h1 class="product-show-head"> <%= @product.name %></h1>
     <% merchant = User.find_by(id: @product.user_id) %>
     <% if merchant.merchant_name.empty? %>
-      <h5> <%= fruitstand_img %> <%= link_to merchant.username, user_path(@product.user.id)  %></h5> 
+      <h5 class="product-show-merchant"> <%= fruitstand_img %> <%= link_to merchant.username, user_path(@product.user.id)  %></h5> 
     <% else %>
-      <h5> <%= fruitstand_img %> <%= link_to merchant.merchant_name, user_path(@product.user.id)  %></h5>
+      <h5 class="product-show-merchant"> <%= fruitstand_img %> <%= link_to merchant.merchant_name, user_path(@product.user.id)  %></h5>
     <% end %>
 
   <section class="product-show">
     <%= product_img_link(product: @product, img_url: @product.img_url, product_class: "show-product-img")%> 
     <section class="product-details">
-      <h2><%=currency_format(@product.price) %> </h2>
-      <h4> <%= @product.description %> </h4>
-      <h5> Stock:
+      <h2> <%=currency_format(@product.price) %> </h2>
+      <h5> <%= @product.description %> </h5>
+      <h5> Average Rating: <%= @product.avg_rating %> </h5>
+      <h5> Stock: 
       <% if @product.stock > 0 %>
         <%= @product.stock %> 
       <% else %>
         <p> Out of stock :( </p>
-        </h5>
       <%end %>
+      </h5>
 
-      <%= form_with model: OrderItem, url: product_order_items_path(@product.id) do |f| %>
+      <%= form_with model: OrderItem, url: product_order_items_path(@product.id), class: "add-to-cart-form" do |f| %>
         <div class="form-row">
-          <%= f.label :quantity %>
+          <h5><%= f.label :quantity %></h5>
           <div class="form-group col-1">  
             <%= f.text_field :quantity, :value => 1, class: "form-control" %>
           </div>
@@ -51,7 +52,7 @@
       
       <div class="form-row">
         <div class="col-md-4">
-        <%= f.label "Review Title", class: "col-form-label"%>
+        <%= f.label "Title", class: "col-form-label"%>
           <%= f.text_field :title, class: "form-control" %>
         </div>
       </div>
@@ -68,28 +69,34 @@
       <% end %>
 </section>
 
+<% if !@product.reviews.empty? %>
 <section class="all-reviews-container">
   <h2> <%= @product.name %> Reviews </h2>
     <% @product.reviews.order(rating: :desc).each do |review| %>
-    <section class="review-containter">
-      <div> 
-        <% review.rating.times do %>
-          <%= rating_img %>
+      <section class="review-containter">
+        <div> 
+          <% review.rating.times do %>
+            <%= rating_img %>
+          <% end %>
+        </div>
+        <h4> <%= review.title %>
+        <small> -
+          <% if review.user %>
+              <%= link_to review.user.username, user_path(review.user.id) %>
+          <% else %>
+              Guest
+          <% end %>
+        </small>
+        </h4>
+        <p> <%= review.description %> </p>
+        <% if session[:user_id] && review.user_id == session[:user_id] %>
+          <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
         <% end %>
-      </div>
-      <h4> <%= review.title %>
-      <small> -
-        <% if review.user %>
-            <%= link_to review.user.username, user_path(review.user.id) %>
-        <% else %>
-            Guest
-        <% end %>
-      </small>
-      </h4>
-      <p> <%= review.description %> </p>
-      <% if session[:user_id] && review.user_id == session[:user_id] %>
-        <%= link_to "Delete Your Review", review_path, method: :delete, data: { confirm: "Are you sure?" }, class: "btn btn-primary" %>
-      <% end %>
-    </section>
-  <% end %>
+      </section>
+    <% end %>
 </section>
+<% else %>
+  <section class="all-reviews-container">
+    <h2> There are no reviews for this product yet! </h2>
+  </section>
+<%end%>

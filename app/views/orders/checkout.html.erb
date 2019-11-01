@@ -1,27 +1,55 @@
-<section>
-<h2>Checkout</h2>
-<%= form_with model: @current_order, url: order_path(id: @current_order.id) do |f| %>
+<section class="page-container">
+  <section class="checkout-welcome">
+    <h1> <strong> Checkout </strong> </h1>
+    <h2>Please provide shipping and billing details to complete your order.</h2>
+  </section>
 
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <%= f.label :address %>
-  <%= f.text_field :address %>
+<section class="checkout-container">
+  <%= form_with model: @current_order, url: order_path(id: @current_order.id) do |f| %>
+    <section class="checkout-shipping-container">
+      <h2> Shipping Details </h2>
+      <div class="form-group col-md-4">
+        <%= f.label :Name %>
+        <%= f.text_field :name, class: "form-control", type: "text", placeholder: "Bonnie Banana"  %>
+      </div>
+      
+      <div class="form-group col-md-4">
+        <%= f.label :Email %>
+        <%= f.text_field :email, class: "form-control", type: "email", placeholder: "BBanana@example.com" %>
+      </div>
 
-  <h2>Billing info</h2>
-  <%= f.label "Credit Card Name" %>
-  <%= f.text_field :cc_name %>
-  <%= f.label "Credit Card Last 4 Digits" %>
-  <%= f.text_field :cc_last4 %>
-  <%= f.label "Exp Date" %>
-  <%= f.text_field :cc_exp %>
-  <%= f.label "CVV" %>
-  <%= f.text_field :cc_cvv %>
-  <%= f.label "Billing Zip Code" %>
-  <%= f.text_field :billing_zip %>
-  
-  <%= f.submit "Submit Order" %>
+      <div class="form-group col-md-4">
+        <%= f.label "Address" %>
+        <%= f.text_field :address, class: "form-control", type: "text", placeholder: "123 Kiwi Ave Apt. 23, Fruitville, WA 99999"%>
+      </div>
+    </section>
 
-<% end %>
+    <section class="checkout-billing-container">
+      <h2>Billing Details</h2>
+      <div class="form-group col-md-4">
+        <%= f.label "Credit Card Name" %>
+        <%= f.text_field :cc_name, class: "form-control", type: "text", placeholder: "Bonnie B Banana" %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label "Credit Card Last 4 Digits" %>
+        <%= f.text_field :cc_last4, class: "form-control", type: "text", placeholder: "4321" %>
+      </div>    
+      <div class="form-group col-md-4">
+        <%= f.label "Exp Date" %>
+        <%= f.text_field :cc_exp, class: "form-control", type: "text", placeholder: "01/21" %>
+      </div>    
+      <div class="form-group col-md-4">
+        <%= f.label "CVV" %>
+        <%= f.text_field :cc_cvv, class: "form-control", type: "text", placeholder: "321" %>
+      </div>
+      <div class="form-group col-md-4">
+        <%= f.label "Billing Zip Code" %>
+        <%= f.text_field :billing_zip, class: "form-control", type: "text", placeholder: "99999" %>
+      </div>
+
+      <%= f.submit "Submit Order", class:"btn btn-secondary submit-btn" %>
+    </section>
+  <% end %>
+<section class="checkout-container">
+
 </section>

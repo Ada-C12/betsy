@@ -55,7 +55,7 @@ class OrderItemsController < ApplicationController
         flash[:errors] = order_item.errors.messages
       end
     else
-      flash[:error] = "Quantity (#{input_quantity}) entered is greater than available stock for #{product.name}."
+      flash[:error] = "Quantity entered (#{input_quantity}) is greater than available stock for #{product.name}."
     end
     return redirect_to cart_path
   end

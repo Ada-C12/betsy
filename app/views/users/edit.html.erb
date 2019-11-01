@@ -1,40 +1,44 @@
-<h2 class="edit-header">edit profile</h2>
-<div class="container center_div">
-  <% if @current_user.errors.any? %>
-    <ul class="errors">
-      <% @current_user.errors.each do |column, message| %>
-        <li>
-          <strong><%= column.capitalize %></strong> <%= message %>
-        </li>
+<section class="page-container">
+  <div class="card edit-user">
+    <h2 class="edit-header">edit profile</h2>
+    <div class="card-body edit-contents">
+      <% if @current_user.errors.any? %>
+        <ul class="errors">
+          <% @current_user.errors.each do |column, message| %>
+            <li>
+              <strong><%= column.capitalize %></strong> <%= message %>
+            </li>
+          <% end %>
+        </ul>
       <% end %>
-    </ul>
-  <% end %>
 
-  <%= form_with model: @current_user do |f| %>
-    <div class="form-group row">
-      <%= f.label :merchant_name, class: "col-sm-2 col-form-label"%>
-      <div class="col-6">
-        <%= f.text_field :merchant_name, class: "form-control" %>
-      </div>
-    </div>
-    <div class="form-group row">
-      <%= f.label :email, class: "col-sm-2 col-form-label"%>
-      <div class="col-6">
-        <%= f.text_field :email, class: "form-control" %>
-      </div>
-    </div>
-    <fieldset disabled>
-      <div class="form-group row">
-        <%= f.label :username, class: "col-sm-2 col-form-label"%>
-        <div class="col-6">
-          <%= f.text_field :username, class: "form-control" %>
+      <%= form_with model: @current_user do |f| %>
+        <div class="form-group row">
+          <%= f.label :merchant_name, class: "col-sm-5 col-form-label"%>
+          <div class="col-5">
+            <%= f.text_field :merchant_name, class: "form-control" %>
+          </div>
         </div>
+        <div class="form-group row">
+          <%= f.label :email, class: "col-sm-5 col-form-label"%>
+          <div class="col-5">
+            <%= f.text_field :email, class: "form-control" %>
+          </div>
+        </div>
+        <fieldset disabled>
+          <div class="form-group row">
+            <%= f.label :username, class: "col-sm-5 col-form-label"%>
+            <div class="col-5">
+              <%= f.text_field :username, class: "form-control" %>
+            </div>
+        </div>
+        </fieldset>
+        <div class="form-group row">
+          <div class="col-sm-10">
+            <%= f.submit "Update", class: "btn btn-primary" %>
+          </div>
+        </div>
+      <% end %>
     </div>
-    </fieldset>
-    <div class="form-group row">
-      <div class="col-sm-10">
-        <%= f.submit "Update", class: "btn btn-primary" %>
-      </div>
-    </div>
-  <% end %>
-</div>
+  </div>
+</section>

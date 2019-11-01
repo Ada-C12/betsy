@@ -1,27 +1,48 @@
 <section class="page-container">
-  <h1 class="page-title" >Welcome To Your Fruit Basket!</h1>
+  <h1 class="page-title" >Welcome to your Fruit Basket!</h1>
 
   <% if @current_order && @current_order.order_items.count > 0 %>
-    <h4> Basket Total: <%=currency_format(@current_order.total)%></h4>
-    
-    <% @current_order.order_items.each do |order_item| %>
-      <%= product_img_link(product: order_item.product, img_url: order_item.product.img_url, product_class: "show-product-img")%>  
-      
-      <h4><%=currency_format(order_item.product.price)%></h4>
-      
-      <%= form_with model: order_item, url: order_item_path(order_item.id) do |f| %>
-        <%= f.label :quantity, class: "col-sm-2 col-form-label"%>
-        <%= f.text_field :quantity, class: "form-control" %>
-        <%= f.submit "Update", class: "btn btn-primary" %>
-      <% end %>
-      
-      <%= link_to "Delete", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
-      
-      <h5 class="card-text"> Merchant:<%= order_item.product.user.merchant_name %>MAKE LINK!! </h5> 
-
-    <% end %>
-    <%= link_to "Order", checkout_path, class:"btn btn-dark" %>
+    <section class="order-items-display">
+      <table class="table cart-table">
+        <thead>
+          <tr>
+            <th scope="col" class="cart-img"></th>
+            <th scope="col" class="cart-name">Product Name</th>
+            <th scope="col" class="cart-price">Unit Price</th>
+            <th scope="col" class="cart-quantity">Quantity</th>
+            <th scope="col" class="cart-update"></th>
+            <th scope="col" class="cart-remove"></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @current_order.order_items.each do |order_item| %>
+          <tr>
+            <td class="text-center">
+              <%= product_img_link(product: order_item.product, img_url: order_item.product.img_url, product_class: "product-thumbnail-cart")%></td>
+            <td><%= link_to order_item.product.name, product_path(order_item.product.id)%>
+            </td>
+            <td><%=currency_format(order_item.product.price)%></td>
+            <%= form_with model: order_item, url: order_item_path(order_item.id) do |f| %>
+              <td>
+                  <%= f.text_field :quantity, :size => "2", class: "form-control"%>
+              </td>
+              <td>
+                <%= f.submit "Update", class: "btn btn-primary"%>
+              </td>
+            <% end %>
+            <td class="text-center cart-remove">
+              <%= link_to "Remove", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
+            </td>
+          <% end %>
+        </tbody>
+      </table>
+      <div id="checkout-section">
+        <h4 id="cart-total"> Basket Total: <%=currency_format(@current_order.total)%></h4>
+        <%= link_to "Checkout", checkout_path, class:"btn btn-dark", id: "checkout-button" %>
+      </div>
+    </section>
   <% else %>
-    <h2>Your basket is empty! :(</h2>
+    <img src="https://live.staticflickr.com/65535/48971625503_83d9d1c039_o.png pcc", alt="cart fruit basket empty image", id="large-cart">
+    <h2 class="text-center">Your basket is empty.</h2>
   <% end %>
 </section>
