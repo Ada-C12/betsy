@@ -378,12 +378,27 @@ th, th a{
 }
 
 .confirmation-shipping-container {
-  margin-left: 10%;
-  margin-right: 10%;
+  max-width: 30%;
+  margin-right: 1%;
 }
 
 
 .confirmation-welcome {
   text-align: center;
   margin-top: 3%;
+}
+
+.confirmation-details-container {
+  display: flex;
+  justify-content: center;
+}
+
+.customer-service {
+  text-align: center;
+  margin-bottom: 2%;
+}
+
+.phone-icon {
+  max-width: 5%;
+  margin-bottom: 1%;
 }

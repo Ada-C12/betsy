@@ -140,7 +140,7 @@ describe OrdersController do
       
       must_redirect_to confirmation_path
       
-      assert_equal "Order #{find_order.id} has been purchased successfully!", flash[:success]
+      assert_equal "Order #{find_order.id} purchased successfully!", flash[:success]
     end
     
     it "redirects to the cart path if the params is invalid and doesn't change the order status" do 
@@ -156,7 +156,7 @@ describe OrdersController do
       
       must_redirect_to cart_path
       
-      assert_equal "Something went wrong! Order was not paid.", flash[:error]
+      assert_equal "Something went wrong! Order was not placed and your card was not billed.", flash[:error]
     end
 
     it "gives back a 404 response if order id is not found" do
