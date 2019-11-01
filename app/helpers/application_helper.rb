@@ -58,5 +58,4 @@ module ApplicationHelper
     image = "https://live.staticflickr.com/65535/48994322702_80ca570ef1_o.png"
     return image_tag (image), alt:"phone icon image", class: "phone-icon"
   end
-
 end
