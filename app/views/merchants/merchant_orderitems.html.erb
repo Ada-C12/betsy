@@ -25,7 +25,7 @@
     </thead>
     <tbody>
       <% Merchant.find_merchants_orderitems(@current_merchant, "false").each do |orderitem| %>
-        <% if orderitem.order.status != "cancel" %>
+        <% if orderitem.order.status != "cancel" || orderitem.order.status != "pending" %>
           <tr>
             <td><%= link_to "Order ##{orderitem.order_id}", merchant_order_path(orderitem.order_id) %></td>
             <td><%= link_to orderitem.product.name, product_path(orderitem.product) %></td>

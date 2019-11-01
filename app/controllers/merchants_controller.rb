@@ -1,7 +1,6 @@
 class MerchantsController < ApplicationController
   before_action :require_login, except: [:index, :destroy, :create]
  
-
   def index
     @merchants = Merchant.all
   end
@@ -45,5 +44,4 @@ class MerchantsController < ApplicationController
   def merchant_orderitems
     @current_merchant = Merchant.find_by(id: session[:merchant_id])
   end
-
 end

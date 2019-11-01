@@ -27,12 +27,11 @@ describe MerchantsController do
     end
 
     describe "merchant_orderitems" do
-    it "responds with success" do 
-      get your_orderitems_path(merchants(:brad))
-      must_respond_with :success
+      it "responds with success" do 
+        get your_orderitems_path(merchants(:brad))
+        must_respond_with :success
+      end
     end
-  end
-
   end
 
   describe "Guest Users" do 
@@ -43,13 +42,8 @@ describe MerchantsController do
       end
     
       it "responds with success when there are no merchants" do
-      # merchants = Merchant.all
-      # merchants.each do |merchant|
-      #   merchant.delete
-      # end
-     
-      get merchants_path
-      must_respond_with :success
+        get merchants_path
+        must_respond_with :success
       end
     end
 
@@ -80,7 +74,6 @@ describe MerchantsController do
         expect(session[:merchant_id]).must_equal merchant.id
         expect(flash[:status]).must_equal :success
         expect(flash[:result_text]).must_equal "Logged in as new merchant #{merchant.username}."
-  
       end
   
       it "redirects to the login if given invalid merchant data" do 
@@ -110,7 +103,6 @@ describe MerchantsController do
         must_redirect_to root_path
       end
     end
-      
   end
-
 end
+

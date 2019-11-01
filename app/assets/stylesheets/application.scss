@@ -168,6 +168,19 @@ h1, h2, h3, h4, h5 {
   line-height: 1.8em;
 }
 
+// REVIEWS
+
+.all-reviews {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3.5em;
+}
+
+.reviews-container {
+  width: 75vw;
+}
+
 // LINK FORMATTING
 
 a:hover {
@@ -189,6 +202,12 @@ a {
 .btn-primary {
   background-color: goldenrod;
   border-color: goldenrod;
+}
+
+.btn-primary:hover {
+  background-color: goldenrod;
+  border-color: goldenrod;
+  color: black;
 }
 
 
@@ -311,6 +330,25 @@ a {
   padding-top: 2rem;
   padding-bottom: 1rem;
 }
+
+// New Product Form
+
+.checks label {
+  margin-left: 3px;
+  margin-right: 15px;
+}
+
+// Merchant list
+
+.merchant_name {
+  color: goldenrod;
+  padding-right: 10%;
+}
+
+.merchant_name:hover {
+  color: black;
+}
+
 
 // Merchant Dashboard
 
