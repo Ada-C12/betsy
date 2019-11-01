@@ -420,6 +420,7 @@ th, th a{
 .cart-quantity {
   max-width: 4rem;
 }
+
 .confirmation-img {
   max-width: 10%;
   border: solid 2px #9D6AB9;
@@ -542,4 +543,20 @@ th, th a{
 
 .current-user .username {
   color: rgb(113, 72, 134);
+}
+
+.order-show-page {
+  text-align: center;
+  padding: 2%
+}
+
+.order-show-page h1 {
+  color: rgb(113, 72, 134);
+  margin: 2%
+}
+
+.order-show-page section {
+  width: auto;
+  margin: 3% 30%;
+  padding: 2%;
 }
