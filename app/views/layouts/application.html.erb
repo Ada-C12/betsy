@@ -16,7 +16,7 @@
       <%# image_tag 'magic-bg-8', class: 'header-image' %>
       <nav>
         <ul>
-          <li><%= image_tag 'https://i.imgur.com/BPqVHL0.png', id: "logo"%></li>
+          <li><%= link_to image_tag('https://i.imgur.com/BPqVHL0.png', id: "logo"), root_path %></li>
           <li><h1><%= link_to "Lumos", root_path, class: "lumos" %></h1></li>
           <% if session[:wizard_id] %>
             <li><%= link_to "Log out", logout_path, method: :delete, class: "user-nav" %></li>

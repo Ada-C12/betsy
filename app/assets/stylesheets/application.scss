@@ -39,8 +39,8 @@
    padding: 1em 0 2em 0;
    border-bottom: 1px solid gray;
    display: flex;
-      justify-content: center;
-      list-style: none;
+   justify-content: center;
+   list-style: none;
    }
    .validations {
       padding: 0.5em 0 0.5em 0
@@ -113,11 +113,6 @@
       text-decoration: none;
       color: darkslategrey;
    }
-
-   // .text-gradient:hover {
-   //    text-decoration: none;
-   //    color: darkslategrey;
-   // }
 
    .lumos {
       background-image: linear-gradient(to right, white, slategray, white);
