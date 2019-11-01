@@ -37,11 +37,11 @@ class OrdersController < ApplicationController
           item.product.stock = item.product.update_quantity(item.quantity, @order.status)
           item.product.save
         end 
-        flash[:success] = "Order #{@order.id} has been purchased successfully!"
+        flash[:success] = "Order #{@order.id} purchased successfully!"
         return redirect_to confirmation_path
         
       else
-        flash[:error] = "Something went wrong! Order was not paid."
+        flash[:error] = "Something went wrong! Order was not placed and your card was not billed."
         flash[:errors] = @order.errors.messages
         return redirect_to cart_path
       end

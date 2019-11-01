@@ -1,38 +1,82 @@
-<section class="confirmaton-page-container">
-  <h1> Thank you for ordering on fruitsy! </h1>
-  <h2> We appreiciate your business and hope to see you again soon! </h2>
-  <h4> You will receive a confirmation email shortly at <%= @current_order.email %>. </h4>
+<section class="page-container">
+  <section class="confirmation-welcome">
+    <h1> <strong> Thank you for ordering on fruitsy! </strong> </h1>
+    <h2> We appreciate your business and hope to see you again soon. </h2>
+    <h4> You will receive a confirmation email shortly at
+    <strong> <%= @current_order.email %> </strong> </h4>
+    <h4> Order <strong> <%= @current_order.id %> </strong> status is
+      <strong> 
+        <%= @current_order.status %> - <%= currency_format(@current_order.total) %>
+      </strong>
+    </h4>
+  </section>
 
-  <% if @current_order.status == "paid" %>
-    <section class="confirmation-img-container">
-      <% img_urls = @current_order.order_items.map do |order_item| %>
-          <% order_item.product.img_url %>
-      <% end %>
-      <% img_urls.each do |url| %>
-        <%= image_tag url, alt:"product image", class:"confirmation-img" %>
-      <% end %>
-    </section>
+    <% if @current_order.status == "paid" %>
+      <section class="confirmation-img-container">
+        <% img_urls = @current_order.order_items.map do |order_item| %>
+            <% order_item.product.img_url %>
+        <% end %>
+        <% img_urls.each do |url| %>
+          <%= image_tag url, alt:"product image", class:"confirmation-img product-thumbnail" %>
+        <% end %>
+      </section>
+    
+    <section class="confirmation-details-container">
+      <section class="confirmation-shipping-container">
+        <table class="table confirmation-table">
+          <thead>
+            <tr>
+              <th scope="col">Shipping Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> Name: <%= @current_order.name %> </td>
+            </tr>
+            <tr>
+              <td> Email: <%= @current_order.email %> </td>
+            </tr>
+            <tr>
+              <td> Address: <%= @current_order.address %> </td>
+            </tr> 
+          </tbody>
+        </table>
+      </section>
 
-    <section class="confirmation-order-container">
-      <h4> Order status: <strong> <%= @current_order.status %> </strong> </h4>
-      <h4> Order number is: <strong> <%= @current_order.id %> </strong> </h4>
-    </section>
+      <section class="confirmation-billing-container">
+        <table class="table confirmation-table">
+          <thead>
+            <tr>
+              <th scope="col">Billing Details</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td> <strong> Name: </strong> <%= @current_order.cc_name %> </td>
+            </tr> 
+            <tr> 
+              <td> <strong> CC Last 4: </strong>  <%= @current_order.cc_last4 %> </td>
+            </tr>
+            <tr>
+              <td> <strong> CC Exp: </strong>  <%= @current_order.cc_exp %> </td>
+            </tr>
+            <tr>
+              <td> <strong> CC CVV: </strong>  <%= @current_order.cc_cvv %> </td>
+            </tr>
+            <tr>
+              <td> <strong> Billing Zip: </strong>  <%= @current_order.billing_zip %> </td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    <% end %>
+  </section>
 
-    <section class="confirmation-shipping-container">
-      <h4>Shipping Info:</h4>
-      <p>Name: <%= @current_order.name %> </p>
-      <p>Email: <%= @current_order.email %> </p>
-      <p>Address: <%= @current_order.address %> </p>
-    </section>
+  <div class="customer-service"> 
+    <div> <%= phone_icon %> </div>
+    <h4> Please call customer service with any issues or to cancel your order at <strong> 1-800-BUY-FRUIT! </strong> </h4>
+  </div>
 
-    <section class="confirmation-payment-container">
-      <h4>Payment Details:</h4>
-      <p>Total: <%= @current_order.total %> </p>
-      <p>Name: <%= @current_order.cc_name %> </p>
-      <p>Card num: <%= @current_order.cc_last4 %> </p>
-      <p>Exp: <%= @current_order.cc_exp %> </p>
-      <p>CVV: <%= @current_order.cc_cvv %> </p>
-      <p>Billing Zip: <%= @current_order.billing_zip %> </p>
-    </section>
-  <% end %>
 </section>
+
+
