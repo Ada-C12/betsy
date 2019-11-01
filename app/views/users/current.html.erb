@@ -1,17 +1,17 @@
 <section class="page-container">
   <h2>hello, 
-  <%if@current_user.merchant_name%>
-    <%=@current_user.merchant_name%>!
+  <%if @current_user.merchant_name && !@current_user.merchant_name.empty? %>
+    <%=  @current_user.merchant_name%>!
   <%else%>
-    <%=@current_user.username%>!
+    <%= @current_user.username%>!
   <%end%>  
   </h2>
-  <p>You can <strong><%=link_to "edit", edit_user_path %></strong> your profile here.</p>
+  <p>You can <strong><%= link_to "edit", edit_user_path %></strong> your profile here.</p>
   <% if @current_user.products.count > 0 %>
     <p>Total revenue as of today: 
-      <%=currency_format(@current_user.total_earned)%></p>
+      <%= currency_format(@current_user.total_earned)%></p>
   <% else %>
-    <p> You haven't sold any products yet! Why not <strong><%=link_to "add a product", new_product_path%></strong> to sell? </p>
+    <p> You haven't sold any products yet! Why not <strong><%= link_to "add a product", new_product_path%></strong> to sell? </p>
   <% end %> 
   </p>
   <section class="user-products__container">
@@ -35,7 +35,6 @@
           <th> Stock</th>
           <th> Description</th>
           <th> Img url </th>
-          <th> Category</th>
           <th> Active </th>
           <th> Edit </th>
         </tr>
@@ -53,16 +52,11 @@
               </td>
               <td> <%= product_img_link(product: product, img_url: product.img_url, product_class:"product-thumbnail") %></td>   
               <%= form_with model: product, method: :patch, url: product_path(product.id) do |f| %>
-              <td><%= f.text_field :name %></td>
+              <td><%= f.text_field :name, :size=>"20" %></td>
               <td>$<%= f.text_field :price, :value => (number_with_precision(f.object.price, :precision => 2) || 0), :size=>"4" %></td>
-              <td><%= f.text_field :stock, :size=>"4" %></td>
-              <td><%= f.text_field :description%></td>
-              <td><%= f.text_field :img_url %>
-              <%if !product.categories.empty? %>
-                <td><%= product.categories.first.name %></td>
-              <%else%>
-                <td><p> N/A</p></td>
-              <%end %>
+              <td><%= f.text_field :stock, :size=>"3" %></td>
+              <td><%= f.text_field :description %></td>
+              <td><%= f.text_field :img_url, :size=>"10" %>
               <td> <%= f.check_box :active %></td>
                 <td><%= f.submit "Update", submit_button_label: "Edit Product" %></td>
             <% end %>

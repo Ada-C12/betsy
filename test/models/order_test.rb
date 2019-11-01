@@ -48,22 +48,46 @@ describe Order do
       refute(order.valid?)
     end
     
-    it "requires a cc_last4 to be present if order status is paid" do
-      order = orders(:order_1)
-      order.cc_last4 = nil
-      refute(order.valid?)
+    describe "cc_last4" do
+      it "requires a cc_last4 to be number if order status is paid" do
+        order = orders(:order_1)
+        order.cc_last4 = nil
+        refute(order.valid?)
+        expect(order.errors.messages).must_include :cc_last4
+        expect(order.errors.messages[:cc_last4]).must_include "is not a number"
+      end
+      
+      it "requires a cc_last4 to be within range of 1000 to 9999 if order status is paid" do
+        order = orders(:order_1)
+        order.cc_last4 = 123
+        refute(order.valid?)
+        expect(order.errors.messages).must_include :cc_last4
+        expect(order.errors.messages[:cc_last4]).must_include "must be greater than or equal to 1000"
+      end
     end
-
+    
     it "requires a cc_exp to be present if order status is paid" do
       order = orders(:order_1)
       order.cc_exp = nil
       refute(order.valid?)
     end
-
-    it "requires a cc_cvv to be present if order status is paid" do
-      order = orders(:order_1)
-      order.cc_cvv = nil
-      refute(order.valid?)
+    
+    describe "cc_cvv" do
+      it "requires a cc_cvv to be number if order status is paid" do
+        order = orders(:order_1)
+        order.cc_cvv = nil
+        refute(order.valid?)
+        expect(order.errors.messages).must_include :cc_cvv
+        expect(order.errors.messages[:cc_cvv]).must_include "is not a number"
+      end
+      
+      it "requires a cc_cvv to be within range of 100 to 9999 if order status is paid" do
+        order = orders(:order_1)
+        order.cc_cvv = 1
+        refute(order.valid?)
+        expect(order.errors.messages).must_include :cc_cvv
+        expect(order.errors.messages[:cc_cvv]).must_include "must be greater than or equal to 100"
+      end
     end
 
     it "requires a billing zip to be present if order status is paid" do
@@ -89,28 +113,28 @@ describe Order do
       end
     end
   end
-
+  
   describe "custom methods" do 
-
+    
     describe "not pending" do 
       it "returns true for an order that is not pending" do
-      
+        
         order = orders(:order_1)
         assert(order.not_pending?) 
-
+        
         order.status = "cancelled"
         assert(order.not_pending?)
-
+        
         order.status = "completed"
         assert(order.not_pending?)
       end 
-
+      
       it "returns false for an order that is pending" do 
         order = orders(:order_2)
         refute(order.not_pending?)
       end 
     end 
-
+    
     describe "contain_orderitems?" do 
       it "returns true if the current user has a product in an order" do 
         order = orders(:order_1)
@@ -118,14 +142,14 @@ describe Order do
         
         assert(order.contain_orderitems?(user))
       end 
-
+      
       it "returns false if the current user does not contain products in an order" do
         user = users(:gretchen)
         order = orders(:order_1) 
         refute(order.contain_orderitems?(user))
       end 
     end 
-
+    
     describe "total" do 
       it "returns the total for all orderitems inside of a paid order" do
         order = orders(:order_1)
@@ -134,19 +158,19 @@ describe Order do
       end 
       it "returns the total for all orderitems inside of a pending order" do 
         order = orders(:order_2)
-
+        
         expect(order.total).must_equal 125
       end 
     end
-
+    
     describe "self.new_order" do
       it "creates a new order with the status of 'pending" do
         expect{
           Order.new_order
         }.must_differ "Order.count", 1
-
+        
         order = Order.last
-
+        
         expect(order.status).must_equal "pending"
       end
     end

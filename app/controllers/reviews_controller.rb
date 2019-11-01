@@ -8,23 +8,19 @@ class ReviewsController < ApplicationController
     if @review.valid?
       if current_user && @review.product.user_id == current_user.id
         flash[:error] = "You can't review your own product!"
-        redirect_to product_path(@review.product.id)
-        return
       elsif current_user && !current_user.reviews.where(product_id: @review.product_id).empty?
         flash[:error] = "You can't review a product more than once!"
-        redirect_to product_path(@review.product.id)
-        return
       elsif @review.save
         flash[:success] = "Your #{Review.rating_sentiment(@review.rating)} review on #{@review.product.name} was added successfully!"
-        redirect_to product_path(@review.product.id)
-        return
+      else
+        flash[:error] = "Something went wrong! Your review was not saved!"
       end
     else
       flash[:error] = "Review was not added. Please check required fields before submitting."
       flash[:errors] = @review.errors.messages
-      redirect_to product_path(@review.product.id)
-      return
     end
+
+    return redirect_to product_path(@review.product.id)
   end
 
   def destroy
@@ -34,17 +30,13 @@ class ReviewsController < ApplicationController
       if review.user_id && review.user_id == session[:user_id]
         review.destroy
         flash[:success] = "Your review was deleted!"
-        redirect_to product_path(product.id)
-        return
       else
         flash[:error] = "You cannot delete a review that isn't yours"
-        redirect_to product_path(product.id)
-        return
       end
+      return redirect_to product_path(product.id)
     else
       flash[:error] = "The review doesn't exist anymore!"
-      redirect_to root_path
-      return
+      return redirect_to root_path
     end
   end
   
