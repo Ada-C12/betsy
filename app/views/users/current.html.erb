@@ -1,9 +1,9 @@
-<section class="page-container">
-  <h2>hello, 
+<section class="page-container current-user">
+  <h2>Hello,
   <%if @current_user.merchant_name && !@current_user.merchant_name.empty? %>
-    <%=  @current_user.merchant_name%>!
+    <span class='username'><%=  @current_user.merchant_name%></span>!
   <%else%>
-    <%= @current_user.username%>!
+    <span class='username'><%= @current_user.username%></span>!
   <%end%>  
   </h2>
   <p>You can <strong><%= link_to "edit", edit_user_path %></strong> your profile here.</p>
@@ -107,8 +107,8 @@
                   Paid
                 </a>
                 <div class="dropdown-menu" aria-labelledby="DropdownMenuLink">
-                  <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, class: "dropdown-item" %>
-                  <%= link_to "Completed", complete_order_path(order.id), method: :patch, class: "dropdown-item" %>
+                  <%= link_to "Cancelled", cancel_order_path(order.id), method: :patch, data: {confirm: "Are you sure you want to cancel the order?"}, class: "dropdown-item" %>
+                  <%= link_to "Completed", complete_order_path(order.id), method: :patch, data: {confirm: "Are you sure you want to complete the order?"}, class: "dropdown-item" %>
                 </div>
               <% else %>
                 <%= order.status.capitalize %>
