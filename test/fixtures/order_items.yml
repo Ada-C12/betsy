@@ -1,0 +1,119 @@
+o_i_1:
+  quantity: 60
+  shipping_status: shipped 
+  product: p_1
+  order: o_2
+
+o_i_2:
+  quantity: 70
+  shipping_status: pending
+  product: p_2
+  order: o_3
+
+o_i_3:
+  quantity: 90
+  shipping_status: pending
+  product: p_3
+  order: o_1
+
+o_i_4:
+  quantity: 3
+  shipping_status: shipped 
+  product: p_4
+  order: o_4
+
+o_i_5:
+  quantity: 4
+  shipping_status: shipped 
+  product: p_5
+  order: o_5
+
+o_i_6:
+  quantity: 67
+  shipping_status: pending
+  product: p_6
+  order: o_6
+
+o_i_7:
+  quantity: 5
+  shipping_status: pending
+  product: p_1
+  order: o_7
+
+o_i_8:
+  quantity: 4
+  shipping_status: pending
+  product: p_2
+  order: o_8
+
+o_i_9:
+  quantity: 5
+  shipping_status: shipped 
+  product: p_3
+  order: o_9
+
+o_i_10:
+  quantity: 1
+  shipping_status: shipped 
+  product: p_4
+  order: o_10
+
+o_i_11:
+  quantity: 33
+  shipping_status: pending
+  product: p_1
+  order: o_2
+
+o_i_12:
+  quantity: 444
+  shipping_status: shipped 
+  product: p_2
+  order: o_3
+
+o_i_13:
+  quantity: 6
+  shipping_status: shipped 
+  product: p_3
+  order: o_1
+
+o_i_14:
+  quantity: 7
+  shipping_status: pending
+  product: p_4
+  order: o_4
+
+o_i_15:
+  quantity: 98
+  shipping_status: pending
+  product: p_5
+  order: o_5
+
+o_i_16:
+  quantity: 22
+  shipping_status: pending
+  product: p_6
+  order: o_6
+
+o_i_17:
+  quantity: 12
+  shipping_status: shipped 
+  product: p_1
+  order: o_7
+
+o_i_18:
+  quantity: 3
+  shipping_status: shipped 
+  product: p_2
+  order: o_8
+
+o_i_19:
+  quantity: 5
+  shipping_status: shipped 
+  product: p_3
+  order: o_9
+
+o_i_20:
+  quantity: 2
+  shipping_status: pending
+  product_id: p_4
+  product_id: o_10

@@ -1,0 +1,33 @@
+body {
+  color: black;
+}
+
+#cart, #order-details {
+  color: black;
+}
+
+#emptiness-statement {
+  color: grey;
+  margin-bottom: 2em;
+}
+
+#orders table {
+  border-right: 1px solid #5a5e61;
+  border-top: 1px solid #5a5e61;
+  margin-bottom: 2em;
+}
+
+#orders table td {
+  border-left: 2px solid #5a5e61;
+  border-bottom: 2px solid #5a5e61;
+  padding: 5px;
+ }
+
+ .table-headers {
+   font-weight: bold;
+ }
+
+ #sum {
+   color: black;
+ }
+ 

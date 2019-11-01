@@ -1,0 +1,24 @@
+<main>
+  <h3>Order <%= @order.id %></h3>
+  <table>
+    <h4>Order by</h4>
+    <theader>
+      <tr class="table-headers">
+        <td>Name</td>
+        <td>Email</td>
+        <td>Mailing Address</td>
+        <td>Credit Card</td>
+        <td>Credit Card Expiration</td>
+      </tr>
+    </theader>
+    <tbody>
+      <tr>
+        <td><%= @user.username %></td>
+        <td><%= @user.email %></td>
+        <td><%= @user.address %></td>
+        <td><%= @user.show_cc %></td>
+        <td><%= @user.cc_expiration %></td>
+      </tr>
+    </tbody>
+  </table>
+</main>

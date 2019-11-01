@@ -1,0 +1,16 @@
+<% if @category.errors.any? %>
+  <p class="alert alert-danger" role="alert">Please fix the following...</p>
+  <ul>
+    <% @category.errors.each do |error, msg|%>
+      <li class="alert alert-danger"><%= error %>: <%= msg %></li>
+    <% end %>
+  </li>
+<% end %>
+<div>
+  <h1><%= heading %></h1>
+  <%= form_with model: @category do |f| %>
+    <%= f.label :label %>
+    <%= f.text_field :label %>
+    <%= f.submit submit_button_label, class: "btn btn-primary"%>
+  <% end %>
+</div>

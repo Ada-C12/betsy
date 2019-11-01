@@ -1,0 +1,42 @@
+<div class="row">
+  <nav class="col-md-2 d-none d-md-block bg-light sidebar">
+    <div class="sidebar-sticky">
+      <ul class="nav flex-column">
+        <li class="h5"><i class="fas fa-user-friends mr-2 text-secondary"></i>Merchants</li>
+        <% @users.each do |user|%>
+          <li class="nav-item">
+            <%= link_to user.username, products_path(merchantId: user.id), class:"nav-link text-secondary #{user.id == @merchant_id.to_i ? 'active' : ''}" %>
+          <% end %>
+        </li>
+        <li class="dropdown-divider"></li>
+        <li class="h5"><i class="fas fa-tags mr-2 text-secondary"></i>Categories</li>
+        <li class="nav-item">
+          <% @categories.each do |category|%>
+            <%= link_to category.label, products_path(categoryId: category.id), class:"nav-link text-secondary #{category.id == @category_id.to_i ? 'active' : ''}"  %>
+          <% end %>
+        </li>
+      </ul>
+    </div>
+  </nav>
+  <div class="col-md-9 ml-sm-auto col-lg-10 px-4">
+    <div class="row">
+      <% @products.each do |product| %>
+        <% if product.retired == "Active" %>
+          <div class="col-sm-4 d-flex mb-4">
+            <div class="card h-100" style="width: 18rem;">
+              <img src=<%= product.photo_url %> class="card-img-top img-fluid" alt=<%= product.name %>>
+              <div class="card-body">
+                <h5 class="card-title">$<%= product.price / 100%></h5>
+                <div class="text-secondary"><%= product.name %></div>
+                <div class="d-flex justify-content-center align-items-end mt-2">
+                  <%= link_to "add to cart", add_to_cart_path(product_id: product.id, order_item: { quantity: 1 }), method: :post, class:"card-link btn btn-primary btn-block align-self-end" %>
+                  <%= link_to "see details", product_path(product.id), method: :get, class:"card-link btn btn-primary btn-block align-self-end" %>
+                </div>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,96 @@
+// body {
+//   background-image: image-url( "https://images-na.ssl-images-amazon.com/images/I/617iKKOV-3L._SX425_.jpg");
+//   background-attachment: fixed;
+//   background-position: center;
+//   background-repeat: no-repeat;
+//   background-size: cover;
+// }
+
+h2 {
+  font-size: 1.5em;
+  color: #735608;
+}
+
+h4 {
+  font-size: 1.2em;
+  color: goldenrod;
+  margin-left: 1em;
+}
+.merchant-summary h5 { 
+  margin-left: 1em;
+  font-size: 1.2em;
+  color: goldenrod;
+}
+
+.merchant-summary td {
+  color: #026099;
+  margin-left: 1.1em;
+}
+
+.merchant-summary table {
+  border-right: 1px solid #34a1e3;
+  border-top: 1px solid #34a1e3;
+  margin-left: 1em;
+  text-align: center;
+  width: 200px;
+  margin-bottom: 2em;
+ }
+
+ .merchant-summary table td {
+  width: 50%
+ }
+
+  .merchant-summary table td {
+  border-left: 2px solid #34a1e3;
+  border-bottom: 2px solid #34a1e3;
+  padding: 5px;
+ }
+
+ .merchant-summary {
+  padding-bottom: 2em;
+}
+
+.order-summary {
+  margin-left: 1.1em;
+  color: green;
+}
+
+.order-summary h3 {
+  font-size: 1.2em;
+  color: goldenrod;
+}
+
+.order-summary a {
+  color: #735608;
+}
+
+.order-summary {
+  color: #735608;
+}
+
+.order-summary h6 strong {
+  size: 1.5em;
+  margin-right: 1em;
+}
+
+
+
+.order-summary table {
+  border-right: 1px solid #88d0fc;
+  border-top: 1px solid #88d0fc;
+  margin-left: 1em;
+  text-align: center;
+  width: 200px;
+  margin-bottom: 2em;
+ }
+
+ .order-summary table td {
+  width: 50%;
+  padding: 5px;
+ }
+
+ .order-summary table td {
+  border-left: 2px solid #88d0fc;
+  border-bottom: 2px solid #88d0fc;
+  padding: 5px;
+ }

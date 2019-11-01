@@ -1,0 +1,39 @@
+c_p_1:
+  category_id: c_1
+  product_id: 2
+
+c_p_2:
+  category_id: c_2
+  product_id: 5
+
+c_p_3:
+  category_id: c_4
+  product_id: p_1
+
+c_p_4:
+  category_id: c_4
+  product_id: p_5
+
+c_p_5:
+  category_id: c_3
+  product_id: p_2
+
+c_p_6:
+  category_id: c_4
+  product_id: p_1
+
+c_p_7:
+  category_id: c_2
+  product_id: p_3
+
+c_p_8:
+  category_id: c_1
+  product_id: p_6
+
+c_p_9:
+  category_id: c_2
+  product_id: p_6
+
+c_p_10:
+  category_id: c_3
+  product_id: p_1

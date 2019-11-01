@@ -1,0 +1,41 @@
+<section class="container">
+  <% if @product.errors.any? %>
+    <p>Please fix the following...</p>
+    <ul>
+      <% @product.errors.each do |error, msg|%>
+        <li><%= error %>: <%= msg %></li>
+      <% end %>
+    </ul>
+  <% end %>
+  <%= form_with model: @product do |f| %>
+    <div class="form-group">
+      <%= f.label :name %>
+      <%= f.text_field :name, class: "form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :categories %>
+      <%= f.collection_select :category_ids, Category.order(:label), :id, :label, {}, {multiple: true}%>
+    </div>
+    <div class="form-group">
+      <%= f.label :stock %>
+      <%= f.text_field :stock, class:"form-control"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :price %>
+      <%= f.text_field :price, class:"form-control"%>
+    </div>
+    <div class="form-group">
+      <%= f.label :retired %>
+      <%= f.select :retired, [['Active','Active'],['Retired','Retired']],{},{class: "form-control"} %>
+    </div>
+    <div class="form-group">
+      <%= f.label :description %>
+      <%= f.text_area :description, class:"form-control" %>
+    </div>
+    <div class="form-group">
+      <%= f.label :photo_url %>
+      <%= f.text_field :photo_url, class:"form-control"%>
+    </div>
+    <%= f.submit submit_button_label, class:"btn btn-primary"%>
+  <% end %>
+</section>

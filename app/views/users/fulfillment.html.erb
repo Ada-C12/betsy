@@ -1,0 +1,54 @@
+<main>
+  <h2>Order Fulfillment</h2>
+
+  <section class = "merchant-summary">
+    <section>
+      <h5> <strong>Total Revenue: </strong> $<%= @user.revenue %> </h5>
+    </section>
+    <section>
+      <h4>Total Revenue by Status</h4>
+      <table>
+        <theader>
+          <tr class="table-headers">
+            <% @user.revenues.keys.each do |status| %>
+              <td><%= status %></td>
+            <% end %>
+          </tr>
+        </theader>
+        <tbody>
+          <tr>
+            <% @user.revenues.values.each do |total| %>
+              <td>$<%= total %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+      <h4>Order Count by Status</h4>
+      <table>
+        <theader>
+          <tr class="table-headers">
+            <% @user.orders_counts.keys.each do |status| %>
+              <td><%= status %></td>
+            <% end %>
+          </tr>
+        </theader>
+        <tbody>
+          <tr>
+            <% @user.orders_counts.values.each do |total| %>
+              <td><%= total %></td>
+            <% end %>
+          </tr>
+        </tbody>
+      </table>  <section>
+    </section>
+  </section>
+
+
+  <section class= "order-summary">
+    <h3>Orders</h3>
+    <% @user.my_orders.each do |order, order_items| %>
+      <%= render 'users/order', order: order, order_items: order_items %>
+    <% end %>
+  </section>
+</main>

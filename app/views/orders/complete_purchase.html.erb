@@ -1,0 +1,40 @@
+<h2 class="congratulatory statement"> Thanks for placing your order! </h2>
+
+<table>
+  <h3 id = "order-details"> Order Details </h2>
+  <theader>
+    <tr class = "table-headers">
+      <td>Quantity</td>
+      <td>Price</td>
+      <td>Item Subtotal</td>
+      <td>Item Description</td>
+    </tr>
+  </theader>
+  <tbody>
+    <% @order_items.each do |order_item| %>
+      <tr>
+        <td> <%= order_item.quantity %></td>
+        <td> $<%= order_item.product.price %></td>
+        <td> $<%= order_item.total %></td>
+        <td><%= link_to order_item.product.name, products_path(order_item.product) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<section class = "summary">
+<h3> Order Summary </h3>
+<p>Total Price: $<%= @cart.revenue %> </p>
+<p> class= "summary"> Order Placed: <%= @cart.date_time_order_purchased %></p>
+<p> class= "summary"> Order Status: <%= @cart.status %> </p>
+</section>
+
+<section id= "shipping information">
+  <h3> Your order is being shipped to the following address: </h3>
+    <p> <%= @cart.user.street_address%> </p>
+    <p> <%= @cart.user.city%>, <%= @cart.user.state.upcase %> <%= @cart.user.mailing_zip %> </p>
+</section>
+
+<section id= "annoying-message">
+    <p> Shipping notifications will be sent to the following email address: <%= @cart.user.email %> </p>
+</section>
