@@ -34,11 +34,6 @@
       color: black
    }
 
-   a:hover {
-      text-decoration: none;
-      color: darkslategrey;
-   }
-
    .cart-row {
    margin: 1em 4em 1em 4em;
    padding: 1em 0 2em 0;
@@ -108,9 +103,23 @@
       background-attachment: fixed;
    }
 
-   .header-image {
-      // object-fit: none;
-      // height: 20em;
-      // width: 100vw;
-      // border-bottom: solid slategray 2px;
+   nav  {
+      background-image: linear-gradient(to right, white, black, white);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
    }
+
+   .text-gradient {
+      color: black;
+      background-color: rgb(255, 255, 255), 0.6;
+   }
+
+   a:hover {
+      text-decoration: none;
+      color: darkslategrey;
+   }
+
+   // .text-gradient:hover {
+   //    text-decoration: none;
+   //    color: darkslategrey;
+   // }
