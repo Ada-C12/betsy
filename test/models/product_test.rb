@@ -232,7 +232,6 @@ describe Product do
         expect(product.reviews.count).must_be :>, 1
         
         result = product.avg_rating
-        
         expect(result).must_be_instance_of Float
         expect(result).must_be_close_to 3.0, 0.01
       end
@@ -242,7 +241,6 @@ describe Product do
         product = Product.first
         
         result = product.avg_rating
-        
         expect(result).must_be_nil
       end
     end
@@ -261,7 +259,6 @@ describe Product do
         Product.destroy_all
         
         result = Product.active
-        
         expect(result).must_be_empty
       end
     end
@@ -279,9 +276,8 @@ describe Product do
       it "returns an empty array of there are no products that are found" do
         OrderItem.destroy_all
         Product.destroy_all
-        
+  
         result = Product.search('nothing')
-        
         expect(result).must_be_empty
       end
     end
