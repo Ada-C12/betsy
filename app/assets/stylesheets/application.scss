@@ -18,46 +18,83 @@
 
    * {
       text-align: center;
-	}
+      font-family: 'Montserrat', sans-serif;
+   }
 
 	ul {
       display: flex;
       align-items: center;
       justify-content: space-around;
-			list-style: none;
-		}
-		a {
-			color: black
-		}
-		a:hover {
+      list-style: none;
+      padding-left: 0;
+   }
+   
+
+   a {
+      color: black
+   }
+
+   a:hover {
       text-decoration: none;
-			color: yellow;
-		}
-		.cart-row {
-      margin: 1em 4em 1em 4em;
-      padding: 1em 0 2em 0;
-      border-bottom: 1px solid gray;
-      display: flex;
-			justify-content: center;
-		}
-		.validations {
-			padding: 0.5em 0 0.5em 0
-		}
-		
-		.top-padding {
-			margin-top: 1rem;
-		}
-		.align-left {
-      text-align: left;
-      padding: 0 0 0.5em 0.5em;
-			border-bottom: 1px dotted gray;
-		}
-		.form-button {
-			margin-top: 1em;
-		}
+      color: darkslategrey;
+   }
+
+   .cart-row {
+   margin: 1em 4em 1em 4em;
+   padding: 1em 0 2em 0;
+   border-bottom: 1px solid gray;
+   display: flex;
+   justify-content: center;
+   list-style: none;
+   }
+   .validations {
+      padding: 0.5em 0 0.5em 0
+   }
+   
+   .top-padding {
+      margin-top: 1rem;
+   }
+   .align-left {
+   text-align: left;
+   padding: 0 0 0.5em 0.5em;
+      border-bottom: 1px dotted gray;
+   }
+   .form-button {
+      margin-top: 1em;
+   }
 		
 	.justify-content-md-center {
 		-webkit-box-pack: center !important;
 		justify-content: center !important;
 	}
+
+   .form-button {
+      margin-top: 1em;
+   }
+   
+   body {
+      background-image: radial-gradient(farthest-corner at 40px 40px,
+           black, white 50%, rgb(0, 0, 0) 100%);
+      }
+
+   h1 {
+      padding-top: 1rem;
+      padding-bottom: 1rem;
+   }
+
+   h1 a, h2, h1 {
+      font-family: 'Herr Von Muellerhoff', cursive;
+      font-size: 3em;
+   }
+
+   section.categories {
+      padding-left: 2em;
+      padding-right: 2em;
+   }
+
+   #logo {
+      transform: rotate(10deg);
+      width: 7rem;
+      padding: 0;
+   }
 

@@ -18,10 +18,10 @@ class ApplicationController < ActionController::Base
     if wizard.nil?
       render :file => "#{Rails.root}/public/404.html",  layout: false, status: :not_found    
     elsif session[:wizard_id].nil?
-      flash[:error] = "You must be logged in to create a new product"
+      flash[:error] = "You cannot complete action unless you are logged in"
       return redirect_to root_path
     elsif wizard.id != session[:wizard_id]
-      flash[:error] = "You cannot create or edit products for a different Wizard's shop"
+      flash[:error] = "You cannot complete action for a different Wizard's shop"
       return redirect_to root_path
     end
   end

@@ -149,7 +149,7 @@ describe OrdersController do
     end
   end
   
-  def confirmation
+  describe "confirmation" do
     it "responds with success for valid ID" do
       get confirmation_path(order1.id)
       
