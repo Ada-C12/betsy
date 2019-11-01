@@ -1,6 +1,7 @@
 require "test_helper"
 describe ProductsController do
   let(:wizard1) { wizards(:wizard1) }
+  let(:wizard2) { wizards(:wizard2) }
   let(:wizard_no_products) { wizards(:wizard_no_products) }
   let(:product) { products(:product1) }
   let(:product3) { products(:product3) }
@@ -166,6 +167,29 @@ describe ProductsController do
       end
     end
 
+    describe "make_retired_true" do
+      it "does not change retired value and redirects to root if not logged in as wizard product belongs to" do
+        patch make_retired_true_path(product.id)
+
+        expect(product.retired).must_equal false
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
+
+    describe "make_retired_false" do
+      it "does not change retired value and redirects to root if not logged in as wizard product belongs to" do
+        product.retired = true
+        product.save
+
+        patch make_retired_false_path(product.id)
+        expect(product.retired).must_equal true
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
   end
 
   describe "Logged In Users Only" do
@@ -266,6 +290,68 @@ describe ProductsController do
         }.wont_change "Product.count"
 
         must_respond_with :bad_request
+      end
+    end
+
+    describe "make_retired_true" do
+      it "changes wizard to true if logged in as that wizard" do
+        perform_login(wizard1)
+        expect(product.retired).must_equal false
+
+        patch make_retired_true_path(product.id)
+
+        product.reload
+
+        expect(product.retired).must_equal true
+
+        must_respond_with :redirect
+      end
+
+      it "does not change retired to true if logged in as a different wizard" do
+        perform_login(wizard2)
+        expect(product.retired).must_equal false
+
+        patch make_retired_true_path(product.id)
+
+        product.reload
+
+        expect(product.retired).must_equal false
+
+        must_respond_with :redirect
+        must_redirect_to root_path
+      end
+    end
+
+    describe "make_retired_false" do
+      it "redirects to root if not logged in as wizard product belongs to" do
+        perform_login(wizard1)
+        product.retired = true
+        product.save
+        expect(product.retired).must_equal true
+
+        patch make_retired_false_path(product.id)
+
+        product.reload
+
+        expect(product.retired).must_equal false
+
+        must_respond_with :redirect
+      end
+
+      it "does not change retired to false if logged in as a different wizard" do
+        perform_login(wizard2)
+        product.retired = true
+        product.save
+        expect(product.retired).must_equal true
+
+        patch make_retired_false_path(product.id)
+
+        product.reload
+
+        expect(product.retired).must_equal true
+
+        must_respond_with :redirect
+        must_redirect_to root_path
       end
     end
   end

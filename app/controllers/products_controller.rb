@@ -85,18 +85,28 @@ class ProductsController < ApplicationController
   
   def make_retired_true
     @product = Product.find_by(id: params[:id])
+
+    if @product.wizard.id != session[:wizard_id]
+      flash[:error] = "Cannot retire a product unless you are logged in as that wizard"
+      return redirect_to root_path
+    end
     
     @product.make_retired_true
     flash[:success] = "Product successfully retired: Will not be shown to guests"
-    return redirect_back(fallback_location: :back)
+    return redirect_back(fallback_location: wizard_products_path(params[:id]))
   end
   
   def make_retired_false
     @product = Product.find_by(id: params[:id])
+
+    if @product.wizard.id != session[:wizard_id]
+      flash[:error] = "Cannot unretire a product unless you are logged in as that wizard"
+      return redirect_to root_path
+    end
     
     @product.make_retired_false
     flash[:success] = "Product successfully unretired: Will now be shown to guests"
-    return redirect_back(fallback_location: :back)
+    return redirect_back(fallback_location: wizard_products_path(params[:id]))
   end
   
   private

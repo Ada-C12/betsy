@@ -1,6 +1,9 @@
 require "test_helper"
 describe Product do
   let(:product1) { products(:product1) }
+  let(:wizard1) { wizards(:wizard1) }
+  let(:category1) { categories(:category1) }
+  
   describe "validations" do
     
     it "must have a name, price, stock, wizard, categories and retired information" do
@@ -148,6 +151,73 @@ describe Product do
         category.must_be_kind_of Category
       end
     end
+  end
+  
+  describe "custom methods" do
+    describe "five_products" do
+      it "returns 5 products" do
+        Product.create(name: 'new-product-1', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: [category1], photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
+        Product.create(name: 'new-product-2', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: [category1], photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
+        Product.create(name: 'new-product-3', price_cents: 1500, description: 'obscure figure while traveling through the mist', stock: 10, wizard: wizard1, categories: [category1], photo_url: 'https://i.imgur.com/BCK4aAc.jpg', retired: false)
+        
+        expect(Product.all.length).must_equal 6
+        
+        expect(Product.five_products.length).must_equal 5
+      end
+    end
     
+    describe "list_unretired" do
+      it "only lists unretired products" do
+        Product.list_unretired.each do |product|
+          expect(product.retired).must_equal false
+        end
+      end
+
+      it "only lists that wizards products when wizard argument is passed in" do
+        Product.list_unretired(wizard1).each do |product|
+          expect(product.wizard).must_equal wizard1
+        end
+      end
+    end
+
+    describe "make_retired_true" do
+      it "can change retired attribute to true" do
+        expect(product1.retired).must_equal false
+
+        product1.make_retired_true
+
+        expect(product1.retired).must_equal true
+      end
+
+      it "does not change retired attribute when already true" do
+        product1.retired = true
+        product1.save
+        expect(product1.retired).must_equal true
+
+        product1.make_retired_true
+
+        expect(product1.retired).must_equal true
+      end
+    end
+
+    describe "make_retired_false" do
+      it "can change retired attribute to false" do
+        product1.retired = true
+        product1.save
+        expect(product1.retired).must_equal true
+
+        product1.make_retired_false
+
+        expect(product1.retired).must_equal false
+      end
+
+      it "does not change retired attribute when already false" do
+        expect(product1.retired).must_equal false
+
+        product1.make_retired_false
+
+        expect(product1.retired).must_equal false
+      end
+    end
   end
 end
