@@ -3,13 +3,32 @@
 /* Import scss content */
 @import "**/*";
 
+.btn-pretty {
+  color: white;
+  background-color: #9D6AB9;
+}
+
+.btn-pretty:hover {
+  color: white;
+  background-color: rgb(139, 57, 182);
+}
+
+.btn-green {
+  background-color:  rgb(94, 170, 95);
+  color: white;
+}
+
+.btn-green:hover {
+  background-color:  rgb(72, 135, 73);
+  color: white;
+}
 
 nav {
   font-family: 'Lato', sans-serif;
 }
 
 .bg-merchant-nav {
-  background-color: #5EAA5F;
+  background-color:  rgb(94, 170, 95);
 }
 
 .navbar-toggler-icon{
@@ -34,7 +53,7 @@ p {
   text-align: center;
   font-size: 6rem;
 }
-.top-brand-name a {
+.top-brand-name a, #dropdown-text {
   color: white
 }
 
@@ -86,7 +105,7 @@ footer {
 
 .page-title {
   padding: 1%;
-  background-color: rgba(94, 170, 95, 0.5);
+  background-color: rgb(94, 170, 95);
   color: white;
   margin-bottom: 1%;
   border-radius: 15px;
@@ -95,7 +114,6 @@ footer {
 .page-container {
   padding: 2%;
 }
-
 
 // cards styling for products
 .cards-container {
@@ -432,6 +450,10 @@ th, th a{
 
 .submit-btn {
   margin-top: 2%;
+}
+
+.order-items-display {
+  margin-top: 30px;
 }
 
 .cart-table > thead {

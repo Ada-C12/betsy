@@ -26,12 +26,12 @@ module ApplicationHelper
 
   def cart_empty_img_link
     image = image_tag "https://live.staticflickr.com/65535/48971625503_83d9d1c039_o.png pcc", alt:"cart fruit basket empty image", class:"basket-img"
-    return link_to image, cart_path
+    return link_to image, cart_path, data: { turbolinks: false }
   end
 
   def cart_full_img_link
     image = image_tag "https://live.staticflickr.com/65535/48971625483_e04b973cc8_o.png", alt:"cart fruit basket full image", class:"basket-img"
-    return link_to image, cart_path
+    return link_to image, cart_path, data: { turbolinks: false }
   end
 
   def product_img_link(product: product, img_url: img_url, product_class: product_class)

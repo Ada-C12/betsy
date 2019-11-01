@@ -53,11 +53,11 @@
         <div class="collapse navbar-collapse" id="navbarNavDropdown">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              <a class="nav-link dropdown-toggle" id="dropdown-text" href="#" id="navbarDropdownMenuLink" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <%= fruitstand_img %>
               Manage My Fruit Stand
               </a>
-              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+              <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink" id="dropdown-text">
                 <%= link_to "Manage My Store", current_user_path, class: "dropdown-item" %>
                 <%= link_to "View My Store", user_path(current_user.id), class: "dropdown-item" %>
                 <%= link_to "Add New Product", new_product_path, class: "dropdown-item" %>
@@ -74,17 +74,17 @@
     <nav class="login-basket-nav">
       <section class="login-loggout-container">
         <%if session[:user_id]%>
-          <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-secondary logout-btn"%>
+          <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-green logout-btn"%>
         <%else %>
-          <%= link_to "Login with Github", github_login_path, class: "btn btn-secondary "%>
+          <%= link_to "Login with Github", github_login_path, class: "btn btn-green "%>
         <%end %>
       </section>
 
       <% cart_order = Order.find_by(id:session[:cart_id]) %>
       <% if cart_order &&  cart_order.order_items.count > 0 %>
-        <div class="cart-link"> <%= cart_full_img_link %> </div>
+        <div class="cart-link"> <%= cart_full_img_link%> </div>
       <% else %>
-        <div class="cart-link"> <%= cart_empty_img_link %> </div>
+        <div class="cart-link"> <%= cart_empty_img_link%> </div>
       <% end %>
     </nav>
       

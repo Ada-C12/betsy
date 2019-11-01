@@ -27,18 +27,18 @@
                   <%= f.text_field :quantity, :size => "2", class: "form-control"%>
               </td>
               <td>
-                <%= f.submit "Update", class: "btn btn-primary"%>
+                <%= f.submit "Update", class: "btn btn-pretty"%>
               </td>
             <% end %>
             <td class="text-center cart-remove">
-              <%= link_to "Remove", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-primary"%>
+              <%= link_to "Remove", order_item_path(order_item.id), method: :delete, data: {confirm: "Are you sure you want to remove this item from your basket?"}, class: "btn btn-pretty"%>
             </td>
           <% end %>
         </tbody>
       </table>
       <div id="checkout-section">
         <h4 id="cart-total"> Basket Total: <%=currency_format(@current_order.total)%></h4>
-        <%= link_to "Checkout", checkout_path, class:"btn btn-dark", id: "checkout-button" %>
+        <%= link_to "Checkout", checkout_path, class:"btn btn-green", id: "checkout-button" %>
       </div>
     </section>
   <% else %>
