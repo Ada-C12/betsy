@@ -1,14 +1,14 @@
-<div class="row product-show container ">
+<div class="row product-show container">
   <div class="col-md-6">
     <div class="col-md-12">
       <div class="img"><%= image_tag "#{@product.photo_url}"%></div>
     </div>
   </div>
 
-  <div class="col-md-6">
+  <div class="col-md-6 product-info">
     <div class="col-md-12">
-      <h3><%= @product.name %><h3>
-      <small class="description"><%= @product.description %><small>
+      <h3><%= @product.name%></h3>
+      <small class="prod-description product-show"><%= @product.description %></small>
       <small><p>Sold by: <%= link_to @product.merchant.username, merchant_products_path(@product.merchant.id)%></p></small>
       <p>$<%= '%.2f' % @product.price %></p>
       
@@ -30,12 +30,23 @@
         <% end %>
         </p>
       <% end %>
-    </div>
+  <%# once we reach this area, everything is italicized %>
   </div>
+</div>
+<div id="reviews">
+    <%= link_to "Leave a Review", new_product_review_path(@product.id), class: "btn btn-primary" %> 
+      <% @product.reviews.each do |review| %>
+        <span><% review.rating.times do %>
+        <i class="fas fa-beer", aria-hidden="true"></i>
+        <%end%>
+        <% (5-review.rating).to_i.times do %>
+        <i class="fas fa-beer", aria-hidden="true"></i>
+      <%end%></span>
+      <h4><%= review.text_review%></h4> 
+      <h6><%= review.rating%></h6> 
+<%end%>
+  <%= link_to "Back", products_path, class: "btn btn-primary" %>
 </div>
 
 
-
-
-
-
+</section>

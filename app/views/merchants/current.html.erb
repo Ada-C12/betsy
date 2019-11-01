@@ -1,25 +1,44 @@
-<article class="table-container">
-  <h2 class="h-center-text-no-pad"> Merchant <%= @current_merchant.username%>'s Dashboard</h2>
+<h2 class="h-center-text"> <%= @current_merchant.username%>'s Merchant  Dashboard</h2>
 
-  <section class="d-flex justify-content-between">
+<section class="button-flex">
+  <%= link_to "Add New Product", new_product_path, class: "btn btn-primary" %>
+  <%= link_to "Create New Product Category", new_type_path, class: "btn btn-primary" %>
+  <%= link_to "View My Order Items", your_orderitems_path(@current_merchant), class: "btn btn-primary" %>
+</section>
 
-    <%= link_to "Add New Product", new_product_path, class: "btn btn-primary" %>
-    <%= link_to "Add New Product Type", new_type_path, class: "btn btn-primary" %>
-    <%= link_to "View My Order Items", your_orderitems_path(@current_merchant), class: "btn btn-primary" %>
-  
-  </section>
-
-  <section>
-    <h2 class="h-center-text-no-pad">Your Products </h2>
-    <ul>
+<section>
+  <h3>List of Your Products</h3> 
+  <table class="table">
+    <thead>
+      <tr>
+        <th></th>
+        <th>Product Name</th>
+        <th>Price</th>
+        <th>Stock</th>
+        <th>Status</th>
+        <th></th>
+      </tr>
+    </thead>
+    <tbody>
       <% @current_merchant.products.each do |product|%>
-        <%= image_tag "#{product.photo_url}"%>
-        <%= link_to product.name, product_path(product.id) %>
-        <%= link_to "Edit", edit_product_path(product), class: "btn btn-primary" %>
+      <tr>
+        <td><span class="img-cart cont-center"><%= image_tag "#{product.photo_url}", alt: "#{product.name}"%></span></td>
+        <td><%= link_to product.name, product_path(product.id) %></td>
+        <td>$<%= '%.2f' % product.price %></td>
+        <td><%= product.stock %></td>
+        <td>
+          <% if product.retired %>
+            Retired
+          <% else %>
+            Active
+          <% end %>
+        </td>
+        <td><%= link_to "Edit", edit_product_path(product), class: "btn btn-primary" %></td>
+      </tr>
       <% end %>
-    </ul>
-  </section>
-</article>
+    </tbody>
+  </table>
+</section>
 
 
   
