@@ -392,7 +392,7 @@ th, th a{
 }
 
 
-.confirmation-welcome {
+.confirmation-welcome, .checkout-welcome {
   text-align: center;
   margin-top: 3%;
 }
@@ -410,4 +410,21 @@ th, th a{
 .phone-icon {
   max-width: 5%;
   margin-bottom: 1%;
+}
+
+.checkout-container {
+  margin-left: 5%;
+  margin-top: 5%;
+}
+
+.checkout-billing-container {
+  margin-top: 5%;
+}
+
+.checkout-container h2 {
+  margin-bottom: 2%
+}
+
+.submit-btn {
+  margin-top: 2%;
 }
