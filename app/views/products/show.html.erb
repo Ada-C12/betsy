@@ -1,0 +1,47 @@
+<main>
+<div class="container">
+	<div class="row">
+		<div class="col-lg-12 product-heading"><h2><%= @product.name %></h2></div>
+	</div>
+	<div class="row">
+		<div class="col-lg-6 product-photo">
+			<%= image_tag @product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : @product.photo_url, alt: "a picture of a #{@product.name}" %>
+		</div>
+		<div class="col-lg-6 align-self-center white-text">
+			<p>Seller: <%=@product.wizard.username%></p>
+			<% if @product.retired %>
+				<p><em>Retired</em></p>
+			<% end %>
+			<p>Price: <%= humanized_money_with_symbol(@product.price) %></p>
+			<p>Description: <%=@product.description%></p>
+			<p>Stock: <%=@product.stock%></p>
+			<%= form_with model: OrderItem, url: product_order_items_path(@product.id) do |f| %>
+				<%= number_field(:order_item, :quantity, min: 1, value: 1) %>
+				<%= f.submit "Add to Cart", class: "btn btn-dark"%>
+			<% end %>
+  </div>
+</div>
+<table class="container reviews">
+	<thead>
+		<tr>
+			<th class="align-self-center halo">Reviews</th>
+		</tr>
+	</thead>
+
+
+	<%@product.reviews.each do |review|%>
+  <tr>
+  <%review.rating.times do%>
+  <td> <%= image_tag 'https://i.imgur.com/BPqVHL0.png', class: "review-photo"%> </td>
+  <%end%>
+  </tr>
+  <tr class="review-tr">
+    <td class="white-text"><%= review.review_comment%></td>
+  </tr>
+	<%end%>
+
+</table>
+<div class="form-button">
+    <%=link_to "Make a review", new_product_review_path(@product.id), class: "btn btn-dark"%>
+</div>
+</main>

@@ -1,0 +1,26 @@
+id,name,price_cents,description,stock,photo_url,wizard_id,category_ids
+1,Red Dragon Egg,5000,Not a Game of Thrones dragon,5,https://i.imgur.com/naNBa64.jpg,2,5
+2,Good Luck Amulet,2000,Results not guaranteed,30,https://i.imgur.com/Edc1YVt.jpg,3,1
+3,Love Potion,1500,Make your crush like you back,100,https://i.imgur.com/BCK4aAc.jpg,4,4
+4,Dorothy's Ruby Slippers,5000,There's no place like home,10,https://i.imgur.com/KqLpTdw.jpg,3,5
+5,The One Ring,600000,Very precious,1,https://i.imgur.com/0RIIitO.jpg,3,6
+6,Philosopher's Stone,30000,For the Alchemist,20,https://i.imgur.com/ZY03ZBP.jpg,2,5
+7,Hand of Midas,500000,Don't hug your loved ones,5,https://i.imgur.com/7k36FUT.jpg?1,2,5
+8,Lasso of Truth,1000000,Heirloom of Wonder Woman,1,https://i.imgur.com/YMi5mBa.jpg,1,5
+9,Excalibur,200000,Stone included,1,https://i.imgur.com/8npvULj.jpg,2,5
+10,Necromancer Bells,8000,Call up old friends,15,https://i.imgur.com/C8NSmeE.jpg,3,6
+11,VHS,2000,Watch Me,1,https://i.imgur.com/f0LYwv8.jpg,5,6
+12,Poison Crown,85000,For your rivals,25,https://i.imgur.com/qrLgJN2.jpg,5,6
+13,Wardrobe,35000,A world of wonder awaits,20,https://i.imgur.com/PqaGEOp.jpg,1,5
+14,Amulet,1000,For good health,35,https://i.imgur.com/GATYPNq.jpg,1,1
+15,Firebolt,8000,Fly fast and win glory for your house,5,https://i.imgur.com/dmWGF5n.jpg,1,5
+16,Wand: Elder Wood,2500,A wand for a lifetime,10,https://i.imgur.com/Kzqtf4n.jpg,1,3
+17,Wand: Chestnut Wood,2500,A wand for a lifetime,10,https://i.imgur.com/aS9qZzE.png,1,3
+18,Wand: Pine Wood,2500,A wand for a lifetime,10,https://i.imgur.com/1gAheYg.jpg,1,3
+19,Modern Quidditch Broom,8000,Keep up with the times and get the edge on the competition,25,https://i.imgur.com/rlYPwzU.jpg,1,5
+20,Dragon Scale,5000,Quality ingredients for your spells,50,https://i.imgur.com/1NlWVS6.jpg,5,2
+21,Chopped Toad Eyes,500,Garnishing for your cauldron spells,55,https://i.imgur.com/UW6cpBV.jpg,2,2
+22,Wool of Bat,3000,Quality cave bat wool,30,https://i.imgur.com/LHhWzLq.jpg,2,2
+23,Werewolf Fang,8000,To strengthen your spells and charms,80,https://i.imgur.com/HZ5QdiT.jpg,4,2
+24,Golden Apple,5000,Cause discord among the partygoers,1,https://i.imgur.com/SBhClRE.jpg,5,6
+25,Labyrinth,800000,Minotaur included,5,https://i.imgur.com/K68UoIE.jpg,2,6

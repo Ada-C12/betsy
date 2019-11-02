@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Lumos</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path('https://i.imgur.com/02QEPJL.png') %>
+    <link href="https://fonts.googleapis.com/css?family=Herr+Von+Muellerhoff|Montserrat:400i,700&display=swap" rel="stylesheet">
+  </head>
+
+  <body>
+    <header>
+      <%# image_tag 'magic-bg-8', class: 'header-image' %>
+      <nav>
+        <ul>
+          <li><%= link_to image_tag('https://i.imgur.com/BPqVHL0.png', id: "logo"), root_path %></li>
+          <li><h1><%= link_to "Lumos", root_path, class: "lumos" %></h1></li>
+          <% if session[:wizard_id] %>
+            <li><%= link_to "Log out", logout_path, method: :delete, class: "halo" %></li>
+            <li><%= link_to "Profile", wizard_path(session[:wizard_id]), class: "halo" %></li>
+            
+          <% else %>
+            <li><%= link_to "Login", github_login_path, class: "halo" %></li>
+          <% end %>
+          <li><%= link_to "Cart", cart_path, class: "halo" %></li>
+        </ul>
+      </nav>
+      <section class="categories">
+        <ul class="background-opacity">
+          <li><%=link_to 'All Items', products_path %></li>
+        <% Category.fixed_categories.each do |category| %>
+          <li><%= link_to category.name, category_products_path(category.id) %>
+          </li>
+        <% end %>
+        <% if Category.more_categories.any? %>
+          <li>
+            <%# copied Julia's bootstrap dropdown %>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                More
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% Category.more_categories.each do |category|%>
+                  <%= link_to category.name, category_products_path(category.id), class:"dropdown-item" %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        <% end %>
+
+          <li>
+            <%# boostrap dropdown %>
+            <div class="dropdown">
+              <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                Wizards
+              </button>
+              <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                <% Wizard.all.each do |wizard|%>
+                  <%= link_to wizard.username, wizard_products_path(wizard.id), class:"dropdown-item" %>
+                <% end %>
+              </div>
+            </div>
+          </li>
+        </ul>
+      </section>
+    </header>
+
+    <% if flash[:error] %>
+      <div class="alert alert-warning alert-container">
+        <strong><%= flash[:error] %></strong>
+        <% if @order %>
+          <section id="cart-validations">
+            <% if @order.errors.any? %>
+              <div>
+                <% @order.errors.each do |column, message| %>
+                  <div class="validations">
+                    <%= column %> <%= message %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </section>
+        <% end %>
+        <% if @category %>
+          <section id="cart-validations">
+            <% if @category.errors.any? %>
+              <div>
+                <% @category.errors.each do |column, message| %>
+                  <div class="validations">
+                    <%= column %> <%= message %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </section>
+        <% end %>
+        <% if @product %>
+          <section id="cart-validations">
+            <% if @product.errors.any? %>
+              <div>
+                <% @product.errors.each do |column, message| %>
+                  <div class="validations">
+                    <strong><%= column.capitalize %></strong> <%= message %>
+                  </div>
+                <% end %>
+              </div>
+            <% end %>
+          </section>
+        <% end %>
+      </div>
+    <strong><% elsif flash[:success] %></strong>
+      <div class="alert alert-success alert-container">
+        <%= flash[:success] %>
+      </div>
+    <% end %>
+
+    <%= yield %>
+    <footer>
+      <h5>&copy 2019</h5>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,70 @@
+// Place all the styles related to the Wizards controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.product-row {
+    margin-bottom: 3em;
+}
+
+.wizard-show-nav {
+    display: flex;
+    justify-content: center;
+    padding-left: 0;
+}
+
+#wizard-show-item-photo {
+    width: 20vw;
+}
+
+.wizard-show-container {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+}
+
+.revenue {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-start: 1;
+}
+
+.orders {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    grid-column-start: 2;
+}
+
+.revenue div:first-child {
+    grid-column: 1 / 2;
+}
+
+.revenue div:last-child {
+    grid-column: 2 / 3;
+}
+
+.orders div div:first-child {
+    grid-column-start: 3;
+}
+
+.orders div span:first-child {
+    grid-column-start: 4;
+}
+
+.wizard-show-page-border {
+    border-bottom: 1px solid gray;
+    margin: 1em 0 1em 0;
+    padding-bottom: 1em;
+}
+
+.bottom-border {
+    border-bottom: 1px solid gray;
+    margin: 0 5em 0 5em;
+    padding-bottom: 1em; 
+}
+
+.bottom-border + h4 {
+    padding-top: 1em; 
+}
+
+h1 {
+    padding-top: 1em;
+}

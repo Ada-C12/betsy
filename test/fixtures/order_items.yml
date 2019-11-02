@@ -1,0 +1,23 @@
+order_items1:
+  quantity: 2
+  product: product1
+  order: order1
+  shipped: false
+
+order_items2:
+  quantity: 1
+  product: product1
+  order: order2
+  shipped: false
+
+order_items3:
+  quantity: 1
+  product: product3
+  order: order2
+  shipped: false
+
+pending_order_items:
+  quantity: 1
+  product: product3
+  order: pending_order
+  shipped: false

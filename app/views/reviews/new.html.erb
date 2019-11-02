@@ -1,0 +1,29 @@
+<h2 class="product-heading">Write a review</h2>
+<% if @review.errors.any? %>
+  <ul class="errors">
+    <% @review.errors.each do |column, message| %>
+      <li>
+        <strong><%= column.capitalize %></strong> <%= message %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>
+
+<div class="container">
+  <%= form_with model: @review, url: product_reviews_path do |f| %>
+  <div class="row justify-content-md-center">
+    <%= f.label :rating %>:<%= f.select :rating, [ 1,2,3,4,5 ] %>
+  </div>
+  <div class="row justify-content-md-center">
+    <%= f.label :review_comment %>
+  </div>
+  <div class="row justify-content-md-center">
+  <%= f.text_area :review_comment,:cols => "50", :rows => "6", class: "text-area-color" %>
+  </div>
+  <div class="row justify-content-md-center">
+    <%= f.submit "Create Review", class: "btn btn-dark form-button"%>
+  </div>
+
+  <% end %>
+
+</div>

@@ -1,0 +1,33 @@
+<section>
+  <% if @order && !@order.order_items.empty? %>
+    <div class="product-heading" id="cart-heading">
+      <h2>Your Cart</h2>
+      <h5 class="total">Total: <%= humanized_money_with_symbol(@order.total) %></h5>
+      <%= link_to "Checkout", checkout_path(@order.id), class: "btn btn btn-dark" %>
+    </div>
+
+    <% @order.order_items.each do |order_item|%>
+      <div class="row cart-row">
+        <%= link_to image_tag(order_item.product.photo_url.empty? ? "https://i.imgur.com/yciRdrY.jpg?2" : order_item.product.photo_url  , alt: "Picture of #{order_item.product.name}"), product_path(order_item.product.id, class: "col-5") %>
+        <div class="col-4 cart-products">
+          <h3 class="halo"><%= order_item.product.name %></h3>
+
+          <%= form_with model: OrderItem, method: :patch, url: order_item_path(order_item.id) do |f| %>
+            <%= f.label :quantity, class: "halo" %>
+            <%= number_field(:order_item, :quantity, min: 1, value: order_item.quantity) %>
+            <%= f.submit "Update", class: "btn btn-dark" %>
+          <% end %>
+
+          <h5>Subtotal: <%= humanized_money_with_symbol(order_item.subtotal) %></h5>
+        </div>
+        <div class="col-1">
+          <%= link_to "Remove", order_item_path(order_item.id), method: :delete, data: { confirm: "Are you sure you want to remove #{order_item.product.name} from cart?" }, class: "btn btn-outline-danger" %>
+        </div>
+      </div>
+    <% end %>
+
+  <% else %>
+    <h1 class="product-heading">Your cart is empty!</h1>
+    <%= image_tag "https://i.imgur.com/WRxbxDC.jpg[/img]", alt: "Harry Potter and Ron Weasley staring at divination ball, lost", class: "not-found"%>
+  <% end %>
+</section>

@@ -1,0 +1,47 @@
+# category1 - category6 represent the FIXED_CATEGORIES_IDS
+category1: 
+  name: Amulets and Wards 
+  products: 
+
+
+category2: 
+  name: Crafts 
+  products: 
+
+
+category3: 
+  name: Wands 
+  products: 
+
+
+category4: 
+  name: Potions 
+  products: 
+
+
+category5: 
+  name: Artifacts 
+  products: 
+
+
+category6: 
+  name: Nox 
+  products: 
+
+# Beyond here represents "more categories"
+
+category7: 
+  name: Clams
+  products: 
+
+
+category8: 
+  name: Lobsters
+  products: 
+
+
+category9: 
+  name: Eggs
+  products: 
+
+

@@ -1,0 +1,75 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+.product-photo img {
+  width: 32vw;
+  height: auto;
+  float: top;
+  padding: 1em;
+
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+}
+
+.carousel-inner > .carousel-item > a img {
+  width:640px;
+  height:360px;
+  object-fit: contain;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap; 
+  align-items: center;
+  justify-content: space-around;
+}
+
+.card {
+  padding: 0.5em;
+  margin: 1em;
+  align-items: center;
+}
+
+.card-title {
+  padding: 0;
+}
+
+.card-body {
+  padding-bottom: 0;
+}
+
+.product-heading {
+  border-top: 1px gray solid;
+  border-bottom: 1px gray solid;
+  padding: 0.5em 0 0.5em 0;
+  margin: 0 3.5em 1em 3.5em;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
+}
+
+.row .label-checkbox {
+  margin-right: 2em;
+}
+
+.row input {
+  margin-right: .3em;
+}
+
+.cat-container {
+  max-width: 500px;
+}
+
+.not-found {
+  padding: 1em;
+
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+  margin-bottom: 2em;
+}
+
+.carousel-caption h5 {
+  color: black;
+  text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px slategray, 0 0 40px white, 0 0 50px slategray, 0 0 60px slategray, 0 0 70px white;
+}
+

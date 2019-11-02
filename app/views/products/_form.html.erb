@@ -1,0 +1,57 @@
+<div class="container cat-container halo">
+  <%= form_with model: @product, url: wizard_products_path do |f| %>
+
+  <div class="row justify-content-md-center">
+    <%= f.label :name %>: 
+  </div>
+  <div class="row justify-content-md-center">
+    <%= f.text_field :name, class: "text-area-color"%>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <%= f.label :price %>: 
+  </div>
+  <div class="row justify-content-md-center">
+    <%= currency_symbol() %>
+    <%= f.number_field :price, step: 0.01, class: "text-area-color" %>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <%= f.label :categories %>: 
+  </div>
+  <div class="row justify-content-md-between">
+    <%= f.collection_check_boxes :category_ids, Category.all_alphabetized, :id, :name, {}, {:multiple => true} do |b| %>
+      <%= b.label class:"label-checkbox" do %>
+        <%= b.check_box + b.text %>
+      <% end %>
+    <% end %>
+  </div>
+
+  <div class="row justify-content-md-center ">
+    <%= f.label :description %>
+  </div>
+  <div class="row justify-content-md-center">
+  <%= f.text_area :description, :cols => "50", :rows => "6", class: "text-area-color"%>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <%= f.label :stock %>: 
+  </div>
+  <div class="row justify-content-md-center">
+    <%= f.number_field :stock, class: "text-area-color"%>
+  </div>
+
+  <div class="row justify-content-md-center">
+    <%= f.label :photo_url %>: 
+  </div>
+  <div class="row justify-content-md-center">
+    <%= f.text_field :photo_url, class: "text-area-color" %>
+  </div>
+
+  <div class="row justify-content-md-center"">
+    <%= f.submit submit_button_label, class: "btn btn-dark product-button top-padding"%>
+  </div>
+
+  <% end %>
+
+</div>

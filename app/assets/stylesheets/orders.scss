@@ -1,0 +1,56 @@
+// Place all the styles related to the Orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.not-found {
+  width: 70vw;
+  height: auto;
+}
+
+.row a img {
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+  padding: 1em;
+  width: 20em;
+}
+
+.cart-products > h3, h5 {
+  padding: 1em;
+}
+
+.cart-products > h5 {
+  margin-top: 1em;
+}
+
+.total {
+  padding: 0;
+}
+
+#index-heading {
+  margin-bottom: 0.5em;
+}
+
+#cart-heading {
+  margin: 0 7em 0 7em;
+}
+
+.checkout-form {
+  display: flex;
+  justify-content: center;
+  margin: 4em;
+}
+
+label { 
+  float: left;
+}
+
+.confirmation-img {
+  width: 25vw;
+  border: 1px solid #ddd;
+  border-radius: 0.5em;
+  padding: 1em;
+}
+
+.confirmation div {
+  padding: 0.5em 0 0.5em 0;
+}
