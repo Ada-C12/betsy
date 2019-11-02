@@ -1,0 +1,49 @@
+// Place all the styles related to the Orders controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.confirmation {
+    text-decoration: none;
+}
+
+.order-show-header {
+    color: white;
+    background-color: purple;
+    margin-top: 2em;
+    text-align: center;
+    padding: .5em;
+}
+
+.container {
+    max-width: 50%;
+}
+
+.page-header {
+    margin-top: 3em;
+    text-align: center;
+}
+
+.order_number_title {
+    font-weight: bold;
+    background-color: purple;
+    color: white;
+}
+
+.buyer-header {
+    font-weight: bold;
+    background-color: purple;
+    color: white;
+    text-decoration: none;
+}
+
+.contact-body {
+    text-align: left;
+    margin-left: 5%;
+}
+
+.td {
+    padding: 1.5em;
+}
+
+.sub {
+    margin-left: 1.75em;
+}

@@ -1,0 +1,60 @@
+// Place all the styles related to the Products controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+img {
+    width: 100%;
+    object-fit: cover;
+}
+
+.card-header {
+    color: white;
+    background-color: purple;
+        margin-top: 2em;
+}
+
+.product-show-header {
+    color: white;
+    background-color: purple;
+    margin-top: 2em;
+    text-align: center;
+}
+
+.center-block {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+ }
+
+ .show-picture {
+     width: 50%
+ }
+
+ .container {
+     max-width: 50%;
+     margin-top: 2em;
+     padding: 1em;
+ }
+
+ .page-header {
+     margin-top: 3em;
+     text-align: center;
+
+ }
+
+ .card-title {
+     display: inline-block;
+     padding-top: 1em;
+     padding-right: .5em;
+     text-decoration: underline;
+ }
+
+ .card-text {
+     padding-bottom:  1rem;
+ }
+
+ .show-picture {
+     margin-top: 5em;
+ }
+
+

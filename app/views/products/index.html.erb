@@ -1,0 +1,28 @@
+<section class="card text-center">
+  <div class="card-body">
+    <h3 class="card-header">Trade your Treasures</h3>
+    <p class="card-text">A preview of our most coveted finds</p>
+  </div>
+</section>
+
+<section>
+  <%if @category %>
+    <h3><%=@category.name %></h3>
+  <%end%>
+</section>
+
+<section class="card-columns">
+<% @products.each do |product| %>
+  <div class="card">
+      <%= link_to image_tag(product.photo_url, alt: "Picture of #{product.name}"), product_path(product.id), class: "img show-picture" %>
+    <div class="card-body text-center">
+    <h5 class="card-text"><%= product.name %></h5>
+      <p class="card-text"><%= product.description %></p>
+      <p class="card-text"> Cost: <%= product.price %> eggshells</p>
+      <p class="card-text">Number in Stock: <%= product.stock %></p>
+    </div>
+  </div>
+<% end %>
+</section>
+
+

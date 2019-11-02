@@ -1,0 +1,36 @@
+
+
+<section>
+<h3 class="product-show-header"><%= @product.name%></h3><% if session[:merchant_id] == @product.merchant_id %><%= link_to "Edit", edit_product_path, class: "edit" %><% end %>
+<%= image_tag(@product.photo_url, alt: "Picture of #{@product.name}", class: "individual image-fluid center-block show-picture") %>
+</section>
+
+<section class="card text-center">
+  <div class="card-body">
+
+      <p class="card-text"><%= @product.description%></p>
+      <p class="card-text">Cost: <%= @product.price %> Eggshells</p>
+      <p class="card-text">Number in Stock: <%= @product.stock%></p>
+      <p><%= link_to "Place item in cart", add_to_cart_path(@product.id), method: :post, class: "btn btn-primary" %></p>
+      <p><%= link_to "Review Product", new_product_review_path(@product.id), method: :get, class: "btn btn-primary" %></p>
+
+  </div>
+  <div class="card-body">
+<h3 class="card-title"><%= "Product Reviews" %></h3>
+  <% @product.reviews.each do |review|%>
+  <ul>
+      <li class="list-group-item">
+        <h4>
+           <% review.rating.times do  %>
+              <a> &#x1f99d; </a>
+           <% end %>
+           </p><%= review.rating %>/5</p>
+          <p><small class="top-ten__creator"><%="#{review.comment}"%> </small></p>
+        </h4>
+      </ul>
+      <% end %>
+  </div>
+</section>
+
+ 
+

@@ -1,0 +1,59 @@
+<main>
+  <h2 class="order-show-header">Checkout</h2>
+  <% cart = Order.find_by(id: session[:order_id])%>
+  <%if cart%>
+    <%if cart.buyer_card == nil %>
+    
+      <section class="container">
+        <%= form_with model: cart do |f| %>
+          <div class="form-group">
+            <%= f.label :buyer_email %>
+            <%= f.text_field :buyer_email, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :buyer_address %>
+            <%= f.text_field :buyer_address, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :buyer_name %>
+            <%= f.text_field :buyer_name, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :buyer_card %>
+            <%= f.text_field :buyer_card, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :card_expiration %>
+            <%= f.text_field :card_expiration, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :cvv %>
+            <%= f.text_field :cvv, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.label :zipcode %>
+            <%= f.text_field :zipcode, class: "form-control" %>
+          </div>
+
+          <div class="form-group">
+            <%= f.submit "Confirm information", class: "btn btn-info" %>
+          </div>
+        <% end %>
+      </section>
+
+    <%else%>
+
+      <section>
+        <p class="page-header">Are you sure you want to place this order?</p>
+        <p class="page-header"><%= link_to "Place order", place_order_path(cart.id), method: :patch, class: "btn btn-info" %></p>
+      </section>
+
+    <%end%>
+  <%end%>
+</main>

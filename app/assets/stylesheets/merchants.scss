@@ -1,0 +1,52 @@
+// Place all the styles related to the Merchants controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+ul {
+    list-style-type: decimal;
+}
+
+li {
+    list-style-type: none;
+}
+
+.edit-btn-style {
+ color: purple;
+ border-color: purple;
+ margin-left: 3em;
+ width: 5%;
+}
+
+.cancel-btn-style {
+    color: #C81F1F;
+    border-color: #C81F1F;
+    width: 15%;
+}
+
+.shipped-btn-style {
+    color: forestgreen;
+    border-color:forestgreen;
+    width: 15%;
+}
+
+.content-container {
+    margin-top: 4em;
+}
+
+.order-card {
+    padding-left: 3em;
+}
+
+.order-item {
+    padding-left: 2em;
+}
+
+.tab-title {
+    color: #254ED8;
+}
+
+.order-title {
+    font-weight: bold;
+    background-color: purple;
+    color: white;
+}
