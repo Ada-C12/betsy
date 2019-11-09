@@ -1,0 +1,196 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+/* Custom bootstrap variables must be set or imported *before* bootstrap. */
+@import "bootstrap";
+/* Import scss content */
+@import "**/*";
+
+
+.success {
+  background-color: green;
+}
+
+.failure {
+  background-color: red;
+}
+
+.error {
+  background-color: red;
+}
+@import url('https://fonts.googleapis.com/css?family=Amatic+SC&display=swap');
+
+// For all elements
+
+*, .product-title {
+  font-family: "Amatic SC";
+}
+
+.product-title, .merchant-summary {
+  text-align: center;
+}
+
+// Navigation and first section with background image
+
+nav {
+  border-bottom: 2px solid grey;
+}
+
+.background-section {
+  height: 45rem;
+  background-image: url("https://images.pexels.com/photos/776656/pexels-photo-776656.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260");
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-attachment: fixed;
+  background-size: cover;
+}
+
+#header{
+  position: absolute;
+  padding: 100px;
+  z-index: 1000;
+  top: 200px;
+  left: 550px;
+  background-color: whitesmoke;
+  opacity: 0.8;
+}
+
+.nav-bar {
+  background-color: lightgrey;
+  padding: 10px;
+  vertical-align: center;
+  display: grid;
+  grid-template-columns: 70% auto auto auto auto;
+}
+
+// Navigation buttons
+
+.home-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 20px;
+  border: none;
+  margin-top: 20px;
+}
+
+.home-button a {
+  text-decoration: none;
+  color: white;
+}
+
+.home-button a:hover {
+  text-decoration: none;
+  color: white;
+}
+
+.title-div {
+  display: inline;
+  text-align: center;
+}
+
+.title-section {
+  display: inline;
+  padding-right: 50px;
+  font-size: 4rem;
+}
+
+.login_out {
+  margin-top: 40px;
+}
+
+.dropbtn {
+  background-color: #4CAF50;
+  color: white;
+  padding: 16px;
+  font-size: 20px;
+  border: none;
+  margin-top: 20px;
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  min-width: 160px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 5px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+  text-decoration: none;
+}
+
+.dropdown:hover .dropdown-content{
+  display: block;
+}
+
+.index-product-container, .product-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+// Images sized to be the same
+
+img {
+  width: 100%;
+  max-width: 300px;
+  height: auto;
+  text-align: center;
+}
+
+.list-unstyled img {
+  width: 20%;
+}
+
+// Products section
+
+.product-container {
+  display: flex;
+  flex-wrap: wrap;
+  padding-top: 35px;
+  padding-bottom: 80px;
+}
+
+.product-name-image {
+  padding-right: 30px;
+}
+
+.product-text {
+  padding: 10rem;
+}
+
+.list-unstyled {
+  list-style: none;
+}
+
+.prod-section {
+  text-align: center;
+}
+
+// Merchant

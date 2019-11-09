@@ -1,0 +1,39 @@
+<h3>Confirmation Page</h3><br>
+<h4>We've received order#<%=@order.id%> and are working on it now. We'll email you an update when
+we've shipped it.</h4><br>
+<p>Order Placed: <%=@order.placed_time%></p>
+<p>Status: <%=@order.status%></p>
+
+
+
+  <table class="table table-hover">
+    <tbody>
+      <%@order.order_items.each do |order_item|%>
+    
+        <%product = Product.find_by(id: order_item.product_id)%>
+        <tr>
+          <td><%= image_tag product.photo_url, alt: "image of plant product"%></td>
+          <td><%= product.name%></td>
+          <td>Quantity: <%= order_item.quantity%></td>
+          <td><%= link_to "Product Page", product_path(product.id)%></td>
+          <td>Price: <%= product.price%></td>
+        </tr>
+      <%end%>
+        <tr>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td></td>
+          <td>Purchase Total: <%=Product.order_total_price(@order)%></td>
+        </tr>
+    </tbody>
+    
+    
+ 
+  </table>
+
+
+  
+
+
+

@@ -1,0 +1,15 @@
+sponge:
+  username: Sponge Bob
+  email: spongebob@gmail.com
+  UID: 678
+  provider: github
+star:
+  username: Patrick Star
+  email: patrickstar@gmail.com
+  UID: 321
+  provider: github
+bob:
+  username: Bob
+  email: bob@plant.com
+  UID: 1
+  provider: github

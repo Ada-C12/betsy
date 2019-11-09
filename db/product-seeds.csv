@@ -1,0 +1,11 @@
+name,price,quantity,description,photo_url,status,merchant_id
+Jade Plant,10.0,20,A great low maintenance plant,https://i.imgur.com/VWyCy9r.jpg,TRUE,8
+Aloe Vera,10.0,20,Widely known to relieve sunburns and heal wounds,https://i.imgur.com/lrVWdlm.jpg,TRUE,1
+Pincushion Cactus,5.0,20,A beautiful cactus,https://i.imgur.com/E0k7xrU.jpg,TRUE,2
+Rose,20,20,Classic flower,https://i.imgur.com/BKs5ERn.jpg,true,5
+Orchid,15,20,Elegant flowers known for their uniqueness,https://i.imgur.com/u8cKntp.jpg,true,4
+Sunflower,10,20,Stunningly beautiful,https://i.imgur.com/7UzPyF4.jpg,true,6
+Sword Fern,12,20,Classic fern that's common around trails,https://i.imgur.com/6oY23rH.jpg,true,7
+Air Plant,8,20,Plants that get their nutrients from air,https://i.imgur.com/jwlcEWQ.jpg,true,1
+Plant Stand,15,20,A stand for your plants,https://i.imgur.com/SBExFJU.jpg,true,5
+White Pot,10,20,A pot for your plant,https://i.imgur.com/cwQKprb.jpg,true,3

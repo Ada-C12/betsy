@@ -1,0 +1,60 @@
+<section class="product-container">
+  <% if @product.status %>
+  <div class="product-name-image">
+    <%= image_tag @product.photo_url %>
+  </div>
+
+  <div class="price-quantity">
+    <h1><%= @product.name %></h1>
+    <h2><%= number_to_currency @product.price %></h2>
+    <%= @product.merchant.username %>
+
+    <%#= form_with model: @orderitem, url: orders_path, class: "#{action_name}-product" do |f| %>
+      <%#= f.label :quantity %>
+      <%#= f.select :quantity, options_for_select(1..20), {}, {class: "form-control"} %>
+      <%#= f.submit "Add to Cart", class: "btn btn-primary" %>
+    <%# end %>
+
+    <%= form_with url: add_product_to_cart_path, method: :post do |f|%>
+      <%= f.label :quantity %>
+      <%= f.select :quantity, options_for_select(1..20), {}, {class: "form-control"} %>
+      <%= f.submit "Add to Cart", class: "btn btn-primary"%>
+    <%end%>
+
+    Description: <%= @product.description%> <br>
+    <% @product.categories.each do |category| %>
+      Categories: <%= category.name %>
+    <% end %>
+    <br>
+    <br>
+    <%= link_to "Review this Product", new_product_review_path(@product.id), class: "btn btn-primary" %>
+  </div>
+
+  <section class="reviews-container">
+    <h2>Reviews</h2>
+    <% if @product.reviews.empty? %>
+      <p>No reviews yet!</p>
+    <% else %>
+    <ul>
+      <% @product.reviews.each do |review| %>
+        <article class="list-unstyled">
+        <li>
+          <% review.rating.times do%>
+          <%= "🌱"  %>
+          <% end %>
+        </li>
+        <p>
+          <%= review.text %>
+        </p>
+      </div>
+      <% end %>
+    <% end %>
+    </section>
+  </article>
+  <% else %>
+    <div class="unavailable-product">
+      <h3>Opps! This product is not available!</h3>
+      <%= image_tag("https://i.imgur.com/xoId4Cx.jpg") %>
+    </div>
+  <% end %>
+</section>

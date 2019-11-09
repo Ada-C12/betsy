@@ -1,0 +1,26 @@
+aloe:
+  name: Aloe plant
+  price: 15
+  quantity: 20
+  description: Heals everything and anything
+  photo_url: https://i.imgur.com/lrVWdlm.jpg
+  status: true
+  merchant: bob
+
+fern:
+  name: Sword Fern
+  price: 8
+  quantity: 10
+  description: A fern that looks like a sword
+  photo_url: https://i.imgur.com/6oY23rH.jpg
+  status: true
+  merchant: bob
+
+bird:
+  name: Bird of Paradise
+  price: 18
+  quantity: 20
+  description: Tropical flower
+  photo_url: https://i.imgur.com/fdrt1ZW.jpg
+  status: true
+  merchant: sponge

@@ -1,0 +1,4 @@
+name,address,email,credit_card_num,cvv,expiration_date,zip,status,total_price,placed_time
+Nancy Wells,1234 135th St SE Seattle WA,nwells@outlook.com,14672896,340,10/2022,98101,pending,0.00,nil
+Joe Schmo,568 112th St NE Kent WA,jschm@gmail.com,87452190,123,07/2021,98105,pending,0.00,nil
+Cate Kemp,1124 198th Ct SE Seattle WA,kempc@aol.com,65723100,753,05/2023,98001,pending,0.00,nil

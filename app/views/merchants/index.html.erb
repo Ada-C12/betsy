@@ -1,0 +1,10 @@
+<section class="merchant_details">
+  <p class="merchant_title"> ALL MERCHANTS </p>
+  <table class='table table-borderless'>
+    <% @merchants.each do |merchant| %>
+      <tr>
+        <td> <%= link_to merchant.username, merchant_products_path(merchant) %> </td>
+      </tr>
+    <% end %>
+  </table>
+</section>

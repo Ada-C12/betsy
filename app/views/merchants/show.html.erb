@@ -1,0 +1,49 @@
+<section>
+  <section class="merchant-summary">
+  <h1> USER SUMMARY: <%= @merchant.username %> </h1>
+  </section>
+  <br>
+
+  <section class="merchant-summary">
+    <p> Joined site: <%= @merchant.created_at %> </p>
+    <% if @merchant.id == session[:user_id] %>
+      <p> 
+      <%= link_to "Add Product", new_merchant_product_path(@merchant.id) %> | 
+      <%= link_to "Add Category", new_category_path %>
+      </p>
+      <p>
+      <%= link_to "Order Summary", merchant_orders_path(@merchant.id) %>
+      </p>
+    <% end %>
+  </section>
+
+  <section>
+    <table class='table'>
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Price</th>
+          <th>Stock</th>
+          <th>Status</th>
+          <th></th>
+        </tr>
+      </thead>
+
+      <% @merchant.products.each do |product| %>
+        <tr>
+          <td> <%= link_to product.name, product_path(product) %> </td>
+          <td> <%= number_to_currency product.price %> </td>
+          <td> <%= product.quantity %> </td>
+          <% if product.status %>
+            <td> <%= link_to "Active", toggle_inactive_path(product.id), method: :patch %> </td>
+          <% else %>
+            <td> <%= link_to "Retired", toggle_active_path(product.id), method: :patch %></td>
+          <% end %>
+          <% if product.merchant_id == session[:user_id] %>
+            <td> <%= link_to "Edit", edit_product_path(product.id) %> </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </section>
+</section>

@@ -1,0 +1,46 @@
+order_1:
+  name: Janice Brown
+  address: 502 Bellevue Avenue E
+  email: janice@yahoo.com
+  credit_card_num: 12345
+  cvv: 123
+  zip: 36117
+  status: pending
+  total_price: 0
+  placed_time: Time.now
+  expiration_date: 09/23
+order_2:
+  name: Sally Sue 
+  address: 804 Forest Avenue N
+  email: sally@yahoo.com
+  credit_card_num: 67896
+  cvv: 456
+  zip: 98102
+  status: pending
+  total_price: 0
+  placed_time: Time.now
+  expiration_date: 11/23
+order_3:
+  name: Jane Doe
+  address: 621 Smith Avenue E
+  email: jane@yahoo.com
+  credit_card_num: 12345
+  cvv: 123
+  zip: 36117
+  status: pending
+  total_price: 0
+  placed_time: Time.now
+  expiration_date: 12/23
+order_4:
+  name: Samantha Brown
+  address: 5397 Summit Street 
+  email: samantha@yahoo.com
+  credit_card_num: 7890
+  cvv: 567
+  zip: 87645
+  status: pending
+  total_price: 0
+  placed_time: Time.now
+  expiration_date: 09/23
+
+

@@ -1,0 +1,22 @@
+<section class="product-container">
+  <% if params[:category_id] %>
+      <h2 class="product-title">List of Products: <%= Category.find(params[:category_id]).name %>
+    <% elsif params[:merchant_id] %>
+      <h2 class="merchant-shop-title"><%= Merchant.find(params[:merchant_id]).username %>'s shop </h2>
+    <% else %>
+      <h2 class="product-title">List of Products</h2>
+  <% end %>
+
+  <section class="index-product-container">
+
+    <% @products.where(status: true).each do |product| %>
+      <%= link_to product_path(product) do %>
+        <%= image_tag product.photo_url, alt: "image of plant product" %>
+      <% end %>
+      <section class="product-text">
+        <h3><%= product.name %></h3>
+        <h3><%= number_to_currency product.price %></h3>
+      </section>
+    <% end %>
+  </section>
+</section>

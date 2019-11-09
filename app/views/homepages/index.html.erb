@@ -1,0 +1,17 @@
+<section class="background-section">
+  <div class="col-lg-12 text-box text-center">
+    <%# <h1>Plants Galore</h1> %>
+    <h1 id="header">We are Planterina</h1>
+  </div>
+</section>
+
+<section class="featured-products">
+  <h1 class="prod-section">Featured Products</h1>
+  <div class="prod-section">
+    <% Product.top_products.each do |product| %>
+      <%= link_to product_path(product) do %>
+        <%= image_tag product.photo_url, alt: "image of plant product" %>
+      <% end %>
+    <% end %>
+  </div>
+</section>

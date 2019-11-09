@@ -1,0 +1,12 @@
+oi_1:
+  quantity: 1
+  product: aloe
+  order: o_1
+  shipping_status: false
+
+
+oi_2:
+  quantity: 2
+  product: fern
+  order: o_2
+  shipping_status: true
