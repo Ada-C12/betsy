@@ -1,0 +1,17 @@
+<h1>Edit Product Form</h1>
+<%#a merchant can only edit the price, stock, status%>
+
+
+<%= form_with model: @product, class:"edit-product-form" do |f| %>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+  <%= f.label :stock %>
+  <%= f.text_field :stock %>
+  <%= f.label :description %>
+  <%= f.text_field :description %>
+
+  <%# product status is nil by default and it means available%>
+  <%= f.label :status %>
+  <%= f.select :status, [["Available"],["Unavailable"]] %>
+  <%= f.submit "Edit Product", class: "product-form-buttom "%>
+<% end %>

@@ -1,0 +1,201 @@
+ /* Custom bootstrap variables must be set or imported *before* bootstrap. */
+@import "bootstrap";
+ /* Import scss content */
+@import "**/*";
+
+//////////////// TEMPORARY,marking sections ONLY! get rid of this when all done!!!
+* {
+   // border: 1px dashed white;
+}
+
+//////////////// GENERAL REFERENCE ///////////////////
+// background-color: #1A3365;
+// background-color: #FFBB00;
+// background-color: #FF4343
+// font-family: 'Alegreya', serif;
+// font-family: 'Bubblegum Sans', cursive;
+// font-family: 'Capriola', sans-serif;
+// font-family: 'Gorditas', cursive;
+// font-family: 'Knewave', cursive;
+// font-family: 'Lemon', cursive;
+// font-family: 'Modak', cursive;
+// font-family: 'Sriracha', cursive;
+
+///////////////////////////////////
+///////////////////////////////////
+///////////////////////////////////
+
+body {
+  background-color: #FFBB00;
+  font-family: 'Capriola', sans-serif;
+  margin: 1rem;
+}
+
+.product_img_index { 
+  object-fit: cover;
+  height: 200px;
+  overflow: hidden;
+
+}
+
+h1 {
+  font-family: 'Gorditas', cursive;
+  font-size: 5rem;
+  text-align: center;
+  background-color: #FF4343
+}
+
+.quiet_link {
+  color: black;
+}
+
+.quiet_link:hover {
+  color: black;
+  text-decoration: none;
+}
+
+.img_100_width {
+  width: 100vw;
+  object-fit: scale-down;
+}
+
+.img_bullet {
+  width: 5rem;
+  object-fit: scale-down;
+}
+
+.thumbnail {
+  width: 100%;
+}
+
+.homepage-nav-links {
+  display: flex;
+  background-color: lightgreen;
+  margin: 0.5rem 0rem;
+  justify-content: space-between;
+}
+
+.centered {
+  align-content: center;
+}
+
+/// flash section here ///
+.flash_section {
+  background-color: skyblue;
+  margin: 0.5rem 0rem;
+  
+}
+
+.flash_msg_box {
+  padding-top: 1rem;
+  padding-left: 1rem;
+  display: flex;
+}
+
+.error_msgs {
+  padding-left: 3.5rem;
+}
+
+
+/// table section here ///
+.table-responsive {
+   // Bootstrap: lets u scroll horizontally
+}
+
+.table-striped {
+   // Bootstrap: colors every other row
+}
+
+footer {
+  display: flex;
+  background-color: wheat;
+  margin-top: 1.5rem;
+  justify-content: space-evenly;
+}
+
+footer section {
+  font-family: 'Gorditas', cursive;
+}
+
+.no-bullet li {
+  list-style: none;
+}
+
+
+.middle_flex {
+  display: flex;
+}
+/// OPTIONAL: Caroline is still toying with this ///
+
+.nav-tabs {
+  
+}
+
+.nav-item {
+}
+
+.nav-link {
+
+}
+/// end OPTIONAL: Caroline is still toying with this ///
+
+:root {
+  --cream: #FFE3B3;
+  --gold: #FFC872;
+  --skyblue: #30A0E0;
+  --seablue: #006BBB; 
+}
+// .container {
+//   text-align: center;
+// }
+.sample {
+  background-color: white;
+
+  .homepage-nav-links {
+    background-color: var(--cream);
+  }
+  h1 {
+    background-color: white;
+  }
+  main h1 {
+    text-align: center;
+    font-family: 'Capriola', sans-serif;
+    background-color: white;
+    color: var(--seablue);
+    font-size: 2.5rem;
+    padding-top: 30px;
+    padding-bottom: 30px;
+  }
+
+  .order_summary {
+    background-color: var(--cream);
+  }
+  .customer {
+    background-color: var(--gold);
+  }
+
+  .btn {
+    font-size: 1.05rem;
+  }
+
+  .btn-primary {
+    background: var(--skyblue);
+    border-color: var(--skyblue);
+  }
+
+  .btn-secondary {
+    background: var(--skyblue);
+    border-color: var(--skyblue);
+  }
+
+  .product-index-item {
+    text-align: center;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    margin-top: 10px;
+    border: 4px solid white;
+  }
+  .product-index-item:hover {
+    border: 4px solid var(--seablue);   
+  }
+}

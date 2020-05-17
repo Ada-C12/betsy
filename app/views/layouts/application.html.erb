@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>MIGHTYDucksBetsy</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <%= favicon_link_tag asset_path("https://live.staticflickr.com/65535/48980725428_924195d3d5_b.jpg") %>
+    <!-- These are the google fonts Caroline found, just soemthing for now, can refine selection later -->
+    <link href="https://fonts.googleapis.com/css?family=Alegreya:900|Bubblegum+Sans|Capriola|Gorditas:700|Knewave|Lemon|Modak|Sriracha&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Bree+Serif|Comfortaa&display=swap" rel="stylesheet">
+  </head>
+
+<!-- added class 'sample' as a sample color scheme -kk -->
+  <body class="sample">
+
+  <h1><%= link_to "MIGHTY DUCKS", root_path, class: "quiet_link" %></h1>
+
+<%= audio_tag("QuackQuack-SoundBible.mp3", id: "quack-audio") %>
+
+  <section class="homepage-nav-links" onclick="playQuack();">
+
+    <div class="dropdown">
+      <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      Products
+      </button>
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+
+      <% @categories.each do |category|%>
+        <% if category.products.count != 0 %>
+        <%= link_to category.name, category_path(category.id), class: "dropdown-item" %>
+        <% end%>
+      <% end %>
+      <%= link_to "View All", products_path, class: "dropdown-item"%>
+    </div>
+    </div>
+    
+    <div class="user-links">
+    <% if session[:order_id] %>
+      <%=  %>
+      <%= link_to (image_tag("shopping_cart-24px.svg")), order_path(session[:order_id]), class:"btn btn-primary" %>
+    <% end %>
+    
+
+
+    <% if session[:merchant_id] %>
+      <%= link_to "#{session[:merchant_name]}'s Dashboard", merchant_path(id: session[:merchant_id]), class: "btn btn-primary"%>
+      <%= link_to "Log out", logout_path, method: "delete", class: "btn btn-primary" %>
+    <% else %>
+    <%= link_to "Login with Github", github_login_path, class:"btn btn-primary" %>
+    <% end %>
+    </div>
+    </section>
+
+</section>
+
+
+<section class="flash_section">
+    
+    <% flash.each do |name, message| %>
+    <section class="flash_msg_box">
+      <% if name.downcase == "error" %>
+        <p class="centered">
+        <%= image_tag("https://live.staticflickr.com/1218/797758643_9f76bfcb1f_m.jpg", class: "img_bullet") %> 
+        <%= name.upcase %>: <%= message %>
+        </p>
+        
+      <% elsif name == "error_msgs" %>
+          <section class="error_msgs">
+            <ul class="no-bullet">
+            <% message.each do |error_msg|%>
+              <li>>> <%= error_msg %> <<</li>
+            <% end %>
+            </ul>
+          </section>
+
+      <% else %>
+        <p class="centered">
+        <%= image_tag("https://live.staticflickr.com/2907/14035136178_6c2842bf8e_m.jpg", class: "img_bullet") %> 
+        <%= name.upcase %>: <%= message %>
+        </p>
+      <% end %>
+    </section>
+    <% end %>
+
+  
+</section>
+
+<main>
+  <%= yield %>
+</main>
+
+<footer>
+  <section>MEET THE DuCKS!!!</section>
+  <section><%= link_to "Diana", "https://github.com/dhan0406", target: :_blank %></section>
+  <section><%= link_to "Caroline", "https://github.com/stupendousC", target: :_blank %></section>
+  <section><%= link_to "Kelsey", "https://github.com/kelsk", target: :_blank %></section>
+  <section><%= link_to "Steph", "https://github.com/Steph0088", target: :_blank %></section>
+</footer>
+
+
+</body>
+</html>

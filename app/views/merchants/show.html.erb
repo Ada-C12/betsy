@@ -1,0 +1,34 @@
+<%= render "dashboard" %>
+
+<div class="table-responsive table-striped">
+  <table class="table">
+    <thead>
+      <tr>
+        <th>CATEGORIES</th>
+        <th>PICTURE</th>
+        <th>NAME</th>
+        <th>DESCRIPTION</th>
+        <th>STOCK</th>
+        <th>AVAILABILITY</th>
+        <th>PRICE</th>
+        <th>EDIT</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      <% @merchant.products.each do |product| %>
+        <tr>
+          <td><%= get_string_of_names(product.categories) %></td>
+          <td><%= make_thumbnail_link(product) %></td>
+          <td><%= link_to product.name.upcase, product_path(id: product.id) %></td>
+          <td><%= first_x_chars(product.description, x=10) %></td>
+          <td><%= product.stock %></td>
+          <td><%= product.status %></td>
+          <td><%= usd(product.price) %></td>
+          <td><%= link_to "EDIT", edit_product_path(id: product.id) %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>
+

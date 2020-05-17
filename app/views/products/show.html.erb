@@ -1,0 +1,51 @@
+<h1>PRODUCT SHOW PAGE</h1>
+
+<h2>Product Details:</h2>
+<section class="container">
+<div class="row">
+<div class="col-md-6">
+  <%= make_thumbnail_link(@product) %>
+  </div>
+  <div class="col-md-6">
+
+  <h4>
+  <%= @product.name%>
+  </h4>
+<ul>  
+
+  <li><%= usd(@product.price)%></li>
+  <li><%= @product.description%></li>
+
+
+<% if @product.merchant_id != session[:merchant_id] && @product.stock != 0 %>
+  <li><%= @product.stock %> currently in stock</li>
+  <p class="padding-top-2rem">
+        <%= link_to "Add To Cart", order_items_path(order_item: { product_id: @product.id } ), method: :post, permitted: true, class:"btn btn-primary"  %>
+  </p>
+<% end %>
+</ul>
+<section class="padding-top-2rem">
+  <%= link_to "View All Products by Seller " + @merchant.name, merchant_products_path(@merchant.id), class: "btn btn-info" %>
+  
+  <%= link_to "Write a Review", new_product_review_path(@product.id), method: :get, class: "btn btn-info" %>
+  </section>
+</div>
+
+</div>
+</section>
+
+<section class="container">
+<h3 class="padding-top-20px"> Reviews </h3>
+<div class="row">
+    <%@product.reviews.each do |review|%>
+      <div class="col-md-6 padding-top-20px">
+      <h4><%= "Rating: #{review.rating}"%></h4>
+      <% (review.rating).times do %>
+        <%= image_tag("https://live.staticflickr.com/65535/48980725428_924195d3d5_b.jpg", width: "25px") %>
+      <% end %>
+      <h4><%= "Created on: #{display_date(review.created_at.to_date)}"%></h4>
+      </div>
+      <div class="col-md-6 padding-top-20px"><%= "Comment: #{review.comment}"%></div>
+    <%end%>
+  </div>
+  </section>

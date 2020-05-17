@@ -1,0 +1,13 @@
+<section class="order-container">
+
+<% if session[:order_id] %>
+
+  <!-- displays customer's open order -->
+  <%= render partial: "cart", locals:{title: "SHOPPING CART"} %>
+
+  <%= link_to "Checkout", checkout_path(id: @order.id), class:"btn btn-primary"  %>
+  <%= link_to "Delete Cart", order_path(order: { id: @order.id } ), method: :delete, class:"btn btn-primary"  %>
+
+<% end %>
+
+</section>
