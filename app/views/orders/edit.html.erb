@@ -1,0 +1,80 @@
+<% if @order.errors.any? %>
+  <section class="alert alert-danger">  
+    <ul>
+      <% @order.errors.each do |column, message| %>
+        <li><strong><%= column.capitalize %></strong> <%= message %></li>
+      <% end %>
+    </ul>
+  </section>
+<% end %>
+
+<div class="new-form">
+  <section>
+    <h1>Checkout</h1>
+
+    <%= form_with model: @cart, url: order_path(@cart) do |f| %>
+      <section>
+        <div class="form-group">
+          <div class="form-row">
+            <div class="col">
+              <%= f.label :name %>
+              <%= f.text_field :name, class: "form-control" %><br>
+            </div>
+                
+            <div class="col">
+              <%= f.label :email, "E-mail" %>
+              <%= f.text_field :email, class: "form-control"  %><br>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section>  
+        <%= f.label :address %>
+        <%= f.text_field :address, class: "form-control"  %><br>
+        
+        <div class="form-row">
+          <div class="col">
+            <%= f.label :city %>
+            <%= f.text_field :city, class: "form-control"  %><br>
+          </div>
+          
+          <div class="col">
+            <%= f.label :state, "State (Ex: WA)" %>
+            <%= f.text_field :state, class: "form-control" %><br>
+          </div>
+
+          <div class="col">
+            <%= f.label :zip_code, "Zip code (5 digits)" %>
+            <%= f.text_field :zipcode, class: "form-control"  %><br>
+          </div> 
+        </div>
+      </section>
+
+      <section>
+        <div class="form-row">
+          <div class="col">
+            <%= f.label :credit_card_number, "Credit card number (13-16 digits)" %>
+            <%= f.text_field :cc_num, class: "form-control"  %><br>
+          </div> 
+
+          <div class="col">
+            <%= f.label :credit_card_expiration, "Credit card expiration (Ex: 12/20)" %>
+            <%= f.text_field :cc_exp, class: "form-control"  %><br>
+          </div> 
+
+          <div class="col">
+            <%= f.label :credit_card_cvv, "Credit card CVV (3-4 digits)" %>
+            <%= f.text_field :cc_cvv, class: "form-control"  %><br>
+          </div> 
+        </div>
+
+        <%= f.hidden_field :status, value: "paid" %>
+        <%= f.hidden_field :order_date, value: Time.new %>
+        <%= hidden_field_tag :order_paid, true %>
+        <%= f.submit "Complete order", class:"btn btn-primary" %>
+      </section>
+    <% end %>
+  </section>
+</div>
+

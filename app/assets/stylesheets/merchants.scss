@@ -1,0 +1,165 @@
+// Place all the styles related to the Merchants controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+h4, h5 {
+  margin-left: 5%;
+}
+
+img {
+  align-self: center;
+  justify-self: center;
+  max-height: 250px;
+  max-width: 250px;
+}
+
+p {
+  text-align: center;
+}
+
+th {
+  text-align: center;
+}
+
+td {
+  width: 25%;
+  text-align: center;
+}
+
+.cell_center {
+  text-align: center;
+}
+
+.cell_left {
+  text-align: left;
+}
+
+.cell_right {
+  text-align: right;
+}
+
+.merchant_details {
+  width: 90%;
+  margin-left: 5%;
+}
+
+.merchant_info {
+  display: grid;
+  grid-template-columns: 400px 400px;
+  width: 70%;
+  margin-left: 20px;
+
+  img {
+    grid-column: 1;
+    grid-row: 1;
+    width: 200px;
+    height: 200px;
+    border-radius: 2%;
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+.merchant_info_details {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  grid-template-rows: auto auto auto auto;
+}
+
+.page_title {
+  margin-left: 5%;
+}
+
+.sm_product_image {
+  width: 75px;
+  height: 75px;
+  crop: fill;
+}
+
+#merchant_index {
+  width: 90%;
+  margin-left: 5%;
+}
+
+
+.merchant-show-container {
+  display: grid;
+  grid-template-columns: 500px 1fr;
+  grid-template-rows: 300px 1fr;
+
+  .merchant-info {
+    grid-column: 1;
+    grid-row: 1;
+    text-align: right;
+
+    img {
+      border-radius: 2%;
+    }
+  }
+
+  .merchant-info-details {
+    grid-column: 2;
+    grid-row: 1;
+    text-align: left;
+    margin-left: 5%;
+
+    h2 {
+      text-align: left;
+      margin-left: 0;
+    }
+    
+    p {
+      font-size: 1.5rem;
+      text-align: left;
+    }
+  }
+
+  .merchant-products-all {
+    grid-column: 1 / span 2;
+    grid-row: 2 / span 1;
+    margin: 0 5%;
+  }
+
+  .merchant-product-header {
+    text-align: left;
+    
+    h4{
+      font-size: 2.5em;
+      margin-left: 2rem;
+    }
+  }
+
+  .merchant-products-list {
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: 5rem;
+
+    ul{
+      list-style-type: none;
+      margin-left: 0
+    }
+
+    img {
+      width: 150px;
+      height: 150px;
+      border-radius: 5%;
+      display: block;
+      margin: 2% auto;
+    }
+  }
+}
+
+.card-deck {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  grid-gap: 2rem;
+}
+
+#card-img {
+  text-align: center;
+}
+
+#merchant-index {
+  padding-left: 5rem;
+  padding-right: 5rem;
+}

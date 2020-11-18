@@ -1,0 +1,17 @@
+// Place all the styles related to the Homepages controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+// .applicaton-container {
+//   display: grid;
+//   grid-template-columns: 500px auto 500px;
+//   grid-template-rows: 400px auto;
+// }
+
+
+
+.carousel-inner, .carousel-item, .active {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

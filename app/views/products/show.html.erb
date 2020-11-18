@@ -1,0 +1,58 @@
+<section class="product-page-container">
+  <section class="product-image">
+    <%= image_tag(@product.photo_url, alt:"#{@product.name}") %>
+  </section>
+  <section class="product-details">
+    <h2 id="product-name"><%= @product.name.titleize %> </h2>
+      <% if @product.categories.count > 0 %>
+        <span class="categories">
+          <% @product.categories.each do |category| %>
+            <%= link_to "#{category.name}", category_path(category.id), class:"badge badge-light"%>
+          <% end %>
+        </span>
+      <% end %>
+    <br>
+      <%= @product.calculate_average_rating %><br><br>
+      <%= link_to "#{@product.merchant.username}", merchant_path(@product.merchant) %><br>
+      <%= @product.description %><br>
+      $<%= sprintf('%.2f', @product.price) %><br><br>
+
+    <% if @product.stock_qty > 0 && @product.active %>
+      <%= form_for Orderitem.create do |f| %>
+        <%= f.hidden_field :order_id, value: @cart.id %>
+        <%= f.hidden_field :product_id, value: @product.id %>
+        <%= f.label :quantity %>
+        <%= f.select :quantity, (1..@product.stock_qty)%>
+        <%= f.submit "Add to cart", class:"btn-primary" %>
+      <% end %>
+      <br>
+    <% else %>
+      Not available<br>
+    <% end %>
+    <%if @product.stock_qty > 0 && @product.active %>
+      <%= @product.stock_qty %> left in stock!
+    <%else%>
+      Item not in stock
+    <%end%> <br />
+  </section>
+</section>
+  <section class="product-reviews">
+    <h4 id="reviews">Reviews </h4>
+    <section class="review">
+    <% if @product.reviews != []%>
+      <% @product.reviews.each do |review| %>
+      <span class="single-review">
+        Name: <%= review.reviewer %><br>
+        <% if review.date %>
+          Date: <%= review.date.strftime( "%B %e, %Y") %><br>
+        <% end %>
+        <% star = "\u2605" %>
+        <% rating = star.encode("utf-8") * review.rating %>
+        Rating: <%= rating %><br>
+        Comment: <%= review.comment %><br>
+      </span>
+      <% end %>
+    <%end%>
+    </section>  
+  <%=link_to "Add Review",  new_product_review_path(@product.id), :class=>"btn btn-primary", id: "add-review"%>
+</section>

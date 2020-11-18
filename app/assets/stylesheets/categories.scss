@@ -1,0 +1,90 @@
+// Place all the styles related to the Categories controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+
+:root {
+  --timid: #bdcff2;
+  --mid: #487adb;
+  --navy: #375cbf;
+  --burnt_orange: #8f3907;
+  --sand: #b5a78f;
+}
+
+h3 {
+  margin-top: 5rem;
+  text-align: center;
+  color: #FE5F55;
+  font-size: 4rem;
+}
+
+.form-group {
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+.form-button {
+  margin-top: 50px;
+}
+
+.categories-list {
+  // margin-left: 20px;
+  // margin-right: 200px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+}
+
+.add-category {
+  margin-top: 50px;
+  margin-left: 50px;
+}
+
+.categories-list a {
+  color: white;
+}
+
+.btn {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  margin: .2rem;
+  border-radius: 40px;
+}
+
+.btn:hover {
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+  border-radius: 25px;
+}
+
+a {
+  color: var(--burnt_orange);
+}
+a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+
+
+.btn-primary {
+  background-color: var(--navy);
+}
+
+.products-by-category {
+  display: flex;
+  flex-direction: row;
+  flex-flow: wrap;
+}
+
+.product-item {
+  align-items: flex-start;
+}
+
+img {
+  border-radius: 5%;
+}

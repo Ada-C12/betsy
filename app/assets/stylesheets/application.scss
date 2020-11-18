@@ -1,0 +1,206 @@
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, or any plugin's
+ * vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any other CSS/SCSS
+ * files in this directory. Styles in this file should be added after the last require_* statement.
+ * It is generally better to create a new file per style scope.
+ *
+ */
+
+/* Custom bootstrap variables must be set or imported *before* bootstrap. */
+@import "bootstrap";
+
+@import "**/*";
+
+:root {
+  --timid: #bdcff2;
+  --mid: #487adb;
+  --navy: #375cbf;
+  --burnt_orange: #8f3907;
+  --sand: #b5a78f;
+}
+
+* {
+  font-family: 'Roboto Condensed', sans-serif;
+  color: #4F6367;
+}
+
+header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: var(--timid);
+  z-index: 100;
+}
+
+a:hover {
+  color: var(--burnt_orange);
+  text-decoration: none;
+}
+
+.flash {
+  margin-top: 320px;
+  margin-left: 100px;
+  margin-right: 100px;
+}
+
+
+.flash .failure, .flash .success{
+  border-radius: 5px;
+}
+
+.flash .failure div, .flash .success div{
+  margin-left: 10px;
+}
+
+.profile {
+  display: flex;
+  justify-content: flex-end;
+  flex-direction: column;
+  align-items: flex-end;
+  padding: 0 1rem;
+}
+
+header h1 {
+  text-align: center;
+}
+
+header h1 a{
+  color: var(--navy); 
+  font-size: 5rem;
+}
+
+header h1 a:hover{
+  style: var(--timid);
+}
+
+
+nav ul {
+  margin-top: 100px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  margin: 0;
+}
+
+a {
+  color: var(--navy);
+}
+
+a:hover {
+  color: var(--burnt_orange);
+}
+
+.searchbar {
+  margin-top: 2rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+.btn {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  margin: .2rem;
+  border-radius: 40px;
+}
+
+.btn:hover {
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+  border-radius: 25px;
+}
+
+.btn a:hover {
+  background-color: var(--navy);
+  border-color: var(--navy);
+  color: var(--burnt_orange);
+}
+
+.btn-primary {
+  background-color: var(--navy);
+}
+
+.btn-primary::selection {
+  background-color: var(--navy);
+}
+
+nav ul li {
+  list-style-type: none;
+}
+
+body {
+  position: relative;
+  margin: 0;
+  padding-bottom: 2.5rem;
+  min-height: 100%;
+}
+
+.success {
+  background-color: lightgreen;
+}
+
+.failure {
+  background-color: darksalmon;
+}
+
+.login_header_container {
+  flex-direction: column;
+}
+
+footer {
+  text-align: center;
+  padding-top: 5rem;
+  padding-bottom: 5rem;
+  width: 100%;
+  height: 2.5rem;
+  position: relative;
+}
+
+div.field_with_errors {
+  display: inline;
+}
+
+
+.badge, .badge-light {
+  color: white;
+  background-color: var(--navy);
+  border-color: var(--navy);
+  margin: .2rem;
+  border-radius: 20px;
+}
+
+.badge a {
+  color: white;
+}
+
+.badge a:hover, .badge-light a:hover {
+  color: white;
+  text-decoration: none;
+}
+
+.badge:hover, .badge-light:hover {
+  background-color: var(--burnt_orange);
+  border-color: var(--burnt_orange); 
+  color: white;
+}
+
+h2, h3, h5 {
+  text-align: center;
+  margin-bottom: 1.5rem;
+  margin-left: 1rem;
+  color: var(--burnt_orange);
+}
+
+footer {
+  color: var(--burnt_orange);
+}
